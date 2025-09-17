@@ -1,0 +1,46 @@
+<div class="scene-container">
+  <div #canvasContainer class="canvas-container"></div>
+  <div class="controls-info">
+    <h3>Modélisation</h3>
+    
+    <div class="controls-section">
+      <h4>Contrôles</h4>
+      <button class="reset-button" (click)="resetCameraPosition()">Réinitialiser</button>
+      
+      <h4>Contrôles Souris</h4>
+      <ul>
+        <li><strong>Clic + Glisser</strong> : Rotation autour de la construction</li>
+        <li><strong>Molette</strong> : Zoom avant/arrière (5-50)</li>
+        <li><strong>Clic droit</strong> : Désactivé</li>
+      </ul>
+    </div>
+
+    <div class="specs-section">
+      <h4>Couleurs</h4>
+      <ul>
+        <li>🔘 Murs : Gris</li>
+        <li>🟢 Porte : Vert</li>
+        <li>🔴 Fenêtres : Rouge</li>
+        <!-- <li>🔵 Sol : Bleu ciel</li>
+        <li>🔵 Toit : Bleu royal</li> -->
+      </ul>
+    </div>
+
+    <div class="dimensions-section">
+      <h4>Dimensions</h4>
+      <ul>
+        <li>Hauteur des murs : 2.5m</li>
+        <li>Épaisseur : 0.20m</li>
+      </ul>
+    </div>
+
+    <!-- <div class="tips-section">
+      <h4>Conseils</h4>
+      <ul>
+        <li>Utilisez la molette pour examiner les détails</li>
+        <li>Tournez autour pour voir tous les angles</li>
+        <li>Le centre de rotation est au centre de la construction</li>
+      </ul>
+    </div> -->
+  </div>
+</div>
