@@ -113,11 +113,9 @@
   .scene-container {
     flex-direction: column;
   }
-  
   .canvas-container {
     height: 60vh;
   }
-  
   .controls-info {
     width: 100%;
     height: 40vh;

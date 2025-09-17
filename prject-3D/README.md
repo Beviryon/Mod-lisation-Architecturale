@@ -1,183 +1,271 @@
-# 🏗️ Projet 3D - Modélisation Architecturale
+# Modélisation Architecturale 3D
 
-## 📋 Description
+Un projet de visualisation 3D d'un bâtiment architectural développé avec **Angular** et **Three.js**.
 
-Ce projet est une application web de modélisation 3D architecturale développée avec **Angular 20** et **Three.js**. Il permet de visualiser une construction complète avec des murs, des ouvertures (portes et fenêtres), et des sols selon des spécifications architecturales précises.
+## 📋 Table des matières
+- [🎯 Description](#-description)
+- [✨ Fonctionnalités](#-fonctionnalités)
+- [🛠️ Technologies utilisées](#️-technologies-utilisées)
+- [🚀 Installation et lancement](#-installation-et-lancement)
+- [📁 Structure du projet](#-structure-du-projet)
+- [⚙️ Configuration](#️-configuration)
+- [🎮 Utilisation](#-utilisation)
+- [🎨 Personnalisation](#-personnalisation)
+- [📐 Architecture technique](#-architecture-technique)
+- [🔧 Développement](#-développement)
 
-## 🎯 Fonctionnalités
+## 🎯 Description
 
-- **Modélisation 3D interactive** avec rotation automatique de la caméra
-- **Géométrie architecturale complète** selon les spécifications du projet
-- **Couleurs conformes** : murs gris, porte verte, fenêtres rouges
-- **Dimensions exactes** : hauteur des murs 2.5m, épaisseur 0.20m
-- **Interface responsive** avec panneau d'information
-- **Éclairage réaliste** avec ombres et effets de lumière
-- **Compatible SSR** (Server-Side Rendering)
+Ce projet présente un **modèle 3D interactif** d'un bâtiment architectural simple comprenant :
+- 4 murs formant une structure rectangulaire
+- 1 porte d'entrée
+- 2 fenêtres de tailles différentes
+- Un toit et un sol
+- Un système d'axes de référence
 
-## 🛠️ Technologies Utilisées
+Le modèle est entièrement **interactif** avec des contrôles souris pour la navigation 3D.
 
-- **Angular 20** - Framework frontend avec signals et zoneless change detection
-- **Three.js** - Bibliothèque JavaScript pour la 3D et WebGL
-- **TypeScript** - Langage de programmation typé
-- **CSS3** - Styles modernes et responsive
-- **SSR** - Rendu côté serveur pour de meilleures performances
+## ✨ Fonctionnalités
 
-## 📐 Spécifications Architecturales
+### 🎮 **Contrôles interactifs**
+- **Rotation** : Clic gauche + glisser pour faire tourner la vue
+- **Zoom** : Molette de la souris pour zoomer/dézoomer
+- **Réinitialisation** : Bouton pour revenir à la vue initiale
 
-### Paramètres Généraux
-- **Hauteur des murs** : 2.5m
-- **Épaisseur** : 0.20m
+### 🏠 **Éléments architecturaux**
+- **Mur principal** : Façade avec ouvertures réelles (ExtrudeGeometry)
+- **Murs latéraux** : Murs pleins gauche, droit et arrière
+- **Ouvertures** : Porte verte et fenêtres rouges
+- **Structure** : Sol marron et toit bleu
+- **Repères** : Axes X, Y, Z avec marqueurs colorés
 
-### Contour des Murs
-- **Point 1** : (0, 0, 0)
-- **Point 2** : (5, 0, 0)
-- **Point 3** : (5, 8, 0)
-- **Point 4** : (0, 8, 0)
+### 💡 **Éclairage réaliste**
+- **Lumière ambiante** : Éclairage général doux
+- **Lumière directionnelle** : Simulation du soleil avec ombres
+- **Ombres portées** : Rendu réaliste des ombres
 
-### Ouvertures
+## 🛠️ Technologies utilisées
 
-#### Fenêtre S1 (Rouge)
-- **Position** : x=2, y=0, z=0.9
-- **Dimensions** : b=1.5m, h=1.2m, ep=0.05m
+- **[Angular 19](https://angular.dev/)** - Framework web moderne
+- **[Three.js](https://threejs.org/)** - Bibliothèque 3D WebGL
+- **[TypeScript](https://www.typescriptlang.org/)** - Langage de programmation typé
+- **[Vite](https://vitejs.dev/)** - Outil de build rapide
+- **HTML5 & CSS3** - Structure et style
 
-#### Fenêtre S2 (Rouge)
-- **Position** : x=5, y=3, z=0.9
-- **Dimensions** : b=0.9m, h=1.2m, ep=0.05m
-
-#### Porte P1 (Verte)
-- **Position** : x=0, y=3.5, z=0
-- **Dimensions** : b=1m, h=2.1m, ep=0.05m
-
-### Sols
-
-#### Sol1 (Sol de base)
-- **Épaisseur** : 0.2m
-- **Position Z** : 0
-- **Contour** : (0,-2), (5,2), (5,8), (0,0)
-
-#### Plancher (Plafond)
-- **Épaisseur** : 0.2m
-- **Position Z** : 2.7m
-- **Contour** : (0,0), (6,0), (6,8), (0,8)
-
-## 🚀 Installation et Démarrage
+## Installation et lancement
 
 ### Prérequis
-- Node.js (version 18 ou supérieure)
-- npm ou yarn
+- **Node.js** (version 18 ou supérieure)
+- **npm** (inclus avec Node.js)
 
-### Installation des dépendances
+### Étapes d'installation
+
+1. **Cloner le projet**
+   ```bash
+   git clone https://github.com/Beviryon/Mod-lisation-Architecturale.git
+   cd prject-3D
+   ```
+
+2. **Installer les dépendances**
+   ```bash
+   npm install
+   ```
+
+3. **Lancer le serveur de développement**
+   ```bash
+   npm start
+   ```
+
+4. **Ouvrir dans le navigateur**
+   ```
+   http://localhost:4200
+   ```
+
+### Autres commandes utiles
+
 ```bash
-npm install
-```
-
-### Démarrage du serveur de développement
-```bash
-npm start
-```
-
-L'application sera accessible à l'adresse : `http://localhost:4200`
-
-### Build de production
-```bash
+# Build de production
 npm run build
+
+# Tests
+npm run test
+
+# Linting
+npm run lint
 ```
 
-### Tests
-```bash
-npm test
-```
-
-## 📁 Structure du Projet
+## Structure du projet
 
 ```
 prject-3D/
 ├── src/
 │   ├── app/
 │   │   ├── components/
-│   │   │   └── scene3d/
-│   │   │       ├── scene3d.ts      # Logique Three.js
-│   │   │       ├── scene3d.html    # Template 3D
-│   │   │       └── scene3d.css    # Styles 3D
-│   │   ├── app.ts                  # Composant principal
-│   │   ├── app.html               # Template principal
-│   │   ├── app.css                # Styles globaux
-│   │   └── app.config.ts          # Configuration Angular
-│   ├── main.ts                    # Point d'entrée
-│   └── index.html                 # HTML principal
-├── package.json                   # Dépendances
-├── angular.json                   # Configuration Angular CLI
-└── README.md                      # Documentation
+│   │   │   └── scene3d/           # Composant principal 3D
+│   │   │       ├── scene3d.ts     # Logique Three.js
+│   │   │       ├── scene3d.html   # Template HTML
+│   │   │       └── scene3d.css    # Styles CSS
+│   │   ├── config/
+│   │   │   └── building-config.ts # Configuration centralisée
+│   │   ├── app.ts                 # Composant racine
+│   │   └── app.html               # Template principal
+│   ├── main.ts                    # Point d'entrée Angular
+│   └── index.html                 # Page HTML principale
+├── package.json                   # Dépendances et scripts
+└── README.md                      # Ce fichier
 ```
 
-## 🎮 Utilisation
+## ⚙️ Configuration
 
-1. **Démarrez l'application** avec `npm start`
-2. **Ouvrez votre navigateur** à l'adresse `http://localhost:4200`
-3. **Visualisez la modélisation 3D** avec :
-   - Rotation automatique de la caméra
-   - Panneau d'information à droite
-   - Géométrie architecturale complète
+### 🎯 **Fichier de configuration principal**
 
-## 🎨 Couleurs et Matériaux
+Le fichier `src/app/config/building-config.ts` centralise **toutes les données** du modèle 3D :
 
-- **Murs** : Gris (`#808080`) - Matériau Lambert
-- **Porte** : Vert (`#00ff00`) - Matériau Lambert
-- **Fenêtres** : Rouge (`#ff0000`) - Matériau Lambert
-- **Sol** : Marron (`#8B4513`) - Matériau Lambert
-- **Plafond** : Beige (`#DEB887`) - Matériau Lambert
-
-## 🔧 Configuration Technique
-
-### Gestion SSR
-Le projet est compatible avec le Server-Side Rendering d'Angular. Three.js ne s'initialise que côté client grâce à la vérification `isPlatformBrowser()`.
-
-### Performance
-- **Bundle size** : ~724kB (inclut Three.js)
-- **Rendu** : WebGL avec antialiasing
-- **Ombres** : PCF Soft Shadow Map
-- **Animation** : 60 FPS avec `requestAnimationFrame`
-
-### Éclairage
-- **Lumière ambiante** : `#404040` (intensité 0.6)
-- **Lumière directionnelle** : `#ffffff` (intensité 0.8)
-- **Ombres** : Activées avec résolution 2048x2048
-
-## 🐛 Résolution de Problèmes
-
-### Erreur "document is not defined"
-Cette erreur peut survenir lors du build SSR. Elle est résolue par la vérification `isPlatformBrowser()` dans le composant.
-
-### Bundle size warning
-Le bundle dépasse le budget de 500kB à cause de Three.js. C'est normal pour une application 3D.
-
-### Performance sur mobile
-Pour de meilleures performances sur mobile, considérez réduire la résolution des ombres ou désactiver certains effets.
-
-## 📝 Développement
-
-### Ajout de nouvelles géométries
-1. Créez une nouvelle méthode dans `scene3d.ts`
-2. Utilisez `THREE.BoxGeometry` pour les formes simples
-3. Ajoutez le mesh à la scène avec `this.scene.add(mesh)`
-
-### Modification des couleurs
-Modifiez les valeurs hexadécimales dans les matériaux Three.js :
 ```typescript
-const material = new THREE.MeshLambertMaterial({ color: 0x808080 });
+// Exemple de configuration
+export const BUILDING_CONFIG = {
+  // Couleurs, dimensions, positions...
+  mainWall: {
+    color: 0xaaaaaa,              // Couleur du mur
+    position: { x: 0, y: 0, z: 2.3 }, // Position dans l'espace
+    openings: {
+      door: {
+        dimensions: { width: 1, height: 2.1, depth: 0.05 },
+        color: 0x00ff00           // Porte verte
+      }
+    }
+  }
+  // ... autres configurations
+};
 ```
 
-### Ajout d'interactions
-Utilisez les événements Three.js pour ajouter des contrôles de caméra ou des interactions avec les objets.
+### 🔧 **Avantages de cette approche**
 
-## 📄 Licence
+- ✅ **Pas de valeurs en dur** dans le code
+- ✅ **Modifications faciles** des propriétés
+- ✅ **Code maintenable** et professionnel
+- ✅ **Évolution simple** du projet
 
-Ce projet est développé dans le cadre d'un projet académique de modélisation 3D architecturale.
+## Utilisation
 
-## 👨‍💻 Auteur
+### Navigation 3D
 
-Développé avec Angular 20 et Three.js pour la modélisation architecturale interactive.
+1. **Rotation de la vue**
+   - Maintenez le **clic gauche** enfoncé
+   - **Glissez** la souris pour faire tourner la caméra autour du bâtiment
 
----
+2. **Zoom**
+   - Utilisez la **molette de la souris**
+   - Vers le haut = zoom avant
+   - Vers le bas = zoom arrière
 
-**Note** : Ce projet respecte scrupuleusement les spécifications architecturales fournies et implémente une visualisation 3D complète et interactive.
+3. **Réinitialisation**
+   - Cliquez sur le bouton **Réinitialiser Vue**
+   - Remet la caméra à sa position initiale
+
+### Interface utilisateur
+
+L'interface affiche :
+- **Informations sur les contrôles** (en haut à gauche)
+- **Légende des couleurs** des éléments
+- **Bouton de réinitialisation** de la vue
+
+## Personnalisation
+
+### Modifier les couleurs
+
+Dans `building-config.ts`, changez les valeurs hexadécimales :
+
+```typescript
+// Exemples de couleurs
+door: {
+  color: 0xff0000,  // Rouge
+  // color: 0x00ff00,  // Vert (actuel)
+  // color: 0x0000ff,  // Bleu
+}
+```
+
+### Redimensionner les éléments
+
+```typescript
+// Modifier les dimensions
+door: {
+  dimensions: { 
+    width: 1.2,   // Plus large (était 1)
+    height: 2.3,  // Plus haute (était 2.1)
+    depth: 0.05 
+  }
+}
+```
+
+### Déplacer les éléments
+
+```typescript
+// Changer les positions
+window1: {
+  position: { 
+    x: 0,     // Centré (était -0.5)
+    y: 1.8,   // Plus haut (était 1.5)
+    z: 2.3 
+  }
+}
+```
+
+### Ajuster l'éclairage
+
+```typescript
+lighting: {
+  ambient: {
+    intensity: 0.8  // Plus lumineux (était 0.6)
+  },
+  directional: {
+    position: { x: 5, y: 15, z: 5 }  // Changer position du soleil
+  }
+}
+```
+
+## 📐 Architecture technique
+
+### Composants principaux
+
+1. **Scene3d** (`scene3d.ts`)
+   - Initialisation de Three.js
+   - Création des géométries 3D
+   - Gestion des contrôles souris
+   - Rendu et animation
+
+2. **Building Config** (`building-config.ts`)
+   - Configuration centralisée
+   - Interfaces TypeScript
+   - Fonctions utilitaires de calcul
+
+### Technologies Three.js utilisées
+
+- **Scene** : Conteneur 3D principal
+- **PerspectiveCamera** : Caméra avec perspective réaliste
+- **WebGLRenderer** : Rendu WebGL haute performance
+- **Geometries** :
+  - `BoxGeometry` : Murs, sol, toit simples
+  - `ExtrudeGeometry` : Mur principal avec ouvertures
+- **Materials** :
+  - `MeshStandardMaterial` : Matériaux avec éclairage réaliste
+- **Lights** :
+  - `AmbientLight` : Lumière ambiante
+  - `DirectionalLight` : Lumière directionnelle avec ombres
+
+### Calculs automatiques
+
+La classe `WallCalculations` génère automatiquement :
+- Les coordonnées des ouvertures de portes
+- Les coordonnées des ouvertures de fenêtres
+- Les découpes dans le mur principal
+
+## Développement
+
+### Ajouter un nouvel élément
+
+1. **Définir l'interface** dans `building-config.ts`
+2. **Ajouter la configuration** dans `BUILDING_CONFIG`
+3. **Créer la méthode de création** dans `scene3d.ts`
+4. **Appeler la méthode** dans `ngOnInit()`
+

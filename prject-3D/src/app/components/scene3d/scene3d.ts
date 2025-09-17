@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, OnDestroy, ViewChild, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import * as THREE from 'three';
+import { BUILDING_CONFIG, WallCalculations } from '../../config/building-config';
 
 @Component({
   selector: 'app-scene3d',
@@ -20,13 +21,17 @@ export class Scene3d implements OnInit, OnDestroy {
   private isMouseDown = false;
   private mouseX = 0;
   private mouseY = 0;
-  private targetRotationX = 0.3;
-  private targetRotationY = 0.5;
-  private rotationX = 0.3;
-  private rotationY = 0.5;
-  private targetZoom = 15;
-  private zoom = 15;
-  private targetPosition = new THREE.Vector3(0, 1.25, 0);
+  private targetRotationX = BUILDING_CONFIG.camera.initial.rotationX;
+  private targetRotationY = BUILDING_CONFIG.camera.initial.rotationY;
+  private rotationX = BUILDING_CONFIG.camera.initial.rotationX;
+  private rotationY = BUILDING_CONFIG.camera.initial.rotationY;
+  private targetZoom = BUILDING_CONFIG.camera.initial.zoom;
+  private zoom = BUILDING_CONFIG.camera.initial.zoom;
+  private targetPosition = new THREE.Vector3(
+    BUILDING_CONFIG.camera.target.x,
+    BUILDING_CONFIG.camera.target.y,
+    BUILDING_CONFIG.camera.target.z
+  );
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
@@ -61,15 +66,16 @@ export class Scene3d implements OnInit, OnDestroy {
 
   private initThree() {
     this.scene = new THREE.Scene();
-    this.scene.background = new THREE.Color(0xbfd1e5);
+    this.scene.background = new THREE.Color(BUILDING_CONFIG.scene.background);
 
     this.camera = new THREE.PerspectiveCamera(
-75,
+      BUILDING_CONFIG.scene.camera.fov,
       this.canvasContainer.nativeElement.clientWidth / this.canvasContainer.nativeElement.clientHeight,
-      0.1,
-      1000
+      BUILDING_CONFIG.scene.camera.near,
+      BUILDING_CONFIG.scene.camera.far
     );
-    this.camera.position.set(10, 10, 9);
+    const camPos = BUILDING_CONFIG.camera.initial.position;
+    this.camera.position.set(camPos.x, camPos.y, camPos.z);
 
     this.renderer = new THREE.WebGLRenderer({ antialias: true });
     
@@ -91,14 +97,16 @@ export class Scene3d implements OnInit, OnDestroy {
     this.renderer.domElement.style.display = 'block';
 
     // Lumières
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+    const ambientConfig = BUILDING_CONFIG.lighting.ambient;
+    const ambientLight = new THREE.AmbientLight(ambientConfig.color, ambientConfig.intensity);
     this.scene.add(ambientLight);
 
-    const dirLight = new THREE.DirectionalLight(0xffffff, 1);
-    dirLight.position.set(10, 20, 10);
+    const dirConfig = BUILDING_CONFIG.lighting.directional;
+    const dirLight = new THREE.DirectionalLight(dirConfig.color, dirConfig.intensity);
+    dirLight.position.set(dirConfig.position.x, dirConfig.position.y, dirConfig.position.z);
     dirLight.castShadow = true;
-    dirLight.shadow.mapSize.width = 2048;
-    dirLight.shadow.mapSize.height = 2048;
+    dirLight.shadow.mapSize.width = dirConfig.shadow.mapSize;
+    dirLight.shadow.mapSize.height = dirConfig.shadow.mapSize;
     this.scene.add(dirLight);
   }
 
@@ -106,115 +114,135 @@ export class Scene3d implements OnInit, OnDestroy {
 
   private createMurPrincipalAvecOuverturesExtrude() {
     const murShape = new THREE.Shape();
+    const contour = BUILDING_CONFIG.mainWall.contour;
 
-    // Mur rectangulaire : largeur = 8m, hauteur = 2.5m
-    murShape.moveTo(-4, 0);
-    murShape.lineTo(4, 0);
-    murShape.lineTo(4, 2.5);
-    murShape.lineTo(-4, 2.5);
-    murShape.lineTo(-4, 0);
+    // Créer le contour du mur à partir de la configuration
+    murShape.moveTo(contour[0].x, contour[0].y);
+    for (let i = 1; i < contour.length; i++) {
+      murShape.lineTo(contour[i].x, contour[i].y);
+    }
 
     // --- Ouvertures ---
-    // Porte (1m x 2.1m) centrée à x=-3
+    const openings = BUILDING_CONFIG.mainWall.openings;
+    
+    // Porte
     const porteHole = new THREE.Path();
-    porteHole.moveTo(-3 - 0.5, 0);
-    porteHole.lineTo(-3 + 0.5, 0);
-    porteHole.lineTo(-3 + 0.5, 2.1);
-    porteHole.lineTo(-3 - 0.5, 2.1);
-    porteHole.lineTo(-3 - 0.5, 0);
+    const doorHole = WallCalculations.getDoorHole(openings.door);
+    porteHole.moveTo(doorHole[0].x, doorHole[0].y);
+    for (let i = 1; i < doorHole.length; i++) {
+      porteHole.lineTo(doorHole[i].x, doorHole[i].y);
+    }
     murShape.holes.push(porteHole);
 
-    // Fenêtre 1 (1.5m x 1.2m) centrée à x=-0.5
+    // Fenêtre 1
     const fenetre1Hole = new THREE.Path();
-    fenetre1Hole.moveTo(-0.5 - 0.75, 0.9);
-    fenetre1Hole.lineTo(-0.5 + 0.75, 0.9);
-    fenetre1Hole.lineTo(-0.5 + 0.75, 2.1);                                                                                                                                                                                                                                                                   
-    fenetre1Hole.lineTo(-0.5 - 0.75, 2.1);
-    fenetre1Hole.lineTo(-0.5 - 0.75, 0.9);
+    const window1Hole = WallCalculations.getWindowHole(openings.window1);
+    fenetre1Hole.moveTo(window1Hole[0].x, window1Hole[0].y);
+    for (let i = 1; i < window1Hole.length; i++) {
+      fenetre1Hole.lineTo(window1Hole[i].x, window1Hole[i].y);
+    }
     murShape.holes.push(fenetre1Hole);
 
-    // Fenêtre 2 (2m x 1.2m) centrée à x=2.5
+    // Fenêtre 2
     const fenetre2Hole = new THREE.Path();
-    fenetre2Hole.moveTo(2.5 - 1, 0.9);
-    fenetre2Hole.lineTo(2.5 + 1, 0.9);
-    fenetre2Hole.lineTo(2.5 + 1, 2.1);
-    fenetre2Hole.lineTo(2.5 - 1, 2.1);
-    fenetre2Hole.lineTo(2.5 - 1, 0.9);
+    const window2Hole = WallCalculations.getWindowHole(openings.window2);
+    fenetre2Hole.moveTo(window2Hole[0].x, window2Hole[0].y);
+    for (let i = 1; i < window2Hole.length; i++) {
+      fenetre2Hole.lineTo(window2Hole[i].x, window2Hole[i].y);
+    }
     murShape.holes.push(fenetre2Hole);
 
-    // Extrusion (épaisseur du mur = 0.2m)
-    const extrudeSettings = { depth: 0.2, bevelEnabled: false };
+    // Extrusion
+    const extrudeSettings = { depth: BUILDING_CONFIG.mainWall.thickness, bevelEnabled: false };
     const murGeometry = new THREE.ExtrudeGeometry(murShape, extrudeSettings);
-    const murMat = new THREE.MeshStandardMaterial({ color: 0xaaaaaa });
+    const murMat = new THREE.MeshStandardMaterial({ color: BUILDING_CONFIG.mainWall.color });
     const mur = new THREE.Mesh(murGeometry, murMat);
 
-    mur.position.set(0, 0, 2.3);
+    const wallPos = BUILDING_CONFIG.mainWall.position;
+    mur.position.set(wallPos.x, wallPos.y, wallPos.z);
     mur.castShadow = true;
     mur.receiveShadow = true;
 
     this.scene.add(mur);
 
     // --- Ajout des fenêtres et porte (colorées) ---
-    const porteGeo = new THREE.BoxGeometry(1, 2.1, 0.05);
-    const porteMat = new THREE.MeshStandardMaterial({ color: 0x00ff00 });
+    // Porte
+    const doorConfig = openings.door;
+    const porteGeo = new THREE.BoxGeometry(doorConfig.dimensions.width, doorConfig.dimensions.height, doorConfig.dimensions.depth);
+    const porteMat = new THREE.MeshStandardMaterial({ color: doorConfig.color });
     const porte = new THREE.Mesh(porteGeo, porteMat);
-    porte.position.set(-3, 1.05, 2.3); // milieu de l'ouverture
+    porte.position.set(doorConfig.position.x, doorConfig.position.y, doorConfig.position.z);
     this.scene.add(porte);
 
-    const fenetre1Geo = new THREE.BoxGeometry(1.5, 1.2, 0.05);
-    const fenetreMat = new THREE.MeshStandardMaterial({ color: 0xff0000 });
-    const fenetre1 = new THREE.Mesh(fenetre1Geo, fenetreMat);
-    fenetre1.position.set(-0.5, 1.5, 2.3);
+    // Fenêtre 1
+    const window1Config = openings.window1;
+    const fenetre1Geo = new THREE.BoxGeometry(window1Config.dimensions.width, window1Config.dimensions.height, window1Config.dimensions.depth);
+    const fenetre1Mat = new THREE.MeshStandardMaterial({ color: window1Config.color });
+    const fenetre1 = new THREE.Mesh(fenetre1Geo, fenetre1Mat);
+    fenetre1.position.set(window1Config.position.x, window1Config.position.y, window1Config.position.z);
     this.scene.add(fenetre1);
 
-    const fenetre2Geo = new THREE.BoxGeometry(2, 1.2, 0.05);
-    const fenetre2 = new THREE.Mesh(fenetre2Geo, fenetreMat);
-    fenetre2.position.set(2.5, 1.5, 2.3);
+    // Fenêtre 2
+    const window2Config = openings.window2;
+    const fenetre2Geo = new THREE.BoxGeometry(window2Config.dimensions.width, window2Config.dimensions.height, window2Config.dimensions.depth);
+    const fenetre2Mat = new THREE.MeshStandardMaterial({ color: window2Config.color });
+    const fenetre2 = new THREE.Mesh(fenetre2Geo, fenetre2Mat);
+    fenetre2.position.set(window2Config.position.x, window2Config.position.y, window2Config.position.z);
     this.scene.add(fenetre2);
   }
 
+
   private createAutresMurs() {
-    const murMat = new THREE.MeshStandardMaterial({ color: 0xaaaaaa });
+    const walls = BUILDING_CONFIG.walls;
 
     // Mur arrière
-    const murArriereGeo = new THREE.BoxGeometry(8, 2.5, 0.2);
-    const murArriere = new THREE.Mesh(murArriereGeo, murMat);
-    murArriere.position.set(0, 1.25, -2.4);
+    const backWall = walls.back;
+    const murArriereGeo = new THREE.BoxGeometry(backWall.dimensions.width, backWall.dimensions.height, backWall.dimensions.depth);
+    const murArriereMat = new THREE.MeshStandardMaterial({ color: backWall.color });
+    const murArriere = new THREE.Mesh(murArriereGeo, murArriereMat);
+    murArriere.position.set(backWall.position.x, backWall.position.y, backWall.position.z);
     murArriere.castShadow = true;
     murArriere.receiveShadow = true;
     this.scene.add(murArriere);
 
     // Mur gauche
-    const murGaucheGeo = new THREE.BoxGeometry(0.2, 2.5, 5);
-    const murGauche = new THREE.Mesh(murGaucheGeo, murMat);
-    murGauche.position.set(-3.9, 1.25, 0);
+    const leftWall = walls.left;
+    const murGaucheGeo = new THREE.BoxGeometry(leftWall.dimensions.width, leftWall.dimensions.height, leftWall.dimensions.depth);
+    const murGaucheMat = new THREE.MeshStandardMaterial({ color: leftWall.color });
+    const murGauche = new THREE.Mesh(murGaucheGeo, murGaucheMat);
+    murGauche.position.set(leftWall.position.x, leftWall.position.y, leftWall.position.z);
     murGauche.castShadow = true;
     murGauche.receiveShadow = true;
     this.scene.add(murGauche);
 
     // Mur droit
-    const murDroitGeo = new THREE.BoxGeometry(0.2, 2.5, 5);
-    const murDroit = new THREE.Mesh(murDroitGeo, murMat);
-    murDroit.position.set(3.9, 1.25, 0);
+    const rightWall = walls.right;
+    const murDroitGeo = new THREE.BoxGeometry(rightWall.dimensions.width, rightWall.dimensions.height, rightWall.dimensions.depth);
+    const murDroitMat = new THREE.MeshStandardMaterial({ color: rightWall.color });
+    const murDroit = new THREE.Mesh(murDroitGeo, murDroitMat);
+    murDroit.position.set(rightWall.position.x, rightWall.position.y, rightWall.position.z);
     murDroit.castShadow = true;
     murDroit.receiveShadow = true;
     this.scene.add(murDroit);
   }
 
   private createSol() {
-    const solGeometry = new THREE.BoxGeometry(-8, 0.2, 5);
-    const solMaterial = new THREE.MeshStandardMaterial({ color: 0x2E1E1A });
+    const groundConfig = BUILDING_CONFIG.ground;
+    const solGeometry = new THREE.BoxGeometry(groundConfig.dimensions.width, groundConfig.dimensions.height, groundConfig.dimensions.depth);
+    const solMaterial = new THREE.MeshStandardMaterial({ color: groundConfig.color });
     const sol = new THREE.Mesh(solGeometry, solMaterial);
-    sol.position.set(0, -0.1, 0);
+    sol.position.set(groundConfig.position.x, groundConfig.position.y, groundConfig.position.z);
     sol.receiveShadow = true;
     this.scene.add(sol);
   }
 
+
   private createToit() {
-    const toitGeo = new THREE.BoxGeometry(8.4, 0.2, 5);
-    const toitMat = new THREE.MeshStandardMaterial({ color: 0x4169e1 });
+    const roofConfig = BUILDING_CONFIG.roof;
+    const toitGeo = new THREE.BoxGeometry(roofConfig.dimensions.width, roofConfig.dimensions.height, roofConfig.dimensions.depth);
+    const toitMat = new THREE.MeshStandardMaterial({ color: roofConfig.color });
     const toit = new THREE.Mesh(toitGeo, toitMat);
-    toit.position.set(0, 2.6, 0);
+    toit.position.set(roofConfig.position.x, roofConfig.position.y, roofConfig.position.z);
     toit.castShadow = true;
     toit.receiveShadow = true;
     this.scene.add(toit);
@@ -250,8 +278,8 @@ export class Scene3d implements OnInit, OnDestroy {
     const deltaX = event.clientX - this.mouseX;
     const deltaY = event.clientY - this.mouseY;
 
-    this.targetRotationY += deltaX * 0.01;
-    this.targetRotationX += deltaY * 0.01;
+    this.targetRotationY += deltaX * BUILDING_CONFIG.camera.controls.rotationSpeed;
+    this.targetRotationX += deltaY * BUILDING_CONFIG.camera.controls.rotationSpeed;
     this.targetRotationX = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, this.targetRotationX));
 
     this.mouseX = event.clientX;
@@ -264,8 +292,8 @@ export class Scene3d implements OnInit, OnDestroy {
 
   private onMouseWheel(event: WheelEvent) {
     event.preventDefault();
-    this.targetZoom += event.deltaY * 0.01;
-    this.targetZoom = Math.max(5, Math.min(50, this.targetZoom));
+    this.targetZoom += event.deltaY * BUILDING_CONFIG.camera.controls.zoomSpeed;
+    this.targetZoom = Math.max(BUILDING_CONFIG.camera.controls.minZoom, Math.min(BUILDING_CONFIG.camera.controls.maxZoom, this.targetZoom));
   }
 
   private updateCameraPosition() {
@@ -289,9 +317,9 @@ export class Scene3d implements OnInit, OnDestroy {
 
   // Méthode publique pour réinitialiser la position de la caméra
   public resetCameraPosition() {
-    this.targetRotationX = 0.2;
-    this.targetRotationY = 0.3;
-    this.targetZoom = 15;
+    this.targetRotationX = BUILDING_CONFIG.camera.initial.rotationX;
+    this.targetRotationY = BUILDING_CONFIG.camera.initial.rotationY;
+    this.targetZoom = BUILDING_CONFIG.camera.initial.zoom;
     
     this.updateCameraPosition();
     
@@ -300,7 +328,8 @@ export class Scene3d implements OnInit, OnDestroy {
 
   private createRepere() {
     // Créer un répère avec les axes X, Y, Z
-    const axesHelper = new THREE.AxesHelper(8);
+    const axesConfig = BUILDING_CONFIG.axes;
+    const axesHelper = new THREE.AxesHelper(axesConfig.size);
     this.scene.add(axesHelper);
 
     // Ajouter des labels pour les axes
@@ -308,15 +337,17 @@ export class Scene3d implements OnInit, OnDestroy {
   }
 
   private createAxisLabels() {
-    // Labels pour les axes (X, Y, Z)
-    this.createSimpleLabel('X', 10, 0,0, 0xff0000); 
-    this.createSimpleLabel('Y', 0, 10,0, 0x00ff00); 
-    this.createSimpleLabel('Z', 0, 0, 10, 0x0000ff); 
+    // Labels pour les axes à partir de la configuration
+    const axesConfig = BUILDING_CONFIG.axes;
+    axesConfig.labels.forEach(label => {
+      this.createSimpleLabel(label.text, label.position.x, label.position.y, label.position.z, label.color);
+    });
   }
 
   private createSimpleLabel(text: string, x: number, y: number, z: number, color: number) {
     // Créer un petit cube coloré comme label
-    const labelGeometry = new THREE.BoxGeometry(0.2, 0.2, 0.2);
+    const labelSize = BUILDING_CONFIG.axes.labelSize;
+    const labelGeometry = new THREE.BoxGeometry(labelSize.width, labelSize.height, labelSize.depth);
     const labelMaterial = new THREE.MeshStandardMaterial({ color: color });
     const label = new THREE.Mesh(labelGeometry, labelMaterial);
     label.position.set(x, y, z);
