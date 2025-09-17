@@ -158,18 +158,18 @@ export class Scene3d implements OnInit, OnDestroy {
     const porteGeo = new THREE.BoxGeometry(1, 2.1, 0.05);
     const porteMat = new THREE.MeshStandardMaterial({ color: 0x00ff00 });
     const porte = new THREE.Mesh(porteGeo, porteMat);
-    porte.position.set(-3, 1.05, 2.525); // milieu de l'ouverture
+    porte.position.set(-3, 1.05, 2.3); // milieu de l'ouverture
     this.scene.add(porte);
 
     const fenetre1Geo = new THREE.BoxGeometry(1.5, 1.2, 0.05);
     const fenetreMat = new THREE.MeshStandardMaterial({ color: 0xff0000 });
     const fenetre1 = new THREE.Mesh(fenetre1Geo, fenetreMat);
-    fenetre1.position.set(-0.5, 1.5, 2.525);
+    fenetre1.position.set(-0.5, 1.5, 2.3);
     this.scene.add(fenetre1);
 
     const fenetre2Geo = new THREE.BoxGeometry(2, 1.2, 0.05);
     const fenetre2 = new THREE.Mesh(fenetre2Geo, fenetreMat);
-    fenetre2.position.set(2.5, 1.5, 2.525);
+    fenetre2.position.set(2.5, 1.5, 2.3);
     this.scene.add(fenetre2);
   }
 
