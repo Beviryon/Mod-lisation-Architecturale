@@ -148,7 +148,7 @@ export class Scene3d implements OnInit, OnDestroy {
     const murMat = new THREE.MeshStandardMaterial({ color: 0xaaaaaa });
     const mur = new THREE.Mesh(murGeometry, murMat);
 
-    mur.position.set(0, 0, 4);
+    mur.position.set(0, 0, 2.3);
     mur.castShadow = true;
     mur.receiveShadow = true;
 
@@ -158,18 +158,18 @@ export class Scene3d implements OnInit, OnDestroy {
     const porteGeo = new THREE.BoxGeometry(1, 2.1, 0.05);
     const porteMat = new THREE.MeshStandardMaterial({ color: 0x00ff00 });
     const porte = new THREE.Mesh(porteGeo, porteMat);
-    porte.position.set(-3, 1.05, 4.125); // milieu de l'ouverture
+    porte.position.set(-3, 1.05, 2.525); // milieu de l'ouverture
     this.scene.add(porte);
 
     const fenetre1Geo = new THREE.BoxGeometry(1.5, 1.2, 0.05);
     const fenetreMat = new THREE.MeshStandardMaterial({ color: 0xff0000 });
     const fenetre1 = new THREE.Mesh(fenetre1Geo, fenetreMat);
-    fenetre1.position.set(-0.5, 1.5, 4.125);
+    fenetre1.position.set(-0.5, 1.5, 2.525);
     this.scene.add(fenetre1);
 
     const fenetre2Geo = new THREE.BoxGeometry(2, 1.2, 0.05);
     const fenetre2 = new THREE.Mesh(fenetre2Geo, fenetreMat);
-    fenetre2.position.set(2.5, 1.5, 4.125);
+    fenetre2.position.set(2.5, 1.5, 2.525);
     this.scene.add(fenetre2);
   }
 
@@ -179,30 +179,30 @@ export class Scene3d implements OnInit, OnDestroy {
     // Mur arrière
     const murArriereGeo = new THREE.BoxGeometry(8, 2.5, 0.2);
     const murArriere = new THREE.Mesh(murArriereGeo, murMat);
-    murArriere.position.set(0, 1.25, -4);
+    murArriere.position.set(0, 1.25, -2.4);
     murArriere.castShadow = true;
     murArriere.receiveShadow = true;
     this.scene.add(murArriere);
 
     // Mur gauche
-    const murGaucheGeo = new THREE.BoxGeometry(0.2, 2.5, 8);
+    const murGaucheGeo = new THREE.BoxGeometry(0.2, 2.5, 5);
     const murGauche = new THREE.Mesh(murGaucheGeo, murMat);
-    murGauche.position.set(-4, 1.25, 0);
+    murGauche.position.set(-3.9, 1.25, 0);
     murGauche.castShadow = true;
     murGauche.receiveShadow = true;
     this.scene.add(murGauche);
 
     // Mur droit
-    const murDroitGeo = new THREE.BoxGeometry(0.2, 2.5, 8);
+    const murDroitGeo = new THREE.BoxGeometry(0.2, 2.5, 5);
     const murDroit = new THREE.Mesh(murDroitGeo, murMat);
-    murDroit.position.set(4, 1.25, 0);
+    murDroit.position.set(3.9, 1.25, 0);
     murDroit.castShadow = true;
     murDroit.receiveShadow = true;
     this.scene.add(murDroit);
   }
 
   private createSol() {
-    const solGeometry = new THREE.BoxGeometry(-8, 0.2, 8);
+    const solGeometry = new THREE.BoxGeometry(-8, 0.2, 5);
     const solMaterial = new THREE.MeshStandardMaterial({ color: 0x2E1E1A });
     const sol = new THREE.Mesh(solGeometry, solMaterial);
     sol.position.set(0, -0.1, 0);
@@ -211,7 +211,7 @@ export class Scene3d implements OnInit, OnDestroy {
   }
 
   private createToit() {
-    const toitGeo = new THREE.BoxGeometry(8.4, 0.2, 8.4);
+    const toitGeo = new THREE.BoxGeometry(8.4, 0.2, 5);
     const toitMat = new THREE.MeshStandardMaterial({ color: 0x4169e1 });
     const toit = new THREE.Mesh(toitGeo, toitMat);
     toit.position.set(0, 2.6, 0);
