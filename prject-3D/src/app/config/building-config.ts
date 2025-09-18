@@ -3,22 +3,22 @@
  * CONFIGURATION DU BÂTIMENT 3D
  * ===============================================
  * 
- * Ce fichier centralise toutes les données de votre modèle 3D architectural.
+ * Ce fichier centralise toutes les données du modèle 3D architectural.
  * Au lieu d'avoir des valeurs en dur dispersées dans le code, tout est ici !
  * 
- * 🎯 OBJECTIFS :
+ * OBJECTIFS :
  * - Éliminer les "magic numbers" (valeurs en dur)
  * - Faciliter les modifications (changer une couleur, une dimension, etc.)
  * - Rendre le code plus maintenable et professionnel
  * - Permettre une évolution facile du projet
  * 
- * 📁 STRUCTURE :
+ * STRUCTURE :
  * 1. INTERFACES : Définissent la forme des données
- * 2. CONFIGURATION : Toutes les valeurs de votre bâtiment
+ * 2. CONFIGURATION : Toutes les valeurs du bâtiment
  * 3. UTILITAIRES : Fonctions de calcul automatique
  * 
- * 💡 UTILISATION :
- * Pour modifier votre bâtiment, il suffit de changer les valeurs dans 
+ * UTILISATION :
+ * Pour modifier le bâtiment, il suffit de changer les valeurs dans 
  * BUILDING_CONFIG ci-dessous. Le code s'adaptera automatiquement !
  * 
  * ===============================================
@@ -161,7 +161,7 @@ export interface SceneConfig {
  * ===============================================
  * CONFIGURATION PRINCIPALE DU BÂTIMENT
  * ===============================================
- * Toutes les données dumodèle 3D sont centralisées ici
+ * Toutes les données du modèle 3D sont centralisées ici
  */
 export const BUILDING_CONFIG = {
   
@@ -181,7 +181,7 @@ export const BUILDING_CONFIG = {
    * ÉCLAIRAGE - Lumières de la scène
    */
   lighting: {
-    ambient: {
+    ambient: {   
       color: 0xffffff,     // Lumière blanche ambiante
       intensity: 0.6       // 60% d'intensité (éclairage doux)
     },
@@ -220,7 +220,7 @@ export const BUILDING_CONFIG = {
   ground: {
     position: { x: 0, y: -0.1, z: 0 }, // Légèrement sous le niveau 0
     dimensions: { width: 8, height: 0.2, depth: 5 }, // 8x5m, épaisseur 20cm
-    color: 0x2E1E1A       // Couleur marron foncé
+    color: 0x2E1E1A  
   } as WallConfig,
 
   /**
