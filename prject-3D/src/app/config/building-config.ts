@@ -228,7 +228,7 @@ export const BUILDING_CONFIG = {
    */
   roof: {
     position: { x: 0, y: 2.6, z: 0 },  // Au-dessus des murs (2.5m + 0.1m)
-    dimensions: { width: 8.4, height: 0.2, depth: 5 }, // Légèrement plus grand que les murs
+    dimensions: { width: 8.4, height: 0.2, depth: 5 }, 
     color: 0x4169e1       // Couleur bleu royal
   } as WallConfig,
 
@@ -249,23 +249,9 @@ export const BUILDING_CONFIG = {
     position: { x: 0, y: 0, z: 2.3 }, // Position du mur dans l'espace
     color: 0xaaaaaa,            // Couleur gris clair
     openings: {
-      // PORTE D'ENTRÉE
-      door: {
-        position: { x: -3, y: 1.05, z: 2.3 }, // Centre de la porte
-        dimensions: { width: 1, height: 2.1, depth: 0.05 }, // 1m x 2.1m
-        color: 0x00ff00,        // Couleur verte
-        type: 'door'
-      },
-      // PREMIÈRE FENÊTRE
-      window1: {
-        position: { x: -0.5, y: 1.5, z: 2.3 }, // Centre de la fenêtre
-        dimensions: { width: 1.5, height: 1.2, depth: 0.05 }, // 1.5m x 1.2m
-        color: 0xff0000,        // Couleur rouge
-        type: 'window'
-      },
       // DEUXIÈME FENÊTRE
       window2: {
-        position: { x: 2.5, y: 1.5, z: 2.3 }, // Centre de la fenêtre
+        position: { x: 0, y: 1.5, z: 2.3 }, 
         dimensions: { width: 2, height: 1.2, depth: 0.05 }, // 2m x 1.2m
         color: 0xff0000,        // Couleur rouge
         type: 'window' as const
@@ -280,21 +266,38 @@ export const BUILDING_CONFIG = {
   walls: {
     // MUR ARRIÈRE
     back: {
-      position: { x: 0, y: 1.25, z: -2.4 }, // Centre du mur arrière
+      position: { x: 0, y: 0, z: -2.5 },
       dimensions: { width: 8, height: 2.5, depth: 0.2 }, // 8m x 2.5m x 20cm
-      color: 0xaaaaaa         // Couleur gris clair
+      color: 0xaaaaaa,
+      openings: {
+        window1: {
+          position: { x: 0, y: 1.5, z: -2.3 },
+          dimensions: { width: 1.5, height: 1.2, depth: 0.05 }, // 1.5m x 1.2m
+          color: 0xff0000,        // Couleur rouge
+          type: 'window'
+        }
+      }
     },
     // MUR GAUCHE
     left: {
-      position: { x: -3.9, y: 1.25, z: 0 }, // Centre du mur gauche
+      position: { x: -3.9, y: 1.25, z: 0 }, 
       dimensions: { width: 0.2, height: 2.5, depth: 5 }, // 20cm x 2.5m x 5m
-      color: 0xaaaaaa         // Couleur gris clair
+      color: 0xaaaaaa,        // Couleur gris clair
     },
     // MUR DROIT
     right: {
-      position: { x: 3.9, y: 1.25, z: 0 },  // Centre du mur droit
+      position: { x: 3.8, y: 0, z: 0 },
       dimensions: { width: 0.2, height: 2.5, depth: 5 }, // 20cm x 2.5m x 5m
-      color: 0xaaaaaa         // Couleur gris clair
+      color: 0xaaaaaa,
+      openings: {
+        // PORTE D'ENTRÉE
+        door: {
+          position: { x: 3.9, y: 1.05, z: 0 },
+          dimensions: { width: 1, height: 2.1, depth: 0.05 }, // 1m x 2.1m
+          color: 0x00ff00,        // Couleur verte
+          type: 'door'
+        }
+      }
     }
   },
 

@@ -132,23 +132,8 @@ export class Scene3d implements OnInit, OnDestroy {
     // --- Ouvertures ---
     const openings = BUILDING_CONFIG.mainWall.openings;
     
-    // Porte
-    const porteHole = new THREE.Path();
-    const doorHole = WallCalculations.getDoorHole(openings.door);
-    porteHole.moveTo(doorHole[0].x, doorHole[0].y);
-    for (let i = 1; i < doorHole.length; i++) {
-      porteHole.lineTo(doorHole[i].x, doorHole[i].y);
-    }
-    murShape.holes.push(porteHole);
-
-    // Fenêtre 1
-    const fenetre1Hole = new THREE.Path();
-    const window1Hole = WallCalculations.getWindowHole(openings.window1);
-    fenetre1Hole.moveTo(window1Hole[0].x, window1Hole[0].y);
-    for (let i = 1; i < window1Hole.length; i++) {
-      fenetre1Hole.lineTo(window1Hole[i].x, window1Hole[i].y);
-    }
-    murShape.holes.push(fenetre1Hole);
+    // Porte - Maintenant sur le mur droit
+    // Fenêtre 1 - Maintenant sur le mur arrière
 
     // Fenêtre 2
     const fenetre2Hole = new THREE.Path();
@@ -172,22 +157,9 @@ export class Scene3d implements OnInit, OnDestroy {
 
     this.scene.add(mur);
 
-    // --- Ajout des fenêtres et porte (colorées) ---
-    // Porte
-    const doorConfig = openings.door;
-    const porteGeo = new THREE.BoxGeometry(doorConfig.dimensions.width, doorConfig.dimensions.height, doorConfig.dimensions.depth);
-    const porteMat = new THREE.MeshStandardMaterial({ color: doorConfig.color });
-    const porte = new THREE.Mesh(porteGeo, porteMat);
-    porte.position.set(doorConfig.position.x, doorConfig.position.y, doorConfig.position.z);
-    this.scene.add(porte);
-
-    // Fenêtre 1
-    const window1Config = openings.window1;
-    const fenetre1Geo = new THREE.BoxGeometry(window1Config.dimensions.width, window1Config.dimensions.height, window1Config.dimensions.depth);
-    const fenetre1Mat = new THREE.MeshStandardMaterial({ color: window1Config.color });
-    const fenetre1 = new THREE.Mesh(fenetre1Geo, fenetre1Mat);
-    fenetre1.position.set(window1Config.position.x, window1Config.position.y, window1Config.position.z);
-    this.scene.add(fenetre1);
+    // --- Ajout des fenêtres (colorées) ---
+    // Porte - Maintenant sur le mur droit
+    // Fenêtre 1 - Maintenant sur le mur arrière
 
     // Fenêtre 2
     const window2Config = openings.window2;
@@ -202,15 +174,8 @@ export class Scene3d implements OnInit, OnDestroy {
   private createAutresMurs() {
     const walls = BUILDING_CONFIG.walls;
 
-    // Mur arrière
-    const backWall = walls.back;
-    const murArriereGeo = new THREE.BoxGeometry(backWall.dimensions.width, backWall.dimensions.height, backWall.dimensions.depth);
-    const murArriereMat = new THREE.MeshStandardMaterial({ color: backWall.color });
-    const murArriere = new THREE.Mesh(murArriereGeo, murArriereMat);
-    murArriere.position.set(backWall.position.x, backWall.position.y, backWall.position.z);
-    murArriere.castShadow = true;
-    murArriere.receiveShadow = true;
-    this.scene.add(murArriere);
+    // Mur arrière avec fenêtre
+    this.createMurArriereAvecFenetre();
 
     // Mur gauche
     const leftWall = walls.left;
@@ -222,15 +187,8 @@ export class Scene3d implements OnInit, OnDestroy {
     murGauche.receiveShadow = true;
     this.scene.add(murGauche);
 
-    // Mur droit
-    const rightWall = walls.right;
-    const murDroitGeo = new THREE.BoxGeometry(rightWall.dimensions.width, rightWall.dimensions.height, rightWall.dimensions.depth);
-    const murDroitMat = new THREE.MeshStandardMaterial({ color: rightWall.color });
-    const murDroit = new THREE.Mesh(murDroitGeo, murDroitMat);
-    murDroit.position.set(rightWall.position.x, rightWall.position.y, rightWall.position.z);
-    murDroit.castShadow = true;
-    murDroit.receiveShadow = true;
-    this.scene.add(murDroit);
+    // Mur droit avec porte
+    this.createMurDroitAvecPorte();
   }
 
   private createSol() {
@@ -360,6 +318,112 @@ export class Scene3d implements OnInit, OnDestroy {
     const label = new THREE.Mesh(labelGeometry, labelMaterial);
     label.position.set(x, y, z);
     this.scene.add(label);
+  }
+
+  // Méthode pour créer le mur arrière avec fenêtre
+  private createMurArriereAvecFenetre() {
+    const backWall = BUILDING_CONFIG.walls.back;
+    const window1Config = backWall.openings.window1;
+
+    // Créer la forme du mur arrière (8m x 2.5m)
+    // Le mur s'étend de x: -4 à x: +4 et de y: 0 à y: 2.5
+    const murShape = new THREE.Shape();
+    murShape.moveTo(-4, 0);    // Coin bas gauche
+    murShape.lineTo(4, 0);     // Coin bas droit  
+    murShape.lineTo(4, 2.5);   // Coin haut droit
+    murShape.lineTo(-4, 2.5);  // Coin haut gauche
+    murShape.lineTo(-4, 0);    // Retour au début
+
+    // Créer le trou de la fenêtre
+    const fenetreHole = new THREE.Path();
+    const windowWidth = window1Config.dimensions.width; // 1.5m
+    const windowHeight = window1Config.dimensions.height; // 1.2m
+    const windowBottom = 0.9; // Hauteur du bas de la fenêtre (0.9m du sol)
+    
+    // Le trou va de x: -0.75 à x: +0.75 et de y: 0.9 à y: 2.1
+    fenetreHole.moveTo(-windowWidth/2, windowBottom);           // Bas gauche
+    fenetreHole.lineTo(windowWidth/2, windowBottom);            // Bas droit
+    fenetreHole.lineTo(windowWidth/2, windowBottom + windowHeight); // Haut droit
+    fenetreHole.lineTo(-windowWidth/2, windowBottom + windowHeight); // Haut gauche
+    fenetreHole.lineTo(-windowWidth/2, windowBottom);           // Retour au début
+    
+    murShape.holes.push(fenetreHole);
+
+    // Extrusion du mur (20cm d'épaisseur)
+    const extrudeSettings = { depth: backWall.dimensions.depth, bevelEnabled: false };
+    const murGeometry = new THREE.ExtrudeGeometry(murShape, extrudeSettings);
+    const murMaterial = new THREE.MeshStandardMaterial({ color: backWall.color });
+    const mur = new THREE.Mesh(murGeometry, murMaterial);
+
+    // Positionner le mur à sa place
+    mur.position.set(backWall.position.x, backWall.position.y, backWall.position.z);
+    mur.castShadow = true;
+    mur.receiveShadow = true;
+    this.scene.add(mur);
+
+    // Ajouter la fenêtre colorée dans le trou
+    const fenetreGeo = new THREE.BoxGeometry(window1Config.dimensions.width, window1Config.dimensions.height, window1Config.dimensions.depth);
+    const fenetreMat = new THREE.MeshStandardMaterial({ color: window1Config.color });
+    const fenetre = new THREE.Mesh(fenetreGeo, fenetreMat);
+    fenetre.position.set(window1Config.position.x, window1Config.position.y, window1Config.position.z);
+    this.scene.add(fenetre);
+  }
+
+  // Méthode pour créer le mur droit avec porte (VRAI TROU comme le mur arrière)
+  private createMurDroitAvecPorte() {
+    const rightWall = BUILDING_CONFIG.walls.right;
+    const doorConfig = rightWall.openings.door;
+
+    // Créer la forme du mur droit (5m x 2.5m)
+    // Le mur s'étend de z: -2.5 à z: +2.5 et de y: 0 à y: 2.5
+    const murShape = new THREE.Shape();
+    murShape.moveTo(-2.5, 0);    // Coin bas gauche
+    murShape.lineTo(2.5, 0);     // Coin bas droit  
+    murShape.lineTo(2.5, 2.5);   // Coin haut droit
+    murShape.lineTo(-2.5, 2.5);  // Coin haut gauche
+    murShape.lineTo(-2.5, 0);    // Retour au début
+
+    // Créer le trou de la porte
+    const porteHole = new THREE.Path();
+    const doorWidth = doorConfig.dimensions.width; // 1m
+    const doorHeight = doorConfig.dimensions.height; // 2.1m
+    
+    // Le trou va de z: -0.5 à z: +0.5 et de y: 0 à y: 2.1
+    porteHole.moveTo(-doorWidth/2, 0);           // Bas gauche
+    porteHole.lineTo(doorWidth/2, 0);            // Bas droit
+    porteHole.lineTo(doorWidth/2, doorHeight);   // Haut droit
+    porteHole.lineTo(-doorWidth/2, doorHeight);   // Haut gauche
+    porteHole.lineTo(-doorWidth/2, 0);           // Retour au début
+    
+    murShape.holes.push(porteHole);
+
+    // Extrusion du mur (20cm d'épaisseur)
+    const extrudeSettings = { depth: rightWall.dimensions.width, bevelEnabled: false };
+    const murGeometry = new THREE.ExtrudeGeometry(murShape, extrudeSettings);
+    const murMaterial = new THREE.MeshStandardMaterial({ color: rightWall.color });
+    const mur = new THREE.Mesh(murGeometry, murMaterial);
+
+    // Positionner le mur à sa place avec ROTATION
+    mur.position.set(rightWall.position.x, rightWall.position.y, rightWall.position.z);
+    
+    // ROTATION NÉCESSAIRE : Le mur droit doit être tourné de 90° sur l'axe Y
+    // pour être perpendiculaire aux autres murs
+    mur.rotation.y = Math.PI / 2; // 90 degrés en radians
+    
+    mur.castShadow = true;
+    mur.receiveShadow = true;
+    this.scene.add(mur);
+
+    // Ajouter la porte colorée dans le trou
+    const porteGeo = new THREE.BoxGeometry(doorConfig.dimensions.width, doorConfig.dimensions.height, doorConfig.dimensions.depth);
+    const porteMat = new THREE.MeshStandardMaterial({ color: doorConfig.color });
+    const porte = new THREE.Mesh(porteGeo, porteMat);
+    porte.position.set(doorConfig.position.x, doorConfig.position.y, doorConfig.position.z);
+    
+    // ROTATION DE LA PORTE : Même rotation que le mur (90° sur Y)
+    porte.rotation.y = Math.PI / 2; // 90 degrés en radians
+    
+    this.scene.add(porte);
   }
 
   // Méthodes pour gérer la modale de légende
