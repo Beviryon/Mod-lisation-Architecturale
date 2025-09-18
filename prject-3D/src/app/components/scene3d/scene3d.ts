@@ -17,6 +17,9 @@ export class Scene3d implements OnInit, OnDestroy {
   private renderer!: THREE.WebGLRenderer;
   private animationId!: number;
 
+  // État de la modale de légende
+  public showLegendModal = false;
+
   // Contrôles de la souris
   private isMouseDown = false;
   private mouseX = 0;
@@ -77,7 +80,11 @@ export class Scene3d implements OnInit, OnDestroy {
     const camPos = BUILDING_CONFIG.camera.initial.position;
     this.camera.position.set(camPos.x, camPos.y, camPos.z);
 
-    this.renderer = new THREE.WebGLRenderer({ antialias: true });
+    this.renderer = new THREE.WebGLRenderer({ 
+      antialias: true, 
+      preserveDrawingBuffer: true,
+      alpha: true 
+    });
     
     // Forcer une taille minimale
     const container = this.canvasContainer.nativeElement;
@@ -326,6 +333,7 @@ export class Scene3d implements OnInit, OnDestroy {
     console.log('Position de la caméra réinitialisée');
   }
 
+
   private createRepere() {
     // Créer un répère avec les axes X, Y, Z
     const axesConfig = BUILDING_CONFIG.axes;
@@ -352,5 +360,18 @@ export class Scene3d implements OnInit, OnDestroy {
     const label = new THREE.Mesh(labelGeometry, labelMaterial);
     label.position.set(x, y, z);
     this.scene.add(label);
+  }
+
+  // Méthodes pour gérer la modale de légende
+  public openLegendModal() {
+    this.showLegendModal = true;
+    // Empêcher le défilement de la page quand la modale est ouverte
+    document.body.style.overflow = 'hidden';
+  }
+
+  public closeLegendModal() {
+    this.showLegendModal = false;
+    // Restaurer le défilement de la page
+    document.body.style.overflow = 'auto';
   }
 }

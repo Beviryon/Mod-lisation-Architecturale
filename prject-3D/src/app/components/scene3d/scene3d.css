@@ -108,6 +108,360 @@
   box-shadow: 0 2px 10px rgba(102, 126, 234, 0.3);
 }
 
+/* Bouton légende */
+.legend-button {
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.legend-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+  background: linear-gradient(135deg, #20c997 0%, #28a745 100%);
+}
+
+.legend-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px rgba(40, 167, 69, 0.3);
+}
+
+/* Styles pour la modale de légende */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  max-width: 90%;
+  max-height: 90%;
+  width: 800px;
+  overflow: hidden;
+  transform: scale(0.8);
+  transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal-content {
+  transform: scale(1);
+}
+
+.modal-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.3s ease;
+}
+
+.close-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.modal-body {
+  padding: 30px;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.legend-section {
+  margin-bottom: 30px;
+}
+
+.legend-section h3 {
+  color: #333;
+  margin-bottom: 15px;
+  font-size: 1.3rem;
+  border-bottom: 2px solid #667eea;
+  padding-bottom: 8px;
+}
+
+.building-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.info-card {
+  background: #f8f9ff;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #e0e6ff;
+}
+
+.info-card h4 {
+  color: #444;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+.info-card ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.info-card li {
+  margin: 8px 0;
+  color: #666;
+}
+
+.openings-info {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.opening-card {
+  display: flex;
+  align-items: flex-start;
+  background: #f8f9ff;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #e0e6ff;
+  gap: 15px;
+}
+
+.opening-card.door {
+  border-left: 4px solid #00ff00;
+}
+
+.opening-card.window {
+  border-left: 4px solid #ff0000;
+}
+
+.opening-icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.opening-details h4 {
+  color: #444;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+.opening-details ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.opening-details li {
+  margin: 6px 0;
+  color: #666;
+}
+
+.color-legend {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.color-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #f8f9ff;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #e0e6ff;
+}
+
+.color-box {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  flex-shrink: 0;
+}
+
+/* Classes pour les couleurs des éléments */
+.color-walls {
+  background-color: #aaaaaa;
+}
+
+.color-door {
+  background-color: #00ff00;
+}
+
+.color-windows {
+  background-color: #ff0000;
+}
+
+.color-ground {
+  background-color: #2E1E1A;
+}
+
+.color-roof {
+  background-color: #4169e1;
+}
+
+.controls-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.control-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: #f8f9ff;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #e0e6ff;
+}
+
+.control-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.control-text {
+  color: #666;
+}
+
+.coordinates-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.axis-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #f8f9ff;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #e0e6ff;
+}
+
+.axis-color {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  flex-shrink: 0;
+}
+
+/* Classes pour les couleurs des axes */
+.axis-x {
+  background-color: #ff0000;
+}
+
+.axis-y {
+  background-color: #00ff00;
+}
+
+.axis-z {
+  background-color: #0000ff;
+}
+
+.tech-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.tech-card {
+  background: #f8f9ff;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #e0e6ff;
+}
+
+.tech-card h4 {
+  color: #444;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+.tech-card p {
+  color: #666;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.modal-footer {
+  padding: 20px;
+  background: #f8f9ff;
+  border-top: 1px solid #e0e6ff;
+  text-align: center;
+}
+
+.close-modal-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.close-modal-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.close-modal-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px rgba(102, 126, 234, 0.3);
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
   .scene-container {
@@ -119,5 +473,36 @@
   .controls-info {
     width: 100%;
     height: 40vh;
+  }
+  
+  /* Responsive pour la modale */
+  .modal-content {
+    width: 95%;
+    max-height: 95%;
+  }
+  
+  .modal-body {
+    padding: 20px;
+    max-height: 70vh;
+  }
+  
+  .building-info {
+    grid-template-columns: 1fr;
+  }
+  
+  .color-legend {
+    grid-template-columns: 1fr;
+  }
+  
+  .tech-info {
+    grid-template-columns: 1fr;
+  }
+  
+  .legend-section h3 {
+    font-size: 1.1rem;
+  }
+  
+  .modal-header h2 {
+    font-size: 1.2rem;
   }
 }

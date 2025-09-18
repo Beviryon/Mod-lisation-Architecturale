@@ -6,6 +6,7 @@
     <div class="controls-section">
       <h4>Contrôles</h4>
       <button class="reset-button" (click)="resetCameraPosition()">Réinitialiser</button>
+      <button class="legend-button" (click)="openLegendModal()">Voir la légende</button>
       
       <h4>Contrôles Souris</h4>
       <ul>
@@ -15,32 +16,191 @@
       </ul>
     </div>
 
-    <div class="specs-section">
+    <!-- <div class="specs-section">
       <h4>Couleurs</h4>
       <ul>
         <li>🔘 Murs : Gris</li>
         <li>🟢 Porte : Vert</li>
         <li>🔴 Fenêtres : Rouge</li>
-        <!-- <li>🔵 Sol : Bleu ciel</li>
-        <li>🔵 Toit : Bleu royal</li> -->
       </ul>
-    </div>
+    </div> -->
 
-    <div class="dimensions-section">
+    <!-- <div class="dimensions-section">
       <h4>Dimensions</h4>
       <ul>
         <li>Hauteur des murs : 2.5m</li>
         <li>Épaisseur : 0.20m</li>
       </ul>
-    </div>
-
-    <!-- <div class="tips-section">
-      <h4>Conseils</h4>
-      <ul>
-        <li>Utilisez la molette pour examiner les détails</li>
-        <li>Tournez autour pour voir tous les angles</li>
-        <li>Le centre de rotation est au centre de la construction</li>
-      </ul>
     </div> -->
+  </div>
+
+  <!-- Modale de légende -->
+  <div class="modal-overlay" [class.active]="showLegendModal" (click)="closeLegendModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2>Légende de la Modélisation 3D</h2>
+        <button class="close-button" (click)="closeLegendModal()">&times;</button>
+      </div>
+      
+      <div class="modal-body">
+        <div class="legend-section">
+          <h3>Architecture du Bâtiment</h3>
+          <div class="building-info">
+            <div class="info-card">
+              <h4>Dimensions Générales</h4>
+              <ul>
+                <li><strong>Longueur :</strong> 8 m</li>
+                <li><strong>Largeur :</strong> 5 m</li>
+                <li><strong>Hauteur :</strong> 2.5 m</li>
+                <li><strong>Épaisseur des murs :</strong> 0.20 m</li>
+              </ul>
+            </div>
+            
+            <div class="info-card">
+              <h4>Éléments Structurels</h4>
+              <ul>
+                <li><strong>Sol :</strong> Plateforme de base (8m × 5m × 0.20m)</li>
+                <li><strong>Toit :</strong> Couverture (8.4m × 5m × 0.20m)</li>
+                <li><strong>Murs :</strong> 4 murs formant un rectangle</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="legend-section">
+          <h3>Ouvertures et Accès</h3>
+          <div class="openings-info">
+            <div class="opening-card door">
+              <div class="opening-icon">🚪</div>
+              <div class="opening-details">
+                <h4>Porte d'Entrée</h4>
+                <ul>
+                  <li><strong>Position :</strong> Mur principal </li>
+                  <li><strong>Dimensions :</strong> 1m × 2.1m</li>
+                  <li><strong>Couleur :</strong> Vert</li>
+                  <li><strong>Epaisseur:</strong> 0.05m</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="opening-card window">
+              <div class="opening-icon">🪟</div>
+              <div class="opening-details">
+                <h4>Fenêtre 1</h4>
+                <ul>
+                  <li><strong>Position :</strong> Mur principal (façade)</li>
+                  <li><strong>Dimensions :</strong> 1.5m × 1.2m</li>
+                  <li><strong>Couleur :</strong> Rouge</li>
+                  <li><strong>Epaisseur:</strong> 0.05m</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="opening-card window">
+              <div class="opening-icon">🪟</div>
+              <div class="opening-details">
+                <h4>Fenêtre 2</h4>
+                <ul>
+                  <li><strong>Position :</strong> Mur principal (façade)</li>
+                  <li><strong>Dimensions :</strong> 2m × 1.2m</li>
+                  <li><strong>Couleur :</strong> Rouge</li>
+                  <li><strong>Epaisseur:</strong> 0.05m</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="legend-section">
+          <h3>Code Couleurs</h3>
+          <div class="color-legend">
+            <div class="color-item">
+              <div class="color-box color-walls"></div>
+              <span><strong>Murs :</strong> Gris clair (#aaaaaa)</span>
+            </div>
+            <div class="color-item">
+              <div class="color-box color-door"></div>
+              <span><strong>Porte :</strong> Vert (#00ff00)</span>
+            </div>
+            <div class="color-item">
+              <div class="color-box color-windows"></div>
+              <span><strong>Fenêtres :</strong> Rouge (#ff0000)</span>
+            </div>
+            <div class="color-item">
+              <div class="color-box color-ground"></div>
+              <span><strong>Sol :</strong> Marron foncé (#2E1E1A)</span>
+            </div>
+            <div class="color-item">
+              <div class="color-box color-roof"></div>
+              <span><strong>Toit :</strong> Bleu royal (#4169e1)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="legend-section">
+          <h3> Contrôles de Navigation</h3>
+          <div class="controls-legend">
+            <div class="control-item">
+              <div class="control-icon">🖱️</div>
+              <div class="control-text">
+                <strong>Clic + Glisser :</strong> Rotation autour du bâtiment
+              </div>
+            </div>
+            <div class="control-item">
+              <div class="control-icon">🎯</div>
+              <div class="control-text">
+                <strong>Molette :</strong> Zoom avant/arrière (5-50 unités)
+              </div>
+            </div>
+            <div class="control-item">
+              <div class="control-icon">🔄</div>
+              <div class="control-text">
+                <strong>Bouton Réinitialiser :</strong> Retour à la vue initiale
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="legend-section">
+          <h3>📐 Système de Coordonnées</h3>
+          <div class="coordinates-info">
+            <div class="axis-info">
+              <div class="axis-color axis-x"></div>
+              <span><strong>Axe X (Rouge) :</strong> Gauche/Droite</span>
+            </div>
+            <div class="axis-info">
+              <div class="axis-color axis-y"></div>
+              <span><strong>Axe Y (Vert) :</strong> Bas/Haut</span>
+            </div>
+            <div class="axis-info">
+              <div class="axis-color axis-z"></div>
+              <span><strong>Axe Z (Bleu) :</strong> Avant/Arrière</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="legend-section">
+          <h3>💡 Techniques Utilisées</h3>
+          <div class="tech-info">
+            <div class="tech-card">
+              <h4>Three.js</h4>
+              <p>Bibliothèque JavaScript pour la création de graphiques 3D dans le navigateur</p>
+            </div>
+            <div class="tech-card">
+              <h4>ExtrudeGeometry</h4>
+              <p>Technique utilisée pour créer de vraies ouvertures dans les murs (trous)</p>
+            </div>
+            <div class="tech-card">
+              <h4>Configuration Centralisée</h4>
+              <p>Toutes les dimensions et couleurs sont définies dans un fichier de configuration (building-config.ts)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="modal-footer">
+        <button class="close-modal-btn" (click)="closeLegendModal()">Fermer</button>
+      </div>
+    </div>
   </div>
 </div>
