@@ -1,83 +1,93 @@
-# Modélisation Architecturale 3D
+﻿# ModÃ©lisation Architecturale 3D
 
-Un projet de visualisation 3D d'un bâtiment architectural développé avec **Angular** et **Three.js**.
+Un projet de visualisation 3D d'un bÃ¢timent architectural dÃ©veloppÃ© avec **Angular** et **Three.js**.
 
-## 📋 Table des matières
-- [🎯 Description](#-description)
-- [✨ Fonctionnalités](#-fonctionnalités)
-- [🛠️ Technologies utilisées](#️-technologies-utilisées)
-- [🚀 Installation et lancement](#-installation-et-lancement)
-- [📁 Structure du projet](#-structure-du-projet)
-- [⚙️ Configuration](#️-configuration)
-- [🎮 Utilisation](#-utilisation)
-- [🎨 Personnalisation](#-personnalisation)
-- [📐 Architecture technique](#-architecture-technique)
-- [🔧 Développement](#-développement)
+## ðŸ“‹ Table des matiÃ¨res
 
-## 🎯 Description
+- [ðŸŽ¯ Description](#-description)
+- [âœ¨ FonctionnalitÃ©s](#-fonctionnalitÃ©s)
+- [ðŸ› ï¸ Technologies utilisÃ©es](#ï¸-technologies-utilisÃ©es)
+- [ðŸš€ Installation et lancement](#-installation-et-lancement)
+- [ðŸ“ Structure du projet](#-structure-du-projet)
+- [âš™ï¸ Configuration](#ï¸-configuration)
+- [ðŸŽ® Utilisation](#-utilisation)
+- [ðŸŽ¨ Personnalisation](#-personnalisation)
+- [ðŸ“ Architecture technique](#-architecture-technique)
+- [ðŸ”§ DÃ©veloppement](#-dÃ©veloppement)
 
-Ce projet présente un **modèle 3D interactif** d'un bâtiment architectural simple comprenant :
+## ðŸŽ¯ Description
+
+Ce projet prÃ©sente un **modÃ¨le 3D interactif** d'un bÃ¢timent architectural simple comprenant :
+
 - 4 murs formant une structure rectangulaire
-- 1 porte d'entrée
-- 2 fenêtres de tailles différentes
+- 1 porte d'entrÃ©e
+- 2 fenÃªtres de tailles diffÃ©rentes
 - Un toit et un sol
-- Un système d'axes de référence
+- Un systÃ¨me d'axes de rÃ©fÃ©rence
 
-Le modèle est entièrement **interactif** avec des contrôles souris pour la navigation 3D.
+Le modÃ¨le est entiÃ¨rement **interactif** avec des contrÃ´les souris pour la navigation 3D.
 
-## ✨ Fonctionnalités
+## âœ¨ FonctionnalitÃ©s
 
-### 🎮 **Contrôles interactifs**
+### ðŸŽ® **ContrÃ´les interactifs**
+
 - **Rotation** : Clic gauche + glisser pour faire tourner la vue
-- **Zoom** : Molette de la souris pour zoomer/dézoomer
-- **Réinitialisation** : Bouton pour revenir à la vue initiale
+- **Zoom** : Molette de la souris pour zoomer/dÃ©zoomer
+- **RÃ©initialisation** : Bouton pour revenir Ã  la vue initiale
 
-### 🏠 **Éléments architecturaux**
-- **Mur principal** : Façade avec ouvertures réelles (ExtrudeGeometry)
-- **Murs latéraux** : Murs pleins gauche, droit et arrière
-- **Ouvertures** : Porte verte et fenêtres rouges
+### ðŸ  **Ã‰lÃ©ments architecturaux**
+
+- **Mur principal** : FaÃ§ade avec ouvertures rÃ©elles (ExtrudeGeometry)
+- **Murs latÃ©raux** : Murs pleins gauche, droit et arriÃ¨re
+- **Ouvertures** : Porte verte et fenÃªtres rouges
 - **Structure** : Sol marron et toit bleu
-- **Repères** : Axes X, Y, Z avec marqueurs colorés
+- **RepÃ¨res** : Axes X, Y, Z avec marqueurs colorÃ©s
 
-### 💡 **Éclairage réaliste**
-- **Lumière ambiante** : Éclairage général doux
-- **Lumière directionnelle** : Simulation du soleil avec ombres
-- **Ombres portées** : Rendu réaliste des ombres
+### ðŸ’¡ **Ã‰clairage rÃ©aliste**
 
-## 🛠️ Technologies utilisées
+- **LumiÃ¨re ambiante** : Ã‰clairage gÃ©nÃ©ral doux
+- **LumiÃ¨re directionnelle** : Simulation du soleil avec ombres
+- **Ombres portÃ©es** : Rendu rÃ©aliste des ombres
+
+## ðŸ› ï¸ Technologies utilisÃ©es
 
 - **[Angular 19](https://angular.dev/)** - Framework web moderne
-- **[Three.js](https://threejs.org/)** - Bibliothèque 3D WebGL
-- **[TypeScript](https://www.typescriptlang.org/)** - Langage de programmation typé
+- **[Three.js](https://threejs.org/)** - BibliothÃ¨que 3D WebGL
+- **[TypeScript](https://www.typescriptlang.org/)** - Langage de programmation typÃ©
 - **[Vite](https://vitejs.dev/)** - Outil de build rapide
 - **HTML5 & CSS3** - Structure et style
 
-## Installation et lancement
+## ðŸš€ Installation et lancement
 
-### Prérequis
-- **Node.js** (version 18 ou supérieure)
+### PrÃ©requis
+
+- **Node.js** (version 18 ou supÃ©rieure)
 - **npm** (inclus avec Node.js)
 
-### Étapes d'installation
+### Ã‰tapes d'installation
 
 1. **Cloner le projet**
+
    ```bash
    git clone https://github.com/Beviryon/Mod-lisation-Architecturale.git
    cd prject-3D
    ```
 
-2. **Installer les dépendances**
+2. **Installer les dÃ©pendances**
+
    ```bash
    npm install
    ```
 
-3. **Lancer le serveur de développement**
+3. **Lancer le serveur de dÃ©veloppement**
+
    ```bash
    npm start
    ```
 
 4. **Ouvrir dans le navigateur**
-   ```
+
+   ```text
    http://localhost:4200
    ```
 
@@ -94,32 +104,32 @@ npm run test
 npm run lint
 ```
 
-## Structure du projet
+## ðŸ“ Structure du projet
 
-```
+```text
 prject-3D/
-├── src/
-│   ├── app/
-│   │   ├── components/
-│   │   │   └── scene3d/           # Composant principal 3D
-│   │   │       ├── scene3d.ts     # Logique Three.js
-│   │   │       ├── scene3d.html   # Template HTML
-│   │   │       └── scene3d.css    # Styles CSS
-│   │   ├── config/
-│   │   │   └── building-config.ts # Configuration centralisée
-│   │   ├── app.ts                 # Composant racine
-│   │   └── app.html               # Template principal
-│   ├── main.ts                    # Point d'entrée Angular
-│   └── index.html                 # Page HTML principale
-├── package.json                   # Dépendances et scripts
-└── README.md                      # Ce fichier
+â”œâ”€â”€ src/
+â”‚   â”œâ”€â”€ app/
+â”‚   â”‚   â”œâ”€â”€ components/
+â”‚   â”‚   â”‚   â””â”€â”€ scene3d/           # Composant principal 3D
+â”‚   â”‚   â”‚       â”œâ”€â”€ scene3d.ts     # Logique Three.js
+â”‚   â”‚   â”‚       â”œâ”€â”€ scene3d.html   # Template HTML
+â”‚   â”‚   â”‚       â””â”€â”€ scene3d.css    # Styles CSS
+â”‚   â”‚   â”œâ”€â”€ config/
+â”‚   â”‚   â”‚   â””â”€â”€ building-config.ts # Configuration centralisÃ©e
+â”‚   â”‚   â”œâ”€â”€ app.ts                 # Composant racine
+â”‚   â”‚   â””â”€â”€ app.html               # Template principal
+â”‚   â”œâ”€â”€ main.ts                    # Point d'entrÃ©e Angular
+â”‚   â””â”€â”€ index.html                 # Page HTML principale
+â”œâ”€â”€ package.json                   # DÃ©pendances et scripts
+â””â”€â”€ README.md                      # Ce fichier
 ```
 
-## ⚙️ Configuration
+## âš™ï¸ Configuration
 
-### 🎯 **Fichier de configuration principal**
+### ðŸŽ¯ **Fichier de configuration principal**
 
-Le fichier `src/app/config/building-config.ts` centralise **toutes les données** du modèle 3D :
+Le fichier `src/app/config/building-config.ts` centralise **toutes les donnÃ©es** du modÃ¨le 3D :
 
 ```typescript
 // Exemple de configuration
@@ -139,42 +149,43 @@ export const BUILDING_CONFIG = {
 };
 ```
 
-### 🔧 **Avantages de cette approche**
+### ðŸ”§ **Avantages de cette approche**
 
-- ✅ **Pas de valeurs en dur** dans le code
-- ✅ **Modifications faciles** des propriétés
-- ✅ **Code maintenable** et professionnel
-- ✅ **Évolution simple** du projet
+- âœ… **Pas de valeurs en dur** dans le code
+- âœ… **Modifications faciles** des propriÃ©tÃ©s
+- âœ… **Code maintenable** et professionnel
+- âœ… **Ã‰volution simple** du projet
 
-## Utilisation
+## ðŸŽ® Utilisation
 
 ### Navigation 3D
 
 1. **Rotation de la vue**
-   - Maintenez le **clic gauche** enfoncé
-   - **Glissez** la souris pour faire tourner la caméra autour du bâtiment
+   - Maintenez le **clic gauche** enfoncÃ©
+   - **Glissez** la souris pour faire tourner la camÃ©ra autour du bÃ¢timent
 
 2. **Zoom**
    - Utilisez la **molette de la souris**
    - Vers le haut = zoom avant
-   - Vers le bas = zoom arrière
+   - Vers le bas = zoom arriÃ¨re
 
-3. **Réinitialisation**
-   - Cliquez sur le bouton **Réinitialiser Vue**
-   - Remet la caméra à sa position initiale
+3. **RÃ©initialisation**
+   - Cliquez sur le bouton **RÃ©initialiser Vue**
+   - Remet la camÃ©ra Ã  sa position initiale
 
 ### Interface utilisateur
 
 L'interface affiche :
-- **Informations sur les contrôles** (en haut à gauche)
-- **Légende des couleurs** des éléments
-- **Bouton de réinitialisation** de la vue
 
-## Personnalisation
+- **Informations sur les contrÃ´les** (en haut Ã  gauche)
+- **LÃ©gende des couleurs** des Ã©lÃ©ments
+- **Bouton de rÃ©initialisation** de la vue
+
+## ðŸŽ¨ Personnalisation
 
 ### Modifier les couleurs
 
-Dans `building-config.ts`, changez les valeurs hexadécimales :
+Dans `building-config.ts`, changez les valeurs hexadÃ©cimales :
 
 ```typescript
 // Exemples de couleurs
@@ -185,38 +196,38 @@ door: {
 }
 ```
 
-### Redimensionner les éléments
+### Redimensionner les Ã©lÃ©ments
 
 ```typescript
 // Modifier les dimensions
 door: {
   dimensions: { 
-    width: 1.2,   // Plus large (était 1)
-    height: 2.3,  // Plus haute (était 2.1)
+    width: 1.2,   // Plus large (Ã©tait 1)
+    height: 2.3,  // Plus haute (Ã©tait 2.1)
     depth: 0.05 
   }
 }
 ```
 
-### Déplacer les éléments
+### DÃ©placer les Ã©lÃ©ments
 
 ```typescript
 // Changer les positions
 window1: {
   position: { 
-    x: 0,     // Centré (était -0.5)
-    y: 1.8,   // Plus haut (était 1.5)
+    x: 0,     // CentrÃ© (Ã©tait -0.5)
+    y: 1.8,   // Plus haut (Ã©tait 1.5)
     z: 2.3 
   }
 }
 ```
 
-### Ajuster l'éclairage
+### Ajuster l'Ã©clairage
 
 ```typescript
 lighting: {
   ambient: {
-    intensity: 0.8  // Plus lumineux (était 0.6)
+    intensity: 0.8  // Plus lumineux (Ã©tait 0.6)
   },
   directional: {
     position: { x: 5, y: 15, z: 5 }  // Changer position du soleil
@@ -224,48 +235,51 @@ lighting: {
 }
 ```
 
-## 📐 Architecture technique
+## ðŸ“ Architecture technique
 
 ### Composants principaux
 
 1. **Scene3d** (`scene3d.ts`)
    - Initialisation de Three.js
-   - Création des géométries 3D
-   - Gestion des contrôles souris
+   - CrÃ©ation des gÃ©omÃ©tries 3D
+   - Gestion des contrÃ´les souris
    - Rendu et animation
 
 2. **Building Config** (`building-config.ts`)
-   - Configuration centralisée
+   - Configuration centralisÃ©e
    - Interfaces TypeScript
    - Fonctions utilitaires de calcul
 
-### Technologies Three.js utilisées
+### Technologies Three.js utilisÃ©es
 
 - **Scene** : Conteneur 3D principal
-- **PerspectiveCamera** : Caméra avec perspective réaliste
+- **PerspectiveCamera** : CamÃ©ra avec perspective rÃ©aliste
 - **WebGLRenderer** : Rendu WebGL haute performance
 - **Geometries** :
   - `BoxGeometry` : Murs, sol, toit simples
   - `ExtrudeGeometry` : Mur principal avec ouvertures
 - **Materials** :
-  - `MeshStandardMaterial` : Matériaux avec éclairage réaliste
+  - `MeshStandardMaterial` : MatÃ©riaux avec Ã©clairage rÃ©aliste
 - **Lights** :
-  - `AmbientLight` : Lumière ambiante
-  - `DirectionalLight` : Lumière directionnelle avec ombres
+  - `AmbientLight` : LumiÃ¨re ambiante
+  - `DirectionalLight` : LumiÃ¨re directionnelle avec ombres
 
 ### Calculs automatiques
 
-La classe `WallCalculations` génère automatiquement :
-- Les coordonnées des ouvertures de portes
-- Les coordonnées des ouvertures de fenêtres
-- Les découpes dans le mur principal
+La classe `WallCalculations` gÃ©nÃ¨re automatiquement :
 
-## Développement
+- Les coordonnÃ©es des ouvertures de portes
+- Les coordonnÃ©es des ouvertures de fenÃªtres
+- Les dÃ©coupes dans le mur principal
 
-### Ajouter un nouvel élément
+## ðŸ”§ DÃ©veloppement
 
-1. **Définir l'interface** dans `building-config.ts`
+### Ajouter un nouvel Ã©lÃ©ment
+
+1. **DÃ©finir l'interface** dans `building-config.ts`
 2. **Ajouter la configuration** dans `BUILDING_CONFIG`
-3. **Créer la méthode de création** dans `scene3d.ts`
-4. **Appeler la méthode** dans `ngOnInit()`
+3. **CrÃ©er la mÃ©thode de crÃ©ation** dans `scene3d.ts`
+4. **Appeler la mÃ©thode** dans `ngOnInit()`
+ 
+ 
 

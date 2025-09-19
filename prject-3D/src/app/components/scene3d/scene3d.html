@@ -35,7 +35,7 @@
   </div>
 
   <!-- Modale de légende -->
-  <div class="modal-overlay" [class.active]="showLegendModal" (click)="closeLegendModal()">
+  <div class="modal-overlay" [class.show]="showLegendModal" (click)="closeLegendModal()">
     <div class="modal-content" (click)="$event.stopPropagation()">
       <div class="modal-header">
         <h2>Légende de la Modélisation 3D</h2>
@@ -202,5 +202,36 @@
         <button class="close-modal-btn" (click)="closeLegendModal()">Fermer</button>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- NOUVEAU : Panneau de test des services -->
+<div class="services-panel">
+  <h4>🧪 Test des Services</h4>
+  
+  <div class="button-row">
+    <button (click)="testStatistiques()" class="btn-blue">
+      📊 Statistiques
+    </button>
+    <button (click)="testCouleurs()" class="btn-orange">
+      🎨 Couleurs
+    </button>
+    <button (click)="testExport()" class="btn-purple">
+      💾 Export
+    </button>
+  </div>
+  
+  <div class="button-row">
+    <button (click)="testValidation()" class="btn-red">
+      🔍 Validation
+    </button>
+    <button (click)="testCommunication()" class="btn-gray">
+      📡 Communication
+    </button>
+  </div>
+  
+  <div id="services-output">
+    <div class="success-message">✅ Services intégrés avec succès!</div>
+    <div>Cliquez sur les boutons pour tester les fonctionnalités.</div>
   </div>
 </div>

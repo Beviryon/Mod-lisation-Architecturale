@@ -3,11 +3,23 @@ import { isPlatformBrowser } from '@angular/common';
 import * as THREE from 'three';
 import { BUILDING_CONFIG, WallCalculations } from '../../config/building-config';
 
+// Import des services
+import { ConfigurationService } from '../../services/configuration/configuration.service';
+import { BatimentService } from '../../services/batiment/batiment.service';
+import { MurService } from '../../services/mur/mur.service';
+import { OuvertureService } from '../../services/ouverture/ouverture.service';
+import { MateriauService } from '../../services/materiau/materiau.service';
+import { SceneService } from '../../services/scene/scene.service';
+// Temporairement commentés pour debug
+// import { CommunicationService } from '../../services/communication/communication.service';
+// import { ValidationService } from '../../services/validation/validation.service';
+
 @Component({
   selector: 'app-scene3d',
   imports: [],
   templateUrl: './scene3d.html',
-  styleUrl: './scene3d.css'
+  styleUrl: './scene3d.css',
+  standalone: true
 })
 export class Scene3d implements OnInit, OnDestroy {
   @ViewChild('canvasContainer', { static: true }) canvasContainer!: ElementRef;
@@ -36,7 +48,31 @@ export class Scene3d implements OnInit, OnDestroy {
     BUILDING_CONFIG.camera.target.z
   );
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    // Injection des services
+    private configurationService: ConfigurationService,
+    private batimentService: BatimentService,
+    private murService: MurService,
+    private ouvertureService: OuvertureService,
+    private materiauService: MateriauService,
+    private sceneService: SceneService
+    // Temporairement commentés pour debug
+    // private communicationService?: CommunicationService,
+    // private validationService?: ValidationService
+  ) {
+    console.log('Scene3dComponent initialisé avec services:', {
+      configurationService: !!this.configurationService,
+      batimentService: !!this.batimentService,
+      murService: !!this.murService,
+      ouvertureService: !!this.ouvertureService,
+      materiauService: !!this.materiauService,
+      sceneService: !!this.sceneService
+      // Temporairement commentés pour debug
+      // communicationService: !!this.communicationService,
+      // validationService: !!this.validationService
+    });
+  }
 
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
@@ -51,6 +87,9 @@ export class Scene3d implements OnInit, OnDestroy {
         this.setupMouseControls();
         this.updateCameraPosition();
         this.animate();
+        
+        // Initialiser les services (optionnel)
+        this.initialiserServices();
       }, 100);
     }
   }
@@ -437,5 +476,321 @@ export class Scene3d implements OnInit, OnDestroy {
     this.showLegendModal = false;
     // Restaurer le défilement de la page
     document.body.style.overflow = 'auto';
+  }
+
+  // ========================================
+  // NOUVELLES MÉTHODES UTILISANT LES SERVICES
+  // ========================================
+
+  /**
+   * Initialiser les services (méthode optionnelle)
+   */
+  private initialiserServices(): void {
+    if (this.configurationService) {
+      console.log('ConfigurationService disponible');
+      // Écouter les changements de configuration
+      this.configurationService.getConfigurationObservable().subscribe(config => {
+        console.log('Configuration mise à jour:', config);
+        // Optionnel : mettre à jour la scène
+        // this.mettreAJourSceneAvecConfiguration(config);
+      });
+    }
+
+    if (this.batimentService) {
+      console.log('BatimentService disponible');
+      // Obtenir les statistiques du bâtiment
+      const statistiques = this.batimentService.getStatistiques();
+      console.log('Statistiques du bâtiment:', statistiques);
+    }
+
+    if (this.murService) {
+      console.log('MurService disponible');
+      // Obtenir les murs
+      const murs = this.murService.getMurs();
+      console.log('Murs disponibles:', murs);
+    }
+
+    if (this.ouvertureService) {
+      console.log('OuvertureService disponible');
+      // Obtenir les ouvertures
+      const ouvertures = this.ouvertureService.getOuvertures();
+      console.log('Ouvertures disponibles:', ouvertures);
+    }
+
+    if (this.materiauService) {
+      console.log('MateriauService disponible');
+      // Obtenir les matériaux
+      const materiaux = this.materiauService.getMateriaux();
+      console.log('Matériaux disponibles:', materiaux);
+    }
+
+    if (this.sceneService) {
+      console.log('SceneService disponible');
+      // Obtenir les propriétés de la scène
+      const proprietesScene = this.sceneService.getProprietesScene();
+      console.log('Propriétés de la scène:', proprietesScene);
+    }
+
+    // Temporairement commentés pour debug
+    // if (this.communicationService) {
+    //   console.log('CommunicationService disponible');
+    //   // Écouter les événements de validation
+    //   this.communicationService.listenToEventType('validation_result').subscribe(event => {
+    //     console.log('Résultat de validation reçu:', event.data);
+    //   });
+    // }
+
+    // if (this.validationService) {
+    //   console.log('ValidationService disponible');
+    //   // Valider la configuration actuelle
+    //   const config = this.configurationService?.getConfiguration();
+    //   if (config) {
+    //     const validationResult = this.validationService.validateBuilding(config);
+    //     console.log('Résultat de validation:', validationResult);
+    //   }
+    // }
+  }
+
+  /**
+   * Créer un mur en utilisant les services (méthode alternative)
+   */
+  private createMurAvecServices(type: 'principal' | 'arriere' | 'gauche' | 'droit'): void {
+    if (!this.murService || !this.materiauService) {
+      console.log('Services non disponibles, utilisation de la méthode classique');
+      return;
+    }
+
+    const mur = this.murService.getMurParType(type);
+    if (!mur) {
+      console.log(`Mur ${type} non trouvé dans les services`);
+      return;
+    }
+
+    console.log(`Création du mur ${type} avec les services:`, mur);
+
+    // Utiliser les données du service pour créer le mur
+    const murGeo = new THREE.BoxGeometry(
+      mur.dimensions.width,
+      mur.dimensions.height,
+      mur.dimensions.depth
+    );
+
+    // Utiliser le matériau du service
+    const materiau = this.materiauService.getMateriauParId(`mur_${type}`);
+    const couleur = materiau ? materiau.couleur : mur.couleur;
+
+    const murMat = new THREE.MeshStandardMaterial({ color: couleur });
+    const murMesh = new THREE.Mesh(murGeo, murMat);
+
+    murMesh.position.set(mur.position.x, mur.position.y, mur.position.z);
+    murMesh.castShadow = true;
+    murMesh.receiveShadow = true;
+
+    this.scene.add(murMesh);
+    console.log(`Mur ${type} créé avec les services`);
+  }
+
+  /**
+   * Obtenir les statistiques du bâtiment via les services
+   */
+  public getStatistiquesBatiment(): any {
+    if (!this.batimentService) {
+      return { message: 'BatimentService non disponible' };
+    }
+
+    return this.batimentService.getStatistiques();
+  }
+
+  /**
+   * Obtenir les statistiques des murs via les services
+   */
+  public getStatistiquesMurs(): any {
+    if (!this.murService) {
+      return { message: 'MurService non disponible' };
+    }
+
+    return this.murService.getStatistiquesMurs();
+  }
+
+  /**
+   * Obtenir les statistiques des ouvertures via les services
+   */
+  public getStatistiquesOuvertures(): any {
+    if (!this.ouvertureService) {
+      return { message: 'OuvertureService non disponible' };
+    }
+
+    return this.ouvertureService.getStatistiquesOuvertures();
+  }
+
+  /**
+   * Obtenir les statistiques des matériaux via les services
+   */
+  public getStatistiquesMateriaux(): any {
+    if (!this.materiauService) {
+      return { message: 'MateriauService non disponible' };
+    }
+
+    return this.materiauService.getStatistiquesMateriaux();
+  }
+
+  /**
+   * Modifier la couleur d'un mur via les services
+   */
+  public modifierCouleurMur(type: 'principal' | 'arriere' | 'gauche' | 'droit', nouvelleCouleur: number): void {
+    if (!this.murService) {
+      console.log('MurService non disponible');
+      return;
+    }
+
+    this.murService.modifierCouleurMur(type, nouvelleCouleur);
+    console.log(`Couleur du mur ${type} modifiée vers:`, nouvelleCouleur);
+  }
+
+  /**
+   * Exporter la configuration via les services
+   */
+  public exporterConfiguration(): string {
+    if (!this.configurationService) {
+      return JSON.stringify({ message: 'ConfigurationService non disponible' });
+    }
+
+    const config = this.configurationService.getConfiguration();
+    return JSON.stringify(config, null, 2);
+  }
+
+  /**
+   * Importer une configuration via les services
+   */
+  public importerConfiguration(configurationJson: string): boolean {
+    if (!this.configurationService) {
+      console.log('ConfigurationService non disponible');
+      return false;
+    }
+
+    try {
+      const config = JSON.parse(configurationJson);
+      this.configurationService.mettreAJourConfiguration(config);
+      return true;
+    } catch (error) {
+      console.error('Erreur lors de l\'importation:', error);
+      return false;
+    }
+  }
+
+  // ========================================
+  // MÉTHODES DE TEST POUR L'INTERFACE
+  // ========================================
+
+  /**
+   * Test des statistiques
+   */
+  public testStatistiques(): void {
+    const output = document.getElementById('services-output');
+    if (!output) return;
+
+    let html = '<div style="color: #2196F3;">📊 <strong>Statistiques:</strong></div>';
+    
+    // Statistiques du bâtiment
+    const statsBatiment = this.getStatistiquesBatiment();
+    html += `<div>🏢 Bâtiment: ${JSON.stringify(statsBatiment, null, 2)}</div>`;
+    
+    // Statistiques des murs
+    const statsMurs = this.getStatistiquesMurs();
+    html += `<div>🧱 Murs: ${JSON.stringify(statsMurs, null, 2)}</div>`;
+    
+    // Statistiques des ouvertures
+    const statsOuvertures = this.getStatistiquesOuvertures();
+    html += `<div>🚪 Ouvertures: ${JSON.stringify(statsOuvertures, null, 2)}</div>`;
+    
+    // Statistiques des matériaux
+    const statsMateriaux = this.getStatistiquesMateriaux();
+    html += `<div>🎨 Matériaux: ${JSON.stringify(statsMateriaux, null, 2)}</div>`;
+    
+    output.innerHTML = html;
+  }
+
+  /**
+   * Test des couleurs
+   */
+  public testCouleurs(): void {
+    const output = document.getElementById('services-output');
+    if (!output) return;
+
+    let html = '<div style="color: #FF9800;">🎨 <strong>Test des Couleurs:</strong></div>';
+    
+    // Changer la couleur du mur principal
+    this.modifierCouleurMur('principal', 0xff0000); // Rouge
+    html += '<div>🔴 Mur principal → Rouge</div>';
+    
+    setTimeout(() => {
+      this.modifierCouleurMur('principal', 0x00ff00); // Vert
+      html += '<div>🟢 Mur principal → Vert</div>';
+      
+      setTimeout(() => {
+        this.modifierCouleurMur('principal', 0x0000ff); // Bleu
+        html += '<div>🔵 Mur principal → Bleu</div>';
+        
+        setTimeout(() => {
+          this.modifierCouleurMur('principal', 0xaaaaaa); // Gris (original)
+          html += '<div>⚪ Mur principal → Gris (original)</div>';
+          output.innerHTML = html;
+        }, 1000);
+      }, 1000);
+    }, 1000);
+    
+    output.innerHTML = html;
+  }
+
+  /**
+   * Test de l'export
+   */
+  public testExport(): void {
+    const output = document.getElementById('services-output');
+    if (!output) return;
+
+    let html = '<div style="color: #9C27B0;">💾 <strong>Test d\'Export:</strong></div>';
+    
+    try {
+      const configuration = this.exporterConfiguration();
+      const configObj = JSON.parse(configuration);
+      
+      html += '<div>✅ Configuration exportée avec succès!</div>';
+      html += `<div>📄 Taille: ${configuration.length} caractères</div>`;
+      html += `<div>🏢 Nom: ${configObj.nom || 'Non défini'}</div>`;
+      html += `<div>📐 Dimensions: ${configObj.dimensions?.longueur || 'N/A'}m x ${configObj.dimensions?.largeur || 'N/A'}m x ${configObj.dimensions?.hauteur || 'N/A'}m</div>`;
+      
+      // Sauvegarder dans localStorage pour test
+      localStorage.setItem('test-configuration', configuration);
+      html += '<div>💾 Sauvegardé dans localStorage</div>';
+      
+    } catch (error) {
+      html += `<div style="color: #f44336;">❌ Erreur: ${error}</div>`;
+    }
+    
+    output.innerHTML = html;
+  }
+
+  /**
+   * Test de la validation (temporairement désactivé)
+   */
+  public testValidation(): void {
+    const output = document.getElementById('services-output');
+    if (!output) return;
+
+    let html = '<div style="color: #FF5722;">🔍 <strong>Test de Validation:</strong></div>';
+    html += '<div style="color: #f44336;">❌ ValidationService temporairement désactivé pour debug</div>';
+    output.innerHTML = html;
+  }
+  /**
+   * Test de la communication (temporairement désactivé)
+   */
+  public testCommunication(): void {
+    const output = document.getElementById('services-output');
+    if (!output) return;
+
+    let html = '<div style="color: #607D8B;">📡 <strong>Test de Communication:</strong></div>';
+    html += '<div style="color: #f44336;">❌ CommunicationService temporairement désactivé pour debug</div>';
+    output.innerHTML = html;
   }
 }
