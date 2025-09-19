@@ -47,6 +47,29 @@ export class Scene3d implements OnInit, OnDestroy {
   murEpaisseur: number = 0.2;
   murCouleur: string = '#aaaaaa';
 
+  // Propriétés pour les modifications des ouvertures
+  selectedOuverture: string = '';
+  ouverturePosition: { x: number; y: number; z: number } = { x: 0, y: 0, z: 0 };
+  ouvertureDimensions: { width: number; height: number; depth: number } = { width: 1, height: 2, depth: 0.05 };
+  ouvertureCouleur: string = '#ff0000';
+  ouvertureType: 'porte' | 'fenetre' = 'fenetre';
+  ouvertureNom: string = '';
+
+  // Propriétés pour la modification de la structure
+  structureDimensions: { longueur: number; largeur: number; hauteur: number } = { longueur: 8, largeur: 5, hauteur: 2.5 };
+  structureNom: string = 'Bâtiment Principal';
+  structureDescription: string = 'Bâtiment architectural avec murs, ouvertures et toit';
+
+  // Propriétés pour le gestionnaire de projets
+  projetsDisponibles: string[] = [];
+  projetActuel: string = 'projet-par-defaut';
+  nouveauProjetNom: string = '';
+
+  // Propriétés pour la validation en temps réel
+  erreursValidation: string[] = [];
+  avertissementsValidation: string[] = [];
+  scoreValidation: number = 100;
+
   // Contrôles de la souris
   private isMouseDown = false;
   private mouseX = 0;
@@ -93,6 +116,9 @@ export class Scene3d implements OnInit, OnDestroy {
     if (isPlatformBrowser(this.platformId)) {
       // Synchroniser les données avec building-config.ts au démarrage
       this.synchroniserDonneesAuDemarrage();
+      
+      // Charger les projets disponibles
+      this.chargerProjets();
       
       // Attendre que le DOM soit prêt
       setTimeout(() => {
@@ -1096,6 +1122,280 @@ export class Scene3d implements OnInit, OnDestroy {
     this.murCouleur = '#aaaaaa';
     
     console.log(`🔄 Valeurs du mur ${this.selectedMur} réinitialisées`);
+  }
+
+  // ===== MÉTHODES POUR LA GESTION DES OUVERTURES =====
+
+  public selectOuverture(ouvertureId: string): void {
+    this.selectedOuverture = ouvertureId;
+    
+    // Charger les valeurs actuelles de l'ouverture
+    const ouverture = this.ouvertureService?.getOuvertureParId(ouvertureId);
+    if (ouverture) {
+      this.ouverturePosition = { ...ouverture.position };
+      this.ouvertureDimensions = { ...ouverture.dimensions };
+      this.ouvertureCouleur = '#' + ouverture.couleur.toString(16).padStart(6, '0');
+      this.ouvertureType = ouverture.type;
+      this.ouvertureNom = ouverture.nom || '';
+    }
+    
+    console.log(`🚪 Ouverture ${ouvertureId} sélectionnée pour modification`);
+  }
+
+  public modifierPositionOuverture(): void {
+    if (!this.selectedOuverture || !this.ouvertureService) return;
+    
+    try {
+      this.ouvertureService.modifierPositionOuverture(this.selectedOuverture, this.ouverturePosition);
+      this.mettreAJourRendu3D();
+      this.validerConfiguration();
+      console.log(`✅ Position de l'ouverture ${this.selectedOuverture} modifiée`);
+    } catch (error) {
+      console.error('❌ Erreur lors de la modification de position:', error);
+    }
+  }
+
+  public modifierDimensionsOuverture(): void {
+    if (!this.selectedOuverture || !this.ouvertureService) return;
+    
+    try {
+      this.ouvertureService.modifierDimensionsOuverture(this.selectedOuverture, this.ouvertureDimensions);
+      this.mettreAJourRendu3D();
+      this.validerConfiguration();
+      console.log(`✅ Dimensions de l'ouverture ${this.selectedOuverture} modifiées`);
+    } catch (error) {
+      console.error('❌ Erreur lors de la modification des dimensions:', error);
+    }
+  }
+
+  public modifierCouleurOuvertureInteractive(): void {
+    if (!this.selectedOuverture || !this.ouvertureService) return;
+    
+    try {
+      const couleurHex = parseInt(this.ouvertureCouleur.replace('#', ''), 16);
+      this.ouvertureService.modifierCouleurOuverture(this.selectedOuverture, couleurHex);
+      this.mettreAJourCouleurOuverture3D(this.selectedOuverture, couleurHex);
+      this.validerConfiguration();
+      console.log(`✅ Couleur de l'ouverture ${this.selectedOuverture} modifiée`);
+    } catch (error) {
+      console.error('❌ Erreur lors de la modification de couleur:', error);
+    }
+  }
+
+  public ajouterOuverture(): void {
+    if (!this.ouvertureService) return;
+    
+    try {
+      const nouvelleOuverture = {
+        nom: this.ouvertureNom || `Nouvelle ${this.ouvertureType}`,
+        type: this.ouvertureType,
+        position: this.ouverturePosition,
+        dimensions: this.ouvertureDimensions,
+        couleur: parseInt(this.ouvertureCouleur.replace('#', ''), 16)
+      };
+      
+      this.ouvertureService.ajouterOuverture('principal', nouvelleOuverture);
+      this.mettreAJourRendu3D();
+      this.validerConfiguration();
+      console.log(`✅ Nouvelle ouverture ajoutée: ${nouvelleOuverture.nom}`);
+    } catch (error) {
+      console.error('❌ Erreur lors de l\'ajout de l\'ouverture:', error);
+    }
+  }
+
+  public supprimerOuverture(): void {
+    if (!this.selectedOuverture || !this.ouvertureService) return;
+    
+    try {
+      this.ouvertureService.supprimerOuverture(this.selectedOuverture);
+      this.mettreAJourRendu3D();
+      this.validerConfiguration();
+      this.selectedOuverture = '';
+      console.log(`✅ Ouverture ${this.selectedOuverture} supprimée`);
+    } catch (error) {
+      console.error('❌ Erreur lors de la suppression de l\'ouverture:', error);
+    }
+  }
+
+  public resetOuvertureValues(): void {
+    if (!this.selectedOuverture) return;
+    
+    // Remettre les valeurs par défaut
+    this.ouverturePosition = { x: 0, y: 0, z: 0 };
+    this.ouvertureDimensions = { width: 1, height: 2, depth: 0.05 };
+    this.ouvertureCouleur = '#ff0000';
+    this.ouvertureType = 'fenetre';
+    this.ouvertureNom = '';
+    
+    console.log(`🔄 Valeurs de l'ouverture ${this.selectedOuverture} réinitialisées`);
+  }
+
+  // ===== MÉTHODES POUR LA GESTION DE LA STRUCTURE =====
+
+  public modifierStructureDimensions(): void {
+    if (!this.configurationService) return;
+    
+    try {
+      const config = this.configurationService.getConfiguration();
+      config.dimensions = { ...this.structureDimensions };
+      config.nom = this.structureNom;
+      config.description = this.structureDescription;
+      
+      this.configurationService.mettreAJourConfiguration(config);
+      this.mettreAJourRendu3D();
+      this.validerConfiguration();
+      console.log(`✅ Dimensions de la structure modifiées`);
+    } catch (error) {
+      console.error('❌ Erreur lors de la modification de la structure:', error);
+    }
+  }
+
+  public resetStructureValues(): void {
+    this.structureDimensions = { longueur: 8, largeur: 5, hauteur: 2.5 };
+    this.structureNom = 'Bâtiment Principal';
+    this.structureDescription = 'Bâtiment architectural avec murs, ouvertures et toit';
+    console.log(`🔄 Valeurs de la structure réinitialisées`);
+  }
+
+  // ===== MÉTHODES POUR LE GESTIONNAIRE DE PROJETS =====
+
+  public chargerProjets(): void {
+    try {
+      const projets = localStorage.getItem('projets-3d');
+      if (projets) {
+        this.projetsDisponibles = JSON.parse(projets);
+      } else {
+        this.projetsDisponibles = ['projet-par-defaut'];
+      }
+      console.log(`📁 Projets chargés: ${this.projetsDisponibles.length}`);
+    } catch (error) {
+      console.error('❌ Erreur lors du chargement des projets:', error);
+      this.projetsDisponibles = ['projet-par-defaut'];
+    }
+  }
+
+  public sauvegarderProjet(): void {
+    if (!this.nouveauProjetNom.trim()) return;
+    
+    try {
+      const config = this.configurationService?.getConfiguration();
+      const donneesProjet = {
+        nom: this.nouveauProjetNom,
+        configuration: config,
+        dateCreation: new Date().toISOString(),
+        version: '1.0'
+      };
+      
+      localStorage.setItem(`projet-${this.nouveauProjetNom}`, JSON.stringify(donneesProjet));
+      
+      // Ajouter à la liste des projets
+      if (!this.projetsDisponibles.includes(this.nouveauProjetNom)) {
+        this.projetsDisponibles.push(this.nouveauProjetNom);
+        localStorage.setItem('projets-3d', JSON.stringify(this.projetsDisponibles));
+      }
+      
+      this.nouveauProjetNom = '';
+      console.log(`✅ Projet sauvegardé: ${donneesProjet.nom}`);
+    } catch (error) {
+      console.error('❌ Erreur lors de la sauvegarde:', error);
+    }
+  }
+
+  public chargerProjet(nomProjet: string): void {
+    try {
+      const donneesProjet = localStorage.getItem(`projet-${nomProjet}`);
+      if (donneesProjet) {
+        const projet = JSON.parse(donneesProjet);
+        this.configurationService?.mettreAJourConfiguration(projet.configuration);
+        this.projetActuel = nomProjet;
+        this.mettreAJourRendu3D();
+        this.validerConfiguration();
+        console.log(`✅ Projet chargé: ${nomProjet}`);
+      }
+    } catch (error) {
+      console.error('❌ Erreur lors du chargement du projet:', error);
+    }
+  }
+
+  public supprimerProjet(nomProjet: string): void {
+    if (nomProjet === 'projet-par-defaut') return;
+    
+    try {
+      localStorage.removeItem(`projet-${nomProjet}`);
+      this.projetsDisponibles = this.projetsDisponibles.filter(p => p !== nomProjet);
+      localStorage.setItem('projets-3d', JSON.stringify(this.projetsDisponibles));
+      
+      if (this.projetActuel === nomProjet) {
+        this.projetActuel = 'projet-par-defaut';
+        this.chargerProjet('projet-par-defaut');
+      }
+      
+      console.log(`✅ Projet supprimé: ${nomProjet}`);
+    } catch (error) {
+      console.error('❌ Erreur lors de la suppression:', error);
+    }
+  }
+
+  // ===== MÉTHODES POUR LA VALIDATION EN TEMPS RÉEL =====
+
+  public validerConfiguration(): void {
+    this.erreursValidation = [];
+    this.avertissementsValidation = [];
+    this.scoreValidation = 100;
+    
+    try {
+      const config = this.configurationService?.getConfiguration();
+      if (!config) return;
+      
+      // Validation des dimensions
+      if (config.dimensions.longueur < 1) {
+        this.erreursValidation.push('La longueur doit être d\'au moins 1m');
+        this.scoreValidation -= 20;
+      }
+      
+      if (config.dimensions.largeur < 1) {
+        this.erreursValidation.push('La largeur doit être d\'au moins 1m');
+        this.scoreValidation -= 20;
+      }
+      
+      if (config.dimensions.hauteur < 2) {
+        this.erreursValidation.push('La hauteur doit être d\'au moins 2m');
+        this.scoreValidation -= 15;
+      }
+      
+      // Validation des murs
+      Object.entries(config.murs).forEach(([type, mur]) => {
+        if (mur.dimensions.width < 0.5) {
+          this.avertissementsValidation.push(`Le mur ${type} est très étroit`);
+          this.scoreValidation -= 5;
+        }
+        
+        if (mur.dimensions.height < 1.5) {
+          this.avertissementsValidation.push(`Le mur ${type} est très bas`);
+          this.scoreValidation -= 5;
+        }
+        
+        // Validation des ouvertures
+        mur.ouvertures.forEach(ouverture => {
+          const surfaceOuverture = ouverture.dimensions.width * ouverture.dimensions.height;
+          const surfaceMur = mur.dimensions.width * mur.dimensions.height;
+          const pourcentage = (surfaceOuverture / surfaceMur) * 100;
+          
+          if (pourcentage > 50) {
+            this.erreursValidation.push(`L'ouverture ${ouverture.id} occupe plus de 50% du mur`);
+            this.scoreValidation -= 15;
+          }
+        });
+      });
+      
+      this.scoreValidation = Math.max(0, this.scoreValidation);
+      console.log(`📊 Validation terminée - Score: ${this.scoreValidation}/100`);
+      
+    } catch (error) {
+      console.error('❌ Erreur lors de la validation:', error);
+      this.erreursValidation.push('Erreur lors de la validation');
+      this.scoreValidation = 0;
+    }
   }
 
   /**

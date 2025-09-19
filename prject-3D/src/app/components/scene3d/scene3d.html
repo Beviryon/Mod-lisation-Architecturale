@@ -582,6 +582,304 @@
     <div>Cliquez sur les boutons pour tester les fonctionnalités.</div>
         </div>
       </div>
+
+      <!-- ===== NOUVELLES SECTIONS D'INTERFACE COMPLÈTE ===== -->
+
+      <!-- Section Modificateur d'Ouvertures -->
+      <div class="test-section">
+        <h3>🚪 Modificateur d'Ouvertures</h3>
+        
+        <div class="ouverture-selector">
+          <h4>Choisissez une ouverture à modifier :</h4>
+          <div class="ouverture-buttons">
+            <button 
+              class="btn-ouverture" 
+              [class.active]="selectedOuverture === 'fenetre1'"
+              (click)="selectOuverture('fenetre1')"
+            >
+              🪟 Fenêtre 1
+            </button>
+            <button 
+              class="btn-ouverture" 
+              [class.active]="selectedOuverture === 'fenetre2'"
+              (click)="selectOuverture('fenetre2')"
+            >
+              🪟 Fenêtre 2
+            </button>
+            <button 
+              class="btn-ouverture" 
+              [class.active]="selectedOuverture === 'porte1'"
+              (click)="selectOuverture('porte1')"
+            >
+              🚪 Porte 1
+            </button>
+          </div>
+        </div>
+
+        <div class="ouverture-properties" *ngIf="selectedOuverture">
+          <h4>Propriétés de l'ouverture :</h4>
+          
+          <!-- Type et Nom -->
+          <div class="property-group">
+            <h5>📝 Type et Nom :</h5>
+            <div class="input-group">
+              <select [(ngModel)]="ouvertureType" class="select-input">
+                <option value="fenetre">Fenêtre</option>
+                <option value="porte">Porte</option>
+              </select>
+              <input 
+                type="text" 
+                [(ngModel)]="ouvertureNom" 
+                placeholder="Nom de l'ouverture"
+                class="text-input"
+              >
+            </div>
+          </div>
+
+          <!-- Position -->
+          <div class="property-group">
+            <h5>📍 Position (X, Y, Z) :</h5>
+            <div class="input-group">
+              <input 
+                type="number" 
+                [(ngModel)]="ouverturePosition.x" 
+                step="0.1" 
+                placeholder="X"
+                class="number-input"
+              >
+              <input 
+                type="number" 
+                [(ngModel)]="ouverturePosition.y" 
+                step="0.1" 
+                placeholder="Y"
+                class="number-input"
+              >
+              <input 
+                type="number" 
+                [(ngModel)]="ouverturePosition.z" 
+                step="0.1" 
+                placeholder="Z"
+                class="number-input"
+              >
+              <button (click)="modifierPositionOuverture()" class="btn-apply">
+                ✅ Appliquer Position
+              </button>
+            </div>
+          </div>
+
+          <!-- Dimensions -->
+          <div class="property-group">
+            <h5>📐 Dimensions (Largeur, Hauteur, Profondeur) :</h5>
+            <div class="input-group">
+              <input 
+                type="number" 
+                [(ngModel)]="ouvertureDimensions.width" 
+                step="0.1" 
+                placeholder="Largeur"
+                class="number-input"
+              >
+              <input 
+                type="number" 
+                [(ngModel)]="ouvertureDimensions.height" 
+                step="0.1" 
+                placeholder="Hauteur"
+                class="number-input"
+              >
+              <input 
+                type="number" 
+                [(ngModel)]="ouvertureDimensions.depth" 
+                step="0.01" 
+                placeholder="Profondeur"
+                class="number-input"
+              >
+              <button (click)="modifierDimensionsOuverture()" class="btn-apply">
+                ✅ Appliquer Dimensions
+              </button>
+            </div>
+          </div>
+
+          <!-- Couleur -->
+          <div class="property-group">
+            <h5>🎨 Couleur :</h5>
+            <div class="input-group">
+              <input 
+                type="color" 
+                [(ngModel)]="ouvertureCouleur"
+                class="color-input"
+              >
+              <span class="color-display">{{ ouvertureCouleur }}</span>
+              <button (click)="modifierCouleurOuvertureInteractive()" class="btn-apply">
+                ✅ Appliquer Couleur
+              </button>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div class="ouverture-actions">
+            <button (click)="ajouterOuverture()" class="btn-add">
+              ➕ Ajouter Ouverture
+            </button>
+            <button (click)="supprimerOuverture()" class="btn-delete">
+              🗑️ Supprimer
+            </button>
+            <button (click)="resetOuvertureValues()" class="btn-reset">
+              🔄 Réinitialiser
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section Modificateur de Structure -->
+      <div class="test-section">
+        <h3>🏗️ Modificateur de Structure</h3>
+        
+        <div class="structure-properties">
+          <!-- Nom et Description -->
+          <div class="property-group">
+            <h5>📝 Informations Générales :</h5>
+            <div class="input-group">
+              <input 
+                type="text" 
+                [(ngModel)]="structureNom" 
+                placeholder="Nom du bâtiment"
+                class="text-input"
+              >
+              <textarea 
+                [(ngModel)]="structureDescription" 
+                placeholder="Description du bâtiment"
+                class="textarea-input"
+                rows="2"
+              ></textarea>
+            </div>
+          </div>
+
+          <!-- Dimensions Globales -->
+          <div class="property-group">
+            <h5>📐 Dimensions Globales (m) :</h5>
+            <div class="input-group">
+              <input 
+                type="number" 
+                [(ngModel)]="structureDimensions.longueur" 
+                step="0.1" 
+                placeholder="Longueur"
+                class="number-input"
+              >
+              <input 
+                type="number" 
+                [(ngModel)]="structureDimensions.largeur" 
+                step="0.1" 
+                placeholder="Largeur"
+                class="number-input"
+              >
+              <input 
+                type="number" 
+                [(ngModel)]="structureDimensions.hauteur" 
+                step="0.1" 
+                placeholder="Hauteur"
+                class="number-input"
+              >
+              <button (click)="modifierStructureDimensions()" class="btn-apply">
+                ✅ Appliquer Dimensions
+              </button>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div class="structure-actions">
+            <button (click)="resetStructureValues()" class="btn-reset">
+              🔄 Réinitialiser Structure
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section Gestionnaire de Projets -->
+      <div class="test-section">
+        <h3>📁 Gestionnaire de Projets</h3>
+        
+        <div class="projet-manager">
+          <!-- Projets Disponibles -->
+          <div class="property-group">
+            <h5>📂 Projets Disponibles :</h5>
+            <div class="projets-list">
+              <div 
+                *ngFor="let projet of projetsDisponibles" 
+                class="projet-item"
+                [class.active]="projet === projetActuel"
+              >
+                <span class="projet-nom">{{ projet }}</span>
+                <div class="projet-actions">
+                  <button (click)="chargerProjet(projet)" class="btn-load">
+                    📂 Charger
+                  </button>
+                  <button 
+                    *ngIf="projet !== 'projet-par-defaut'"
+                    (click)="supprimerProjet(projet)" 
+                    class="btn-delete-small"
+                  >
+                    🗑️
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Nouveau Projet -->
+          <div class="property-group">
+            <h5>➕ Nouveau Projet :</h5>
+            <div class="input-group">
+              <input 
+                type="text" 
+                [(ngModel)]="nouveauProjetNom" 
+                placeholder="Nom du nouveau projet"
+                class="text-input"
+              >
+              <button (click)="sauvegarderProjet()" class="btn-save">
+                💾 Sauvegarder
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section Validation en Temps Réel -->
+      <div class="test-section">
+        <h3>✅ Validation en Temps Réel</h3>
+        
+        <div class="validation-panel">
+          <!-- Score de Validation -->
+          <div class="validation-score">
+            <h5>📊 Score de Validation :</h5>
+            <div class="score-display" [class]="'score-' + (scoreValidation >= 80 ? 'good' : scoreValidation >= 60 ? 'warning' : 'error')">
+              {{ scoreValidation }}/100
+            </div>
+          </div>
+
+          <!-- Erreurs -->
+          <div class="validation-errors" *ngIf="erreursValidation.length > 0">
+            <h5>❌ Erreurs :</h5>
+            <ul>
+              <li *ngFor="let erreur of erreursValidation">{{ erreur }}</li>
+            </ul>
+          </div>
+
+          <!-- Avertissements -->
+          <div class="validation-warnings" *ngIf="avertissementsValidation.length > 0">
+            <h5>⚠️ Avertissements :</h5>
+            <ul>
+              <li *ngFor="let avertissement of avertissementsValidation">{{ avertissement }}</li>
+            </ul>
+          </div>
+
+          <!-- Actions -->
+          <div class="validation-actions">
+            <button (click)="validerConfiguration()" class="btn-validate">
+              🔍 Valider Configuration
+            </button>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>

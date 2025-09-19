@@ -18,6 +18,7 @@ Bienvenue dans la documentation complète de votre projet de modélisation archi
 - [🎨 Sélecteur de Couleurs](#sélecteur-de-couleurs)
 - [🧪 Bouton de Test](#bouton-de-test)
 - [📱 Sidebar de Test](#sidebar-de-test)
+- [🎛️ Interface Complète](#interface-complète)
 
 ### 📖 Documentation Technique
 - [📝 Résumé des Données Réelles](#résumé-des-données-réelles)
@@ -198,6 +199,26 @@ Guide pour utiliser la sidebar de test des services.
 - **Scène 3D** : Configuration 3D
 - **Murs** : Test des murs
 - **Modifications** : Modifications interactives
+
+---
+
+## 🎛️ Interface Complète
+
+**Fichier :** [`GUIDE-INTERFACE-COMPLETE.md`](./GUIDE-INTERFACE-COMPLETE.md)
+
+Guide complet pour l'interface avancée de modification du bâtiment.
+
+### 🎯 Fonctionnalités Principales
+- **Modificateur d'ouvertures** : Modification des portes et fenêtres
+- **Modificateur de structure** : Dimensions globales et informations
+- **Gestionnaire de projets** : Sauvegarde et chargement de configurations
+- **Validation en temps réel** : Score de qualité et détection d'erreurs
+
+### 🚀 Utilisation
+1. Ouvrez la sidebar de test
+2. Naviguez vers les nouvelles sections
+3. Modifiez les propriétés souhaitées
+4. Validez et sauvegardez vos projets
 
 ---
 
