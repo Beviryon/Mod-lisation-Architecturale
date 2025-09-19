@@ -1,4 +1,4 @@
-<div class="scene-container">
+<div class="scene-container" [class.sidebar-open]="showTestModal">
   <div #canvasContainer class="canvas-container"></div>
   <div class="controls-info">
     <h3>Modélisation</h3>
@@ -7,6 +7,7 @@
       <h4>Contrôles</h4>
       <button class="reset-button" (click)="resetCameraPosition()">Réinitialiser</button>
       <button class="legend-button" (click)="openLegendModal()">Voir la légende</button>
+      <button class="test-button" (click)="openTestModal()">🧪 Test des Services</button>
       
       <h4>Contrôles Souris</h4>
       <ul>
@@ -205,33 +206,143 @@
   </div>
 </div>
 
-<!-- NOUVEAU : Panneau de test des services -->
-<div class="services-panel">
-  <h4>🧪 Test des Services</h4>
-  
-  <div class="button-row">
-    <button (click)="testStatistiques()" class="btn-blue">
-      📊 Statistiques
+
+<!-- Sidebar de test des services -->
+<div class="sidebar-overlay" [class.show]="showTestModal" (click)="closeTestModal($event)">
+  <div class="sidebar-content test-sidebar" (click)="$event.stopPropagation()">
+    <div class="sidebar-header">
+      <h2>🧪 Test des Services</h2>
+      <button class="sidebar-close" (click)="closeTestModal($event)">×</button>
+    </div>
+    <div class="sidebar-body">
+      <!-- Section des tests de base -->
+      <div class="test-section">
+        <h3>Tests de Base</h3>
+        <div class="test-buttons">
+          <button (click)="testStatistiques()" class="btn-test btn-blue">
+            <div class="btn-icon"></div>
+            <div class="btn-label">Statistiques</div>
+          </button>
+          <button (click)="testExport()" class="btn-test btn-purple">
+            <div class="btn-icon"></div>
+            <div class="btn-label">Export</div>
+          </button>
+          <button (click)="testValidation()" class="btn-test btn-red">
+            <div class="btn-icon"></div>
+            <div class="btn-label">Synchroniser</div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Section des tests de couleurs automatiques -->
+      <div class="test-section">
+        <h3> Tests de Couleurs Automatiques</h3>
+        <div class="test-buttons">
+          <button (click)="testCouleurs()" class="btn-test btn-orange">
+            <div class="btn-icon"></div>
+            <div class="btn-label">Couleurs Murs</div>
+          </button>
+          <button (click)="testCouleursOuvertures()" class="btn-test btn-cyan">
+            <div class="btn-icon"></div>
+            <div class="btn-label">Couleurs Ouvertures</div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Section du sélecteur de couleurs interactif -->
+      <div class="test-section">
+        <h3> Sélecteur de Couleurs Interactif</h3>
+        
+        <!-- Sélecteur de couleurs -->
+        <div class="color-picker-section">
+          <div class="color-picker-container">
+            <label for="colorPicker">Choisir une couleur :</label>
+            <div class="color-input-group">
+              <input type="color" id="colorPicker" [(ngModel)]="selectedColor" (change)="onColorChange()" class="color-picker">
+              <span class="color-value">{{selectedColor}}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sélection des éléments -->
+        <div class="element-selection-section">
+          <div class="element-group">
+            <h4> Murs</h4>
+            <div class="element-buttons">
+              <button (click)="changeElementColor('principal')" class="btn-element" [class.active]="selectedElement === 'principal'">
+                <div class="element-icon"></div>
+                <div class="element-label">Mur Principal</div>
+              </button>
+              <button (click)="changeElementColor('arriere')" class="btn-element" [class.active]="selectedElement === 'arriere'">
+                <div class="element-icon"></div>
+                <div class="element-label">Mur Arrière</div>
+              </button>
+              <button (click)="changeElementColor('gauche')" class="btn-element" [class.active]="selectedElement === 'gauche'">
+                <div class="element-icon"></div>
+                <div class="element-label">Mur Gauche</div>
+              </button>
+              <button (click)="changeElementColor('droit')" class="btn-element" [class.active]="selectedElement === 'droit'">
+                <div class="element-icon"></div>
+                <div class="element-label">Mur Droit</div>
+              </button>
+            </div>
+          </div>
+
+          <div class="element-group">
+            <h4> Ouvertures</h4>
+            <div class="element-buttons">
+              <button (click)="changeElementColor('fenetre2')" class="btn-element" [class.active]="selectedElement === 'fenetre2'">
+                <div class="element-icon"></div>
+                <div class="element-label">Fenêtre Principale</div>
     </button>
-    <button (click)="testCouleurs()" class="btn-orange">
-      🎨 Couleurs
+              <button (click)="changeElementColor('fenetre3')" class="btn-element" [class.active]="selectedElement === 'fenetre3'">
+                <div class="element-icon"></div>
+                <div class="element-label">Fenêtre Arrière</div>
     </button>
-    <button (click)="testExport()" class="btn-purple">
-      💾 Export
+              <button (click)="changeElementColor('porte1')" class="btn-element" [class.active]="selectedElement === 'porte1'">
+                <div class="element-icon"></div>
+                <div class="element-label">Porte d'Entrée</div>
     </button>
+            </div>
+          </div>
   </div>
   
-  <div class="button-row">
-    <button (click)="testValidation()" class="btn-red">
-      🔍 Validation
+        <!-- Actions -->
+        <div class="color-actions-section">
+          <button (click)="resetAllColors()" class="btn-reset">
+            <div class="btn-icon"></div>
+            <div class="btn-text">Remettre les couleurs originales</div>
     </button>
-    <button (click)="testCommunication()" class="btn-gray">
-      📡 Communication
-    </button>
+        </div>
+      </div>
+
+      <!-- Section de communication -->
+      <div class="test-section">
+        <h3>📡 Communication</h3>
+        <div class="test-buttons">
+          <button (click)="testCommunication()" class="btn-test btn-gray">
+            <div class="btn-icon">📡</div>
+            <div class="btn-label">Communication</div>
+          </button>
+          <button (click)="testMateriaux()" class="btn-test btn-purple">
+            <div class="btn-icon">🎨</div>
+            <div class="btn-label">Matériaux</div>
+          </button>
+          <button (click)="testScene()" class="btn-test btn-indigo">
+            <div class="btn-icon">🎬</div>
+            <div class="btn-label">Scène 3D</div>
+          </button>
+        </div>
   </div>
   
-  <div id="services-output">
-    <div class="success-message">✅ Services intégrés avec succès!</div>
+      <!-- Zone de sortie des tests -->
+      <div class="test-output-section">
+        <h3> Résultats des Tests</h3>
+        <div id="services-output" class="test-output">
+          <div class="success-message">✅ Services intégrés avec succès!</div>
     <div>Cliquez sur les boutons pour tester les fonctionnalités.</div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

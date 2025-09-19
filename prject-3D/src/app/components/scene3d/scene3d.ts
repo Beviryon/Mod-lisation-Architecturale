@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, OnDestroy, ViewChild, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import * as THREE from 'three';
 import { BUILDING_CONFIG, WallCalculations } from '../../config/building-config';
 
@@ -16,7 +17,7 @@ import { SceneService } from '../../services/scene/scene.service';
 
 @Component({
   selector: 'app-scene3d',
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './scene3d.html',
   styleUrl: './scene3d.css',
   standalone: true
@@ -31,6 +32,13 @@ export class Scene3d implements OnInit, OnDestroy {
 
   // État de la modale de légende
   public showLegendModal = false;
+
+  // État du modal de test
+  public showTestModal = false;
+
+  // Propriétés pour le sélecteur de couleurs
+  selectedColor = '#aaaaaa'; // Couleur par défaut (gris)
+  selectedElement: string | null = null;
 
   // Contrôles de la souris
   private isMouseDown = false;
@@ -76,6 +84,9 @@ export class Scene3d implements OnInit, OnDestroy {
 
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
+      // Synchroniser les données avec building-config.ts au démarrage
+      this.synchroniserDonneesAuDemarrage();
+      
       // Attendre que le DOM soit prêt
       setTimeout(() => {
         this.initThree();
@@ -191,6 +202,7 @@ export class Scene3d implements OnInit, OnDestroy {
 
     const wallPos = BUILDING_CONFIG.mainWall.position;
     mur.position.set(wallPos.x, wallPos.y, wallPos.z);
+    mur.name = 'murPrincipal'; // Nom pour la mise à jour des couleurs
     mur.castShadow = true;
     mur.receiveShadow = true;
 
@@ -206,6 +218,7 @@ export class Scene3d implements OnInit, OnDestroy {
     const fenetre2Mat = new THREE.MeshStandardMaterial({ color: window2Config.color });
     const fenetre2 = new THREE.Mesh(fenetre2Geo, fenetre2Mat);
     fenetre2.position.set(window2Config.position.x, window2Config.position.y, window2Config.position.z);
+    fenetre2.name = 'fenetre2'; // Nom pour la mise à jour des couleurs
     this.scene.add(fenetre2);
   }
 
@@ -222,6 +235,7 @@ export class Scene3d implements OnInit, OnDestroy {
     const murGaucheMat = new THREE.MeshStandardMaterial({ color: leftWall.color });
     const murGauche = new THREE.Mesh(murGaucheGeo, murGaucheMat);
     murGauche.position.set(leftWall.position.x, leftWall.position.y, leftWall.position.z);
+    murGauche.name = 'murGauche'; // Nom pour la mise à jour des couleurs
     murGauche.castShadow = true;
     murGauche.receiveShadow = true;
     this.scene.add(murGauche);
@@ -396,6 +410,7 @@ export class Scene3d implements OnInit, OnDestroy {
 
     // Positionner le mur à sa place
     mur.position.set(backWall.position.x, backWall.position.y, backWall.position.z);
+    mur.name = 'murArriere'; // Nom pour la mise à jour des couleurs
     mur.castShadow = true;
     mur.receiveShadow = true;
     this.scene.add(mur);
@@ -405,6 +420,7 @@ export class Scene3d implements OnInit, OnDestroy {
     const fenetreMat = new THREE.MeshStandardMaterial({ color: window1Config.color });
     const fenetre = new THREE.Mesh(fenetreGeo, fenetreMat);
     fenetre.position.set(window1Config.position.x, window1Config.position.y, window1Config.position.z);
+    fenetre.name = 'fenetre3'; // Nom pour la mise à jour des couleurs
     this.scene.add(fenetre);
   }
 
@@ -449,6 +465,7 @@ export class Scene3d implements OnInit, OnDestroy {
     // pour être perpendiculaire aux autres murs
     mur.rotation.y = Math.PI / 2; // 90 degrés en radians
     
+    mur.name = 'murDroit'; // Nom pour la mise à jour des couleurs
     mur.castShadow = true;
     mur.receiveShadow = true;
     this.scene.add(mur);
@@ -462,6 +479,7 @@ export class Scene3d implements OnInit, OnDestroy {
     // ROTATION DE LA PORTE : Même rotation que le mur (90° sur Y)
     porte.rotation.y = Math.PI / 2; // 90 degrés en radians
     
+    porte.name = 'porte1'; // Nom pour la mise à jour des couleurs
     this.scene.add(porte);
   }
 
@@ -474,6 +492,22 @@ export class Scene3d implements OnInit, OnDestroy {
 
   public closeLegendModal() {
     this.showLegendModal = false;
+    // Restaurer le défilement de la page
+    document.body.style.overflow = 'auto';
+  }
+
+  // Méthodes pour gérer le modal de test
+  public openTestModal() {
+    this.showTestModal = true;
+    // Empêcher le défilement de la page quand la modale est ouverte
+    document.body.style.overflow = 'hidden';
+  }
+
+  public closeTestModal(event?: Event) {
+    if (event) {
+      event.stopPropagation();
+    }
+    this.showTestModal = false;
     // Restaurer le défilement de la page
     document.body.style.overflow = 'auto';
   }
@@ -643,8 +677,45 @@ export class Scene3d implements OnInit, OnDestroy {
       return;
     }
 
+    // Mettre à jour via le service
     this.murService.modifierCouleurMur(type, nouvelleCouleur);
+    
+    // Mettre à jour visuellement dans la scène 3D
+    this.mettreAJourCouleurMur3D(type, nouvelleCouleur);
+    
     console.log(`Couleur du mur ${type} modifiée vers:`, nouvelleCouleur);
+  }
+
+  /**
+   * Mettre à jour la couleur d'un mur dans la scène 3D
+   */
+  private mettreAJourCouleurMur3D(type: 'principal' | 'arriere' | 'gauche' | 'droit', nouvelleCouleur: number): void {
+    if (!this.scene) return;
+
+    // Trouver le mur dans la scène par son nom
+    const nomMur = this.getNomMur3D(type);
+    const mur = this.scene.getObjectByName(nomMur) as THREE.Mesh;
+    
+    if (mur && mur.material) {
+      // Mettre à jour la couleur du matériau
+      (mur.material as THREE.MeshStandardMaterial).color.setHex(nouvelleCouleur);
+      console.log(`✅ Couleur 3D mise à jour pour ${nomMur}:`, nouvelleCouleur);
+    } else {
+      console.log(`❌ Mur ${nomMur} non trouvé dans la scène 3D`);
+    }
+  }
+
+  /**
+   * Obtenir le nom du mur dans la scène 3D
+   */
+  private getNomMur3D(type: 'principal' | 'arriere' | 'gauche' | 'droit'): string {
+    const noms: Record<string, string> = {
+      principal: 'murPrincipal',
+      arriere: 'murArriere', 
+      gauche: 'murGauche',
+      droit: 'murDroit'
+    };
+    return noms[type] || 'murInconnu';
   }
 
   /**
@@ -691,21 +762,39 @@ export class Scene3d implements OnInit, OnDestroy {
 
     let html = '<div style="color: #2196F3;">📊 <strong>Statistiques:</strong></div>';
     
-    // Statistiques du bâtiment
+    // Synchroniser d'abord les données
+    try {
+      const nouvelleConfiguration = this.convertirBuildingConfigVersConfigurationService();
+      this.configurationService.mettreAJourConfiguration(nouvelleConfiguration);
+      
+      // Les services se mettent à jour automatiquement via ConfigurationService
+      
+      html += '<div style="color: #4CAF50;">✅ Données synchronisées avec building-config.ts</div>';
+      html += '<div style="color: #4CAF50;">✅ Services mis à jour avec les nouvelles données</div>';
+    } catch (error) {
+      html += `<div style="color: #f44336;">❌ Erreur de synchronisation: ${error}</div>`;
+    }
+    
+    // Statistiques du bâtiment (après synchronisation)
     const statsBatiment = this.getStatistiquesBatiment();
     html += `<div>🏢 Bâtiment: ${JSON.stringify(statsBatiment, null, 2)}</div>`;
     
-    // Statistiques des murs
+    // Statistiques des murs (après synchronisation)
     const statsMurs = this.getStatistiquesMurs();
     html += `<div>🧱 Murs: ${JSON.stringify(statsMurs, null, 2)}</div>`;
     
-    // Statistiques des ouvertures
+    // Statistiques des ouvertures (après synchronisation)
     const statsOuvertures = this.getStatistiquesOuvertures();
     html += `<div>🚪 Ouvertures: ${JSON.stringify(statsOuvertures, null, 2)}</div>`;
     
     // Statistiques des matériaux
     const statsMateriaux = this.getStatistiquesMateriaux();
     html += `<div>🎨 Matériaux: ${JSON.stringify(statsMateriaux, null, 2)}</div>`;
+    
+    // Afficher les vraies statistiques calculées directement depuis building-config.ts
+    const vraiesStats = this.calculerVraiesStatistiques();
+    html += '<div style="color: #FF9800;">📐 <strong>Vraies statistiques (building-config.ts):</strong></div>';
+    html += `<div>🏢 Bâtiment réel: ${JSON.stringify(vraiesStats, null, 2)}</div>`;
     
     output.innerHTML = html;
   }
@@ -719,27 +808,185 @@ export class Scene3d implements OnInit, OnDestroy {
 
     let html = '<div style="color: #FF9800;">🎨 <strong>Test des Couleurs:</strong></div>';
     
-    // Changer la couleur du mur principal
+    // Tester tous les murs avec différentes couleurs
     this.modifierCouleurMur('principal', 0xff0000); // Rouge
     html += '<div>🔴 Mur principal → Rouge</div>';
     
     setTimeout(() => {
-      this.modifierCouleurMur('principal', 0x00ff00); // Vert
-      html += '<div>🟢 Mur principal → Vert</div>';
+      this.modifierCouleurMur('arriere', 0x00ff00); // Vert
+      html += '<div>🟢 Mur arrière → Vert</div>';
       
       setTimeout(() => {
-        this.modifierCouleurMur('principal', 0x0000ff); // Bleu
-        html += '<div>🔵 Mur principal → Bleu</div>';
+        this.modifierCouleurMur('gauche', 0x0000ff); // Bleu
+        html += '<div>🔵 Mur gauche → Bleu</div>';
         
         setTimeout(() => {
-          this.modifierCouleurMur('principal', 0xaaaaaa); // Gris (original)
-          html += '<div>⚪ Mur principal → Gris (original)</div>';
+          this.modifierCouleurMur('droit', 0xff00ff); // Magenta
+          html += '<div>🟣 Mur droit → Magenta</div>';
+          
+          setTimeout(() => {
+            // Remettre toutes les couleurs originales
+            this.modifierCouleurMur('principal', 0xaaaaaa); // Gris (original)
+            this.modifierCouleurMur('arriere', 0xaaaaaa); // Gris (original)
+            this.modifierCouleurMur('gauche', 0xaaaaaa); // Gris (original)
+            this.modifierCouleurMur('droit', 0xaaaaaa); // Gris (original)
+            html += '<div>⚪ Tous les murs → Gris (original)</div>';
+            output.innerHTML = html;
+          }, 1000);
+        }, 1000);
+      }, 1000);
+    }, 1000);
+    
+    output.innerHTML = html;
+  }
+
+  /**
+   * Test des couleurs des ouvertures
+   */
+  public testCouleursOuvertures(): void {
+    const output = document.getElementById('services-output');
+    if (!output) return;
+
+    let html = '<div style="color: #FF9800;">🚪 <strong>Test des Couleurs des Ouvertures:</strong></div>';
+    
+    // Tester les couleurs des ouvertures
+    this.modifierCouleurOuverture('fenetre2', 0x00ffff); // Cyan
+    html += '<div>🔵 Fenêtre principale → Cyan</div>';
+    
+    setTimeout(() => {
+      this.modifierCouleurOuverture('fenetre3', 0xffff00); // Jaune
+      html += '<div>🟡 Fenêtre arrière → Jaune</div>';
+      
+      setTimeout(() => {
+        this.modifierCouleurOuverture('porte1', 0xff8000); // Orange
+        html += '<div>🟠 Porte d\'entrée → Orange</div>';
+        
+        setTimeout(() => {
+          // Remettre les couleurs originales
+          this.modifierCouleurOuverture('fenetre2', 0xff0000); // Rouge (original)
+          this.modifierCouleurOuverture('fenetre3', 0xff0000); // Rouge (original)
+          this.modifierCouleurOuverture('porte1', 0x00ff00); // Vert (original)
+          html += '<div>⚪ Toutes les ouvertures → Couleurs originales</div>';
           output.innerHTML = html;
         }, 1000);
       }, 1000);
     }, 1000);
     
     output.innerHTML = html;
+  }
+
+  /**
+   * Modifier la couleur d'une ouverture
+   */
+  public modifierCouleurOuverture(idOuverture: string, nouvelleCouleur: number): void {
+    if (!this.ouvertureService) {
+      console.log('OuvertureService non disponible');
+      return;
+    }
+
+    // Mettre à jour via le service
+    this.ouvertureService.modifierCouleurOuverture(idOuverture, nouvelleCouleur);
+    
+    // Mettre à jour visuellement dans la scène 3D
+    this.mettreAJourCouleurOuverture3D(idOuverture, nouvelleCouleur);
+    
+    console.log(`Couleur de l'ouverture ${idOuverture} modifiée vers:`, nouvelleCouleur);
+  }
+
+  /**
+   * Mettre à jour la couleur d'une ouverture dans la scène 3D
+   */
+  private mettreAJourCouleurOuverture3D(idOuverture: string, nouvelleCouleur: number): void {
+    if (!this.scene) return;
+
+    // Trouver l'ouverture dans la scène par son nom
+    const nomOuverture = this.getNomOuverture3D(idOuverture);
+    const ouverture = this.scene.getObjectByName(nomOuverture) as THREE.Mesh;
+    
+    if (ouverture && ouverture.material) {
+      // Mettre à jour la couleur du matériau
+      (ouverture.material as THREE.MeshStandardMaterial).color.setHex(nouvelleCouleur);
+      console.log(`✅ Couleur 3D mise à jour pour ${nomOuverture}:`, nouvelleCouleur);
+    } else {
+      console.log(`❌ Ouverture ${nomOuverture} non trouvée dans la scène 3D`);
+    }
+  }
+
+  /**
+   * Obtenir le nom de l'ouverture dans la scène 3D
+   */
+  private getNomOuverture3D(idOuverture: string): string {
+    const noms: Record<string, string> = {
+      'fenetre2': 'fenetre2',
+      'fenetre3': 'fenetre3', 
+      'porte1': 'porte1'
+    };
+    return noms[idOuverture] || 'ouvertureInconnue';
+  }
+
+  // ========================================
+  // MÉTHODES POUR LE SÉLECTEUR DE COULEURS
+  // ========================================
+
+  /**
+   * Gérer le changement de couleur dans le sélecteur
+   */
+  public onColorChange(): void {
+    if (this.selectedElement) {
+      this.changeElementColor(this.selectedElement);
+    }
+  }
+
+  /**
+   * Changer la couleur d'un élément spécifique
+   */
+  public changeElementColor(elementId: string): void {
+    this.selectedElement = elementId;
+    
+    // Convertir la couleur hex en nombre
+    const colorNumber = parseInt(this.selectedColor.replace('#', ''), 16);
+    
+    // Déterminer si c'est un mur ou une ouverture
+    const murTypes = ['principal', 'arriere', 'gauche', 'droit'];
+    const ouvertureTypes = ['fenetre2', 'fenetre3', 'porte1'];
+    
+    if (murTypes.includes(elementId)) {
+      // C'est un mur
+      this.modifierCouleurMur(elementId as 'principal' | 'arriere' | 'gauche' | 'droit', colorNumber);
+      console.log(`🎨 Couleur du mur ${elementId} changée vers: ${this.selectedColor}`);
+    } else if (ouvertureTypes.includes(elementId)) {
+      // C'est une ouverture
+      this.modifierCouleurOuverture(elementId, colorNumber);
+      console.log(`🎨 Couleur de l'ouverture ${elementId} changée vers: ${this.selectedColor}`);
+    }
+  }
+
+  /**
+   * Remettre toutes les couleurs originales
+   */
+  public resetAllColors(): void {
+    // Couleurs originales des murs (gris)
+    const couleurMurOriginale = 0xaaaaaa;
+    
+    // Couleurs originales des ouvertures
+    const couleurFenetreOriginale = 0xff0000; // Rouge
+    const couleurPorteOriginale = 0x00ff00; // Vert
+    
+    // Remettre les couleurs des murs
+    this.modifierCouleurMur('principal', couleurMurOriginale);
+    this.modifierCouleurMur('arriere', couleurMurOriginale);
+    this.modifierCouleurMur('gauche', couleurMurOriginale);
+    this.modifierCouleurMur('droit', couleurMurOriginale);
+    
+    // Remettre les couleurs des ouvertures
+    this.modifierCouleurOuverture('fenetre2', couleurFenetreOriginale);
+    this.modifierCouleurOuverture('fenetre3', couleurFenetreOriginale);
+    this.modifierCouleurOuverture('porte1', couleurPorteOriginale);
+    
+    // Remettre la couleur du sélecteur
+    this.selectedColor = '#aaaaaa';
+    
+    console.log('🔄 Toutes les couleurs ont été remises à leurs valeurs originales');
   }
 
   /**
@@ -772,14 +1019,40 @@ export class Scene3d implements OnInit, OnDestroy {
   }
 
   /**
-   * Test de la validation (temporairement désactivé)
+   * Synchroniser les données avec building-config.ts
    */
   public testValidation(): void {
     const output = document.getElementById('services-output');
     if (!output) return;
 
-    let html = '<div style="color: #FF5722;">🔍 <strong>Test de Validation:</strong></div>';
-    html += '<div style="color: #f44336;">❌ ValidationService temporairement désactivé pour debug</div>';
+    let html = '<div style="color: #FF5722;">🔄 <strong>Synchronisation des données:</strong></div>';
+    
+    try {
+      // Convertir les données de building-config vers ConfigurationService
+      const nouvelleConfiguration = this.convertirBuildingConfigVersConfigurationService();
+      
+      // Mettre à jour le ConfigurationService
+      this.configurationService.mettreAJourConfiguration(nouvelleConfiguration);
+      
+      html += '<div>✅ Données synchronisées avec succès!</div>';
+      html += `<div>🏢 Nom: ${nouvelleConfiguration.nom}</div>`;
+      html += `<div>📐 Dimensions: ${nouvelleConfiguration.dimensions.longueur}m x ${nouvelleConfiguration.dimensions.largeur}m x ${nouvelleConfiguration.dimensions.hauteur}m</div>`;
+      
+      // Calculer les vraies statistiques
+      const vraiesStats = this.calculerVraiesStatistiques();
+      html += '<div>📊 Vraies statistiques:</div>';
+      html += `<div>  • Murs: ${vraiesStats.nombreMurs}</div>`;
+      html += `<div>  • Ouvertures: ${vraiesStats.nombreOuvertures}</div>`;
+      html += `<div>  • Portes: ${vraiesStats.nombrePortes}</div>`;
+      html += `<div>  • Fenêtres: ${vraiesStats.nombreFenetres}</div>`;
+      html += `<div>  • Surface murs: ${vraiesStats.surfaceMurs}m²</div>`;
+      html += `<div>  • Surface ouvertures: ${vraiesStats.surfaceOuvertures}m²</div>`;
+      html += `<div>  • % ouvertures: ${vraiesStats.pourcentageOuvertures}%</div>`;
+      
+    } catch (error) {
+      html += `<div style="color: #f44336;">❌ Erreur: ${error}</div>`;
+    }
+    
     output.innerHTML = html;
   }
   /**
@@ -792,5 +1065,326 @@ export class Scene3d implements OnInit, OnDestroy {
     let html = '<div style="color: #607D8B;">📡 <strong>Test de Communication:</strong></div>';
     html += '<div style="color: #f44336;">❌ CommunicationService temporairement désactivé pour debug</div>';
     output.innerHTML = html;
+  }
+
+  /**
+   * Test des matériaux, palettes et textures
+   */
+  public testMateriaux(): void {
+    const output = document.getElementById('services-output');
+    if (!output) return;
+
+    if (!this.materiauService) {
+      let html = '<div style="color: #607D8B;">🎨 <strong>Test des Matériaux:</strong></div>';
+      html += '<div style="color: #f44336;">❌ MateriauService non disponible</div>';
+      output.innerHTML = html;
+      return;
+    }
+
+    let html = '<div style="color: #607D8B;">🎨 <strong>Test des Matériaux:</strong></div>';
+    
+    try {
+      // Test des matériaux disponibles
+      const materiaux = this.materiauService.getMateriaux();
+      html += `<div style="color: #4CAF50;">📦 <strong>Matériaux disponibles:</strong> ${materiaux.length}</div>`;
+      html += '<div style="margin-left: 20px; color: #666;">';
+      materiaux.forEach((materiau: any) => {
+        html += `<div>• ${materiau.nom} (${materiau.type}): ${materiau.description}</div>`;
+      });
+      html += '</div>';
+
+      // Test des palettes de couleurs
+      const palettes = this.materiauService.getPalettes();
+      html += `<div style="color: #4CAF50;">🎨 <strong>Palettes de couleurs:</strong> ${palettes.length}</div>`;
+      html += '<div style="margin-left: 20px; color: #666;">';
+      palettes.forEach((palette: any) => {
+        const couleursHex = palette.couleurs.map((c: number) => '#' + c.toString(16).padStart(6, '0')).join(', ');
+        html += `<div>• ${palette.nom} (${palette.type}): ${palette.description}</div>`;
+        html += `<div style="margin-left: 10px; color: #888;">Couleurs: ${couleursHex}</div>`;
+      });
+      html += '</div>';
+
+      // Test des textures
+      const textures = this.materiauService.getTextures();
+      html += `<div style="color: #4CAF50;">🖼️ <strong>Textures disponibles:</strong> ${textures.length}</div>`;
+      html += '<div style="margin-left: 20px; color: #666;">';
+      textures.forEach((texture: any) => {
+        html += `<div>• ${texture.nom} (${texture.type}): ${texture.description}</div>`;
+      });
+      html += '</div>';
+
+      // Test des statistiques
+      const statistiques = this.materiauService.getStatistiquesMateriaux();
+      html += '<div style="color: #4CAF50;">📊 <strong>Statistiques des matériaux:</strong></div>';
+      html += '<div style="margin-left: 20px; color: #666;">';
+      html += `<div>• Nombre total: ${statistiques.nombreTotal}</div>`;
+      html += `<div>• Par type: ${JSON.stringify(statistiques.nombreParType)}</div>`;
+      html += `<div>• Couleurs utilisées: ${statistiques.couleursUtilisees.length}</div>`;
+      html += `<div>• Textures utilisées: ${statistiques.texturesUtilisees.length}</div>`;
+      html += `<div>• Palette la plus utilisée: ${statistiques.paletteLaPlusUtilisee}</div>`;
+      html += `<div>• Matériau le plus utilisé: ${statistiques.materiauLePlusUtilise}</div>`;
+      html += '</div>';
+
+      html += '<div style="color: #4CAF50; margin-top: 10px;">✅ Test des matériaux terminé avec succès !</div>';
+      
+    } catch (error) {
+      html += `<div style="color: #f44336;">❌ Erreur lors du test des matériaux: ${error}</div>`;
+    }
+
+    output.innerHTML = html;
+  }
+
+  /**
+   * Test de la scène 3D, caméra, éclairage et contrôles
+   */
+  public testScene(): void {
+    const output = document.getElementById('services-output');
+    if (!output) return;
+
+    if (!this.sceneService) {
+      let html = '<div style="color: #607D8B;">🎬 <strong>Test de la Scène:</strong></div>';
+      html += '<div style="color: #f44336;">❌ SceneService non disponible</div>';
+      output.innerHTML = html;
+      return;
+    }
+
+    let html = '<div style="color: #607D8B;">🎬 <strong>Test de la Scène 3D:</strong></div>';
+    
+    try {
+      // Test des propriétés de la scène
+      const proprietesScene = this.sceneService.getProprietesScene();
+      html += '<div style="color: #4CAF50;">🎭 <strong>Propriétés de la scène:</strong></div>';
+      html += '<div style="margin-left: 20px; color: #666;">';
+      html += `<div>• Nom: ${proprietesScene.nom}</div>`;
+      html += `<div>• Dimensions: ${proprietesScene.largeur}x${proprietesScene.hauteur}</div>`;
+      html += `<div>• Couleur de fond: #${proprietesScene.backgroundColor.toString(16).padStart(6, '0')}</div>`;
+      html += `<div>• Brouillard: ${proprietesScene.fogNear} - ${proprietesScene.fogFar}</div>`;
+      html += `<div>• Antialias: ${proprietesScene.antialias ? 'Activé' : 'Désactivé'}</div>`;
+      html += `<div>• Ombres: ${proprietesScene.shadowMapEnabled ? 'Activées' : 'Désactivées'}</div>`;
+      html += `<div>• Type d'ombres: ${proprietesScene.shadowMapType}</div>`;
+      html += '</div>';
+
+      // Test de la configuration de la caméra
+      const proprietesCamera = this.sceneService.getProprietesCamera();
+      html += '<div style="color: #4CAF50;">📷 <strong>Configuration de la caméra:</strong></div>';
+      html += '<div style="margin-left: 20px; color: #666;">';
+      html += `<div>• Position: (${proprietesCamera.position.x}, ${proprietesCamera.position.y}, ${proprietesCamera.position.z})</div>`;
+      html += `<div>• Cible: (${proprietesCamera.target.x}, ${proprietesCamera.target.y}, ${proprietesCamera.target.z})</div>`;
+      html += `<div>• FOV: ${proprietesCamera.fov}°</div>`;
+      html += `<div>• Near: ${proprietesCamera.near}</div>`;
+      html += `<div>• Far: ${proprietesCamera.far}</div>`;
+      html += `<div>• Type: ${proprietesCamera.type}</div>`;
+      html += '</div>';
+
+      // Test des contrôles de navigation
+      const controlesScene = this.sceneService.getControlesScene();
+      html += '<div style="color: #4CAF50;">🎮 <strong>Contrôles de navigation:</strong></div>';
+      html += '<div style="margin-left: 20px; color: #666;">';
+      html += `<div>• Rotation: ${controlesScene.enableRotate ? 'Activée' : 'Désactivée'}</div>`;
+      html += `<div>• Zoom: ${controlesScene.enableZoom ? 'Activé' : 'Désactivé'}</div>`;
+      html += `<div>• Pan: ${controlesScene.enablePan ? 'Activé' : 'Désactivé'}</div>`;
+      html += `<div>• Amortissement: ${controlesScene.enableDamping ? 'Activé' : 'Désactivé'}</div>`;
+      html += `<div>• Facteur d'amortissement: ${controlesScene.dampingFactor}</div>`;
+      html += `<div>• Vitesse de rotation: ${controlesScene.rotateSpeed}</div>`;
+      html += `<div>• Vitesse de zoom: ${controlesScene.zoomSpeed}</div>`;
+      html += `<div>• Vitesse de pan: ${controlesScene.panSpeed}</div>`;
+      html += `<div>• Distance min: ${controlesScene.minDistance}</div>`;
+      html += `<div>• Distance max: ${controlesScene.maxDistance}</div>`;
+      html += `<div>• Angle polaire min: ${controlesScene.minPolarAngle}</div>`;
+      html += `<div>• Angle polaire max: ${controlesScene.maxPolarAngle}</div>`;
+      html += '</div>';
+
+      // Test de l'éclairage
+      const lumiere = this.sceneService.getLumieres();
+      html += `<div style="color: #4CAF50;">💡 <strong>Configuration de l'éclairage:</strong> ${lumiere.length} sources</div>`;
+      html += '<div style="margin-left: 20px; color: #666;">';
+      lumiere.forEach((lumiere: any, index: number) => {
+        html += `<div><strong>Source ${index + 1}:</strong></div>`;
+        html += `<div style="margin-left: 10px;">• Type: ${lumiere.type}</div>`;
+        html += `<div style="margin-left: 10px;">• Couleur: #${lumiere.color.toString(16).padStart(6, '0')}</div>`;
+        html += `<div style="margin-left: 10px;">• Intensité: ${lumiere.intensity}</div>`;
+        html += `<div style="margin-left: 10px;">• Ombres: ${lumiere.castShadow ? 'Oui' : 'Non'}</div>`;
+        html += `<div style="margin-left: 10px;">• Activée: ${lumiere.enabled ? 'Oui' : 'Non'}</div>`;
+        if (lumiere.position) {
+          html += `<div style="margin-left: 10px;">• Position: (${lumiere.position.x}, ${lumiere.position.y}, ${lumiere.position.z})</div>`;
+        }
+        if (lumiere.direction) {
+          html += `<div style="margin-left: 10px;">• Direction: (${lumiere.direction.x}, ${lumiere.direction.y}, ${lumiere.direction.z})</div>`;
+        }
+      });
+      html += '</div>';
+
+      // Test des statistiques de la scène
+      const statistiquesScene = this.sceneService.getStatistiquesScene();
+      html += '<div style="color: #4CAF50;">📊 <strong>Statistiques de la scène:</strong></div>';
+      html += '<div style="margin-left: 20px; color: #666;">';
+      html += `<div>• Nombre d'objets: ${statistiquesScene.nombreObjets}</div>`;
+      html += `<div>• Nombre de murs: ${statistiquesScene.nombreMurs}</div>`;
+      html += `<div>• Nombre d'ouvertures: ${statistiquesScene.nombreOuvertures}</div>`;
+      html += `<div>• Nombre de lumières: ${statistiquesScene.nombreLumieres}</div>`;
+      html += `<div>• Nombre de triangles: ${statistiquesScene.nombreTriangles}</div>`;
+      html += `<div>• Mémoire utilisée: ${statistiquesScene.memoireUtilisee}MB</div>`;
+      html += `<div>• FPS: ${statistiquesScene.fps}</div>`;
+      html += `<div>• Temps de rendu: ${statistiquesScene.tempsRendu}ms</div>`;
+      html += '</div>';
+
+      html += '<div style="color: #4CAF50; margin-top: 10px;">✅ Test de la scène terminé avec succès !</div>';
+      
+    } catch (error) {
+      html += `<div style="color: #f44336;">❌ Erreur lors du test de la scène: ${error}</div>`;
+    }
+
+    output.innerHTML = html;
+  }
+
+  /**
+   * Synchroniser les données au démarrage du composant
+   */
+  private synchroniserDonneesAuDemarrage(): void {
+    try {
+      const nouvelleConfiguration = this.convertirBuildingConfigVersConfigurationService();
+      this.configurationService.mettreAJourConfiguration(nouvelleConfiguration);
+      
+      // Les services se mettent à jour automatiquement via ConfigurationService
+      
+      console.log('✅ Données synchronisées avec building-config.ts au démarrage');
+      console.log('✅ Services mis à jour avec les nouvelles données');
+    } catch (error) {
+      console.error('❌ Erreur lors de la synchronisation au démarrage:', error);
+    }
+  }
+
+  /**
+   * Convertir les données de building-config vers ConfigurationService
+   */
+  private convertirBuildingConfigVersConfigurationService(): any {
+    const config = BUILDING_CONFIG;
+    
+    return {
+      nom: 'Bâtiment Principal',
+      description: 'Bâtiment architectural avec murs, ouvertures et toit',
+      dimensions: {
+        longueur: config.ground.dimensions.width,  // 8m
+        largeur: config.ground.dimensions.depth,   // 5m
+        hauteur: config.mainWall.contour[2].y      // 2.5m
+      },
+      murs: {
+        principal: {
+          position: config.mainWall.position,
+          dimensions: {
+            width: Math.abs(config.mainWall.contour[1].x - config.mainWall.contour[0].x), // 8m
+            height: config.mainWall.contour[2].y, // 2.5m
+            depth: config.mainWall.thickness // 0.2m
+          },
+          couleur: config.mainWall.color,
+          epaisseur: config.mainWall.thickness,
+          ouvertures: [
+            // Seule fenêtre du mur principal (window2 dans building-config)
+            {
+              id: 'fenetre2',
+              type: 'fenetre',
+              position: config.mainWall.openings.window2.position,
+              dimensions: config.mainWall.openings.window2.dimensions,
+              couleur: config.mainWall.openings.window2.color,
+              nom: 'Fenêtre Rouge'
+            }
+          ]
+        },
+        arriere: {
+          position: config.walls.back.position,
+          dimensions: config.walls.back.dimensions,
+          couleur: config.walls.back.color,
+          epaisseur: config.walls.back.dimensions.depth,
+          ouvertures: [
+            // Fenêtre arrière
+            {
+              id: 'fenetre3',
+              type: 'fenetre',
+              position: config.walls.back.openings.window1.position,
+              dimensions: config.walls.back.openings.window1.dimensions,
+              couleur: config.walls.back.openings.window1.color,
+              nom: 'Fenêtre Arrière'
+            }
+          ]
+        },
+        gauche: {
+          position: config.walls.left.position,
+          dimensions: config.walls.left.dimensions,
+          couleur: config.walls.left.color,
+          epaisseur: config.walls.left.dimensions.width,
+          ouvertures: []
+        },
+        droit: {
+          position: config.walls.right.position,
+          dimensions: config.walls.right.dimensions,
+          couleur: config.walls.right.color,
+          epaisseur: config.walls.right.dimensions.width,
+          ouvertures: [
+            // Porte d'entrée
+            {
+              id: 'porte1',
+              type: 'porte',
+              position: config.walls.right.openings.door.position,
+              dimensions: config.walls.right.openings.door.dimensions,
+              couleur: config.walls.right.openings.door.color,
+              nom: 'Porte d\'Entrée'
+            }
+          ]
+        }
+      },
+      toit: {
+        position: config.roof.position,
+        dimensions: config.roof.dimensions,
+        couleur: config.roof.color
+      },
+      sol: {
+        position: config.ground.position,
+        dimensions: config.ground.dimensions,
+        couleur: config.ground.color
+      }
+    };
+  }
+
+  /**
+   * Calculer les vraies statistiques basées sur building-config.ts
+   */
+  private calculerVraiesStatistiques(): any {
+    const config = BUILDING_CONFIG;
+    
+    // Calculer la surface des murs
+    const surfaceMurPrincipal = 8 * 2.5; // 8m x 2.5m = 20m²
+    const surfaceMurArriere = 8 * 2.5;   // 8m x 2.5m = 20m²
+    const surfaceMurGauche = 5 * 2.5;    // 5m x 2.5m = 12.5m²
+    const surfaceMurDroit = 5 * 2.5;     // 5m x 2.5m = 12.5m²
+    
+    const surfaceTotaleMurs = surfaceMurPrincipal + surfaceMurArriere + surfaceMurGauche + surfaceMurDroit; // 65m²
+    
+    // Calculer la surface des ouvertures selon building-config.ts
+    const surfaceFenetrePrincipale = config.mainWall.openings.window2.dimensions.width * config.mainWall.openings.window2.dimensions.height; // 2m x 1.2m = 2.4m²
+    const surfaceFenetreArriere = config.walls.back.openings.window1.dimensions.width * config.walls.back.openings.window1.dimensions.height; // 1.5m x 1.2m = 1.8m²
+    const surfacePorte = config.walls.right.openings.door.dimensions.width * config.walls.right.openings.door.dimensions.height; // 1m x 2.1m = 2.1m²
+    
+    const surfaceTotaleOuvertures = surfaceFenetrePrincipale + surfaceFenetreArriere + surfacePorte; // 6.3m²
+    
+    const pourcentageOuvertures = (surfaceTotaleOuvertures / surfaceTotaleMurs) * 100;
+    
+    return {
+      nombreMurs: 4,
+      nombreOuvertures: 3, // 1 porte + 2 fenêtres
+      nombrePortes: 1,
+      nombreFenetres: 2, // 1 fenêtre principale + 1 fenêtre arrière
+      surfaceMurs: Math.round(surfaceTotaleMurs * 100) / 100,
+      surfaceOuvertures: Math.round(surfaceTotaleOuvertures * 100) / 100,
+      pourcentageOuvertures: Math.round(pourcentageOuvertures * 100) / 100,
+      details: {
+        surfaceMurPrincipal,
+        surfaceMurArriere,
+        surfaceMurGauche,
+        surfaceMurDroit,
+        surfaceFenetrePrincipale,
+        surfaceFenetreArriere,
+        surfacePorte
+      }
+    };
   }
 }
