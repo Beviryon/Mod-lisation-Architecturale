@@ -2,7 +2,7 @@
 
 ## 🎯 **Nouveau test de la scène 3D ajouté !**
 
-J'ai ajouté un **test complet du SceneService** dans le sidebar qui vous permet d'explorer la configuration de la scène 3D, de la caméra, de l'éclairage et des contrôles !
+J'ai ajouté un **test complet du SceneService** dans le sidebar qui permet d'explorer la configuration de la scène 3D, de la caméra, de l'éclairage et des contrôles !
 
 ## ✅ **Ce que teste le nouveau bouton "🎬 Scène 3D" :**
 
@@ -188,18 +188,10 @@ Source 2:
 3. **Optimisez les paramètres** de rendu
 4. **Ajustez les contrôles** de navigation
 
-## 🎉 **Résultat**
-
-Maintenant vous avez un **test complet du SceneService** qui vous permet de :
+##  **Résultat**
 
 - **Explorer** la configuration de la scène 3D
 - **Analyser** les paramètres de la caméra
 - **Contrôler** les contrôles de navigation
 - **Vérifier** la configuration de l'éclairage
 - **Surveiller** les performances de rendu
-
-Votre sidebar de test est maintenant **encore plus complet** ! 🚀✨
-
-## 🔄 **Prochaines étapes**
-
-Voulez-vous maintenant tester le **ValidationService** (validation des données) ou avez-vous d'autres services à explorer ? 🧪

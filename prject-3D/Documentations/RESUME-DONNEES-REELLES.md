@@ -2,9 +2,9 @@
 
 ## 🎯 **Source de vérité : `building-config.ts`**
 
-Votre fichier `building-config.ts` est maintenant la **source de vérité** pour toutes les données de votre projet 3D.
+Le fichier `building-config.ts` est maintenant la **source de vérité** pour toutes les données du projet.
 
-## 🏗️ **Votre bâtiment réel**
+## 🏗️ **Le bâtiment réel**
 
 ### **Structure générale**
 - **Dimensions** : 8m × 5m × 2.5m
@@ -92,11 +92,9 @@ Après synchronisation, vous devriez voir :
 - ✅ **6.3m² de surface d'ouvertures**
 - ✅ **9.69% d'ouvertures**
 
-## 🎯 **Avantages**
+##  **Avantages**
 
 - **Cohérence** : Les données visuelles correspondent aux calculs
 - **Maintenance** : Une seule source de vérité (`building-config.ts`)
 - **Évolutivité** : Facile de modifier le bâtiment en changeant juste le fichier de config
 - **Fiabilité** : Les tests et statistiques sont maintenant précis
-
-Votre projet est maintenant parfaitement synchronisé ! 🎉

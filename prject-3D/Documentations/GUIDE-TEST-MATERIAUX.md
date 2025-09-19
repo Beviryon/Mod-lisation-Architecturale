@@ -2,7 +2,7 @@
 
 ## 🎯 **Nouveau test des matériaux ajouté !**
 
-J'ai ajouté un **test complet du MateriauService** dans le sidebar qui vous permet d'explorer tous les matériaux, palettes de couleurs et textures disponibles !
+J'ai ajouté un **test complet du MateriauService** dans le sidebar qui  permet d'explorer tous les matériaux, palettes de couleurs et textures disponibles !
 
 ## ✅ **Ce que teste le nouveau bouton "🎨 Matériaux" :**
 
@@ -129,9 +129,8 @@ J'ai ajouté un **test complet du MateriauService** dans le sidebar qui vous per
 2. **Identifiez les palettes** les plus utilisées
 3. **Optimisez les ressources** disponibles
 
-## 🎉 **Résultat**
+##  **Résultat**
 
-Maintenant vous avez un **test complet du MateriauService** qui vous permet de :
 
 - **Explorer** tous les matériaux disponibles
 - **Découvrir** les palettes de couleurs prédéfinies
@@ -139,8 +138,5 @@ Maintenant vous avez un **test complet du MateriauService** qui vous permet de :
 - **Comprendre** les statistiques d'utilisation
 - **Optimiser** vos choix de matériaux
 
-Votre sidebar de test est maintenant **encore plus complet** ! 🚀✨
 
-## 🔄 **Prochaines étapes**
 
-Voulez-vous maintenant tester le **SceneService** (caméra, éclairage, contrôles) ou le **ValidationService** (validation des données) ? 🧪

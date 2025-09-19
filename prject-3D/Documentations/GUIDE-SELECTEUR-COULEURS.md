@@ -1,6 +1,6 @@
 # 🎨 Guide du Sélecteur de Couleurs Interactif
 
-## 🎯 **Nouvelle fonctionnalité**
+##  **Nouvelle fonctionnalité**
 
 J'ai créé un **sélecteur de couleurs interactif** qui vous permet de tester chaque mur et chaque ouverture individuellement avec une palette de couleurs complète !
 
@@ -94,12 +94,11 @@ Aller sur `http://localhost:4200`
 3. **Vérifiez** que FormsModule est bien importé
 4. **Testez** avec les boutons de test automatiques d'abord
 
-## 🎉 **Résultat**
+##  **Résultat**
 
-Maintenant vous pouvez **personnaliser chaque élément** de votre bâtiment avec la couleur de votre choix ! 
 
 - **Sélectionnez** n'importe quelle couleur
 - **Cliquez** sur l'élément à colorier
 - **Admirez** le résultat en temps réel dans la scène 3D !
 
-Votre bâtiment devient **vraiment interactif** ! 🏗️✨
+

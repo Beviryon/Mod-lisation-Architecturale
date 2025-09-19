@@ -2,7 +2,7 @@
 
 ## 🎯 **Problème identifié**
 
-Vos données de test ne correspondent pas à vos données réelles car vous avez **deux sources de données différentes** :
+Les données de test ne correspondait pas aux données réelles car j'avais **deux sources de données différentes** :
 
 1. **`building-config.ts`** - Configuration statique utilisée pour créer la scène 3D
 2. **`ConfigurationService`** - Configuration dynamique utilisée pour les calculs et statistiques
@@ -122,6 +122,6 @@ Après synchronisation, vos statistiques devraient afficher :
 - Les calculs sont basés sur les dimensions réelles définies dans `building-config.ts`
 - La synchronisation est réversible (vous pouvez revenir aux données par défaut)
 
-## 🎉 **Résultat**
+##  **Résultat**
 
-Après synchronisation, vos tests de services afficheront les **vraies données** correspondant à ce que vous voyez visuellement dans la scène 3D !
+Après synchronisation, les tests de services afficheront les **vraies données** correspondant à ce que vous voyez visuellement dans la scène 3D !

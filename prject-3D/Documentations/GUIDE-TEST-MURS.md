@@ -164,9 +164,8 @@ Mur Principal:
 3. **Optimisez les performances** de rendu
 4. **Validez les modifications** en temps réel
 
-## 🎉 **Résultat**
+##  **Résultat**
 
-Maintenant vous avez des **tests complets du MurService** qui permettent de :
 
 - **Explorer** tous les murs et leurs propriétés
 - **Analyser** les statistiques et relations spatiales
@@ -175,8 +174,3 @@ Maintenant vous avez des **tests complets du MurService** qui permettent de :
 - **Valider** la cohérence des données
 - **Optimiser** la structure du bâtiment
 
-Votre sidebar de test est maintenant **encore plus puissant** ! 🚀✨
-
-## 🔄 **Prochaines étapes**
-
-Voulez-vous maintenant tester le **ValidationService** ou avez-vous d'autres services à explorer ? 🧪
