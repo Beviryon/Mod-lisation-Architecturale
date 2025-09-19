@@ -40,6 +40,13 @@ export class Scene3d implements OnInit, OnDestroy {
   selectedColor = '#aaaaaa'; // Couleur par défaut (gris)
   selectedElement: string | null = null;
 
+  // Propriétés pour les modifications interactives des murs
+  selectedMur: string = '';
+  murPosition: { x: number; y: number; z: number } = { x: 0, y: 0, z: 0 };
+  murDimensions: { width: number; height: number; depth: number } = { width: 8, height: 2.5, depth: 0.2 };
+  murEpaisseur: number = 0.2;
+  murCouleur: string = '#aaaaaa';
+
   // Contrôles de la souris
   private isMouseDown = false;
   private mouseX = 0;
@@ -990,6 +997,108 @@ export class Scene3d implements OnInit, OnDestroy {
   }
 
   /**
+   * Sélectionner un mur pour modification
+   */
+  public selectMur(murType: string): void {
+    this.selectedMur = murType;
+    
+    // Charger les valeurs actuelles du mur
+    const mur = this.murService?.getMurParType(murType as any);
+    if (mur) {
+      this.murPosition = { ...mur.position };
+      this.murDimensions = { ...mur.dimensions };
+      this.murEpaisseur = mur.epaisseur;
+      this.murCouleur = '#' + mur.couleur.toString(16).padStart(6, '0');
+    }
+    
+    console.log(`🧱 Mur ${murType} sélectionné pour modification`);
+  }
+
+  /**
+   * Modifier la position du mur sélectionné
+   */
+  public modifierPositionMur(): void {
+    if (!this.selectedMur || !this.murService) return;
+    
+    this.murService.modifierPositionMur(this.selectedMur as any, this.murPosition);
+    this.mettreAJourRendu3D();
+    
+    console.log(`📍 Position du mur ${this.selectedMur} modifiée:`, this.murPosition);
+  }
+
+  /**
+   * Modifier les dimensions du mur sélectionné
+   */
+  public modifierDimensionsMur(): void {
+    if (!this.selectedMur || !this.murService) return;
+    
+    this.murService.modifierDimensionsMur(this.selectedMur as any, this.murDimensions);
+    this.mettreAJourRendu3D();
+    
+    console.log(`📐 Dimensions du mur ${this.selectedMur} modifiées:`, this.murDimensions);
+  }
+
+  /**
+   * Modifier l'épaisseur du mur sélectionné
+   */
+  public modifierEpaisseurMur(): void {
+    if (!this.selectedMur || !this.murService) return;
+    
+    this.murService.modifierEpaisseurMur(this.selectedMur as any, this.murEpaisseur);
+    this.mettreAJourRendu3D();
+    
+    console.log(`📏 Épaisseur du mur ${this.selectedMur} modifiée:`, this.murEpaisseur);
+  }
+
+  /**
+   * Modifier la couleur du mur sélectionné
+   */
+  public modifierCouleurMurInteractive(): void {
+    if (!this.selectedMur || !this.murService) return;
+    
+    const colorNumber = parseInt(this.murCouleur.replace('#', ''), 16);
+    this.murService.modifierCouleurMur(this.selectedMur as any, colorNumber);
+    this.mettreAJourRendu3D();
+    
+    console.log(`🎨 Couleur du mur ${this.selectedMur} modifiée:`, this.murCouleur);
+  }
+
+  /**
+   * Appliquer toutes les modifications du mur sélectionné
+   */
+  public appliquerModificationsMur(): void {
+    if (!this.selectedMur || !this.murService) return;
+    
+    // Appliquer toutes les modifications
+    this.murService.modifierPositionMur(this.selectedMur as any, this.murPosition);
+    this.murService.modifierDimensionsMur(this.selectedMur as any, this.murDimensions);
+    this.murService.modifierEpaisseurMur(this.selectedMur as any, this.murEpaisseur);
+    
+    const colorNumber = parseInt(this.murCouleur.replace('#', ''), 16);
+    this.murService.modifierCouleurMur(this.selectedMur as any, colorNumber);
+    
+    // Mettre à jour le rendu 3D
+    this.mettreAJourRendu3D();
+    
+    console.log(`✅ Toutes les modifications du mur ${this.selectedMur} ont été appliquées`);
+  }
+
+  /**
+   * Réinitialiser les valeurs du mur sélectionné
+   */
+  public resetMurValues(): void {
+    if (!this.selectedMur) return;
+    
+    // Remettre les valeurs par défaut
+    this.murPosition = { x: 0, y: 0, z: 0 };
+    this.murDimensions = { width: 8, height: 2.5, depth: 0.2 };
+    this.murEpaisseur = 0.2;
+    this.murCouleur = '#aaaaaa';
+    
+    console.log(`🔄 Valeurs du mur ${this.selectedMur} réinitialisées`);
+  }
+
+  /**
    * Test de l'export
    */
   public testExport(): void {
@@ -1235,6 +1344,243 @@ export class Scene3d implements OnInit, OnDestroy {
     }
 
     output.innerHTML = html;
+  }
+
+  /**
+   * Test complet des murs avec modifications en temps réel
+   */
+  public testMurs(): void {
+    const output = document.getElementById('services-output');
+    if (!output) return;
+
+    if (!this.murService) {
+      let html = '<div style="color: #607D8B;">🧱 <strong>Test des Murs:</strong></div>';
+      html += '<div style="color: #f44336;">❌ MurService non disponible</div>';
+      output.innerHTML = html;
+      return;
+    }
+
+    let html = '<div style="color: #607D8B;">🧱 <strong>Test Complet des Murs:</strong></div>';
+    
+    try {
+      // Test des murs disponibles
+      const murs = this.murService.getMurs();
+      html += `<div style="color: #4CAF50;">🏗️ <strong>Murs disponibles:</strong> ${murs.length}</div>`;
+      html += '<div style="margin-left: 20px; color: #666;">';
+      murs.forEach((mur: any) => {
+        html += `<div><strong>${mur.nom}:</strong></div>`;
+        html += `<div style="margin-left: 10px;">• Type: ${mur.type}</div>`;
+        html += `<div style="margin-left: 10px;">• Position: (${mur.position.x}, ${mur.position.y}, ${mur.position.z})</div>`;
+        html += `<div style="margin-left: 10px;">• Dimensions: ${mur.dimensions.width}x${mur.dimensions.height}x${mur.dimensions.depth}</div>`;
+        html += `<div style="margin-left: 10px;">• Surface: ${mur.surface}m²</div>`;
+        html += `<div style="margin-left: 10px;">• Volume: ${mur.volume}m³</div>`;
+        html += `<div style="margin-left: 10px;">• Ouvertures: ${mur.nombreOuvertures}</div>`;
+        html += `<div style="margin-left: 10px;">• Couleur: #${mur.couleur.toString(16).padStart(6, '0')}</div>`;
+      });
+      html += '</div>';
+
+      // Test des statistiques des murs
+      const statistiques = this.murService.getStatistiquesMurs();
+      html += '<div style="color: #4CAF50;">📊 <strong>Statistiques des murs:</strong></div>';
+      html += '<div style="margin-left: 20px; color: #666;">';
+      html += `<div>• Nombre total: ${statistiques.nombreTotal}</div>`;
+      html += `<div>• Surface totale: ${statistiques.surfaceTotale}m²</div>`;
+      html += `<div>• Volume total: ${statistiques.volumeTotal}m³</div>`;
+      html += `<div>• Nombre d'ouvertures: ${statistiques.nombreOuvertures}</div>`;
+      html += `<div>• Pourcentage d'ouvertures moyen: ${statistiques.pourcentageOuverturesMoyen}%</div>`;
+      html += '</div>';
+
+      // Test des murs avec le plus d'ouvertures
+      const mursPlusOuvertures = this.murService.getMursAvecPlusOuvertures();
+      html += `<div style="color: #4CAF50;">🚪 <strong>Murs avec le plus d'ouvertures:</strong> ${mursPlusOuvertures.length}</div>`;
+      html += '<div style="margin-left: 20px; color: #666;">';
+      mursPlusOuvertures.forEach((mur: any) => {
+        html += `<div>• ${mur.nom}: ${mur.nombreOuvertures} ouvertures</div>`;
+      });
+      html += '</div>';
+
+      // Test des murs sans ouvertures
+      const mursSansOuvertures = this.murService.getMursSansOuvertures();
+      html += `<div style="color: #4CAF50;">🧱 <strong>Murs sans ouvertures:</strong> ${mursSansOuvertures.length}</div>`;
+      html += '<div style="margin-left: 20px; color: #666;">';
+      mursSansOuvertures.forEach((mur: any) => {
+        html += `<div>• ${mur.nom}</div>`;
+      });
+      html += '</div>';
+
+      // Test des distances entre murs
+      html += '<div style="color: #4CAF50;">📏 <strong>Distances entre murs:</strong></div>';
+      html += '<div style="margin-left: 20px; color: #666;">';
+      for (let i = 0; i < murs.length; i++) {
+        for (let j = i + 1; j < murs.length; j++) {
+          const distance = this.murService.calculerDistanceEntreMurs(murs[i], murs[j]);
+          html += `<div>• ${murs[i].nom} ↔ ${murs[j].nom}: ${distance}m</div>`;
+        }
+      }
+      html += '</div>';
+
+      // Test des murs adjacents
+      html += '<div style="color: #4CAF50;">🔗 <strong>Murs adjacents:</strong></div>';
+      html += '<div style="margin-left: 20px; color: #666;">';
+      murs.forEach((mur: any) => {
+        const adjacents = this.murService.getMursAdjacents(mur);
+        html += `<div><strong>${mur.nom}:</strong> ${adjacents.length} adjacents`;
+        if (adjacents.length > 0) {
+          html += ` (${adjacents.map((a: any) => a.nom).join(', ')})`;
+        }
+        html += '</div>';
+      });
+      html += '</div>';
+
+      html += '<div style="color: #4CAF50; margin-top: 10px;">✅ Test des murs terminé avec succès !</div>';
+      
+    } catch (error) {
+      html += `<div style="color: #f44336;">❌ Erreur lors du test des murs: ${error}</div>`;
+    }
+
+    output.innerHTML = html;
+  }
+
+  /**
+   * Test des modifications de murs en temps réel
+   */
+  public testModificationsMurs(): void {
+    const output = document.getElementById('services-output');
+    if (!output) return;
+
+    if (!this.murService) {
+      let html = '<div style="color: #607D8B;">🔧 <strong>Test des Modifications:</strong></div>';
+      html += '<div style="color: #f44336;">❌ MurService non disponible</div>';
+      output.innerHTML = html;
+      return;
+    }
+
+    let html = '<div style="color: #607D8B;">🔧 <strong>Test des Modifications de Murs:</strong></div>';
+    
+    try {
+      // Test de modification de position du mur principal
+      const murPrincipal = this.murService.getMurPrincipal();
+      if (murPrincipal) {
+        const anciennePosition = { ...murPrincipal.position };
+        const nouvellePosition = {
+          x: anciennePosition.x + 0.5,
+          y: anciennePosition.y,
+          z: anciennePosition.z + 0.3
+        };
+        
+        html += '<div style="color: #4CAF50;">📍 <strong>Modification de position du mur principal:</strong></div>';
+        html += '<div style="margin-left: 20px; color: #666;">';
+        html += `<div>• Ancienne position: (${anciennePosition.x}, ${anciennePosition.y}, ${anciennePosition.z})</div>`;
+        html += `<div>• Nouvelle position: (${nouvellePosition.x}, ${nouvellePosition.y}, ${nouvellePosition.z})</div>`;
+        
+        this.murService.modifierPositionMur('principal', nouvellePosition);
+        html += '<div style="color: #4CAF50;">✅ Position modifiée avec succès !</div>';
+        html += '</div>';
+      }
+
+      // Test de modification des dimensions du mur arrière
+      const murArriere = this.murService.getMurArriere();
+      if (murArriere) {
+        const anciennesDimensions = { ...murArriere.dimensions };
+        const nouvellesDimensions = {
+          width: anciennesDimensions.width + 1,
+          height: anciennesDimensions.height,
+          depth: anciennesDimensions.depth
+        };
+        
+        html += '<div style="color: #4CAF50;">📐 <strong>Modification des dimensions du mur arrière:</strong></div>';
+        html += '<div style="margin-left: 20px; color: #666;">';
+        html += `<div>• Anciennes dimensions: ${anciennesDimensions.width}x${anciennesDimensions.height}x${anciennesDimensions.depth}</div>`;
+        html += `<div>• Nouvelles dimensions: ${nouvellesDimensions.width}x${nouvellesDimensions.height}x${nouvellesDimensions.depth}</div>`;
+        
+        this.murService.modifierDimensionsMur('arriere', nouvellesDimensions);
+        html += '<div style="color: #4CAF50;">✅ Dimensions modifiées avec succès !</div>';
+        html += '</div>';
+      }
+
+      // Test de modification de l'épaisseur du mur gauche
+      const murGauche = this.murService.getMurGauche();
+      if (murGauche) {
+        const ancienneEpaisseur = murGauche.epaisseur;
+        const nouvelleEpaisseur = ancienneEpaisseur + 0.1;
+        
+        html += '<div style="color: #4CAF50;">📏 <strong>Modification de l\'épaisseur du mur gauche:</strong></div>';
+        html += '<div style="margin-left: 20px; color: #666;">';
+        html += `<div>• Ancienne épaisseur: ${ancienneEpaisseur}m</div>`;
+        html += `<div>• Nouvelle épaisseur: ${nouvelleEpaisseur}m</div>`;
+        
+        this.murService.modifierEpaisseurMur('gauche', nouvelleEpaisseur);
+        html += '<div style="color: #4CAF50;">✅ Épaisseur modifiée avec succès !</div>';
+        html += '</div>';
+      }
+
+      // Test de modification de couleur du mur droit
+      const murDroit = this.murService.getMurDroit();
+      if (murDroit) {
+        const ancienneCouleur = murDroit.couleur;
+        const nouvelleCouleur = 0xFF6B35; // Orange
+        
+        html += '<div style="color: #4CAF50;">🎨 <strong>Modification de couleur du mur droit:</strong></div>';
+        html += '<div style="margin-left: 20px; color: #666;">';
+        html += `<div>• Ancienne couleur: #${ancienneCouleur.toString(16).padStart(6, '0')}</div>`;
+        html += `<div>• Nouvelle couleur: #${nouvelleCouleur.toString(16).padStart(6, '0')}</div>`;
+        
+        this.murService.modifierCouleurMur('droit', nouvelleCouleur);
+        html += '<div style="color: #4CAF50;">✅ Couleur modifiée avec succès !</div>';
+        html += '</div>';
+      }
+
+      // Mettre à jour le rendu 3D
+      html += '<div style="color: #4CAF50; margin-top: 15px;">🔄 <strong>Mise à jour du rendu 3D...</strong></div>';
+      this.mettreAJourRendu3D();
+      html += '<div style="color: #4CAF50;">✅ Rendu 3D mis à jour !</div>';
+
+      html += '<div style="color: #4CAF50; margin-top: 10px;">✅ Test des modifications terminé avec succès !</div>';
+      
+    } catch (error) {
+      html += `<div style="color: #f44336;">❌ Erreur lors du test des modifications: ${error}</div>`;
+    }
+
+    output.innerHTML = html;
+  }
+
+  /**
+   * Mettre à jour le rendu 3D après modifications
+   */
+  private mettreAJourRendu3D(): void {
+    if (!this.scene) return;
+
+    // Mettre à jour les murs dans la scène 3D
+    const murs = this.murService?.getMurs();
+    if (murs) {
+      murs.forEach(mur => {
+        const nomMur = this.getNomMur3D(mur.type);
+        const mur3D = this.scene.getObjectByName(nomMur) as THREE.Mesh;
+        
+        if (mur3D) {
+          // Mettre à jour la position
+          mur3D.position.set(mur.position.x, mur.position.y, mur.position.z);
+          
+          // Mettre à jour les dimensions
+          mur3D.scale.set(
+            mur.dimensions.width / 8, // Normaliser par rapport aux dimensions originales
+            mur.dimensions.height / 2.5,
+            mur.dimensions.depth / 0.2
+          );
+          
+          // Mettre à jour la couleur
+          if (mur3D.material) {
+            (mur3D.material as THREE.MeshStandardMaterial).color.setHex(mur.couleur);
+          }
+          
+          console.log(`✅ Mur 3D ${nomMur} mis à jour:`, {
+            position: mur.position,
+            dimensions: mur.dimensions,
+            couleur: mur.couleur
+          });
+        }
+      });
+    }
   }
 
   /**

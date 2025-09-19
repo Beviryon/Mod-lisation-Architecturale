@@ -612,6 +612,18 @@
   color: white;
 }
 
+.btn-test.btn-brown {
+  background: #795548;
+  border-color: #5D4037;
+  color: white;
+}
+
+.btn-test.btn-orange {
+  background: #FF9800;
+  border-color: #F57C00;
+  color: white;
+}
+
 .btn-test .btn-icon {
   font-size: 18px;
 }
@@ -746,6 +758,191 @@
   background: #E64A19;
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(255, 87, 34, 0.4);
+}
+
+/* Styles pour le modificateur de murs interactif */
+.mur-modifier-section {
+  margin-bottom: 30px;
+  padding: 20px;
+  background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+  border-radius: 12px;
+  border: 1px solid #ffcc02;
+}
+
+.mur-modifier-section h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.mur-selector {
+  margin-bottom: 20px;
+}
+
+.mur-selector h4 {
+  margin-bottom: 15px;
+  color: #444;
+  font-size: 1rem;
+}
+
+.mur-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.btn-mur {
+  background: #f5f5f5;
+  border: 2px solid #ddd;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  color: #555;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-start;
+}
+
+.btn-mur:hover {
+  background: #e8f0ff;
+  border-color: #2196F3;
+  transform: translateY(-2px);
+}
+
+.btn-mur.active {
+  background: #2196F3;
+  border-color: #1976D2;
+  color: white;
+}
+
+.mur-properties {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.mur-properties h4 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 1.1rem;
+}
+
+.property-group {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+}
+
+.property-group h5 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #444;
+  font-size: 0.95rem;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.number-input {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 100%;
+}
+
+.number-input:focus {
+  outline: none;
+  border-color: #2196F3;
+  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
+}
+
+.color-input {
+  width: 60px;
+  height: 40px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.color-display {
+  font-family: monospace;
+  font-size: 14px;
+  color: #666;
+  background: #f5f5f5;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+
+.btn-apply {
+  background: #4CAF50;
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.btn-apply:hover {
+  background: #45a049;
+  transform: translateY(-2px);
+}
+
+.btn-apply-all {
+  background: #FF9800;
+  border: none;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.btn-apply-all:hover {
+  background: #F57C00;
+  transform: translateY(-2px);
+}
+
+.mur-actions {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #ddd;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* Zone de sortie des tests */

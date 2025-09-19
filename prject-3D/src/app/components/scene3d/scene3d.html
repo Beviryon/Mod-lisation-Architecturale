@@ -332,12 +332,251 @@
             <div class="btn-icon">🎬</div>
             <div class="btn-label">Scène 3D</div>
           </button>
+          <button (click)="testMurs()" class="btn-test btn-brown">
+            <div class="btn-icon">🧱</div>
+            <div class="btn-label">Murs</div>
+          </button>
+          <button (click)="testModificationsMurs()" class="btn-test btn-orange">
+            <div class="btn-icon">🔧</div>
+            <div class="btn-label">Modifications</div>
+    </button>
         </div>
   </div>
   
+      <!-- Sélecteur de couleurs interactif -->
+      <div class="color-selector-section">
+        <h3>🎨 Sélecteur de Couleurs Interactif</h3>
+        
+        <div class="color-picker-container">
+          <label for="colorPicker">Choisissez une couleur :</label>
+          <div class="color-input-group">
+            <input 
+              type="color" 
+              id="colorPicker" 
+              class="color-picker"
+              [(ngModel)]="selectedColor"
+              (change)="onColorChange()"
+            >
+            <span class="color-value">{{ selectedColor }}</span>
+          </div>
+        </div>
+
+        <div class="element-selector">
+          <h4>Choisissez un élément à colorier :</h4>
+          <div class="element-buttons">
+            <button 
+              class="btn-element" 
+              [class.active]="selectedElement === 'principal'"
+              (click)="changeElementColor('principal')"
+            >
+              🧱 Mur Principal
+            </button>
+            <button 
+              class="btn-element" 
+              [class.active]="selectedElement === 'arriere'"
+              (click)="changeElementColor('arriere')"
+            >
+              🧱 Mur Arrière
+            </button>
+            <button 
+              class="btn-element" 
+              [class.active]="selectedElement === 'gauche'"
+              (click)="changeElementColor('gauche')"
+            >
+              🧱 Mur Gauche
+            </button>
+            <button 
+              class="btn-element" 
+              [class.active]="selectedElement === 'droit'"
+              (click)="changeElementColor('droit')"
+            >
+              🧱 Mur Droit
+            </button>
+            <button 
+              class="btn-element" 
+              [class.active]="selectedElement === 'fenetre2'"
+              (click)="changeElementColor('fenetre2')"
+            >
+              🪟 Fenêtre Principale
+            </button>
+            <button 
+              class="btn-element" 
+              [class.active]="selectedElement === 'fenetre3'"
+              (click)="changeElementColor('fenetre3')"
+            >
+              🪟 Fenêtre Arrière
+            </button>
+            <button 
+              class="btn-element" 
+              [class.active]="selectedElement === 'porte1'"
+              (click)="changeElementColor('porte1')"
+            >
+              🚪 Porte d'Entrée
+            </button>
+          </div>
+        </div>
+
+        <div class="color-actions">
+          <button (click)="resetAllColors()" class="btn-reset">
+            🔄 Remettre à zéro
+          </button>
+        </div>
+      </div>
+
+      <!-- Modificateur de murs interactif -->
+      <div class="mur-modifier-section">
+        <h3>🔧 Modificateur de Murs Interactif</h3>
+        
+        <div class="mur-selector">
+          <h4>Choisissez un mur à modifier :</h4>
+          <div class="mur-buttons">
+            <button 
+              class="btn-mur" 
+              [class.active]="selectedMur === 'principal'"
+              (click)="selectMur('principal')"
+            >
+              🧱 Mur Principal
+            </button>
+            <button 
+              class="btn-mur" 
+              [class.active]="selectedMur === 'arriere'"
+              (click)="selectMur('arriere')"
+            >
+              🧱 Mur Arrière
+            </button>
+            <button 
+              class="btn-mur" 
+              [class.active]="selectedMur === 'gauche'"
+              (click)="selectMur('gauche')"
+            >
+              🧱 Mur Gauche
+            </button>
+            <button 
+              class="btn-mur" 
+              [class.active]="selectedMur === 'droit'"
+              (click)="selectMur('droit')"
+            >
+              🧱 Mur Droit
+            </button>
+          </div>
+        </div>
+
+        <div class="mur-properties" *ngIf="selectedMur">
+          <h4>Propriétés du {{ selectedMur === 'principal' ? 'Mur Principal' : selectedMur === 'arriere' ? 'Mur Arrière' : selectedMur === 'gauche' ? 'Mur Gauche' : 'Mur Droit' }} :</h4>
+          
+          <!-- Position -->
+          <div class="property-group">
+            <h5>📍 Position (X, Y, Z) :</h5>
+            <div class="input-group">
+              <input 
+                type="number" 
+                [(ngModel)]="murPosition.x" 
+                step="0.1" 
+                placeholder="X"
+                class="number-input"
+              >
+              <input 
+                type="number" 
+                [(ngModel)]="murPosition.y" 
+                step="0.1" 
+                placeholder="Y"
+                class="number-input"
+              >
+              <input 
+                type="number" 
+                [(ngModel)]="murPosition.z" 
+                step="0.1" 
+                placeholder="Z"
+                class="number-input"
+              >
+              <button (click)="modifierPositionMur()" class="btn-apply">
+                ✅ Appliquer Position
+              </button>
+            </div>
+          </div>
+
+          <!-- Dimensions -->
+          <div class="property-group">
+            <h5>📐 Dimensions (Largeur, Hauteur, Profondeur) :</h5>
+            <div class="input-group">
+              <input 
+                type="number" 
+                [(ngModel)]="murDimensions.width" 
+                step="0.1" 
+                placeholder="Largeur"
+                class="number-input"
+              >
+              <input 
+                type="number" 
+                [(ngModel)]="murDimensions.height" 
+                step="0.1" 
+                placeholder="Hauteur"
+                class="number-input"
+              >
+              <input 
+                type="number" 
+                [(ngModel)]="murDimensions.depth" 
+                step="0.1" 
+                placeholder="Profondeur"
+                class="number-input"
+              >
+              <button (click)="modifierDimensionsMur()" class="btn-apply">
+                ✅ Appliquer Dimensions
+              </button>
+            </div>
+          </div>
+
+          <!-- Épaisseur -->
+          <div class="property-group">
+            <h5>📏 Épaisseur :</h5>
+            <div class="input-group">
+              <input 
+                type="number" 
+                [(ngModel)]="murEpaisseur" 
+                step="0.01" 
+                placeholder="Épaisseur"
+                class="number-input"
+              >
+              <button (click)="modifierEpaisseurMur()" class="btn-apply">
+                ✅ Appliquer Épaisseur
+              </button>
+            </div>
+          </div>
+
+          <!-- Couleur -->
+          <div class="property-group">
+            <h5>🎨 Couleur :</h5>
+            <div class="input-group">
+              <label for="murColorPicker" class="sr-only">Sélecteur de couleur du mur</label>
+              <input 
+                type="color" 
+                id="murColorPicker"
+                [(ngModel)]="murCouleur"
+                class="color-input"
+                title="Sélecteur de couleur du mur"
+              >
+              <span class="color-display">{{ murCouleur }}</span>
+              <button (click)="modifierCouleurMurInteractive()" class="btn-apply">
+                ✅ Appliquer Couleur
+              </button>
+            </div>
+          </div>
+
+          <!-- Actions globales -->
+          <div class="mur-actions">
+            <button (click)="appliquerModificationsMur()" class="btn-apply-all">
+              🚀 Appliquer Toutes les Modifications
+            </button>
+            <button (click)="resetMurValues()" class="btn-reset">
+              🔄 Réinitialiser
+            </button>
+          </div>
+        </div>
+      </div>
+
       <!-- Zone de sortie des tests -->
       <div class="test-output-section">
-        <h3> Résultats des Tests</h3>
+        <h3>📊 Résultats des Tests</h3>
         <div id="services-output" class="test-output">
           <div class="success-message">✅ Services intégrés avec succès!</div>
     <div>Cliquez sur les boutons pour tester les fonctionnalités.</div>
