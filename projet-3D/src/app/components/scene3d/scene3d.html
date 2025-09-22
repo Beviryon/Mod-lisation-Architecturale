@@ -1,0 +1,1502 @@
+<div class="scene-container" [class.sidebar-open]="showTestModal">
+  <div #canvasContainer class="canvas-container"></div>
+  <div class="controls-info">
+    <h3>Modélisation</h3>
+    
+    <div class="controls-section">
+      <h4>Contrôles</h4>
+      <button class="reset-button" (click)="resetCameraPosition()">Réinitialiser</button>
+      <button class="legend-button" (click)="openLegendModal()">Voir la légende</button>
+      <button class="test-button" (click)="openTestModal()"> Test des Services</button>
+      <button class="dimensions-button" (click)="toggleDimensionsInterface()"> Dimensions Temps Réel</button>
+      <button class="fenetres-button" (click)="toggleFenetresInterface()"> Fenêtres Temps Réel</button>
+      <button class="murs-button" (click)="toggleMursInterface()"> Murs Temps Réel</button>
+      <button class="calculateur-button" (click)="toggleCalculateurFenetres()"> 🧮 Calculateur Fenêtres</button>
+      
+      <h4>Contrôles Souris</h4>
+      <ul>
+        <li><strong>Clic + Glisser</strong> : Rotation autour de la construction</li>
+        <li><strong>Molette</strong> : Zoom avant/arrière (5-50)</li>
+        <li><strong>Clic droit</strong> : Désactivé</li>
+      </ul>
+    </div>
+
+
+  <!-- Modale de légende -->
+  <div class="modal-overlay" [class.show]="showLegendModal" (click)="closeLegendModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2>Légende de la Modélisation 3D</h2>
+        <button class="close-button" (click)="closeLegendModal()">&times;</button>
+      </div>
+      
+      <div class="modal-body">
+        <div class="legend-section">
+          <h3>Architecture du Bâtiment</h3>
+          <div class="building-info">
+            <div class="info-card">
+              <h4>Dimensions Générales</h4>
+              <ul>
+                <li><strong>Longueur :</strong> 8 m</li>
+                <li><strong>Largeur :</strong> 5 m</li>
+                <li><strong>Hauteur :</strong> 2.5 m</li>
+                <li><strong>Épaisseur des murs :</strong> 0.20 m</li>
+              </ul>
+            </div>
+            
+            <div class="info-card">
+              <h4>Éléments Structurels</h4>
+              <ul>
+                <li><strong>Sol :</strong> Plateforme de base (8m × 5m × 0.20m)</li>
+                <li><strong>Toit :</strong> Couverture (8.4m × 5m × 0.20m)</li>
+                <li><strong>Murs :</strong> 4 murs formant un rectangle</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="legend-section">
+          <h3>Ouvertures et Accès</h3>
+          <div class="openings-info">
+            <div class="opening-card door">
+              <div class="opening-icon">🚪</div>
+              <div class="opening-details">
+                <h4>Porte d'Entrée</h4>
+                <ul>
+                  <li><strong>Position :</strong> Mur principal </li>
+                  <li><strong>Dimensions :</strong> 1m × 2.1m</li>
+                  <li><strong>Couleur :</strong> Vert</li>
+                  <li><strong>Epaisseur:</strong> 0.05m</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="opening-card window">
+              <div class="opening-icon">🪟</div>
+              <div class="opening-details">
+                <h4>Fenêtre 1</h4>
+                <ul>
+                  <li><strong>Position :</strong> Mur principal (façade)</li>
+                  <li><strong>Dimensions :</strong> 1.5m × 1.2m</li>
+                  <li><strong>Couleur :</strong> Rouge</li>
+                  <li><strong>Epaisseur:</strong> 0.05m</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="opening-card window">
+              <div class="opening-icon">🪟</div>
+              <div class="opening-details">
+                <h4>Fenêtre 2</h4>
+                <ul>
+                  <li><strong>Position :</strong> Mur principal (façade)</li>
+                  <li><strong>Dimensions :</strong> 2m × 1.2m</li>
+                  <li><strong>Couleur :</strong> Rouge</li>
+                  <li><strong>Epaisseur:</strong> 0.05m</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="legend-section">
+          <h3>Code Couleurs</h3>
+          <div class="color-legend">
+            <div class="color-item">
+              <div class="color-box color-walls"></div>
+              <span><strong>Murs :</strong> Gris clair (#aaaaaa)</span>
+            </div>
+            <div class="color-item">
+              <div class="color-box color-door"></div>
+              <span><strong>Porte :</strong> Vert (#00ff00)</span>
+            </div>
+            <div class="color-item">
+              <div class="color-box color-windows"></div>
+              <span><strong>Fenêtres :</strong> Rouge (#ff0000)</span>
+            </div>
+            <div class="color-item">
+              <div class="color-box color-ground"></div>
+              <span><strong>Sol :</strong> Marron foncé (#2E1E1A)</span>
+            </div>
+            <div class="color-item">
+              <div class="color-box color-roof"></div>
+              <span><strong>Toit :</strong> Bleu royal (#4169e1)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="legend-section">
+          <h3> Contrôles de Navigation</h3>
+          <div class="controls-legend">
+            <div class="control-item">
+              <div class="control-icon">🖱️</div>
+              <div class="control-text">
+                <strong>Clic + Glisser :</strong> Rotation autour du bâtiment
+              </div>
+            </div>
+            <div class="control-item">
+              <div class="control-icon">🎯</div>
+              <div class="control-text">
+                <strong>Molette :</strong> Zoom avant/arrière (5-50 unités)
+              </div>
+            </div>
+            <div class="control-item">
+              <div class="control-icon">🔄</div>
+              <div class="control-text">
+                <strong>Bouton Réinitialiser :</strong> Retour à la vue initiale
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="legend-section">
+          <h3>📐 Système de Coordonnées</h3>
+          <div class="coordinates-info">
+            <div class="axis-info">
+              <div class="axis-color axis-x"></div>
+              <span><strong>Axe X (Rouge) :</strong> Gauche/Droite</span>
+            </div>
+            <div class="axis-info">
+              <div class="axis-color axis-y"></div>
+              <span><strong>Axe Y (Vert) :</strong> Bas/Haut</span>
+            </div>
+            <div class="axis-info">
+              <div class="axis-color axis-z"></div>
+              <span><strong>Axe Z (Bleu) :</strong> Avant/Arrière</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="legend-section">
+          <h3>💡 Techniques Utilisées</h3>
+          <div class="tech-info">
+            <div class="tech-card">
+              <h4>Three.js</h4>
+              <p>Bibliothèque JavaScript pour la création de graphiques 3D dans le navigateur</p>
+            </div>
+            <div class="tech-card">
+              <h4>ExtrudeGeometry</h4>
+              <p>Technique utilisée pour créer de vraies ouvertures dans les murs (trous)</p>
+            </div>
+            <div class="tech-card">
+              <h4>Configuration Centralisée</h4>
+              <p>Toutes les dimensions et couleurs sont définies dans un fichier de configuration (building-config.ts)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="modal-footer">
+        <button class="close-modal-btn" (click)="closeLegendModal()">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Sidebar de test des services -->
+<div class="sidebar-overlay" [class.show]="showTestModal" (click)="closeTestModal($event)">
+  <div class="sidebar-content test-sidebar" (click)="$event.stopPropagation()">
+    <div class="sidebar-header">
+      <h2> Test des Services</h2>
+      <button class="sidebar-close" (click)="closeTestModal($event)">×</button>
+    </div>
+    <div class="sidebar-body">
+      <!-- Section des tests de base -->
+      <div class="test-section">
+        <h3>Tests de Base</h3>
+        <div class="test-buttons">
+          <button (click)="testStatistiques()" class="btn-test btn-blue">
+            <div class="btn-icon"></div>
+            <div class="btn-label">Statistiques</div>
+          </button>
+          <button (click)="testExport()" class="btn-test btn-purple">
+            <div class="btn-icon"></div>
+            <div class="btn-label">Export</div>
+          </button>
+          <button (click)="testValidation()" class="btn-test btn-red">
+            <div class="btn-icon"></div>
+            <div class="btn-label">Synchroniser</div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Section des tests de couleurs automatiques -->
+      <div class="test-section">
+        <h3> Tests de Couleurs Automatiques</h3>
+        <!-- <div class="test-buttons">
+          <button (click)="testCouleurs()" class="btn-test btn-orange">
+            <div class="btn-icon"></div>
+            <div class="btn-label">Couleurs Murs</div>
+          </button>
+          <button (click)="testCouleursOuvertures()" class="btn-test btn-cyan">
+            <div class="btn-icon"></div>
+            <div class="btn-label">Couleurs Ouvertures</div>
+          </button>
+        </div> -->
+      </div>
+
+      <!-- Section du sélecteur de couleurs interactif -->
+      <div class="test-section">
+        <h3> Sélecteur de Couleurs Interactif</h3>
+        
+        <!-- Sélecteur de couleurs -->
+        <div class="color-picker-section">
+          <div class="color-picker-container">
+            <label for="colorPicker">Choisir une couleur :</label>
+            <div class="color-input-group">
+              <input type="color" id="colorPicker" [(ngModel)]="selectedColor" (change)="onColorChange()" class="color-picker">
+              <span class="color-value">{{selectedColor}}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sélection des éléments -->
+        <div class="element-selection-section">
+          <div class="element-group">
+            <h4> Murs</h4>
+            <div class="element-buttons">
+              <button (click)="changeElementColor('principal')" class="btn-element" [class.active]="selectedElement === 'principal'">
+                <div class="element-icon"></div>
+                <div class="element-label">Mur Principal</div>
+              </button>
+              <button (click)="changeElementColor('arriere')" class="btn-element" [class.active]="selectedElement === 'arriere'">
+                <div class="element-icon"></div>
+                <div class="element-label">Mur Arrière</div>
+              </button>
+              <button (click)="changeElementColor('gauche')" class="btn-element" [class.active]="selectedElement === 'gauche'">
+                <div class="element-icon"></div>
+                <div class="element-label">Mur Gauche</div>
+              </button>
+              <button (click)="changeElementColor('droit')" class="btn-element" [class.active]="selectedElement === 'droit'">
+                <div class="element-icon"></div>
+                <div class="element-label">Mur Droit</div>
+              </button>
+            </div>
+          </div>
+
+          <div class="element-group">
+            <h4> Ouvertures</h4>
+            <div class="element-buttons">
+              <button (click)="changeElementColor('fenetre2')" class="btn-element" [class.active]="selectedElement === 'fenetre2'">
+                <div class="element-icon"></div>
+                <div class="element-label">Fenêtre Principale</div>
+    </button>
+              <button (click)="changeElementColor('fenetre3')" class="btn-element" [class.active]="selectedElement === 'fenetre3'">
+                <div class="element-icon"></div>
+                <div class="element-label">Fenêtre Arrière</div>
+    </button>
+              <button (click)="changeElementColor('porte1')" class="btn-element" [class.active]="selectedElement === 'porte1'">
+                <div class="element-icon"></div>
+                <div class="element-label">Porte d'Entrée</div>
+    </button>
+            </div>
+          </div>
+  </div>
+  
+        <!-- Actions -->
+        <div class="color-actions-section">
+          <button (click)="resetAllColors()" class="btn-reset">
+            <div class="btn-icon"></div>
+            <div class="btn-text">Remettre les couleurs originales</div>
+    </button>
+        </div>
+      </div>
+
+      <!-- Section de communication -->
+      <!-- <div class="test-section">
+        <h3>📡 Communication</h3>
+        <!-- Bouton de rechargement de configuration -->
+        <div class="reload-section">
+          <button (click)="rechargerConfigurationDepuisFichier()" class="btn-reload">
+            🔄 Recharger Configuration
+          </button>
+          <p class="reload-description">
+            Modifiez building-config.ts puis cliquez pour voir les changements
+          </p>
+        </div>
+
+        <div class="test-buttons">
+          <button (click)="testCommunication()" class="btn-test btn-gray">
+            <div class="btn-icon">📡</div>
+            <div class="btn-label">Communication</div>
+          </button>
+          <button (click)="testMateriaux()" class="btn-test btn-purple">
+            <div class="btn-icon">🎨</div>
+            <div class="btn-label">Matériaux</div>
+          </button>
+          <button (click)="testScene()" class="btn-test btn-indigo">
+            <div class="btn-icon">🎬</div>
+            <div class="btn-label">Scène 3D</div>
+          </button>
+          <button (click)="testMurs()" class="btn-test btn-brown">
+            <div class="btn-icon">🧱</div>
+            <div class="btn-label">Murs</div>
+          </button>
+          <button (click)="testModificationsMurs()" class="btn-test btn-orange">
+            <div class="btn-icon">🔧</div>
+            <div class="btn-label">Modifications</div>
+          </button>
+          <button (click)="testMiseAJourRendu()" class="btn-test btn-teal">
+            <div class="btn-icon">🔄</div>
+            <div class="btn-label">Test Rendu</div>
+          </button>
+          <button (click)="testModificationOuverture()" class="btn-test btn-pink">
+            <div class="btn-icon">🔧</div>
+            <div class="btn-label">Test Modif</div>
+          </button>
+          <button (click)="testModificationComplete()" class="btn-test btn-indigo">
+            <div class="btn-icon">🏗️</div>
+            <div class="btn-label">Test Complet</div>
+          </button>
+        </div>
+  </div> -->
+  
+
+      <!-- Modificateur de murs interactif -->
+      <div class="mur-modifier-section">
+        <h3>🔧 Modificateur de Murs Interactif</h3>
+        
+        <div class="mur-selector">
+          <h4>Choisissez un mur à modifier :</h4>
+          <div class="mur-buttons">
+            <button 
+              class="btn-mur" 
+              [class.active]="selectedMur === 'principal'"
+              (click)="selectMur('principal')"
+            >
+              🧱 Mur Principal
+            </button>
+            <button 
+              class="btn-mur" 
+              [class.active]="selectedMur === 'arriere'"
+              (click)="selectMur('arriere')"
+            >
+              🧱 Mur Arrière
+            </button>
+            <button 
+              class="btn-mur" 
+              [class.active]="selectedMur === 'gauche'"
+              (click)="selectMur('gauche')"
+            >
+              🧱 Mur Gauche
+            </button>
+            <button 
+              class="btn-mur" 
+              [class.active]="selectedMur === 'droit'"
+              (click)="selectMur('droit')"
+            >
+              🧱 Mur Droit
+            </button>
+          </div>
+        </div>
+
+        <div class="mur-properties" *ngIf="selectedMur">
+          <h4>Propriétés du {{ selectedMur === 'principal' ? 'Mur Principal' : selectedMur === 'arriere' ? 'Mur Arrière' : selectedMur === 'gauche' ? 'Mur Gauche' : 'Mur Droit' }} :</h4>
+          
+          <!-- Position -->
+          <div class="property-group">
+            <h5>📍 Position (X, Y, Z) :</h5>
+            <div class="input-group">
+              <input 
+                type="number" 
+                [(ngModel)]="murPosition.x" 
+                step="0.1" 
+                placeholder="X"
+                class="number-input"
+              >
+              <input 
+                type="number" 
+                [(ngModel)]="murPosition.y" 
+                step="0.1" 
+                placeholder="Y"
+                class="number-input"
+              >
+              <input 
+                type="number" 
+                [(ngModel)]="murPosition.z" 
+                step="0.1" 
+                placeholder="Z"
+                class="number-input"
+              >
+              <button (click)="modifierPositionMur()" class="btn-apply">
+                ✅ Appliquer Position
+              </button>
+            </div>
+          </div>
+
+          <!-- Dimensions -->
+          <div class="property-group">
+            <h5>📐 Dimensions (Largeur, Hauteur, Profondeur) :</h5>
+            <div class="input-group">
+              <input 
+                type="number" 
+                [(ngModel)]="murDimensions.width" 
+                step="0.1" 
+                placeholder="Largeur"
+                class="number-input"
+              >
+              <input 
+                type="number" 
+                [(ngModel)]="murDimensions.height" 
+                step="0.1" 
+                placeholder="Hauteur"
+                class="number-input"
+              >
+              <input 
+                type="number" 
+                [(ngModel)]="murDimensions.depth" 
+                step="0.1" 
+                placeholder="Profondeur"
+                class="number-input"
+              >
+              <button (click)="modifierDimensionsMur()" class="btn-apply">
+                ✅ Appliquer Dimensions
+              </button>
+            </div>
+          </div>
+
+          <!-- Épaisseur -->
+          <div class="property-group">
+            <h5>📏 Épaisseur :</h5>
+            <div class="input-group">
+              <input 
+                type="number" 
+                [(ngModel)]="murEpaisseur" 
+                step="0.01" 
+                placeholder="Épaisseur"
+                class="number-input"
+              >
+              <button (click)="modifierEpaisseurMur()" class="btn-apply">
+                ✅ Appliquer Épaisseur
+              </button>
+            </div>
+          </div>
+
+          <!-- Couleur -->
+          <div class="property-group">
+            <h5>🎨 Couleur :</h5>
+            <div class="input-group">
+              <label for="murColorPicker" class="sr-only">Sélecteur de couleur du mur</label>
+              <input 
+                type="color" 
+                id="murColorPicker"
+                [(ngModel)]="murCouleur"
+                class="color-input"
+                title="Sélecteur de couleur du mur"
+              >
+              <span class="color-display">{{ murCouleur }}</span>
+              <button (click)="modifierCouleurMurInteractive()" class="btn-apply">
+                ✅ Appliquer Couleur
+              </button>
+            </div>
+          </div>
+
+          <!-- Actions globales -->
+          <div class="mur-actions">
+            <button (click)="appliquerModificationsMur()" class="btn-apply-all">
+              🚀 Appliquer Toutes les Modifications
+            </button>
+            <button (click)="resetMurValues()" class="btn-reset">
+              🔄 Réinitialiser
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Zone de sortie des tests -->
+      <div class="test-output-section">
+        <h3>📊 Résultats des Tests</h3>
+        <div id="services-output" class="test-output">
+          <div class="success-message">✅ Services intégrés avec succès!</div>
+    <div>Cliquez sur les boutons pour tester les fonctionnalités.</div>
+        </div>
+      </div>
+
+      <!-- ===== NOUVELLES SECTIONS D'INTERFACE COMPLÈTE ===== -->
+
+      <!-- Section Modificateur d'Ouvertures -->
+      <div class="test-section">
+        <h3>🚪 Modificateur d'Ouvertures</h3>
+        
+        <div class="ouverture-selector">
+          <h4>Choisissez une ouverture à modifier :</h4>
+          <div class="ouverture-buttons">
+            <button 
+              class="btn-ouverture" 
+              [class.active]="selectedOuverture === 'fenetre1'"
+              (click)="selectOuverture('fenetre1')"
+            >
+              🪟 Fenêtre 1
+            </button>
+            <button 
+              class="btn-ouverture" 
+              [class.active]="selectedOuverture === 'fenetre2'"
+              (click)="selectOuverture('fenetre2')"
+            >
+              🪟 Fenêtre 2
+            </button>
+            <button 
+              class="btn-ouverture" 
+              [class.active]="selectedOuverture === 'porte1'"
+              (click)="selectOuverture('porte1')"
+            >
+              🚪 Porte 1
+            </button>
+          </div>
+        </div>
+
+        <div class="ouverture-properties" *ngIf="selectedOuverture">
+          <h4>Propriétés de l'ouverture :</h4>
+          
+          <!-- Type et Nom -->
+          <div class="property-group">
+            <h5>📝 Type et Nom :</h5>
+            <div class="input-group">
+              <select [(ngModel)]="ouvertureType" class="select-input" title="Type d'ouverture" aria-label="Type d'ouverture">
+                <option value="fenetre">Fenêtre</option>
+                <option value="porte">Porte</option>
+              </select>
+              <input 
+                type="text" 
+                [(ngModel)]="ouvertureNom" 
+                placeholder="Nom de l'ouverture"
+                class="text-input"
+              >
+            </div>
+          </div>
+
+          <!-- Position -->
+          <div class="property-group">
+            <h5>📍 Position (X, Y, Z) :</h5>
+            <div class="input-group">
+              <input 
+                type="number" 
+                [(ngModel)]="ouverturePosition.x" 
+                step="0.1" 
+                placeholder="X"
+                class="number-input"
+              >
+              <input 
+                type="number" 
+                [(ngModel)]="ouverturePosition.y" 
+                step="0.1" 
+                placeholder="Y"
+                class="number-input"
+              >
+              <input 
+                type="number" 
+                [(ngModel)]="ouverturePosition.z" 
+                step="0.1" 
+                placeholder="Z"
+                class="number-input"
+              >
+              <button (click)="modifierPositionOuverture()" class="btn-apply">
+                ✅ Appliquer Position
+              </button>
+            </div>
+          </div>
+
+          <!-- Dimensions -->
+          <div class="property-group">
+            <h5>📐 Dimensions (Largeur, Hauteur, Profondeur) :</h5>
+            <div class="input-group">
+              <input 
+                type="number" 
+                [(ngModel)]="ouvertureDimensions.width" 
+                step="0.1" 
+                placeholder="Largeur"
+                class="number-input"
+              >
+              <input 
+                type="number" 
+                [(ngModel)]="ouvertureDimensions.height" 
+                step="0.1" 
+                placeholder="Hauteur"
+                class="number-input"
+              >
+              <input 
+                type="number" 
+                [(ngModel)]="ouvertureDimensions.depth" 
+                step="0.01" 
+                placeholder="Profondeur"
+                class="number-input"
+              >
+              <button (click)="modifierDimensionsOuverture()" class="btn-apply">
+                ✅ Appliquer Dimensions
+              </button>
+            </div>
+          </div>
+
+          <!-- Couleur -->
+          <div class="property-group">
+            <h5>🎨 Couleur :</h5>
+            <div class="input-group">
+              <input 
+                type="color" 
+                [(ngModel)]="ouvertureCouleur"
+                class="color-input"
+                title="Couleur de l'ouverture"
+                aria-label="Couleur de l'ouverture"
+              >
+              <span class="color-display">{{ ouvertureCouleur }}</span>
+              <button (click)="modifierCouleurOuvertureInteractive()" class="btn-apply">
+                ✅ Appliquer Couleur
+              </button>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div class="ouverture-actions">
+            <button (click)="ajouterOuverture()" class="btn-add">
+              ➕ Ajouter Ouverture
+            </button>
+            <button (click)="supprimerOuverture()" class="btn-delete">
+              🗑️ Supprimer
+            </button>
+            <button (click)="resetOuvertureValues()" class="btn-reset">
+              🔄 Réinitialiser
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section Modificateur de Structure -->
+      <div class="test-section">
+        <h3>🏗️ Modificateur de Structure</h3>
+        
+        <div class="structure-properties">
+          <!-- Nom et Description -->
+          <div class="property-group">
+            <h5>📝 Informations Générales :</h5>
+            <div class="input-group">
+              <input 
+                type="text" 
+                [(ngModel)]="structureNom" 
+                placeholder="Nom du bâtiment"
+                class="text-input"
+              >
+              <textarea 
+                [(ngModel)]="structureDescription" 
+                placeholder="Description du bâtiment"
+                class="textarea-input"
+                rows="2"
+              ></textarea>
+            </div>
+          </div>
+
+          <!-- Dimensions Globales -->
+          <div class="property-group">
+            <h5>Dimensions Globales (m) :</h5>
+            <div class="input-group">
+              <input 
+                type="number" 
+                [(ngModel)]="structureDimensions.longueur" 
+                step="0.1" 
+                placeholder="Longueur"
+                class="number-input"
+              >
+              <input 
+                type="number" 
+                [(ngModel)]="structureDimensions.largeur" 
+                step="0.1" 
+                placeholder="Largeur"
+                class="number-input"
+              >
+              <input 
+                type="number" 
+                [(ngModel)]="structureDimensions.hauteur" 
+                step="0.1" 
+                placeholder="Hauteur"
+                class="number-input"
+              >
+              <button (click)="modifierStructureDimensions()" class="btn-apply">
+                Appliquer Dimensions
+              </button>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div class="structure-actions">
+            <button (click)="resetStructureValues()" class="btn-reset">
+              Réinitialiser Structure
+            </button>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Section Validation en Temps Réel -->
+      <div class="test-section">
+        <h3>Validation en Temps Réel</h3>
+        
+        <div class="validation-panel">
+          <!-- Score de Validation -->
+          <div class="validation-score">
+            <h5>Score de Validation :</h5>
+            <div class="score-display" [class]="'score-' + (scoreValidation >= 80 ? 'good' : scoreValidation >= 60 ? 'warning' : 'error')">
+              {{ scoreValidation }}/100
+            </div>
+          </div>
+
+          <!-- Erreurs -->
+          <div class="validation-errors" *ngIf="erreursValidation.length > 0">
+            <h5>❌ Erreurs :</h5>
+            <ul>
+              <li *ngFor="let erreur of erreursValidation">{{ erreur }}</li>
+            </ul>
+          </div>
+
+          <!-- Avertissements -->
+          <div class="validation-warnings" *ngIf="avertissementsValidation.length > 0">
+            <h5>⚠️ Avertissements :</h5>
+            <ul>
+              <li *ngFor="let avertissement of avertissementsValidation">{{ avertissement }}</li>
+            </ul>
+          </div>
+
+          <!-- Actions -->
+          <div class="validation-actions">
+            <button (click)="validerConfiguration()" class="btn-validate">
+              Valider Configuration
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Interface de Dimensions en Temps Réel -->
+<div class="dimensions-overlay" [class.show]="showDimensionsInterface" (click)="toggleDimensionsInterface()">
+  <div class="dimensions-content" (click)="$event.stopPropagation()">
+    <div class="dimensions-header">
+      <h2>📏 Dimensions en Temps Réel</h2>
+      <button class="dimensions-close" (click)="toggleDimensionsInterface()">×</button>
+    </div>
+    
+    <div class="dimensions-body">
+      <!-- Contrôles de mise à jour -->
+      <div class="realtime-controls">
+        <div class="control-group">
+          <label class="control-label">
+            <input type="checkbox" [(ngModel)]="isRealTimeUpdate" (change)="toggleRealTimeUpdate()">
+            ⚡ Mise à jour en temps réel
+          </label>
+        </div>
+        
+        <div class="control-actions" *ngIf="!isRealTimeUpdate">
+          <button (click)="appliquerDimensionsManuellement()" class="btn-apply">
+            ✅ Appliquer les Dimensions
+          </button>
+        </div>
+      </div>
+
+      <!-- Contrôles des dimensions -->
+      <div class="dimensions-controls">
+        <h3>🏗️ Dimensions du Bâtiment</h3>
+        
+        <!-- Longueur -->
+        <div class="dimension-group">
+          <label class="dimension-label">
+            📐 Longueur (m)
+          </label>
+          <div class="dimension-control">
+            <input 
+              type="range" 
+              min="2" 
+              max="20" 
+              step="0.1" 
+              [(ngModel)]="dimensionsReelTemps.longueur"
+              (input)="onDimensionsChange()"
+              class="dimension-slider"
+              title="Longueur du bâtiment"
+              aria-label="Longueur du bâtiment"
+            >
+            <input 
+              type="number" 
+              min="2" 
+              max="20" 
+              step="0.1" 
+              [(ngModel)]="dimensionsReelTemps.longueur"
+              (input)="onDimensionsChange()"
+              class="dimension-input"
+              title="Longueur du bâtiment"
+              aria-label="Longueur du bâtiment"
+              placeholder="Longueur"
+            >
+            <span class="dimension-value">{{ dimensionsReelTemps.longueur }}m</span>
+          </div>
+        </div>
+
+        <!-- Largeur -->
+        <div class="dimension-group">
+          <label class="dimension-label">
+            📏 Largeur (m)
+          </label>
+          <div class="dimension-control">
+            <input 
+              type="range" 
+              min="2" 
+              max="15" 
+              step="0.1" 
+              [(ngModel)]="dimensionsReelTemps.largeur"
+              (input)="onDimensionsChange()"
+              class="dimension-slider"
+              title="Largeur du bâtiment"
+              aria-label="Largeur du bâtiment"
+            >
+            <input 
+              type="number" 
+              min="2" 
+              max="15" 
+              step="0.1" 
+              [(ngModel)]="dimensionsReelTemps.largeur"
+              (input)="onDimensionsChange()"
+              class="dimension-input"
+              title="Largeur du bâtiment"
+              aria-label="Largeur du bâtiment"
+              placeholder="Largeur"
+            >
+            <span class="dimension-value">{{ dimensionsReelTemps.largeur }}m</span>
+          </div>
+        </div>
+
+        <!-- Hauteur -->
+        <div class="dimension-group">
+          <label class="dimension-label">
+            📏 Hauteur (m)
+          </label>
+          <div class="dimension-control">
+            <input 
+              type="range" 
+              min="1" 
+              max="10" 
+              step="0.1" 
+              [(ngModel)]="dimensionsReelTemps.hauteur"
+              (input)="onDimensionsChange()"
+              class="dimension-slider"
+              title="Hauteur du bâtiment"
+              aria-label="Hauteur du bâtiment"
+            >
+            <input 
+              type="number" 
+              min="1" 
+              max="10" 
+              step="0.1" 
+              [(ngModel)]="dimensionsReelTemps.hauteur"
+              (input)="onDimensionsChange()"
+              class="dimension-input"
+              title="Hauteur du bâtiment"
+              aria-label="Hauteur du bâtiment"
+              placeholder="Hauteur"
+            >
+            <span class="dimension-value">{{ dimensionsReelTemps.hauteur }}m</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Informations actuelles -->
+      <div class="dimensions-info">
+        <h3>📊 Informations Actuelles</h3>
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="info-label">Surface au sol :</span>
+            <span class="info-value">{{ (dimensionsReelTemps.longueur * dimensionsReelTemps.largeur).toFixed(1) }} m²</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Volume :</span>
+            <span class="info-value">{{ (dimensionsReelTemps.longueur * dimensionsReelTemps.largeur * dimensionsReelTemps.hauteur).toFixed(1) }} m³</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Périmètre :</span>
+            <span class="info-value">{{ (2 * (dimensionsReelTemps.longueur + dimensionsReelTemps.largeur)).toFixed(1) }} m</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="dimensions-actions">
+        <button (click)="chargerDimensionsActuelles()" class="btn-load">
+          📥 Charger Dimensions Actuelles
+        </button>
+        <button (click)="resetDimensionsReelTemps()" class="btn-reset">
+          🔄 Réinitialiser
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Interface des Fenêtres en Temps Réel -->
+<div class="fenetres-overlay" [class.show]="showFenetresInterface" (click)="toggleFenetresInterface()">
+  <div class="fenetres-content" (click)="$event.stopPropagation()">
+    <div class="fenetres-header">
+      <h2>🪟 Fenêtres en Temps Réel</h2>
+      <button class="fenetres-close" (click)="toggleFenetresInterface()">×</button>
+    </div>
+    
+    <div class="fenetres-body">
+      <!-- Contrôles de mise à jour -->
+      <div class="realtime-controls">
+        <div class="control-group">
+          <label class="control-label">
+            <input type="checkbox" [(ngModel)]="isRealTimeUpdate" (change)="toggleRealTimeUpdate()">
+            ⚡ Mise à jour en temps réel
+          </label>
+        </div>
+        
+        <div class="control-actions" *ngIf="!isRealTimeUpdate">
+          <button (click)="mettreAJourFenetresReelTemps()" class="btn-apply">
+            ✅ Appliquer les Modifications
+          </button>
+        </div>
+      </div>
+
+      <!-- Contrôles des fenêtres -->
+      <div class="fenetres-controls">
+        <h3>🪟 Propriétés des Fenêtres</h3>
+        
+        <!-- Dimensions -->
+        <div class="dimension-group">
+          <label class="dimension-label">
+            📐 Largeur (m)
+          </label>
+          <div class="dimension-control">
+            <input 
+              type="range" 
+              min="0.5" 
+              max="3" 
+              step="0.1" 
+              [(ngModel)]="fenetresReelTemps.longueur"
+              (input)="onFenetresChange()"
+              class="dimension-slider"
+              title="Largeur de la fenêtre"
+              aria-label="Largeur de la fenêtre"
+            >
+            <input 
+              type="number" 
+              min="0.5" 
+              max="3" 
+              step="0.1" 
+              [(ngModel)]="fenetresReelTemps.longueur"
+              (input)="onFenetresChange()"
+              class="dimension-input"
+              title="Largeur de la fenêtre"
+              aria-label="Largeur de la fenêtre"
+              placeholder="Largeur"
+            >
+            <span class="dimension-value">{{ fenetresReelTemps.longueur }}m</span>
+          </div>
+        </div>
+
+        <div class="dimension-group">
+          <label class="dimension-label">
+            📏 Profondeur (m)
+          </label>
+          <div class="dimension-control">
+            <input 
+              type="range" 
+              min="0.05" 
+              max="0.5" 
+              step="0.01" 
+              [(ngModel)]="fenetresReelTemps.largeur"
+              (input)="onFenetresChange()"
+              class="dimension-slider"
+              title="Profondeur de la fenêtre"
+              aria-label="Profondeur de la fenêtre"
+            >
+            <input 
+              type="number" 
+              min="0.05" 
+              max="0.5" 
+              step="0.01" 
+              [(ngModel)]="fenetresReelTemps.largeur"
+              (input)="onFenetresChange()"
+              class="dimension-input"
+              title="Profondeur de la fenêtre"
+              aria-label="Profondeur de la fenêtre"
+              placeholder="Profondeur"
+            >
+            <span class="dimension-value">{{ fenetresReelTemps.largeur }}m</span>
+          </div>
+        </div>
+
+        <div class="dimension-group">
+          <label class="dimension-label">
+            📏 Hauteur (m)
+          </label>
+          <div class="dimension-control">
+            <input 
+              type="range" 
+              min="0.5" 
+              max="3" 
+              step="0.1" 
+              [(ngModel)]="fenetresReelTemps.hauteur"
+              (input)="onFenetresChange()"
+              class="dimension-slider"
+              title="Hauteur de la fenêtre"
+              aria-label="Hauteur de la fenêtre"
+            >
+            <input 
+              type="number" 
+              min="0.5" 
+              max="3" 
+              step="0.1" 
+              [(ngModel)]="fenetresReelTemps.hauteur"
+              (input)="onFenetresChange()"
+              class="dimension-input"
+              title="Hauteur de la fenêtre"
+              aria-label="Hauteur de la fenêtre"
+              placeholder="Hauteur"
+            >
+            <span class="dimension-value">{{ fenetresReelTemps.hauteur }}m</span>
+          </div>
+        </div>
+
+        <!-- Couleur -->
+        <div class="dimension-group">
+          <label class="dimension-label">
+            🎨 Couleur
+          </label>
+          <div class="dimension-control">
+            <input 
+              type="color" 
+              [(ngModel)]="fenetresReelTemps.couleur"
+              (input)="onFenetresChange()"
+              class="color-input"
+              title="Couleur de la fenêtre"
+              aria-label="Couleur de la fenêtre"
+            >
+            <span class="dimension-value">{{ fenetresReelTemps.couleur }}</span>
+          </div>
+        </div>
+
+        <!-- Type et Nom -->
+        <div class="dimension-group">
+          <label class="dimension-label">
+            📝 Type et Nom
+          </label>
+          <div class="dimension-control">
+            <select [(ngModel)]="fenetresReelTemps.type" (change)="onFenetresChange()" class="select-input" title="Type de fenêtre" aria-label="Type de fenêtre">
+              <option value="fenetre">Fenêtre</option>
+              <option value="porte">Porte</option>
+            </select>
+            <input 
+              type="text" 
+              [(ngModel)]="fenetresReelTemps.nom"
+              (input)="onFenetresChange()"
+              placeholder="Nom de la fenêtre"
+              class="text-input"
+              title="Nom de la fenêtre"
+              aria-label="Nom de la fenêtre"
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- Informations actuelles -->
+      <div class="fenetres-info">
+        <h3>📊 Informations Actuelles</h3>
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="info-label">Surface :</span>
+            <span class="info-value">{{ (fenetresReelTemps.longueur * fenetresReelTemps.hauteur).toFixed(2) }} m²</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Volume :</span>
+            <span class="info-value">{{ (fenetresReelTemps.longueur * fenetresReelTemps.largeur * fenetresReelTemps.hauteur).toFixed(3) }} m³</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Périmètre :</span>
+            <span class="info-value">{{ (2 * (fenetresReelTemps.longueur + fenetresReelTemps.hauteur)).toFixed(2) }} m</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="fenetres-actions">
+        <button (click)="chargerFenetresActuelles()" class="btn-load">
+          📥 Charger Propriétés Actuelles
+        </button>
+        <button (click)="resetFenetresReelTemps()" class="btn-reset">
+          🔄 Réinitialiser
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Interface des Murs en Temps Réel -->
+<div class="murs-overlay" [class.show]="showMursInterface" (click)="toggleMursInterface()">
+  <div class="murs-content" (click)="$event.stopPropagation()">
+    <div class="murs-header">
+      <h2>🧱 Murs en Temps Réel</h2>
+      <button class="murs-close" (click)="toggleMursInterface()">×</button>
+    </div>
+    
+    <div class="murs-body">
+      <!-- Contrôles de mise à jour -->
+      <div class="realtime-controls">
+        <div class="control-group">
+          <label class="control-label">
+            <input type="checkbox" [(ngModel)]="isRealTimeUpdate" (change)="toggleRealTimeUpdate()">
+            ⚡ Mise à jour en temps réel
+          </label>
+        </div>
+        
+        <div class="control-actions" *ngIf="!isRealTimeUpdate">
+          <button (click)="mettreAJourMursReelTemps()" class="btn-apply">
+            ✅ Appliquer les Modifications
+          </button>
+        </div>
+      </div>
+
+      <!-- Contrôles des murs -->
+      <div class="murs-controls">
+        <h3>🧱 Propriétés des Murs</h3>
+        
+        <!-- Dimensions -->
+        <div class="dimension-group">
+          <label class="dimension-label">
+            📐 Longueur Murs Principal/Arrière (m)
+          </label>
+          <div class="dimension-control">
+            <input 
+              type="range" 
+              min="2" 
+              max="20" 
+              step="0.1" 
+              [(ngModel)]="mursReelTemps.longueur"
+              (input)="onMursChange()"
+              class="dimension-slider"
+              title="Longueur du mur"
+              aria-label="Longueur du mur"
+            >
+            <input 
+              type="number" 
+              min="2" 
+              max="20" 
+              step="0.1" 
+              [(ngModel)]="mursReelTemps.longueur"
+              (input)="onMursChange()"
+              class="dimension-input"
+              title="Longueur du mur"
+              aria-label="Longueur du mur"
+              placeholder="Longueur"
+            >
+            <span class="dimension-value">{{ mursReelTemps.longueur }}m</span>
+          </div>
+        </div>
+
+        <div class="dimension-group">
+          <label class="dimension-label">
+            📏 Largeur Murs Latéraux (m)
+          </label>
+          <div class="dimension-control">
+            <input 
+              type="range" 
+              min="2" 
+              max="15" 
+              step="0.1" 
+              [(ngModel)]="mursReelTemps.largeur"
+              (input)="onMursChange()"
+              class="dimension-slider"
+              title="Largeur des murs latéraux"
+              aria-label="Largeur des murs latéraux"
+            >
+            <input 
+              type="number" 
+              min="2" 
+              max="15" 
+              step="0.1" 
+              [(ngModel)]="mursReelTemps.largeur"
+              (input)="onMursChange()"
+              class="dimension-input"
+              title="Largeur des murs latéraux"
+              aria-label="Largeur des murs latéraux"
+              placeholder="Largeur"
+            >
+            <span class="dimension-value">{{ mursReelTemps.largeur }}m</span>
+          </div>
+        </div>
+
+        <div class="dimension-group">
+          <label class="dimension-label">
+            📏 Hauteur (m)
+          </label>
+          <div class="dimension-control">
+            <input 
+              type="range" 
+              min="1" 
+              max="10" 
+              step="0.1" 
+              [(ngModel)]="mursReelTemps.hauteur"
+              (input)="onMursChange()"
+              class="dimension-slider"
+              title="Hauteur du mur"
+              aria-label="Hauteur du mur"
+            >
+            <input 
+              type="number" 
+              min="1" 
+              max="10" 
+              step="0.1" 
+              [(ngModel)]="mursReelTemps.hauteur"
+              (input)="onMursChange()"
+              class="dimension-input"
+              title="Hauteur du mur"
+              aria-label="Hauteur du mur"
+              placeholder="Hauteur"
+            >
+            <span class="dimension-value">{{ mursReelTemps.hauteur }}m</span>
+          </div>
+        </div>
+
+        <div class="dimension-group">
+          <label class="dimension-label">
+            📏 Épaisseur (m)
+          </label>
+          <div class="dimension-control">
+            <input 
+              type="range" 
+              min="0.1" 
+              max="1" 
+              step="0.01" 
+              [(ngModel)]="mursReelTemps.epaisseur"
+              (input)="onMursChange()"
+              class="dimension-slider"
+              title="Épaisseur du mur"
+              aria-label="Épaisseur du mur"
+            >
+            <input 
+              type="number" 
+              min="0.1" 
+              max="1" 
+              step="0.01" 
+              [(ngModel)]="mursReelTemps.epaisseur"
+              (input)="onMursChange()"
+              class="dimension-input"
+              title="Épaisseur du mur"
+              aria-label="Épaisseur du mur"
+              placeholder="Épaisseur"
+            >
+            <span class="dimension-value">{{ mursReelTemps.epaisseur }}m</span>
+          </div>
+        </div>
+
+        <!-- Couleur -->
+        <div class="dimension-group">
+          <label class="dimension-label">
+            🎨 Couleur
+          </label>
+          <div class="dimension-control">
+            <input 
+              type="color" 
+              [(ngModel)]="mursReelTemps.couleur"
+              (input)="onMursChange()"
+              class="color-input"
+              title="Couleur du mur"
+              aria-label="Couleur du mur"
+            >
+            <span class="dimension-value">{{ mursReelTemps.couleur }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Informations actuelles -->
+      <div class="murs-info">
+        <h3>📊 Informations Actuelles</h3>
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="info-label">Surface :</span>
+            <span class="info-value">{{ (mursReelTemps.longueur * mursReelTemps.hauteur).toFixed(1) }} m²</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Volume :</span>
+            <span class="info-value">{{ (mursReelTemps.longueur * mursReelTemps.epaisseur * mursReelTemps.hauteur).toFixed(2) }} m³</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Périmètre :</span>
+            <span class="info-value">{{ (2 * (mursReelTemps.longueur + mursReelTemps.hauteur)).toFixed(1) }} m</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="murs-actions">
+        <button (click)="chargerMursActuels()" class="btn-load">
+          📥 Charger Propriétés Actuelles
+        </button>
+        <button (click)="resetMursReelTemps()" class="btn-reset">
+          🔄 Réinitialiser
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- =============================================== -->
+<!-- CALCULATEUR DE FENÊTRES INTÉGRÉ -->
+<!-- =============================================== -->
+<div class="calculateur-overlay" *ngIf="showCalculateurFenetres">
+  <div class="calculateur-content">
+    <div class="calculateur-header">
+      <h2>🧮 Calculateur de Fenêtres Intelligent</h2>
+      <button (click)="toggleCalculateurFenetres()" class="btn-close">✕</button>
+    </div>
+
+    <!-- Sélection du mur -->
+    <div class="calculateur-section">
+      <h3>📐 Sélection du Mur</h3>
+      <select 
+        [(ngModel)]="murSelectionneCalculateur" 
+        (change)="onMurSelectionneCalculateur()" 
+        class="form-control"
+        title="Choisir le mur sur lequel ajouter des fenêtres"
+        aria-label="Sélection du mur">
+        <option value="">-- Choisir un mur --</option>
+        <option value="principal">Mur Principal (Façade) - 8m × 2.5m</option>
+        <option value="arriere">Mur Arrière - 8m × 2.5m</option>
+        <option value="gauche">Mur Gauche - 5m × 2.5m</option>
+        <option value="droit">Mur Droit - 5m × 2.5m</option>
+      </select>
+    </div>
+
+    <!-- Paramètres des fenêtres -->
+    <div class="calculateur-section" *ngIf="murSelectionneCalculateur">
+      <h3>🪟 Paramètres des Fenêtres</h3>
+      
+      <div class="parametres-grid">
+        <div class="parametre-item">
+          <label>Taille des fenêtres:</label>
+          <select 
+            [(ngModel)]="parametresFenetres.tailleFenetre" 
+            (change)="onParametresFenetresChange()"
+            class="form-control"
+            title="Choisir la taille des fenêtres"
+            aria-label="Taille des fenêtres">
+            <option value="petit">Petit (0.8m × 1.0m)</option>
+            <option value="moyen">Moyen (1.5m × 1.2m)</option>
+            <option value="grand">Grand (2.5m × 1.8m)</option>
+          </select>
+        </div>
+
+        <div class="parametre-item">
+          <label>Écart entre fenêtres (m):</label>
+          <input 
+            type="range" 
+            [(ngModel)]="parametresFenetres.ecart" 
+            [min]="0.1" 
+            [max]="2.0" 
+            [step]="0.1"
+            (input)="onParametresFenetresChange()"
+            class="slider"
+            title="Espacement entre les fenêtres en mètres"
+            aria-label="Écart entre fenêtres">
+          <span class="valeur">{{ parametresFenetres.ecart }}m</span>
+        </div>
+
+        <div class="parametre-item">
+          <label>Nombre de fenêtres souhaitées:</label>
+          <input 
+            type="number" 
+            [(ngModel)]="parametresFenetres.nombreFenetres" 
+            [min]="0" 
+            [max]="20"
+            (input)="onParametresFenetresChange()"
+            class="number-input"
+            title="Nombre de fenêtres à ajouter"
+            aria-label="Nombre de fenêtres">
+        </div>
+
+        <div class="parametre-item">
+          <label>Couleur des fenêtres:</label>
+          <input 
+            type="color" 
+            [(ngModel)]="parametresFenetres.couleur"
+            class="color-input"
+            title="Couleur des fenêtres"
+            aria-label="Couleur des fenêtres">
+        </div>
+      </div>
+    </div>
+
+    <!-- Résultats du calcul -->
+    <div class="calculateur-section" *ngIf="calculResultat">
+      <h3>📊 Résultats du Calcul</h3>
+      
+      <div class="resultats" [class.valid]="calculResultat.isValid" [class.invalid]="!calculResultat.isValid">
+        <div class="statut">
+          <span class="icone">{{ calculResultat.isValid ? '✅' : '❌' }}</span>
+          <span class="message">{{ calculResultat.message }}</span>
+        </div>
+        
+        <div class="details" *ngIf="calculResultat.isValid">
+          <div class="detail-item">
+            <strong>Nombre max de fenêtres:</strong> {{ calculResultat.nombreMaxFenetres }}
+          </div>
+          <div class="detail-item">
+            <strong>Largeur totale utilisée:</strong> {{ calculResultat.largeurTotaleUtilisee.toFixed(2) }}m
+          </div>
+          <div class="detail-item">
+            <strong>Marge restante:</strong> {{ calculResultat.margeRestante.toFixed(2) }}m
+          </div>
+        </div>
+      </div>
+
+      <!-- Positions calculées -->
+      <div class="positions" *ngIf="calculResultat.positionsCalculees.length > 0">
+        <h4>📍 Positions Calculées</h4>
+        <div class="position-list">
+          <div 
+            *ngFor="let position of calculResultat.positionsCalculees; let i = index" 
+            class="position-item">
+            <span class="numero">Fenêtre {{ i + 1 }}:</span>
+            <span class="coordonnees">
+              X: {{ position.x.toFixed(2) }}m, 
+              Y: {{ position.y.toFixed(2) }}m, 
+              Z: {{ position.z.toFixed(2) }}m
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="calculateur-actions" *ngIf="calculResultat && calculResultat.isValid">
+      <button 
+        (click)="genererConfigurationFenetres()" 
+        class="btn btn-primary"
+        [disabled]="parametresFenetres.nombreFenetres > calculResultat.nombreMaxFenetres"
+        title="Générer le code de configuration">
+        🚀 Générer Configuration
+      </button>
+      
+      <button 
+        (click)="optimiserDimensionsFenetres()" 
+        class="btn btn-secondary"
+        title="Optimiser automatiquement les dimensions">
+        ⚡ Optimiser Dimensions
+      </button>
+
+      <button 
+        (click)="appliquerConfigurationDirecte()" 
+        class="btn btn-success"
+        [disabled]="!configurationGeneree"
+        title="Appliquer directement au modèle 3D">
+        🎯 Appliquer au Modèle
+      </button>
+    </div>
+
+    <!-- Configuration générée -->
+    <div class="calculateur-section" *ngIf="configurationGeneree">
+      <h3>⚙️ Configuration Générée</h3>
+      <div class="config-code">
+        <pre>{{ configurationGeneree }}</pre>
+      </div>
+      <button (click)="copierConfigurationFenetres()" class="btn btn-info">📋 Copier</button>
+    </div>
+  </div>
+</div>
