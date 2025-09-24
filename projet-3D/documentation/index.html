@@ -1,0 +1,326 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>projet-3-d documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+	   <link rel="stylesheet" href="./styles/style.css">
+        <link rel="stylesheet" href="./styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="./" class="navbar-brand">projet-3-d documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content readme">
+                   <div class="content-data">
+
+
+<h1>🏗️ Modélisation Architecturale 3D</h1>
+<p>Application Angular avec Three.js pour la modélisation et visualisation de bâtiments en 3D.</p>
+<h2>🚀 Démarrage Rapide</h2>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash"># Installation des dépendances
+npm install
+
+# Lancement de l&#39;application
+ng serve
+
+# Accès à l&#39;application
+http://localhost:4200</code></pre></div><h2>✨ Fonctionnalités Principales</h2>
+<h3>🏠 Modélisation 3D</h3>
+<ul>
+<li><strong>Bâtiment complet</strong> : Murs, toit, sol, ouvertures</li>
+<li><strong>Modifications en temps réel</strong> : Dimensions, couleurs, positions</li>
+<li><strong>Calculateur de fenêtres</strong> : Ajout automatique d&#39;ouvertures</li>
+<li><strong>Interface intuitive</strong> : Contrôles visuels et sliders</li>
+</ul>
+<h3>🎨 Personnalisation</h3>
+<ul>
+<li><strong>Couleurs interactives</strong> : Sélecteur de couleurs pour chaque élément</li>
+<li><strong>Dimensions flexibles</strong> : Modification des tailles en temps réel</li>
+<li><strong>Configuration directe</strong> : Édition du fichier <code>building-config.ts</code></li>
+</ul>
+<h3>🧮 Outils Avancés</h3>
+<ul>
+<li><strong>Calculateur de fenêtres</strong> : Calcul automatique du nombre d&#39;ouvertures</li>
+<li><strong>Validation en temps réel</strong> : Vérification des contraintes architecturales</li>
+<li><strong>Export/Import</strong> : Sauvegarde des configurations</li>
+</ul>
+<h2>📁 Structure du Projet</h2>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-none">src/
+├── app/
+│   ├── components/
+│   │   ├── scene3d/           # Composant principal 3D
+│   │   └── calculateur-fenetres/ # Calculateur d&#39;ouvertures
+│   ├── services/              # Services métier
+│   ├── config/
+│   │   └── building-config.ts # Configuration du bâtiment
+│   └── app.ts                 # Composant racine
+├── assets/                    # Ressources statiques
+└── styles/                    # Styles globaux</code></pre></div><h2>🎯 Utilisation</h2>
+<h3>1. Interface Principale</h3>
+<ul>
+<li><strong>Barre latérale gauche</strong> : Contrôles et outils</li>
+<li><strong>Zone centrale</strong> : Visualisation 3D interactive</li>
+<li><strong>Boutons de modification</strong> : Dimensions, couleurs, ouvertures</li>
+</ul>
+<h3>2. Modification du Bâtiment</h3>
+<ul>
+<li><strong>Dimensions</strong> : Sliders pour longueur, largeur, hauteur</li>
+<li><strong>Couleurs</strong> : Sélecteur de couleurs pour chaque élément</li>
+<li><strong>Ouvertures</strong> : Ajout/suppression de fenêtres et portes</li>
+</ul>
+<h3>3. Calculateur de Fenêtres</h3>
+<ul>
+<li><strong>Sélection du mur</strong> : Choisir le mur à modifier</li>
+<li><strong>Paramètres</strong> : Taille, écart, nombre de fenêtres</li>
+<li><strong>Application</strong> : Ajout automatique des ouvertures</li>
+</ul>
+<h2>🔧 Configuration</h2>
+<h3>Fichier <code>building-config.ts</code></h3>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">export const BUILDING_CONFIG = {
+  // Dimensions du bâtiment
+  dimensions: { longueur: 8, largeur: 5, hauteur: 2.5 },
+  
+  // Configuration des murs
+  murs: {
+    principal: { /* ... */ },
+    arriere: { /* ... */ },
+    gauche: { /* ... */ },
+    droit: { /* ... */ }
+  },
+  
+  // Ouvertures (fenêtres et portes)
+  ouvertures: { /* ... */ }
+};</code></pre></div><h3>Modification Directe</h3>
+<ol>
+<li>Éditez <code>src/app/config/building-config.ts</code></li>
+<li>Cliquez sur &quot;🔄 Recharger Configuration&quot;</li>
+<li>Les changements s&#39;appliquent immédiatement</li>
+</ol>
+<h2>🛠️ Technologies</h2>
+<ul>
+<li><strong>Angular 17+</strong> : Framework frontend</li>
+<li><strong>Three.js</strong> : Rendu 3D</li>
+<li><strong>TypeScript</strong> : Langage de développement</li>
+<li><strong>RxJS</strong> : Programmation réactive</li>
+<li><strong>CSS3</strong> : Styles et animations</li>
+</ul>
+<h2>📚 Documentation</h2>
+<ul>
+<li><strong><a href="./Documentations/NAVIGATION.md">Guide de Navigation</a></strong> : Navigation dans l&#39;interface</li>
+<li><strong><a href="./Documentations/GUIDE-TEST-SCENE.md">Guide de Test de Scène</a></strong> : Tests et diagnostics</li>
+<li><strong><a href="./Documentations/README.md">Documentation Complète</a></strong> : Guide détaillé</li>
+</ul>
+<h2>🐛 Dépannage</h2>
+<h3>Problèmes Courants</h3>
+<ul>
+<li><strong>Scène 3D ne se charge pas</strong> : Vérifiez la console, redémarrez l&#39;application</li>
+<li><strong>Modifications non visibles</strong> : Cliquez sur &quot;Recharger Configuration&quot;</li>
+<li><strong>Erreurs de compilation</strong> : Vérifiez <code>building-config.ts</code> pour les erreurs de syntaxe</li>
+</ul>
+<h3>Console de Développement</h3>
+<p>Ouvrez F12 pour voir :</p>
+<ul>
+<li>Messages de log détaillés</li>
+<li>Erreurs de compilation</li>
+<li>État des services</li>
+</ul>
+<h2>🚀 Développement</h2>
+<h3>Commandes Utiles</h3>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash"># Compilation
+ng build
+
+# Tests
+ng test
+
+# Linting
+ng lint
+
+# Génération de composant
+ng generate component nom-composant</code></pre></div><h3>Structure des Services</h3>
+<ul>
+<li><code>ConfigurationService</code> : Gestion de la configuration</li>
+<li><code>SceneService</code> : Gestion de la scène 3D</li>
+<li><code>CalculateurFenetresService</code> : Calcul des ouvertures</li>
+</ul>
+<h2>📄 Licence</h2>
+<p>Projet éducatif - Utilisation libre pour l&#39;apprentissage.</p>
+<hr>
+<p><em>Dernière mise à jour : {{ new Date().toLocaleDateString(&#39;fr-FR&#39;) }}</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 0;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'readme';
+            var COMPODOC_CURRENT_PAGE_URL = 'index.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="./js/libs/custom-elements.min.js"></script>
+       <script src="./js/libs/lit-html.js"></script>
+
+       <script src="./js/menu-wc.js" defer></script>
+       <script nomodule src="./js/menu-wc_es5.js" defer></script>
+
+       <script src="./js/libs/bootstrap-native.js"></script>
+
+       <script src="./js/libs/es6-shim.min.js"></script>
+       <script src="./js/libs/EventDispatcher.js"></script>
+       <script src="./js/libs/promise.min.js"></script>
+
+       <script src="./js/compodoc.js"></script>
+
+       <script src="./js/tabs.js"></script>
+       <script src="./js/menu.js"></script>
+       <script src="./js/libs/clipboard.min.js"></script>
+       <script src="./js/libs/prism.js"></script>
+       <script src="./js/sourceCode.js"></script>
+          <script src="./js/search/search.js"></script>
+          <script src="./js/search/lunr.min.js"></script>
+          <script src="./js/search/search-lunr.js"></script>
+          <script src="./js/search/search_index.js"></script>
+       <script src="./js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

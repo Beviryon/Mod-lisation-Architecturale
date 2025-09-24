@@ -1,0 +1,885 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>projet-3-d documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">projet-3-d documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Interfaces</li>
+  <li class="breadcrumb-item"
+  >
+  ConfigurationBatiment</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/services/configuration/configuration.service.ts</code>
+        </p>
+
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Interface pour la configuration d&#39;un bâtiment</p>
+
+            </p>
+
+
+        <section data-compodoc="block-index">
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#description" 
+>
+                                            description
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#dimensions" 
+>
+                                            dimensions
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#murs" 
+>
+                                            murs
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#nom" 
+>
+                                            nom
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#sol" 
+>
+                                            sol
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#toit" 
+>
+                                            toit
+                                        </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section data-compodoc="block-properties">
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="description"></a>
+                                        <span class="name "><b>description</b>
+                                            <a href="#description">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>description:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="dimensions"></a>
+                                        <span class="name "><b>dimensions</b>
+                                            <a href="#dimensions">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>dimensions:     <code>literal type</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>literal type</code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="murs"></a>
+                                        <span class="name "><b>murs</b>
+                                            <a href="#murs">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>murs:     <code>literal type</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>literal type</code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="nom"></a>
+                                        <span class="name "><b>nom</b>
+                                            <a href="#nom">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>nom:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="sol"></a>
+                                        <span class="name "><b>sol</b>
+                                            <a href="#sol">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>sol:         <code><a href="../interfaces/ConfigurationSol.html" target="_self" >ConfigurationSol</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../interfaces/ConfigurationSol.html" target="_self" >ConfigurationSol</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="toit"></a>
+                                        <span class="name "><b>toit</b>
+                                            <a href="#toit">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>toit:         <code><a href="../interfaces/ConfigurationToit.html" target="_self" >ConfigurationToit</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../interfaces/ConfigurationToit.html" target="_self" >ConfigurationToit</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+import { BehaviorSubject, Observable } from &#x27;rxjs&#x27;;
+import { ConfigDirectService, ConfigurationComplete } from &#x27;../../config/config-direct&#x27;;
+
+/**
+ * Interface pour la configuration d&#x27;un bâtiment
+ */
+export interface ConfigurationBatiment {
+  // Configuration générale
+  nom: string;
+  description: string;
+  dimensions: {
+    longueur: number;  // en mètres
+    largeur: number;   // en mètres
+    hauteur: number;   // en mètres
+  };
+  
+  // Configuration des murs
+  murs: {
+    principal: ConfigurationMur;
+    arriere: ConfigurationMur;
+    gauche: ConfigurationMur;
+    droit: ConfigurationMur;
+  };
+  
+  // Configuration du toit
+  toit: ConfigurationToit;
+  
+  // Configuration du sol
+  sol: ConfigurationSol;
+}
+
+/**
+ * Interface pour la configuration d&#x27;un mur
+ */
+export interface ConfigurationMur {
+  position: { x: number; y: number; z: number };
+  dimensions: { width: number; height: number; depth: number };
+  couleur: number;
+  epaisseur: number;
+  ouvertures: ConfigurationOuverture[];
+}
+
+/**
+ * Interface pour la configuration d&#x27;une ouverture
+ */
+export interface ConfigurationOuverture {
+  id: string;
+  type: &#x27;porte&#x27; | &#x27;fenetre&#x27;;
+  position: { x: number; y: number; z: number };
+  dimensions: { width: number; height: number; depth: number };
+  couleur: number;
+  nom?: string;
+}
+
+/**
+ * Interface pour la configuration du toit
+ */
+export interface ConfigurationToit {
+  position: { x: number; y: number; z: number };
+  dimensions: { width: number; height: number; depth: number };
+  couleur: number;
+}
+
+/**
+ * Interface pour la configuration du sol
+ */
+export interface ConfigurationSol {
+  position: { x: number; y: number; z: number };
+  dimensions: { width: number; height: number; depth: number };
+  couleur: number;
+}
+
+/**
+ * Service de gestion de la configuration du bâtiment
+ * Remplace le fichier building-config.ts statique
+ */
+@Injectable({
+  providedIn: &#x27;root&#x27;
+})
+export class ConfigurationService {
+  
+  // Configuration par défaut
+  private configurationParDefaut: ConfigurationBatiment &#x3D; {
+    nom: &#x27;Bâtiment Principal&#x27;,
+    description: &#x27;Bâtiment architectural avec murs, ouvertures et toit&#x27;,
+    dimensions: {
+      longueur: 8,
+      largeur: 5,
+      hauteur: 2.5
+    },
+    murs: {
+      principal: {
+        position: { x: 0, y: 0, z: 2.3 },
+        dimensions: { width: 8, height: 2.5, depth: 0.2 },
+        couleur: 0xaaaaaa,
+        epaisseur: 0.2,
+        ouvertures: [
+          {
+            id: &#x27;fenetre1&#x27;,
+            type: &#x27;fenetre&#x27;,
+            position: { x: -1.5, y: 1.5, z: 2.3 },
+            dimensions: { width: 1.5, height: 1.2, depth: 0.05 },
+            couleur: 0x0000ff,
+            nom: &#x27;Fenêtre Bleue&#x27;
+          },
+          {
+            id: &#x27;fenetre2&#x27;,
+            type: &#x27;fenetre&#x27;,
+            position: { x: 0, y: 1.5, z: 2.3 },
+            dimensions: { width: 2, height: 1.2, depth: 0.05 },
+            couleur: 0xff0000,
+            nom: &#x27;Fenêtre Rouge&#x27;
+          }
+        ]
+      },
+      arriere: {
+        position: { x: 0, y: 0, z: -2.5 },
+        dimensions: { width: 8, height: 2.5, depth: 0.2 },
+        couleur: 0xaaaaaa,
+        epaisseur: 0.2,
+        ouvertures: [
+          {
+            id: &#x27;fenetre3&#x27;,
+            type: &#x27;fenetre&#x27;,
+            position: { x: 0, y: 1.5, z: -2.3 },
+            dimensions: { width: 1.5, height: 1.2, depth: 0.05 },
+            couleur: 0xff0000,
+            nom: &#x27;Fenêtre Arrière&#x27;
+          }
+        ]
+      },
+      gauche: {
+        position: { x: -3.9, y: 1.25, z: 0 },
+        dimensions: { width: 0.2, height: 2.5, depth: 5 },
+        couleur: 0xaaaaaa,
+        epaisseur: 0.2,
+        ouvertures: []
+      },
+      droit: {
+        position: { x: 3.8, y: 0, z: 0 },
+        dimensions: { width: 0.2, height: 2.5, depth: 5 },
+        couleur: 0xaaaaaa,
+        epaisseur: 0.2,
+        ouvertures: [
+          {
+            id: &#x27;porte1&#x27;,
+            type: &#x27;porte&#x27;,
+            position: { x: 3.9, y: 1.05, z: 0 },
+            dimensions: { width: 1, height: 2.1, depth: 0.05 },
+            couleur: 0x00ff00,
+            nom: &#x27;Porte d\&#x27;Entrée&#x27;
+          }
+        ]
+      }
+    },
+    toit: {
+      position: { x: 0, y: 2.6, z: 0 },
+      dimensions: { width: 8.4, height: 0.2, depth: 5 },
+      couleur: 0x4169e1
+    },
+    sol: {
+      position: { x: 0, y: -0.1, z: 0 },
+      dimensions: { width: 8.2, height: 0.2, depth: 5.2 },
+      couleur: 0x8b4513
+    }
+  };
+
+  // Subject pour la configuration actuelle
+  private configurationActuelle &#x3D; new BehaviorSubject&lt;ConfigurationBatiment&gt;(this.configurationParDefaut);
+  
+  // Observable public
+  public configuration$ &#x3D; this.configurationActuelle.asObservable();
+
+  constructor(private configDirectService: ConfigDirectService) {
+    console.log(&#x27;ConfigurationService initialisé avec ConfigDirectService&#x27;);
+    
+    // Écouter les changements du ConfigDirectService
+    this.configDirectService.configuration$.subscribe(config &#x3D;&gt; {
+      this.synchroniserAvecConfigDirect(config);
+    });
+  }
+
+  /**
+   * Synchroniser avec la configuration directe
+   */
+  private synchroniserAvecConfigDirect(config: ConfigurationComplete): void {
+    try {
+      const nouvelleConfig: ConfigurationBatiment &#x3D; {
+        nom: &#x27;Bâtiment Direct&#x27;,
+        description: &#x27;Configuration chargée directement depuis building-config.ts&#x27;,
+        dimensions: {
+          longueur: config.walls.back.dimensions.width,
+          largeur: config.walls.left.dimensions.depth,
+          hauteur: config.walls.back.dimensions.height
+        },
+        murs: {
+          principal: {
+            position: config.mainWall.position,
+            dimensions: {
+              width: config.mainWall.contour[1].x - config.mainWall.contour[0].x, // Calcul de la largeur
+              height: config.mainWall.contour[2].y - config.mainWall.contour[0].y, // Calcul de la hauteur
+              depth: config.mainWall.thickness
+            },
+            couleur: config.mainWall.color,
+            epaisseur: config.mainWall.thickness,
+            ouvertures: []
+          },
+          arriere: {
+            position: config.walls.back.position,
+            dimensions: config.walls.back.dimensions,
+            couleur: config.walls.back.color,
+            epaisseur: config.walls.back.dimensions.depth,
+            ouvertures: config.walls.back.openings ? [
+              {
+                id: &#x27;fenetre-arriere&#x27;,
+                position: config.walls.back.openings.window1.position,
+                dimensions: config.walls.back.openings.window1.dimensions,
+                couleur: config.walls.back.openings.window1.color,
+                type: config.walls.back.openings.window1.type &#x3D;&#x3D;&#x3D; &#x27;window&#x27; ? &#x27;fenetre&#x27; : &#x27;porte&#x27;,
+                nom: &#x27;Fenêtre Arrière&#x27;
+              }
+            ] : []
+          },
+          gauche: {
+            position: config.walls.left.position,
+            dimensions: config.walls.left.dimensions,
+            couleur: config.walls.left.color,
+            epaisseur: config.walls.left.dimensions.width,
+            ouvertures: []
+          },
+          droit: {
+            position: config.walls.right.position,
+            dimensions: config.walls.right.dimensions,
+            couleur: config.walls.right.color,
+            epaisseur: config.walls.right.dimensions.width,
+            ouvertures: config.walls.right.openings ? [
+              {
+                id: &#x27;porte-principale&#x27;,
+                position: config.walls.right.openings.door.position,
+                dimensions: config.walls.right.openings.door.dimensions,
+                couleur: config.walls.right.openings.door.color,
+                type: config.walls.right.openings.door.type &#x3D;&#x3D;&#x3D; &#x27;door&#x27; ? &#x27;porte&#x27; : &#x27;fenetre&#x27;,
+                nom: &#x27;Porte Principale&#x27;
+              }
+            ] : []
+          }
+        },
+        toit: {
+          position: config.roof.position,
+          dimensions: config.roof.dimensions,
+          couleur: config.roof.color
+        },
+        sol: {
+          position: config.ground.position,
+          dimensions: config.ground.dimensions,
+          couleur: config.ground.color
+        }
+      };
+
+      this.configurationActuelle.next(nouvelleConfig);
+      console.log(&#x27;🔄 Configuration synchronisée avec ConfigDirectService&#x27;);
+      
+    } catch (error) {
+      console.error(&#x27;❌ Erreur lors de la synchronisation:&#x27;, error);
+    }
+  }
+
+  /**
+   * Recharger la configuration depuis building-config.ts
+   */
+  public rechargerConfiguration(): void {
+    this.configDirectService.rechargerConfiguration();
+    console.log(&#x27;🔄 Configuration rechargée depuis building-config.ts&#x27;);
+  }
+
+  /**
+   * Obtenir la configuration actuelle
+   */
+  getConfiguration(): ConfigurationBatiment {
+    return this.configurationActuelle.value;
+  }
+
+  /**
+   * Obtenir la configuration en tant qu&#x27;Observable
+   */
+  getConfigurationObservable(): Observable&lt;ConfigurationBatiment&gt; {
+    return this.configuration$;
+  }
+
+  /**
+   * Mettre à jour la configuration complète
+   */
+  mettreAJourConfiguration(nouvelleConfiguration: ConfigurationBatiment): void {
+    try {
+      // Validation de la configuration
+      if (!nouvelleConfiguration || !nouvelleConfiguration.nom || !nouvelleConfiguration.dimensions) {
+        throw new Error(&#x27;Configuration invalide: propriétés manquantes&#x27;);
+      }
+      
+      if (nouvelleConfiguration.dimensions.longueur &lt;&#x3D; 0 || 
+          nouvelleConfiguration.dimensions.largeur &lt;&#x3D; 0 || 
+          nouvelleConfiguration.dimensions.hauteur &lt;&#x3D; 0) {
+        throw new Error(&#x27;Configuration invalide: dimensions doivent être positives&#x27;);
+      }
+      
+      this.configurationActuelle.next(nouvelleConfiguration);
+      console.log(&#x27;Configuration mise à jour:&#x27;, nouvelleConfiguration);
+    } catch (error) {
+      console.error(&#x27;Erreur lors de la mise à jour de la configuration:&#x27;, error);
+      throw error;
+    }
+  }
+
+  /**
+   * Mettre à jour un mur spécifique
+   */
+  mettreAJourMur(nomMur: keyof ConfigurationBatiment[&#x27;murs&#x27;], nouveauMur: ConfigurationMur): void {
+    const configActuelle &#x3D; this.getConfiguration();
+    configActuelle.murs[nomMur] &#x3D; nouveauMur;
+    this.mettreAJourConfiguration(configActuelle);
+  }
+
+  /**
+   * Ajouter une ouverture à un mur
+   */
+  ajouterOuverture(nomMur: keyof ConfigurationBatiment[&#x27;murs&#x27;], nouvelleOuverture: ConfigurationOuverture): void {
+    const configActuelle &#x3D; this.getConfiguration();
+    configActuelle.murs[nomMur].ouvertures.push(nouvelleOuverture);
+    this.mettreAJourConfiguration(configActuelle);
+  }
+
+  /**
+   * Supprimer une ouverture d&#x27;un mur
+   */
+  supprimerOuverture(nomMur: keyof ConfigurationBatiment[&#x27;murs&#x27;], idOuverture: string): void {
+    const configActuelle &#x3D; this.getConfiguration();
+    const mur &#x3D; configActuelle.murs[nomMur];
+    mur.ouvertures &#x3D; mur.ouvertures.filter(ouverture &#x3D;&gt; ouverture.id !&#x3D;&#x3D; idOuverture);
+    this.mettreAJourConfiguration(configActuelle);
+  }
+
+  /**
+   * Réinitialiser à la configuration par défaut
+   */
+  reinitialiserConfiguration(): void {
+    this.configurationActuelle.next(this.configurationParDefaut);
+    console.log(&#x27;Configuration réinitialisée&#x27;);
+  }
+
+  /**
+   * Obtenir les dimensions du bâtiment
+   */
+  getDimensionsBatiment(): { longueur: number; largeur: number; hauteur: number } {
+    return this.getConfiguration().dimensions;
+  }
+
+  /**
+   * Obtenir tous les murs
+   */
+  getMurs(): ConfigurationBatiment[&#x27;murs&#x27;] {
+    return this.getConfiguration().murs;
+  }
+
+  /**
+   * Obtenir un mur spécifique
+   */
+  getMur(nomMur: keyof ConfigurationBatiment[&#x27;murs&#x27;]): ConfigurationMur {
+    return this.getConfiguration().murs[nomMur];
+  }
+
+  /**
+   * Obtenir toutes les ouvertures de tous les murs
+   */
+  getAllOuvertures(): ConfigurationOuverture[] {
+    const config &#x3D; this.getConfiguration();
+    const toutesOuvertures: ConfigurationOuverture[] &#x3D; [];
+    
+    Object.values(config.murs).forEach(mur &#x3D;&gt; {
+      toutesOuvertures.push(...mur.ouvertures);
+    });
+    
+    return toutesOuvertures;
+  }
+}
+
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'ConfigurationBatiment.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

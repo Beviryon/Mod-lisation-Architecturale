@@ -1,0 +1,858 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>projet-3-d documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">projet-3-d documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Interfaces</li>
+  <li class="breadcrumb-item"
+  >
+  ProprietesBatiment</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/services/batiment/batiment.service.ts</code>
+        </p>
+
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Interface pour les propriétés d&#39;un bâtiment</p>
+
+            </p>
+
+
+        <section data-compodoc="block-index">
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#dateCreation" 
+>
+                                            dateCreation
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#derniereModification" 
+>
+                                            derniereModification
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#description" 
+>
+                                            description
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#etage" 
+>
+                                            etage
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#nom" 
+>
+                                            nom
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#surface" 
+>
+                                            surface
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#type" 
+>
+                                            type
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#volume" 
+>
+                                            volume
+                                        </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section data-compodoc="block-properties">
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="dateCreation"></a>
+                                        <span class="name "><b>dateCreation</b>
+                                            <a href="#dateCreation">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>dateCreation:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="derniereModification"></a>
+                                        <span class="name "><b>derniereModification</b>
+                                            <a href="#derniereModification">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>derniereModification:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="description"></a>
+                                        <span class="name "><b>description</b>
+                                            <a href="#description">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>description:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="etage"></a>
+                                        <span class="name "><b>etage</b>
+                                            <a href="#etage">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>etage:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="nom"></a>
+                                        <span class="name "><b>nom</b>
+                                            <a href="#nom">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>nom:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="surface"></a>
+                                        <span class="name "><b>surface</b>
+                                            <a href="#surface">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>surface:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="type"></a>
+                                        <span class="name "><b>type</b>
+                                            <a href="#type">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>type:     <code>&quot;residentiel&quot; | &quot;commercial&quot; | &quot;industriel&quot; | &quot;public&quot;</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>&quot;residentiel&quot; | &quot;commercial&quot; | &quot;industriel&quot; | &quot;public&quot;</code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="volume"></a>
+                                        <span class="name "><b>volume</b>
+                                            <a href="#volume">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>volume:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+import { BehaviorSubject, Observable } from &#x27;rxjs&#x27;;
+import { ConfigurationService, ConfigurationBatiment } from &#x27;../configuration/configuration.service&#x27;;
+
+/**
+ * Interface pour les propriétés d&#x27;un bâtiment
+ */
+export interface ProprietesBatiment {
+  nom: string;
+  description: string;
+  type: &#x27;residentiel&#x27; | &#x27;commercial&#x27; | &#x27;industriel&#x27; | &#x27;public&#x27;;
+  etage: number;
+  surface: number; // en m²
+  volume: number;   // en m³
+  dateCreation: Date;
+  derniereModification: Date;
+}
+
+/**
+ * Interface pour les statistiques du bâtiment
+ */
+export interface StatistiquesBatiment {
+  nombreMurs: number;
+  nombreOuvertures: number;
+  nombrePortes: number;
+  nombreFenetres: number;
+  surfaceMurs: number;
+  surfaceOuvertures: number;
+  pourcentageOuvertures: number;
+}
+
+/**
+ * Service de gestion des bâtiments
+ */
+@Injectable({
+  providedIn: &#x27;root&#x27;
+})
+export class BatimentService {
+  
+  private proprietesBatiment &#x3D; new BehaviorSubject&lt;ProprietesBatiment&gt;({
+    nom: &#x27;Bâtiment Principal&#x27;,
+    description: &#x27;Bâtiment architectural avec murs, ouvertures et toit&#x27;,
+    type: &#x27;residentiel&#x27;,
+    etage: 1,
+    surface: 0,
+    volume: 0,
+    dateCreation: new Date(),
+    derniereModification: new Date()
+  });
+
+  public proprietes$ &#x3D; this.proprietesBatiment.asObservable();
+
+  constructor(private configurationService: ConfigurationService) {
+    // Calculer automatiquement la surface et le volume
+    this.calculerSurfaceEtVolume();
+    
+    // Écouter les changements de configuration pour recalculer
+    this.configurationService.getConfigurationObservable().subscribe(() &#x3D;&gt; {
+      this.calculerSurfaceEtVolume();
+      this.mettreAJourDateModification();
+    });
+  }
+
+  /**
+   * Obtenir les propriétés du bâtiment
+   */
+  getProprietes(): ProprietesBatiment {
+    return this.proprietesBatiment.value;
+  }
+
+  /**
+   * Obtenir les propriétés en tant qu&#x27;Observable
+   */
+  getProprietesObservable(): Observable&lt;ProprietesBatiment&gt; {
+    return this.proprietes$;
+  }
+
+  /**
+   * Mettre à jour les propriétés du bâtiment
+   */
+  mettreAJourProprietes(nouvellesProprietes: Partial&lt;ProprietesBatiment&gt;): void {
+    const proprietesActuelles &#x3D; this.getProprietes();
+    const proprietesMisesAJour &#x3D; {
+      ...proprietesActuelles,
+      ...nouvellesProprietes,
+      derniereModification: new Date()
+    };
+    
+    this.proprietesBatiment.next(proprietesMisesAJour);
+    console.log(&#x27;Propriétés du bâtiment mises à jour:&#x27;, proprietesMisesAJour);
+  }
+
+  /**
+   * Calculer la surface et le volume du bâtiment
+   */
+  private calculerSurfaceEtVolume(): void {
+    const config &#x3D; this.configurationService.getConfiguration();
+    const dimensions &#x3D; config.dimensions;
+    
+    const surface &#x3D; dimensions.longueur * dimensions.largeur;
+    const volume &#x3D; surface * dimensions.hauteur;
+    
+    this.mettreAJourProprietes({
+      surface: Math.round(surface * 100) / 100, // Arrondir à 2 décimales
+      volume: Math.round(volume * 100) / 100
+    });
+  }
+
+  /**
+   * Mettre à jour la date de dernière modification
+   */
+  private mettreAJourDateModification(): void {
+    this.mettreAJourProprietes({
+      derniereModification: new Date()
+    });
+  }
+
+  /**
+   * Obtenir les statistiques du bâtiment
+   */
+  getStatistiques(): StatistiquesBatiment {
+    const config &#x3D; this.configurationService.getConfiguration();
+    const toutesOuvertures &#x3D; this.configurationService.getAllOuvertures();
+    
+    const nombreMurs &#x3D; 4; // principal, arrière, gauche, droit
+    const nombreOuvertures &#x3D; toutesOuvertures.length;
+    const nombrePortes &#x3D; toutesOuvertures.filter(o &#x3D;&gt; o.type &#x3D;&#x3D;&#x3D; &#x27;porte&#x27;).length;
+    const nombreFenetres &#x3D; toutesOuvertures.filter(o &#x3D;&gt; o.type &#x3D;&#x3D;&#x3D; &#x27;fenetre&#x27;).length;
+    
+    // Calculer la surface des murs
+    const murs &#x3D; config.murs;
+    const surfaceMurs &#x3D; 
+      (murs.principal.dimensions.width * murs.principal.dimensions.height) +
+      (murs.arriere.dimensions.width * murs.arriere.dimensions.height) +
+      (murs.gauche.dimensions.width * murs.gauche.dimensions.height) +
+      (murs.droit.dimensions.width * murs.droit.dimensions.height);
+    
+    // Calculer la surface des ouvertures
+    const surfaceOuvertures &#x3D; toutesOuvertures.reduce((total, ouverture) &#x3D;&gt; {
+      return total + (ouverture.dimensions.width * ouverture.dimensions.height);
+    }, 0);
+    
+    const pourcentageOuvertures &#x3D; surfaceMurs &gt; 0 ? 
+      Math.round((surfaceOuvertures / surfaceMurs) * 100 * 100) / 100 : 0;
+    
+    return {
+      nombreMurs,
+      nombreOuvertures,
+      nombrePortes,
+      nombreFenetres,
+      surfaceMurs: Math.round(surfaceMurs * 100) / 100,
+      surfaceOuvertures: Math.round(surfaceOuvertures * 100) / 100,
+      pourcentageOuvertures
+    };
+  }
+
+  /**
+   * Obtenir le type de bâtiment
+   */
+  getTypeBatiment(): string {
+    return this.getProprietes().type;
+  }
+
+  /**
+   * Changer le type de bâtiment
+   */
+  changerTypeBatiment(nouveauType: ProprietesBatiment[&#x27;type&#x27;]): void {
+    this.mettreAJourProprietes({ type: nouveauType });
+  }
+
+  /**
+   * Obtenir la surface du bâtiment
+   */
+  getSurface(): number {
+    return this.getProprietes().surface;
+  }
+
+  /**
+   * Obtenir le volume du bâtiment
+   */
+  getVolume(): number {
+    return this.getProprietes().volume;
+  }
+
+  /**
+   * Obtenir le nom du bâtiment
+   */
+  getNom(): string {
+    return this.getProprietes().nom;
+  }
+
+  /**
+   * Changer le nom du bâtiment
+   */
+  changerNom(nouveauNom: string): void {
+    this.mettreAJourProprietes({ nom: nouveauNom });
+  }
+
+  /**
+   * Obtenir la description du bâtiment
+   */
+  getDescription(): string {
+    return this.getProprietes().description;
+  }
+
+  /**
+   * Changer la description du bâtiment
+   */
+  changerDescription(nouvelleDescription: string): void {
+    this.mettreAJourProprietes({ description: nouvelleDescription });
+  }
+
+  /**
+   * Obtenir la date de création
+   */
+  getDateCreation(): Date {
+    return this.getProprietes().dateCreation;
+  }
+
+  /**
+   * Obtenir la date de dernière modification
+   */
+  getDerniereModification(): Date {
+    return this.getProprietes().derniereModification;
+  }
+
+  /**
+   * Exporter les données du bâtiment
+   */
+  exporterDonnees(): string {
+    const proprietes &#x3D; this.getProprietes();
+    const config &#x3D; this.configurationService.getConfiguration();
+    const statistiques &#x3D; this.getStatistiques();
+    
+    const donneesExport &#x3D; {
+      proprietes,
+      configuration: config,
+      statistiques,
+      dateExport: new Date()
+    };
+    
+    return JSON.stringify(donneesExport, null, 2);
+  }
+
+  /**
+   * Importer les données du bâtiment
+   */
+  importerDonnees(donneesJson: string): boolean {
+    try {
+      if (!donneesJson || donneesJson.trim() &#x3D;&#x3D;&#x3D; &#x27;&#x27;) {
+        throw new Error(&#x27;Données JSON vides ou invalides&#x27;);
+      }
+      
+      const donnees &#x3D; JSON.parse(donneesJson);
+      
+      // Validation des données importées
+      if (!donnees || typeof donnees !&#x3D;&#x3D; &#x27;object&#x27;) {
+        throw new Error(&#x27;Format de données invalide&#x27;);
+      }
+      
+      if (donnees.proprietes) {
+        // Validation des propriétés
+        if (!donnees.proprietes.nom || !donnees.proprietes.type) {
+          throw new Error(&#x27;Propriétés du bâtiment incomplètes&#x27;);
+        }
+        this.mettreAJourProprietes(donnees.proprietes);
+      }
+      
+      if (donnees.configuration) {
+        this.configurationService.mettreAJourConfiguration(donnees.configuration);
+      }
+      
+      console.log(&#x27;Données importées avec succès&#x27;);
+      return true;
+    } catch (error) {
+      console.error(&#x27;Erreur lors de l\&#x27;importation:&#x27;, error);
+      return false;
+    }
+  }
+}
+
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'ProprietesBatiment.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

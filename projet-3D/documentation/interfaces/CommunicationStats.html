@@ -1,0 +1,927 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>projet-3-d documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">projet-3-d documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Interfaces</li>
+  <li class="breadcrumb-item"
+  >
+  CommunicationStats</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/services/communication/communication.service.ts</code>
+        </p>
+
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Interface pour les statistiques de communication</p>
+
+            </p>
+
+
+        <section data-compodoc="block-index">
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#averageResponseTime" 
+>
+                                            averageResponseTime
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#eventsByPriority" 
+>
+                                            eventsByPriority
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#eventsBySource" 
+>
+                                            eventsBySource
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#eventsByType" 
+>
+                                            eventsByType
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#lastEvent" 
+>
+                                            lastEvent
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#totalEvents" 
+>
+                                            totalEvents
+                                        </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section data-compodoc="block-properties">
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="averageResponseTime"></a>
+                                        <span class="name "><b>averageResponseTime</b>
+                                            <a href="#averageResponseTime">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>averageResponseTime:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="eventsByPriority"></a>
+                                        <span class="name "><b>eventsByPriority</b>
+                                            <a href="#eventsByPriority">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>eventsByPriority:     <code>Record&lt;string | number&gt;</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>Record&lt;string | number&gt;</code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="eventsBySource"></a>
+                                        <span class="name "><b>eventsBySource</b>
+                                            <a href="#eventsBySource">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>eventsBySource:     <code>Record&lt;string | number&gt;</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>Record&lt;string | number&gt;</code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="eventsByType"></a>
+                                        <span class="name "><b>eventsByType</b>
+                                            <a href="#eventsByType">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>eventsByType:     <code>Record&lt;string | number&gt;</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>Record&lt;string | number&gt;</code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="lastEvent"></a>
+                                        <span class="name "><b>lastEvent</b>
+                                            <a href="#lastEvent">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>lastEvent:     <code>Date | null</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>Date | null</code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="totalEvents"></a>
+                                        <span class="name "><b>totalEvents</b>
+                                            <a href="#totalEvents">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>totalEvents:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+import { BehaviorSubject, Observable, Subject } from &#x27;rxjs&#x27;;
+import { filter, map } from &#x27;rxjs/operators&#x27;;
+
+/**
+ * Interface pour les événements de communication
+ */
+export interface CommunicationEvent {
+  id: string;
+  type: string;
+  source: string;
+  target?: string;
+  data: any;
+  timestamp: Date;
+  priority: &#x27;low&#x27; | &#x27;medium&#x27; | &#x27;high&#x27; | &#x27;critical&#x27;;
+}
+
+/**
+ * Interface pour les messages entre services
+ */
+export interface ServiceMessage {
+  from: string;
+  to: string;
+  action: string;
+  payload: any;
+  timestamp: Date;
+}
+
+/**
+ * Interface pour les statistiques de communication
+ */
+export interface CommunicationStats {
+  totalEvents: number;
+  eventsByType: Record&lt;string, number&gt;;
+  eventsBySource: Record&lt;string, number&gt;;
+  eventsByPriority: Record&lt;string, number&gt;;
+  averageResponseTime: number;
+  lastEvent: Date | null;
+}
+
+/**
+ * Service de communication entre les services
+ */
+@Injectable({
+  providedIn: &#x27;root&#x27;
+})
+export class CommunicationService {
+  
+  private eventSubject &#x3D; new Subject&lt;CommunicationEvent&gt;();
+  private messageSubject &#x3D; new Subject&lt;ServiceMessage&gt;();
+  private statsSubject &#x3D; new BehaviorSubject&lt;CommunicationStats&gt;({
+    totalEvents: 0,
+    eventsByType: {},
+    eventsBySource: {},
+    eventsByPriority: {},
+    averageResponseTime: 0,
+    lastEvent: null
+  });
+
+  private events: CommunicationEvent[] &#x3D; [];
+  private messages: ServiceMessage[] &#x3D; [];
+  private responseTimes: number[] &#x3D; [];
+
+  public events$ &#x3D; this.eventSubject.asObservable();
+  public messages$ &#x3D; this.messageSubject.asObservable();
+  public stats$ &#x3D; this.statsSubject.asObservable();
+
+  constructor() {
+    console.log(&#x27;CommunicationService initialisé&#x27;);
+  }
+
+  /**
+   * Émettre un événement
+   */
+  emitEvent(event: Omit&lt;CommunicationEvent, &#x27;id&#x27; | &#x27;timestamp&#x27;&gt;): void {
+    const fullEvent: CommunicationEvent &#x3D; {
+      ...event,
+      id: &#x60;event_${Date.now()}_${Math.random().toString(36).substr(2, 9)}&#x60;,
+      timestamp: new Date()
+    };
+
+    this.events.push(fullEvent);
+    this.eventSubject.next(fullEvent);
+    this.updateStats();
+    
+    console.log(&#x60;[CommunicationService] Événement émis:&#x60;, fullEvent);
+  }
+
+  /**
+   * Écouter les événements par type
+   */
+  listenToEventType(eventType: string): Observable&lt;CommunicationEvent&gt; {
+    return this.events$.pipe(
+      filter(event &#x3D;&gt; event.type &#x3D;&#x3D;&#x3D; eventType)
+    );
+  }
+
+  /**
+   * Écouter les événements par source
+   */
+  listenToSource(source: string): Observable&lt;CommunicationEvent&gt; {
+    return this.events$.pipe(
+      filter(event &#x3D;&gt; event.source &#x3D;&#x3D;&#x3D; source)
+    );
+  }
+
+  /**
+   * Écouter les événements par priorité
+   */
+  listenToPriority(priority: CommunicationEvent[&#x27;priority&#x27;]): Observable&lt;CommunicationEvent&gt; {
+    return this.events$.pipe(
+      filter(event &#x3D;&gt; event.priority &#x3D;&#x3D;&#x3D; priority)
+    );
+  }
+
+  /**
+   * Envoyer un message entre services
+   */
+  sendMessage(message: Omit&lt;ServiceMessage, &#x27;timestamp&#x27;&gt;): void {
+    const fullMessage: ServiceMessage &#x3D; {
+      ...message,
+      timestamp: new Date()
+    };
+
+    this.messages.push(fullMessage);
+    this.messageSubject.next(fullMessage);
+    
+    console.log(&#x60;[CommunicationService] Message envoyé:&#x60;, fullMessage);
+  }
+
+  /**
+   * Écouter les messages destinés à un service
+   */
+  listenToMessages(serviceName: string): Observable&lt;ServiceMessage&gt; {
+    return this.messages$.pipe(
+      filter(message &#x3D;&gt; message.to &#x3D;&#x3D;&#x3D; serviceName)
+    );
+  }
+
+  /**
+   * Écouter les messages d&#x27;un service
+   */
+  listenFromService(serviceName: string): Observable&lt;ServiceMessage&gt; {
+    return this.messages$.pipe(
+      filter(message &#x3D;&gt; message.from &#x3D;&#x3D;&#x3D; serviceName)
+    );
+  }
+
+  /**
+   * Obtenir tous les événements
+   */
+  getEvents(): CommunicationEvent[] {
+    return [...this.events];
+  }
+
+  /**
+   * Obtenir tous les messages
+   */
+  getMessages(): ServiceMessage[] {
+    return [...this.messages];
+  }
+
+  /**
+   * Obtenir les événements récents (dernières 24h)
+   */
+  getRecentEvents(hours: number &#x3D; 24): CommunicationEvent[] {
+    const cutoff &#x3D; new Date(Date.now() - hours * 60 * 60 * 1000);
+    return this.events.filter(event &#x3D;&gt; event.timestamp &gt; cutoff);
+  }
+
+  /**
+   * Obtenir les événements par type
+   */
+  getEventsByType(type: string): CommunicationEvent[] {
+    return this.events.filter(event &#x3D;&gt; event.type &#x3D;&#x3D;&#x3D; type);
+  }
+
+  /**
+   * Obtenir les événements par source
+   */
+  getEventsBySource(source: string): CommunicationEvent[] {
+    return this.events.filter(event &#x3D;&gt; event.source &#x3D;&#x3D;&#x3D; source);
+  }
+
+  /**
+   * Obtenir les événements par priorité
+   */
+  getEventsByPriority(priority: CommunicationEvent[&#x27;priority&#x27;]): CommunicationEvent[] {
+    return this.events.filter(event &#x3D;&gt; event.priority &#x3D;&#x3D;&#x3D; priority);
+  }
+
+  /**
+   * Mettre à jour les statistiques
+   */
+  private updateStats(): void {
+    const stats: CommunicationStats &#x3D; {
+      totalEvents: this.events.length,
+      eventsByType: this.getEventsByTypeStats(),
+      eventsBySource: this.getEventsBySourceStats(),
+      eventsByPriority: this.getEventsByPriorityStats(),
+      averageResponseTime: this.calculateAverageResponseTime(),
+      lastEvent: this.events.length &gt; 0 ? this.events[this.events.length - 1].timestamp : null
+    };
+
+    this.statsSubject.next(stats);
+  }
+
+  /**
+   * Obtenir les statistiques par type
+   */
+  private getEventsByTypeStats(): Record&lt;string, number&gt; {
+    const stats: Record&lt;string, number&gt; &#x3D; {};
+    this.events.forEach(event &#x3D;&gt; {
+      stats[event.type] &#x3D; (stats[event.type] || 0) + 1;
+    });
+    return stats;
+  }
+
+  /**
+   * Obtenir les statistiques par source
+   */
+  private getEventsBySourceStats(): Record&lt;string, number&gt; {
+    const stats: Record&lt;string, number&gt; &#x3D; {};
+    this.events.forEach(event &#x3D;&gt; {
+      stats[event.source] &#x3D; (stats[event.source] || 0) + 1;
+    });
+    return stats;
+  }
+
+  /**
+   * Obtenir les statistiques par priorité
+   */
+  private getEventsByPriorityStats(): Record&lt;string, number&gt; {
+    const stats: Record&lt;string, number&gt; &#x3D; {};
+    this.events.forEach(event &#x3D;&gt; {
+      stats[event.priority] &#x3D; (stats[event.priority] || 0) + 1;
+    });
+    return stats;
+  }
+
+  /**
+   * Calculer le temps de réponse moyen
+   */
+  private calculateAverageResponseTime(): number {
+    if (this.responseTimes.length &#x3D;&#x3D;&#x3D; 0) return 0;
+    const sum &#x3D; this.responseTimes.reduce((a, b) &#x3D;&gt; a + b, 0);
+    return Math.round(sum / this.responseTimes.length * 100) / 100;
+  }
+
+  /**
+   * Enregistrer un temps de réponse
+   */
+  recordResponseTime(responseTime: number): void {
+    this.responseTimes.push(responseTime);
+    this.updateStats();
+  }
+
+  /**
+   * Obtenir les statistiques actuelles
+   */
+  getStats(): CommunicationStats {
+    return this.statsSubject.value;
+  }
+
+  /**
+   * Obtenir les statistiques en tant qu&#x27;Observable
+   */
+  getStatsObservable(): Observable&lt;CommunicationStats&gt; {
+    return this.stats$;
+  }
+
+  /**
+   * Effacer l&#x27;historique des événements
+   */
+  clearEvents(): void {
+    this.events &#x3D; [];
+    this.eventSubject.next({
+      id: &#x27;clear&#x27;,
+      type: &#x27;system&#x27;,
+      source: &#x27;CommunicationService&#x27;,
+      data: { action: &#x27;clear&#x27; },
+      timestamp: new Date(),
+      priority: &#x27;medium&#x27;
+    });
+    this.updateStats();
+  }
+
+  /**
+   * Effacer l&#x27;historique des messages
+   */
+  clearMessages(): void {
+    this.messages &#x3D; [];
+    this.messageSubject.next({
+      from: &#x27;CommunicationService&#x27;,
+      to: &#x27;all&#x27;,
+      action: &#x27;clear&#x27;,
+      payload: { action: &#x27;clear&#x27; },
+      timestamp: new Date()
+    });
+  }
+
+  /**
+   * Exporter les données de communication
+   */
+  exportCommunicationData(): string {
+    const data &#x3D; {
+      events: this.events,
+      messages: this.messages,
+      stats: this.getStats(),
+      exportDate: new Date()
+    };
+    
+    return JSON.stringify(data, null, 2);
+  }
+
+  /**
+   * Importer les données de communication
+   */
+  importCommunicationData(dataJson: string): boolean {
+    try {
+      const data &#x3D; JSON.parse(dataJson);
+      
+      if (data.events) {
+        this.events &#x3D; data.events;
+      }
+      
+      if (data.messages) {
+        this.messages &#x3D; data.messages;
+      }
+      
+      this.updateStats();
+      console.log(&#x27;Données de communication importées avec succès&#x27;);
+      return true;
+    } catch (error) {
+      console.error(&#x27;Erreur lors de l\&#x27;importation des données de communication:&#x27;, error);
+      return false;
+    }
+  }
+
+  /**
+   * Méthodes utilitaires pour les événements courants
+   */
+
+  /**
+   * Émettre un événement de modification de mur
+   */
+  emitWallModified(wallId: string, changes: any): void {
+    this.emitEvent({
+      type: &#x27;wall_modified&#x27;,
+      source: &#x27;MurService&#x27;,
+      data: { wallId, changes },
+      priority: &#x27;medium&#x27;
+    });
+  }
+
+  /**
+   * Émettre un événement de modification d&#x27;ouverture
+   */
+  emitOpeningModified(openingId: string, changes: any): void {
+    this.emitEvent({
+      type: &#x27;opening_modified&#x27;,
+      source: &#x27;OuvertureService&#x27;,
+      data: { openingId, changes },
+      priority: &#x27;medium&#x27;
+    });
+  }
+
+  /**
+   * Émettre un événement de changement de matériau
+   */
+  emitMaterialChanged(materialId: string, newMaterial: any): void {
+    this.emitEvent({
+      type: &#x27;material_changed&#x27;,
+      source: &#x27;MateriauService&#x27;,
+      data: { materialId, newMaterial },
+      priority: &#x27;low&#x27;
+    });
+  }
+
+  /**
+   * Émettre un événement de mise à jour de la scène
+   */
+  emitSceneUpdated(sceneData: any): void {
+    this.emitEvent({
+      type: &#x27;scene_updated&#x27;,
+      source: &#x27;SceneService&#x27;,
+      data: sceneData,
+      priority: &#x27;high&#x27;
+    });
+  }
+
+  /**
+   * Émettre un événement de validation
+   */
+  emitValidationResult(validationData: any): void {
+    this.emitEvent({
+      type: &#x27;validation_result&#x27;,
+      source: &#x27;ValidationService&#x27;,
+      data: validationData,
+      priority: &#x27;high&#x27;
+    });
+  }
+
+  /**
+   * Émettre un événement d&#x27;erreur
+   */
+  emitError(error: any, source: string): void {
+    this.emitEvent({
+      type: &#x27;error&#x27;,
+      source: source,
+      data: { error: error.message || error, stack: error.stack },
+      priority: &#x27;critical&#x27;
+    });
+  }
+
+  /**
+   * Émettre un événement de succès
+   */
+  emitSuccess(message: string, source: string, data?: any): void {
+    this.emitEvent({
+      type: &#x27;success&#x27;,
+      source: source,
+      data: { message, ...data },
+      priority: &#x27;low&#x27;
+    });
+  }
+}
+
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'CommunicationStats.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

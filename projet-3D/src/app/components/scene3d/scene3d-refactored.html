@@ -1,0 +1,309 @@
+<div class="scene-container" [class.sidebar-open]="showTestModal">
+  <!-- Composant core pour la scène 3D -->
+  <app-scene3d-core 
+    [showAxes]="true"
+    [showGrid]="false"
+    (sceneReady)="onSceneReady($event)"
+    (cameraReady)="onCameraReady($event)"
+    (rendererReady)="onRendererReady($event)">
+  </app-scene3d-core>
+
+  <!-- Barre latérale de contrôles -->
+  <div class="controls-sidebar">
+    <div class="controls-header">
+      <h3>🏗️ Modélisation 3D</h3>
+      <button class="close-sidebar" (click)="closeTestModal()" *ngIf="showTestModal">×</button>
+    </div>
+
+    <!-- Navigation -->
+    <div class="controls-section">
+      <h4>🎮 Navigation</h4>
+      <button class="control-button" (click)="resetCameraPosition()" title="Réinitialiser la vue">
+        🔄 Réinitialiser Vue
+      </button>
+      <button class="control-button" (click)="openLegendModal()" title="Voir la légende">
+        📖 Légende
+      </button>
+    </div>
+
+    <!-- Contrôles principaux -->
+    <div class="controls-section">
+      <h4>⚙️ Contrôles</h4>
+      <button 
+        class="control-button" 
+        [class.active]="showDimensionsInterface"
+        (click)="toggleDimensionsInterface()" 
+        title="Modifier les dimensions">
+        📏 Dimensions
+      </button>
+      <button 
+        class="control-button" 
+        [class.active]="showColorSelector"
+        (click)="toggleColorSelector()" 
+        title="Modifier les couleurs">
+        🎨 Couleurs
+      </button>
+      <button 
+        class="control-button" 
+        [class.active]="showFenetresCalculator"
+        (click)="toggleFenetresCalculator()" 
+        title="Calculateur de fenêtres">
+        🧮 Fenêtres
+      </button>
+      <button 
+        class="control-button" 
+        [class.active]="showMursController"
+        (click)="toggleMursController()" 
+        title="Contrôleur de murs">
+        🧱 Murs
+      </button>
+      <button 
+        class="control-button" 
+        [class.active]="showOuverturesController"
+        (click)="toggleOuverturesController()" 
+        title="Contrôleur d'ouvertures">
+        🚪 Ouvertures
+      </button>
+      <button 
+        class="control-button" 
+        [class.active]="showStructureController"
+        (click)="toggleStructureController()" 
+        title="Contrôleur de structure">
+        🏗️ Structure
+      </button>
+    </div>
+
+    <!-- Informations de navigation -->
+    <div class="controls-section">
+      <h4>🖱️ Contrôles Souris</h4>
+      <div class="mouse-controls">
+        <div class="mouse-item">
+          <span class="mouse-action">Clic + Glisser</span>
+          <span class="mouse-description">Rotation autour du bâtiment</span>
+        </div>
+        <div class="mouse-item">
+          <span class="mouse-action">Molette</span>
+          <span class="mouse-description">Zoom avant/arrière</span>
+        </div>
+        <div class="mouse-item">
+          <span class="mouse-action">Clic droit</span>
+          <span class="mouse-description">Désactivé</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sous-composants -->
+    <div class="sub-components">
+      <!-- Contrôleur de dimensions -->
+      <app-dimensions-controller
+        [isVisible]="showDimensionsInterface"
+        [showStructureDimensions]="true"
+        [showElementDimensions]="false"
+        [structureDimensions]="structureDimensions"
+        [elementDimensions]="elementDimensions"
+        [minDimensions]="minDimensions"
+        [maxDimensions]="maxDimensions"
+        (structureDimensionsChange)="onStructureDimensionsChange($event)"
+        (elementDimensionsChange)="onElementDimensionsChange($event)"
+        (resetRequested)="onDimensionsReset()"
+        (applyRequested)="onDimensionsApply()">
+      </app-dimensions-controller>
+
+      <!-- Sélecteur de couleurs -->
+      <app-color-selector
+        [isVisible]="showColorSelector"
+        [elements]="colorableElements"
+        [selectedElementId]="selectedElementId"
+        [newColor]="newColor"
+        (elementSelected)="onElementSelected($event)"
+        (colorChanged)="onColorChanged($event)"
+        (colorApplied)="onColorApplied($event)"
+        (colorReset)="onColorReset($event)">
+      </app-color-selector>
+
+      <!-- Calculateur de fenêtres -->
+      <app-fenetres-calculator
+        [isVisible]="showFenetresCalculator"
+        [mursDisponibles]="mursDisponibles"
+        [selectedMurId]="selectedMurId"
+        [parametresFenetres]="parametresFenetres"
+        (murSelected)="onMurSelected($event)"
+        (configurationApplied)="onConfigurationApplied($event)"
+        (parametresReset)="onParametresReset()">
+      </app-fenetres-calculator>
+
+      <!-- Contrôleur de murs -->
+      <app-murs-controller
+        [isVisible]="showMursController"
+        [murs]="murs"
+        [selectedMurId]="selectedMurIdMurs"
+        (murSelected)="onMurSelectedMurs($event)"
+        (murChanged)="onMurChanged($event)"
+        (ouvertureAdded)="onOuvertureAdded($event)"
+        (ouvertureRemoved)="onOuvertureRemoved($event)"
+        (murDuplicated)="onMurDuplicated($event)"
+        (murDeleted)="onMurDeleted($event)">
+      </app-murs-controller>
+
+      <!-- Contrôleur d'ouvertures -->
+      <app-ouvertures-controller
+        [isVisible]="showOuverturesController"
+        [ouvertures]="ouvertures"
+        [mursDisponibles]="mursDisponibles"
+        [selectedOuvertureId]="selectedOuvertureId"
+        (ouvertureSelected)="onOuvertureSelected($event)"
+        (ouvertureChanged)="onOuvertureChanged($event)"
+        (ouvertureAdded)="onOuvertureAddedGlobal($event)"
+        (ouvertureDuplicated)="onOuvertureDuplicated($event)"
+        (ouvertureDeleted)="onOuvertureDeleted($event)">
+      </app-ouvertures-controller>
+
+      <!-- Contrôleur de structure -->
+      <app-structure-controller
+        [isVisible]="showStructureController"
+        [structure]="structure"
+        (structureChanged)="onStructureChanged($event)"
+        (structureApplied)="onStructureApplied($event)"
+        (structureReset)="onStructureReset()"
+        (structureOptimized)="onStructureOptimized($event)"
+        (structureExported)="onStructureExported($event)"
+        (structureImported)="onStructureImported($event)"
+        (structurePreviewed)="onStructurePreviewed($event)">
+      </app-structure-controller>
+    </div>
+  </div>
+
+  <!-- Modale de légende -->
+  <div class="modal-overlay" [class.show]="showLegendModal" (click)="closeLegendModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2>📖 Légende de la Modélisation 3D</h2>
+        <button class="close-button" (click)="closeLegendModal()">&times;</button>
+      </div>
+      
+      <div class="modal-body">
+        <div class="legend-section">
+          <h3>🏗️ Architecture du Bâtiment</h3>
+          <div class="building-info">
+            <div class="info-card">
+              <h4>📐 Dimensions Générales</h4>
+              <ul>
+                <li><strong>Longueur :</strong> {{ structure.dimensions.longueur }}m</li>
+                <li><strong>Largeur :</strong> {{ structure.dimensions.largeur }}m</li>
+                <li><strong>Hauteur :</strong> {{ structure.dimensions.hauteur }}m</li>
+                <li><strong>Épaisseur des murs :</strong> 0.20m</li>
+              </ul>
+            </div>
+            
+            <div class="info-card">
+              <h4>🧱 Éléments Structurels</h4>
+              <ul>
+                <li><strong>Sol :</strong> Plateforme de base</li>
+                <li><strong>Murs :</strong> 4 murs formant la structure</li>
+                <li><strong>Toit :</strong> Couverture du bâtiment</li>
+                <li><strong>Ouvertures :</strong> Portes et fenêtres</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="legend-section">
+          <h3>🎨 Couleurs et Matériaux</h3>
+          <div class="color-legend">
+            <div class="color-item" *ngFor="let element of colorableElements">
+              <div class="color-swatch" [style.background-color]="element.currentColor"></div>
+              <span class="color-name">{{ element.name }}</span>
+              <span class="color-type">{{ element.type }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="legend-section">
+          <h3>🖱️ Contrôles de Navigation</h3>
+          <div class="controls-legend">
+            <div class="control-item">
+              <span class="control-icon">🖱️</span>
+              <span class="control-text">Clic gauche + glisser pour faire tourner la vue</span>
+            </div>
+            <div class="control-item">
+              <span class="control-icon">🎯</span>
+              <span class="control-text">Molette de la souris pour zoomer/dézoomer</span>
+            </div>
+            <div class="control-item">
+              <span class="control-icon">🔄</span>
+              <span class="control-text">Bouton "Réinitialiser" pour revenir à la vue initiale</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modale de test -->
+  <div class="modal-overlay" [class.show]="showTestModal" (click)="closeTestModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2>🧪 Test des Services</h2>
+        <button class="close-button" (click)="closeTestModal()">&times;</button>
+      </div>
+      
+      <div class="modal-body">
+        <div class="test-section">
+          <h3>🔧 Services Disponibles</h3>
+          <div class="services-list">
+            <div class="service-item">
+              <span class="service-name">ConfigurationService</span>
+              <span class="service-status">✅ Actif</span>
+            </div>
+            <div class="service-item">
+              <span class="service-name">BatimentService</span>
+              <span class="service-status">✅ Actif</span>
+            </div>
+            <div class="service-item">
+              <span class="service-name">MurService</span>
+              <span class="service-status">✅ Actif</span>
+            </div>
+            <div class="service-item">
+              <span class="service-name">OuvertureService</span>
+              <span class="service-status">✅ Actif</span>
+            </div>
+            <div class="service-item">
+              <span class="service-name">MateriauService</span>
+              <span class="service-status">✅ Actif</span>
+            </div>
+            <div class="service-item">
+              <span class="service-name">SceneService</span>
+              <span class="service-status">✅ Actif</span>
+            </div>
+            <div class="service-item">
+              <span class="service-name">CalculateurFenetresService</span>
+              <span class="service-status">✅ Actif</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="test-section">
+          <h3>📊 Statistiques du Projet</h3>
+          <div class="stats-grid">
+            <div class="stat-item">
+              <div class="stat-label">Murs</div>
+              <div class="stat-value">{{ murs.length }}</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-label">Ouvertures</div>
+              <div class="stat-value">{{ ouvertures.length }}</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-label">Éléments colorables</div>
+              <div class="stat-value">{{ colorableElements.length }}</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-label">Surface au sol</div>
+              <div class="stat-value">{{ structure.dimensions.longueur * structure.dimensions.largeur }}m²</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

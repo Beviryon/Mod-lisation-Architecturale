@@ -1,0 +1,229 @@
+<div class="murs-controller" *ngIf="isVisible">
+  <h3>🧱 Contrôleur de Murs</h3>
+  
+  <!-- Liste des murs -->
+  <div class="murs-list">
+    <h4>Murs disponibles</h4>
+    <div class="mur-item" 
+         *ngFor="let mur of murs" 
+         [class.selected]="mur.id === selectedMurId"
+         (click)="selectMur(mur.id)">
+      <div class="mur-info">
+        <div class="mur-name">{{ mur.nom }}</div>
+        <div class="mur-details">
+          {{ mur.dimensions.width }}m × {{ mur.dimensions.height }}m × {{ mur.dimensions.depth }}m
+        </div>
+        <div class="mur-openings">
+          {{ mur.ouvertures.length }} ouverture(s)
+        </div>
+      </div>
+      <div class="mur-color" [style.background-color]="mur.couleur"></div>
+    </div>
+  </div>
+
+  <!-- Détails du mur sélectionné -->
+  <div class="mur-details" *ngIf="murSelectionne">
+    <h4>📐 Détails du Mur : {{ murSelectionne.nom }}</h4>
+    
+    <!-- Position -->
+    <div class="detail-section">
+      <h5>Position</h5>
+      <div class="position-controls">
+        <div class="control-group">
+          <label>X (m)</label>
+          <input 
+            type="range" 
+            min="-10" 
+            max="10" 
+            step="0.1" 
+            [(ngModel)]="murSelectionne.position.x"
+            (input)="onMurChange()"
+            class="control-slider"
+            title="Position X du mur"
+            aria-label="Position X du mur"
+          >
+          <span class="control-value">{{ murSelectionne.position.x }}</span>
+        </div>
+        
+        <div class="control-group">
+          <label>Y (m)</label>
+          <input 
+            type="range" 
+            min="-5" 
+            max="10" 
+            step="0.1" 
+            [(ngModel)]="murSelectionne.position.y"
+            (input)="onMurChange()"
+            class="control-slider"
+            title="Position Y du mur"
+            aria-label="Position Y du mur"
+          >
+          <span class="control-value">{{ murSelectionne.position.y }}</span>
+        </div>
+        
+        <div class="control-group">
+          <label>Z (m)</label>
+          <input 
+            type="range" 
+            min="-10" 
+            max="10" 
+            step="0.1" 
+            [(ngModel)]="murSelectionne.position.z"
+            (input)="onMurChange()"
+            class="control-slider"
+            title="Position Z du mur"
+            aria-label="Position Z du mur"
+          >
+          <span class="control-value">{{ murSelectionne.position.z }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dimensions -->
+    <div class="detail-section">
+      <h5>Dimensions</h5>
+      <div class="dimension-controls">
+        <div class="control-group">
+          <label>Largeur (m)</label>
+          <input 
+            type="range" 
+            min="1" 
+            max="20" 
+            step="0.1" 
+            [(ngModel)]="murSelectionne.dimensions.width"
+            (input)="onMurChange()"
+            class="control-slider"
+            title="Largeur du mur"
+            aria-label="Largeur du mur"
+          >
+          <span class="control-value">{{ murSelectionne.dimensions.width }}</span>
+        </div>
+        
+        <div class="control-group">
+          <label>Hauteur (m)</label>
+          <input 
+            type="range" 
+            min="1" 
+            max="10" 
+            step="0.1" 
+            [(ngModel)]="murSelectionne.dimensions.height"
+            (input)="onMurChange()"
+            class="control-slider"
+            title="Hauteur du mur"
+            aria-label="Hauteur du mur"
+          >
+          <span class="control-value">{{ murSelectionne.dimensions.height }}</span>
+        </div>
+        
+        <div class="control-group">
+          <label>Profondeur (m)</label>
+          <input 
+            type="range" 
+            min="0.1" 
+            max="2" 
+            step="0.01" 
+            [(ngModel)]="murSelectionne.dimensions.depth"
+            (input)="onMurChange()"
+            class="control-slider"
+            title="Profondeur du mur"
+            aria-label="Profondeur du mur"
+          >
+          <span class="control-value">{{ murSelectionne.dimensions.depth }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Couleur -->
+    <div class="detail-section">
+      <h5>Couleur</h5>
+      <div class="color-controls">
+        <input 
+          type="color" 
+          [(ngModel)]="murSelectionne.couleur"
+          (input)="onMurChange()"
+          class="color-input"
+          title="Couleur du mur"
+          aria-label="Couleur du mur"
+        >
+        <span class="color-value">{{ murSelectionne.couleur }}</span>
+      </div>
+    </div>
+
+    <!-- Épaisseur -->
+    <div class="detail-section">
+      <h5>Épaisseur</h5>
+      <div class="control-group">
+        <input 
+          type="range" 
+          min="0.05" 
+          max="1" 
+          step="0.01" 
+          [(ngModel)]="murSelectionne.epaisseur"
+          (input)="onMurChange()"
+          class="control-slider"
+          title="Épaisseur du mur"
+          aria-label="Épaisseur du mur"
+        >
+        <span class="control-value">{{ murSelectionne.epaisseur }}m</span>
+      </div>
+    </div>
+
+    <!-- Ouvertures -->
+    <div class="detail-section">
+      <h5>Ouvertures ({{ murSelectionne.ouvertures.length }})</h5>
+      <div class="ouvertures-list" *ngIf="murSelectionne.ouvertures.length > 0">
+        <div class="ouverture-item" 
+             *ngFor="let ouverture of murSelectionne.ouvertures; let i = index">
+          <div class="ouverture-info">
+            <span class="ouverture-type">{{ ouverture.type }}</span>
+            <span class="ouverture-size">
+              {{ ouverture.dimensions.width }}m × {{ ouverture.dimensions.height }}m
+            </span>
+          </div>
+          <div class="ouverture-color" [style.background-color]="ouverture.couleur"></div>
+          <button 
+            type="button" 
+            (click)="removeOuverture(i)"
+            class="btn-remove"
+            title="Supprimer cette ouverture"
+          >
+            ❌
+          </button>
+        </div>
+      </div>
+      <div class="no-openings" *ngIf="murSelectionne.ouvertures.length === 0">
+        Aucune ouverture sur ce mur
+      </div>
+    </div>
+
+    <!-- Boutons d'action -->
+    <div class="action-buttons">
+      <button 
+        type="button" 
+        (click)="addOuverture()" 
+        class="btn btn-primary"
+        title="Ajouter une ouverture"
+      >
+        ➕ Ajouter Ouverture
+      </button>
+      
+      <button 
+        type="button" 
+        (click)="duplicateMur()" 
+        class="btn btn-secondary"
+        title="Dupliquer ce mur"
+      >
+        📋 Dupliquer
+      </button>
+      
+      <button 
+        type="button" 
+        (click)="deleteMur()" 
+        class="btn btn-danger"
+        title="Supprimer ce mur"
+      >
+        🗑️ Supprimer
+      </button>
+    </div>
+  </div>
+</div>

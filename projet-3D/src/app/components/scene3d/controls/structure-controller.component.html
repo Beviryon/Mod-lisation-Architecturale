@@ -1,0 +1,193 @@
+<div class="structure-controller" *ngIf="isVisible">
+  <h3>🏗️ Contrôleur de Structure</h3>
+  
+  <!-- Informations générales -->
+  <div class="structure-info">
+    <h4>Informations générales</h4>
+    <div class="info-grid">
+      <div class="info-item">
+        <label>Nom du bâtiment :</label>
+        <input 
+          type="text" 
+          [(ngModel)]="structure.nom"
+          (input)="onStructureChange()"
+          class="info-input"
+          title="Nom du bâtiment"
+          aria-label="Nom du bâtiment"
+        >
+      </div>
+      
+      <div class="info-item">
+        <label>Type de bâtiment :</label>
+        <select 
+          [(ngModel)]="structure.type"
+          (change)="onStructureChange()"
+          class="info-select"
+          title="Type de bâtiment"
+          aria-label="Type de bâtiment"
+        >
+          <option value="residentiel">Résidentiel</option>
+          <option value="commercial">Commercial</option>
+          <option value="industriel">Industriel</option>
+          <option value="public">Public</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dimensions globales -->
+  <div class="dimensions-section">
+    <h4>Dimensions globales</h4>
+    <div class="dimension-controls">
+      <div class="control-group">
+        <label>Longueur (m)</label>
+        <input 
+          type="range" 
+          min="5" 
+          max="50" 
+          step="0.5" 
+          [(ngModel)]="structure.dimensions.longueur"
+          (input)="onStructureChange()"
+          class="control-slider"
+          title="Longueur du bâtiment"
+          aria-label="Longueur du bâtiment"
+        >
+        <span class="control-value">{{ structure.dimensions.longueur }}</span>
+      </div>
+      
+      <div class="control-group">
+        <label>Largeur (m)</label>
+        <input 
+          type="range" 
+          min="5" 
+          max="50" 
+          step="0.5" 
+          [(ngModel)]="structure.dimensions.largeur"
+          (input)="onStructureChange()"
+          class="control-slider"
+          title="Largeur du bâtiment"
+          aria-label="Largeur du bâtiment"
+        >
+        <span class="control-value">{{ structure.dimensions.largeur }}</span>
+      </div>
+      
+      <div class="control-group">
+        <label>Hauteur (m)</label>
+        <input 
+          type="range" 
+          min="2" 
+          max="20" 
+          step="0.5" 
+          [(ngModel)]="structure.dimensions.hauteur"
+          (input)="onStructureChange()"
+          class="control-slider"
+          title="Hauteur du bâtiment"
+          aria-label="Hauteur du bâtiment"
+        >
+        <span class="control-value">{{ structure.dimensions.hauteur }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Couleur de base -->
+  <div class="color-section">
+    <h4>Couleur de base</h4>
+    <div class="color-controls">
+        <input 
+          type="color" 
+          [(ngModel)]="structure.couleur"
+          (input)="onStructureChange()"
+          class="color-input"
+          title="Couleur de base du bâtiment"
+          aria-label="Couleur de base du bâtiment"
+        >
+      <span class="color-value">{{ structure.couleur }}</span>
+    </div>
+  </div>
+
+  <!-- Matériaux -->
+  <div class="materials-section">
+    <h4>Matériaux</h4>
+    <div class="material-controls">
+      <div class="control-group">
+        <label>Matériau principal :</label>
+        <select 
+          [(ngModel)]="structure.materiauPrincipal"
+          (change)="onStructureChange()"
+          class="material-select"
+          title="Matériau principal du bâtiment"
+          aria-label="Matériau principal du bâtiment"
+        >
+          <option value="beton">Béton</option>
+          <option value="brique">Brique</option>
+          <option value="bois">Bois</option>
+          <option value="metal">Métal</option>
+          <option value="pierre">Pierre</option>
+        </select>
+      </div>
+      
+      <div class="control-group">
+        <label>Matériau de toit :</label>
+        <select 
+          [(ngModel)]="structure.materiauToit"
+          (change)="onStructureChange()"
+          class="material-select"
+          title="Matériau de toit du bâtiment"
+          aria-label="Matériau de toit du bâtiment"
+        >
+          <option value="tuile">Tuile</option>
+          <option value="ardoise">Ardoise</option>
+          <option value="metal">Métal</option>
+          <option value="beton">Béton</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Statistiques -->
+  <div class="stats-section">
+    <h4>Statistiques</h4>
+    <div class="stats-grid">
+      <div class="stat-item">
+        <span class="stat-label">Surface au sol :</span>
+        <span class="stat-value">{{ getSurfaceSol() }} m²</span>
+      </div>
+      
+      <div class="stat-item">
+        <span class="stat-label">Volume total :</span>
+        <span class="stat-value">{{ getVolumeTotal() }} m³</span>
+      </div>
+      
+      <div class="stat-item">
+        <span class="stat-label">Nombre de murs :</span>
+        <span class="stat-value">{{ getNombreMurs() }}</span>
+      </div>
+      
+      <div class="stat-item">
+        <span class="stat-label">Nombre d'ouvertures :</span>
+        <span class="stat-value">{{ getNombreOuvertures() }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Boutons d'action -->
+  <div class="action-buttons">
+    <button 
+      type="button" 
+      (click)="resetStructure()" 
+      class="btn btn-secondary"
+      title="Réinitialiser la structure"
+    >
+      🔄 Réinitialiser
+    </button>
+    
+    <button 
+      type="button" 
+      (click)="exportStructure()" 
+      class="btn btn-primary"
+      title="Exporter la structure"
+    >
+      📤 Exporter
+    </button>
+  </div>
+</div>

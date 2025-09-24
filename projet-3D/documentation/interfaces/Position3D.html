@@ -1,0 +1,739 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>projet-3-d documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">projet-3-d documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Interfaces</li>
+  <li class="breadcrumb-item"
+  >
+  Position3D</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/config/building-config.ts</code>
+        </p>
+
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Position 3D dans l&#39;espace</p>
+
+            </p>
+
+
+        <section data-compodoc="block-index">
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#x" 
+>
+                                            x
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#y" 
+>
+                                            y
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#z" 
+>
+                                            z
+                                        </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section data-compodoc="block-properties">
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="x"></a>
+                                        <span class="name "><b>x</b>
+                                            <a href="#x">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>x:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="y"></a>
+                                        <span class="name "><b>y</b>
+                                            <a href="#y">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>y:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="z"></a>
+                                        <span class="name "><b>z</b>
+                                            <a href="#z">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>z:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export interface Position3D {
+  x: number;
+  y: number;
+  z: number;
+}
+
+/**
+ * Dimensions 3D d&#x27;un objet
+ * @param width - Largeur (axe X)
+ * @param height - Hauteur (axe Y)
+ * @param depth - Profondeur (axe Z)
+ */
+export interface Dimensions3D {
+  width: number;
+  height: number;
+  depth: number;
+}
+
+/**
+ * Configuration d&#x27;un mur simple
+ * @param position - Position du centre du mur
+ * @param dimensions - Taille du mur
+ * @param color - Couleur hexadécimale (ex: 0xaaaaaa)
+ */
+export interface WallConfig {
+  position: Position3D;
+  dimensions: Dimensions3D;
+  color: number;
+}
+
+/**
+ * Configuration d&#x27;une ouverture (porte ou fenêtre)
+ * @param position - Position du centre de l&#x27;ouverture
+ * @param dimensions - Taille de l&#x27;ouverture
+ * @param color - Couleur de l&#x27;élément
+ * @param type - Type d&#x27;ouverture (&#x27;door&#x27; ou &#x27;window&#x27;)
+ */
+export interface OpeningConfig {
+  position: Position3D;
+  dimensions: Dimensions3D;
+  color: number;
+  type: &#x27;door&#x27; | &#x27;window&#x27;;
+}
+
+/**
+ * Configuration du mur principal avec ouvertures (façade)
+ * @param contour - Points définissant la forme du mur
+ * @param thickness - Épaisseur du mur
+ * @param position - Position du mur dans l&#x27;espace
+ * @param color - Couleur du mur
+ * @param openings - Ouvertures (porte et fenêtres) dans ce mur
+ */
+export interface MainWallConfig {
+  contour: Position3D[];
+  thickness: number;
+  position: Position3D;
+  color: number;
+  openings: {
+    door: OpeningConfig;
+    window1: OpeningConfig;
+    window2: OpeningConfig;
+  };
+}
+
+/**
+ * Configuration de la caméra et des contrôles
+ * @param initial - Position et paramètres initiaux de la caméra
+ * @param target - Point que la caméra regarde
+ * @param controls - Paramètres des contrôles souris
+ */
+export interface CameraConfig {
+  initial: {
+    position: Position3D;
+    rotationX: number;  // Rotation verticale
+    rotationY: number;  // Rotation horizontale
+    zoom: number;       // Distance de la caméra
+  };
+  target: Position3D;   // Point central regardé par la caméra
+  controls: {
+    minZoom: number;      // Distance minimale
+    maxZoom: number;      // Distance maximale
+    rotationSpeed: number; // Vitesse de rotation
+    zoomSpeed: number;     // Vitesse de zoom
+  };
+}
+
+/**
+ * Configuration de l&#x27;éclairage de la scène
+ * @param ambient - Lumière ambiante (éclairage général)
+ * @param directional - Lumière directionnelle (comme le soleil)
+ */
+export interface LightingConfig {
+  ambient: {
+    color: number;      // Couleur de la lumière ambiante
+    intensity: number;  // Intensité (0-1)
+  };
+  directional: {
+    color: number;      // Couleur de la lumière directionnelle
+    intensity: number;  // Intensité
+    position: Position3D; // Position de la source lumineuse
+    shadow: {
+      mapSize: number;  // Qualité des ombres (résolution)
+    };
+  };
+}
+
+/**
+ * Configuration générale de la scène 3D
+ * @param background - Couleur de fond de la scène
+ * @param camera - Paramètres de la caméra (champ de vision, distances)
+ */
+export interface SceneConfig {
+  background: number;   // Couleur de fond (ex: 0xbfd1e5 &#x3D; bleu ciel)
+  camera: {
+    fov: number;        // Champ de vision (field of view) en degrés
+    near: number;       // Distance de rendu minimale
+    far: number;        // Distance de rendu maximale
+  };
+}
+
+/**
+ * &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+ * CONFIGURATION PRINCIPALE DU BÂTIMENT
+ * &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+ * Toutes les données du modèle 3D sont centralisées ici
+ */
+export const BUILDING_CONFIG &#x3D; {
+  
+  /**
+   * SCÈNE 3D - Paramètres généraux
+   */
+  scene: {
+    background: 0xbfd1e5,  // Couleur bleu ciel pour le fond
+    camera: {
+      fov: 75,             // Angle de vue (75° &#x3D; vue naturelle)
+      near: 0.1,           // Objets plus proches que 0.1 non rendus
+      far: 1000            // Objets plus loin que 1000 non rendus
+    }
+  } as SceneConfig,
+
+  /**
+   * ÉCLAIRAGE - Lumières de la scène
+   */
+  lighting: {
+    ambient: {   
+      color: 0xffffff,     // Lumière blanche ambiante
+      intensity: 0.6       // 60% d&#x27;intensité (éclairage doux)
+    },
+    directional: {
+      color: 0xffffff,     // Lumière blanche directionnelle (soleil)
+      intensity: 1,        // 100% d&#x27;intensité
+      position: { x: 10, y: 20, z: 10 }, // Position du &quot;soleil&quot;
+      shadow: {
+        mapSize: 2048      // Résolution des ombres (2048x2048)
+      }
+    }
+  } as LightingConfig,
+
+  /**
+   * CAMÉRA - Point de vue et contrôles
+   */
+  camera: {
+    initial: {
+      position: { x: 10, y: 10, z: 9 }, // Position initiale de la caméra
+      rotationX: 0.3,                   // Inclinaison verticale
+      rotationY: 0.5,                   // Rotation horizontale
+      zoom: 15                          // Distance initiale
+    },
+    target: { x: 0, y: 1.25, z: 0 },   // Point regardé (centre du bâtiment)
+    controls: {
+      minZoom: 5,           // Distance minimale (zoom max)
+      maxZoom: 50,          // Distance maximale (zoom min)
+      rotationSpeed: 0.01,  // Sensibilité de rotation souris
+      zoomSpeed: 0.01       // Sensibilité du zoom molette
+    }
+  } as CameraConfig,
+
+  /**
+   * SOL - Plateforme de base
+   */
+  ground: {
+    position: { x: 0, y: -0.1, z: 0 }, // Légèrement sous le niveau 0
+    dimensions: { width: 8, height: 0.2, depth: 5 }, // 8x5m, épaisseur 20cm
+    color: 0x2E1E1A  
+  } as WallConfig,
+
+  /**
+   * TOIT - Couverture du bâtiment
+   */
+  roof: {
+    position: { x: 0, y: 2.6, z: 0 },  // Au-dessus des murs (2.5m + 0.1m)
+    dimensions: { width: 8.4, height: 0.2, depth: 5 }, 
+    color: 0x4169e1       // Couleur bleu royal
+  } as WallConfig,
+
+  /**
+   * MUR PRINCIPAL (FAÇADE) - Mur avec ouvertures
+   * Ce mur utilise ExtrudeGeometry pour créer de vraies ouvertures
+   */
+  mainWall: {
+    contour: [
+      // Points définissant la forme rectangulaire du mur (8m x 2.5m)
+      { x: -4, y: 0, z: 0 },    // Coin bas gauche
+      { x: 4, y: 0, z: 0 },     // Coin bas droit
+      { x: 4, y: 2.5, z: 0 },   // Coin haut droit
+      { x: -4, y: 2.5, z: 0 },  // Coin haut gauche
+      { x: -4, y: 0, z: 0 }     // Retour au point de départ
+    ],
+    thickness: 0.2,             // Épaisseur du mur (20cm)
+    position: { x: 0, y: 0, z: 2.3 }, // Position du mur dans l&#x27;espace
+    color: 0xaaaaaa,            // Couleur gris clair
+    openings: {
+      // PORTE CENTRALE
+      door: {
+        position: { x: 0, y: 1.05, z: 2.3 },
+        dimensions: { width: 1, height: 2, depth: 0.05 }, // 1m x 2m
+        color: 0x00ff00,        // Couleur verte
+        type: &#x27;door&#x27; as const
+      },
+      // PREMIÈRE FENÊTRE (gauche)
+      window1: {
+        position: { x: -2, y: 1.5, z: 2.3 }, 
+        dimensions: { width: 1.5, height: 1.2, depth: 0.05 }, // 1.5m x 1.2m
+        color: 0xff0000,        // Couleur rouge
+        type: &#x27;window&#x27; as const
+      },
+      // DEUXIÈME FENÊTRE (droite)
+      window2: {
+        position: { x: 2, y: 1.5, z: 2.3 }, 
+        dimensions: { width: 1.5, height: 1.2, depth: 0.05 }, // 1.5m x 1.2m
+        color: 0xff0000,        // Couleur rouge
+        type: &#x27;window&#x27; as const
+      }
+    }
+  } as MainWallConfig,
+
+
+  /**
+   * AUTRES MURS - Murs latéraux et arrière (murs pleins)
+   */
+  walls: {
+    // MUR ARRIÈRE
+    back: {
+      position: { x: 0, y: 0, z: -2.5 },
+      dimensions: { width: 8, height: 2.5, depth: 0.2 }, // 8m x 2.5m x 20cm
+      color: 0xaaaaaa,
+      openings: {
+        window1: {
+          position: { x: 0, y: 1.5, z: -2.2 },
+          dimensions: { width: 1.5, height: 1.2, depth: 0.05 }, // 1.5m x 1.2m
+          color: 0xff0000,        // Couleur rouge
+          type: &#x27;window&#x27; as const
+        }
+      }
+    },
+    // MUR GAUCHE
+    left: {
+      position: { x: -3.9, y: 1.25, z: 0 }, 
+      dimensions: { width: 0.2, height: 2.5, depth: 5 }, // 20cm x 2.5m x 5m
+      color: 0xaaaaaa,
+      openings: {
+        window5: {
+          position: { x: -3.8, y: 1.5, z: 0 },
+          dimensions: { width: 1.2, height: 1.0, depth: 0.05 }, // 1.2m x 1m
+          color: 0xff0000,        // Couleur rouge
+          type: &#x27;window&#x27; as const
+        }
+      }
+      // Couleur gris clair
+    },
+    // MUR DROIT
+    right: {
+      position: { x: 3.8, y: 0, z: 0 },
+      dimensions: { width: 0.2, height: 2.5, depth: 5 }, // 20cm x 2.5m x 5m
+      color: 0xaaaaaa,
+      openings: {
+        // PORTE D&#x27;ENTRÉE
+        door: {
+          position: { x: 3.8, y: 1.05, z: 0 },
+          dimensions: { width: 1, height: 2.1, depth: 0.05 }, // 1m x 2.1m
+          color: 0x00ff00,        // Couleur verte
+          type: &#x27;door&#x27; as const
+        },
+        // FENÊTRE
+        window1: {
+          position: { x: 3.8, y: 1.5, z: 1.5 },
+          dimensions: { width: 1.2, height: 1.0, depth: 0.05 }, // 1.2m x 1m
+          color: 0xff0000,        // Couleur rouge
+          type: &#x27;window&#x27; as const
+        }
+      }
+    }
+  },
+
+  /**
+   * AXES DE RÉFÉRENCE (REPÈRE) - Pour s&#x27;orienter dans l&#x27;espace
+   */
+  axes: {
+    size: 8,                  // Longueur des axes (8 unités)
+    labels: [
+      // Axe X (rouge) - gauche/droite
+      { text: &#x27;X&#x27;, position: { x: 10, y: 0, z: 0 }, color: 0xff0000 },
+      // Axe Y (vert) - bas/haut
+      { text: &#x27;Y&#x27;, position: { x: 0, y: 10, z: 0 }, color: 0x00ff00 },
+      // Axe Z (bleu) - avant/arrière
+      { text: &#x27;Z&#x27;, position: { x: 0, y: 0, z: 10 }, color: 0x0000ff }
+    ],
+    labelSize: { width: 0.2, height: 0.2, depth: 0.2 } // Taille des cubes de repère
+  }
+};
+
+/**
+ * &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+ * FONCTIONS UTILITAIRES
+ * &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+ * Calculs automatiques pour les ouvertures dans les murs
+ */
+export class WallCalculations {
+  
+  /**
+   * Calcule les coordonnées d&#x27;une ouverture de porte
+   * @param config - Configuration de la porte
+   * @returns Points définissant le trou rectangulaire pour la porte
+   */
+  static getDoorHole(config: OpeningConfig) {
+    const halfWidth &#x3D; config.dimensions.width / 2;  // Demi-largeur de la porte
+    return [
+      // Rectangle partant du sol (y&#x3D;0) jusqu&#x27;à la hauteur de la porte
+      { x: config.position.x - halfWidth, y: 0 },                    // Bas gauche
+      { x: config.position.x + halfWidth, y: 0 },                    // Bas droit
+      { x: config.position.x + halfWidth, y: config.dimensions.height }, // Haut droit
+      { x: config.position.x - halfWidth, y: config.dimensions.height }, // Haut gauche
+      { x: config.position.x - halfWidth, y: 0 }                     // Retour au début
+    ];
+  }
+
+  /**
+   * Calcule les coordonnées d&#x27;une ouverture de fenêtre
+   * @param config - Configuration de la fenêtre
+   * @param bottomOffset - Distance du sol au bas de la fenêtre (par défaut 0.9m)
+   * @returns Points définissant le trou rectangulaire pour la fenêtre
+   */
+  static getWindowHole(config: OpeningConfig, bottomOffset: number &#x3D; 0.9) {
+    const halfWidth &#x3D; config.dimensions.width / 2;  // Demi-largeur de la fenêtre
+    const bottom &#x3D; bottomOffset;                     // Position du bas de la fenêtre
+    const top &#x3D; bottom + config.dimensions.height;  // Position du haut de la fenêtre
+    
+    return [
+      // Rectangle surélevé par rapport au sol
+      { x: config.position.x - halfWidth, y: bottom }, // Bas gauche
+      { x: config.position.x + halfWidth, y: bottom }, // Bas droit
+      { x: config.position.x + halfWidth, y: top },    // Haut droit
+      { x: config.position.x - halfWidth, y: top },    // Haut gauche
+      { x: config.position.x - halfWidth, y: bottom }  // Retour au début
+    ];
+  }
+
+}</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'Position3D.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

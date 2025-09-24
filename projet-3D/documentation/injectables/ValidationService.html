@@ -1,0 +1,1840 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>projet-3-d documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">projet-3-d documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Injectables</li>
+  <li class="breadcrumb-item" >ValidationService</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/services/validation/validation.service.ts</code>
+        </p>
+
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Service de validation architecturale</p>
+
+            </p>
+
+
+
+            <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#stats$" >stats$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#statsSubject" >statsSubject</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#validationHistory" >validationHistory</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#validationRules" >validationRules</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#clearHistory" >clearHistory</a>
+                            </li>
+                            <li>
+                                <a href="#exportValidationData" >exportValidationData</a>
+                            </li>
+                            <li>
+                                <a href="#getStats" >getStats</a>
+                            </li>
+                            <li>
+                                <a href="#getStatsObservable" >getStatsObservable</a>
+                            </li>
+                            <li>
+                                <a href="#getValidationHistory" >getValidationHistory</a>
+                            </li>
+                            <li>
+                                <a href="#getValidationRules" >getValidationRules</a>
+                            </li>
+                            <li>
+                                <a href="#importValidationData" >importValidationData</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#initializeValidationRules" >initializeValidationRules</a>
+                            </li>
+                            <li>
+                                <a href="#toggleRule" >toggleRule</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#updateStats" >updateStats</a>
+                            </li>
+                            <li>
+                                <a href="#validateBuilding" >validateBuilding</a>
+                            </li>
+                            <li>
+                                <a href="#validateOpening" >validateOpening</a>
+                            </li>
+                            <li>
+                                <a href="#validateProportions" >validateProportions</a>
+                            </li>
+                            <li>
+                                <a href="#validateWall" >validateWall</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(communicationService: <a href="../injectables/CommunicationService.html" target="_self">CommunicationService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">src/app/services/validation/validation.service.ts:80</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>communicationService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/CommunicationService.html" target="_self" >CommunicationService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="clearHistory"></a>
+                    <span class="name">
+                        <span ><b>clearHistory</b></span>
+                        <a href="#clearHistory"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>clearHistory()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="520"
+                                    class="link-to-prism">src/app/services/validation/validation.service.ts:520</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Effacer l&#39;historique des validations</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="exportValidationData"></a>
+                    <span class="name">
+                        <span ><b>exportValidationData</b></span>
+                        <a href="#exportValidationData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>exportValidationData()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="529"
+                                    class="link-to-prism">src/app/services/validation/validation.service.ts:529</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Exporter les données de validation</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getStats"></a>
+                    <span class="name">
+                        <span ><b>getStats</b></span>
+                        <a href="#getStats"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getStats()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="465"
+                                    class="link-to-prism">src/app/services/validation/validation.service.ts:465</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Obtenir les statistiques de validation</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/ValidationStats.html" target="_self" >ValidationStats</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getStatsObservable"></a>
+                    <span class="name">
+                        <span ><b>getStatsObservable</b></span>
+                        <a href="#getStatsObservable"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getStatsObservable()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="472"
+                                    class="link-to-prism">src/app/services/validation/validation.service.ts:472</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Obtenir les statistiques en tant qu&#39;Observable</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/ValidationStats.html" target="_self" >Observable&lt;ValidationStats&gt;</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getValidationHistory"></a>
+                    <span class="name">
+                        <span ><b>getValidationHistory</b></span>
+                        <a href="#getValidationHistory"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getValidationHistory()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="458"
+                                    class="link-to-prism">src/app/services/validation/validation.service.ts:458</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Obtenir l&#39;historique des validations</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/ValidationResult.html" target="_self" >ValidationResult[]</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getValidationRules"></a>
+                    <span class="name">
+                        <span ><b>getValidationRules</b></span>
+                        <a href="#getValidationRules"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getValidationRules()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="440"
+                                    class="link-to-prism">src/app/services/validation/validation.service.ts:440</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Obtenir les règles de validation</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/ValidationRule.html" target="_self" >ValidationRule[]</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="importValidationData"></a>
+                    <span class="name">
+                        <span ><b>importValidationData</b></span>
+                        <a href="#importValidationData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>importValidationData(dataJson: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="543"
+                                    class="link-to-prism">src/app/services/validation/validation.service.ts:543</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Importer les données de validation</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>dataJson</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="initializeValidationRules"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>initializeValidationRules</b></span>
+                        <a href="#initializeValidationRules"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>initializeValidationRules()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="90"
+                                    class="link-to-prism">src/app/services/validation/validation.service.ts:90</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Initialiser les règles de validation</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleRule"></a>
+                    <span class="name">
+                        <span ><b>toggleRule</b></span>
+                        <a href="#toggleRule"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toggleRule(ruleId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="447"
+                                    class="link-to-prism">src/app/services/validation/validation.service.ts:447</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Activer/désactiver une règle</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>ruleId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateStats"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>updateStats</b></span>
+                        <a href="#updateStats"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>updateStats()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="479"
+                                    class="link-to-prism">src/app/services/validation/validation.service.ts:479</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Mettre à jour les statistiques</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="validateBuilding"></a>
+                    <span class="name">
+                        <span ><b>validateBuilding</b></span>
+                        <a href="#validateBuilding"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>validateBuilding(buildingData: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="193"
+                                    class="link-to-prism">src/app/services/validation/validation.service.ts:193</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Valider un bâtiment complet</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>buildingData</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/ValidationResult.html" target="_self" >ValidationResult</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="validateOpening"></a>
+                    <span class="name">
+                        <span ><b>validateOpening</b></span>
+                        <a href="#validateOpening"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>validateOpening(openingData: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, wallType: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="307"
+                                    class="link-to-prism">src/app/services/validation/validation.service.ts:307</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Valider une ouverture</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>openingData</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>wallType</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/ValidationResult.html" target="_self" >ValidationResult</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="validateProportions"></a>
+                    <span class="name">
+                        <span ><b>validateProportions</b></span>
+                        <a href="#validateProportions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>validateProportions(buildingData: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="387"
+                                    class="link-to-prism">src/app/services/validation/validation.service.ts:387</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Valider les proportions globales</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>buildingData</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/ValidationResult.html" target="_self" >ValidationResult</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="validateWall"></a>
+                    <span class="name">
+                        <span ><b>validateWall</b></span>
+                        <a href="#validateWall"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>validateWall(wallData: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, wallType: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="255"
+                                    class="link-to-prism">src/app/services/validation/validation.service.ts:255</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Valider un mur</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>wallData</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>wallType</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/ValidationResult.html" target="_self" >ValidationResult</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+            <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="stats$"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>stats$</b></span>
+                        <a href="#stats$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.statsSubject.asObservable()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">src/app/services/validation/validation.service.ts:80</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="statsSubject"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>statsSubject</b></span>
+                        <a href="#statsSubject"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new BehaviorSubject&lt;ValidationStats&gt;({
+    totalValidations: 0,
+    successRate: 0,
+    averageScore: 0,
+    errorsByCategory: {},
+    warningsByCategory: {},
+    lastValidation: null
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">src/app/services/validation/validation.service.ts:71</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="validationHistory"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>validationHistory</b></span>
+                        <a href="#validationHistory"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/ValidationResult.html" target="_self" >ValidationResult[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/services/validation/validation.service.ts:70</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="validationRules"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>validationRules</b></span>
+                        <a href="#validationRules"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/ValidationRule.html" target="_self" >ValidationRule[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/app/services/validation/validation.service.ts:69</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+import { BehaviorSubject, Observable } from &#x27;rxjs&#x27;;
+import { CommunicationService } from &#x27;../communication/communication.service&#x27;;
+
+/**
+ * Interface pour les résultats de validation
+ */
+export interface ValidationResult {
+  isValid: boolean;
+  errors: ValidationError[];
+  warnings: ValidationWarning[];
+  score: number; // Score de 0 à 100
+  timestamp: Date;
+}
+
+/**
+ * Interface pour les erreurs de validation
+ */
+export interface ValidationError {
+  code: string;
+  message: string;
+  field: string;
+  severity: &#x27;low&#x27; | &#x27;medium&#x27; | &#x27;high&#x27; | &#x27;critical&#x27;;
+  suggestion?: string;
+}
+
+/**
+ * Interface pour les avertissements de validation
+ */
+export interface ValidationWarning {
+  code: string;
+  message: string;
+  field: string;
+  suggestion?: string;
+}
+
+/**
+ * Interface pour les règles de validation
+ */
+export interface ValidationRule {
+  id: string;
+  name: string;
+  description: string;
+  category: &#x27;dimensions&#x27; | &#x27;proportions&#x27; | &#x27;materials&#x27; | &#x27;safety&#x27; | &#x27;aesthetics&#x27;;
+  weight: number; // Poids de la règle (1-10)
+  enabled: boolean;
+}
+
+/**
+ * Interface pour les statistiques de validation
+ */
+export interface ValidationStats {
+  totalValidations: number;
+  successRate: number;
+  averageScore: number;
+  errorsByCategory: Record&lt;string, number&gt;;
+  warningsByCategory: Record&lt;string, number&gt;;
+  lastValidation: Date | null;
+}
+
+/**
+ * Service de validation architecturale
+ */
+@Injectable({
+  providedIn: &#x27;root&#x27;
+})
+export class ValidationService {
+  
+  private validationRules: ValidationRule[] &#x3D; [];
+  private validationHistory: ValidationResult[] &#x3D; [];
+  private statsSubject &#x3D; new BehaviorSubject&lt;ValidationStats&gt;({
+    totalValidations: 0,
+    successRate: 0,
+    averageScore: 0,
+    errorsByCategory: {},
+    warningsByCategory: {},
+    lastValidation: null
+  });
+
+  public stats$ &#x3D; this.statsSubject.asObservable();
+
+  constructor(private communicationService: CommunicationService) {
+    this.initializeValidationRules();
+    console.log(&#x27;ValidationService initialisé&#x27;);
+  }
+
+  /**
+   * Initialiser les règles de validation
+   */
+  private initializeValidationRules(): void {
+    this.validationRules &#x3D; [
+      // Règles de dimensions
+      {
+        id: &#x27;wall_thickness_min&#x27;,
+        name: &#x27;Épaisseur minimale des murs&#x27;,
+        description: &#x27;Les murs doivent avoir une épaisseur minimale de 10cm&#x27;,
+        category: &#x27;dimensions&#x27;,
+        weight: 8,
+        enabled: true
+      },
+      {
+        id: &#x27;wall_thickness_max&#x27;,
+        name: &#x27;Épaisseur maximale des murs&#x27;,
+        description: &#x27;Les murs ne doivent pas dépasser 1m d\&#x27;épaisseur&#x27;,
+        category: &#x27;dimensions&#x27;,
+        weight: 5,
+        enabled: true
+      },
+      {
+        id: &#x27;door_height_min&#x27;,
+        name: &#x27;Hauteur minimale des portes&#x27;,
+        description: &#x27;Les portes doivent faire au moins 2m de haut&#x27;,
+        category: &#x27;dimensions&#x27;,
+        weight: 9,
+        enabled: true
+      },
+      {
+        id: &#x27;door_width_min&#x27;,
+        name: &#x27;Largeur minimale des portes&#x27;,
+        description: &#x27;Les portes doivent faire au moins 80cm de large&#x27;,
+        category: &#x27;dimensions&#x27;,
+        weight: 9,
+        enabled: true
+      },
+      {
+        id: &#x27;window_height_min&#x27;,
+        name: &#x27;Hauteur minimale des fenêtres&#x27;,
+        description: &#x27;Les fenêtres doivent faire au moins 1m de haut&#x27;,
+        category: &#x27;dimensions&#x27;,
+        weight: 6,
+        enabled: true
+      },
+
+      // Règles de proportions
+      {
+        id: &#x27;opening_ratio_max&#x27;,
+        name: &#x27;Ratio d\&#x27;ouvertures maximum&#x27;,
+        description: &#x27;Les ouvertures ne doivent pas représenter plus de 50% de la surface des murs&#x27;,
+        category: &#x27;proportions&#x27;,
+        weight: 7,
+        enabled: true
+      },
+      {
+        id: &#x27;aspect_ratio_reasonable&#x27;,
+        name: &#x27;Ratio d\&#x27;aspect raisonnable&#x27;,
+        description: &#x27;Le ratio largeur/hauteur des ouvertures doit être entre 0.3 et 3&#x27;,
+        category: &#x27;proportions&#x27;,
+        weight: 4,
+        enabled: true
+      },
+
+      // Règles de sécurité
+      {
+        id: &#x27;exit_accessibility&#x27;,
+        name: &#x27;Accessibilité des sorties&#x27;,
+        description: &#x27;Au moins une porte doit être accessible depuis chaque pièce&#x27;,
+        category: &#x27;safety&#x27;,
+        weight: 10,
+        enabled: true
+      },
+      {
+        id: &#x27;window_placement&#x27;,
+        name: &#x27;Placement des fenêtres&#x27;,
+        description: &#x27;Les fenêtres doivent être placées à une hauteur raisonnable&#x27;,
+        category: &#x27;safety&#x27;,
+        weight: 6,
+        enabled: true
+      },
+
+      // Règles esthétiques
+      {
+        id: &#x27;color_harmony&#x27;,
+        name: &#x27;Harmonie des couleurs&#x27;,
+        description: &#x27;Les couleurs doivent être harmonieuses&#x27;,
+        category: &#x27;aesthetics&#x27;,
+        weight: 3,
+        enabled: true
+      },
+      {
+        id: &#x27;symmetry_preference&#x27;,
+        name: &#x27;Préférence pour la symétrie&#x27;,
+        description: &#x27;La symétrie est préférable pour l\&#x27;esthétique&#x27;,
+        category: &#x27;aesthetics&#x27;,
+        weight: 2,
+        enabled: true
+      }
+    ];
+  }
+
+  /**
+   * Valider un bâtiment complet
+   */
+  validateBuilding(buildingData: any): ValidationResult {
+    const errors: ValidationError[] &#x3D; [];
+    const warnings: ValidationWarning[] &#x3D; [];
+    let totalScore &#x3D; 0;
+    let maxScore &#x3D; 0;
+
+    // Valider les murs
+    if (buildingData.murs) {
+      Object.entries(buildingData.murs).forEach(([wallType, wallData]: [string, any]) &#x3D;&gt; {
+        const wallValidation &#x3D; this.validateWall(wallData, wallType);
+        errors.push(...wallValidation.errors);
+        warnings.push(...wallValidation.warnings);
+        totalScore +&#x3D; wallValidation.score;
+        maxScore +&#x3D; 100;
+      });
+    }
+
+    // Valider les ouvertures
+    if (buildingData.murs) {
+      Object.entries(buildingData.murs).forEach(([wallType, wallData]: [string, any]) &#x3D;&gt; {
+        if (wallData.ouvertures) {
+          wallData.ouvertures.forEach((opening: any) &#x3D;&gt; {
+            const openingValidation &#x3D; this.validateOpening(opening, wallType);
+            errors.push(...openingValidation.errors);
+            warnings.push(...openingValidation.warnings);
+            totalScore +&#x3D; openingValidation.score;
+            maxScore +&#x3D; 100;
+          });
+        }
+      });
+    }
+
+    // Valider les proportions globales
+    const proportionsValidation &#x3D; this.validateProportions(buildingData);
+    errors.push(...proportionsValidation.errors);
+    warnings.push(...proportionsValidation.warnings);
+    totalScore +&#x3D; proportionsValidation.score;
+    maxScore +&#x3D; 100;
+
+    const finalScore &#x3D; maxScore &gt; 0 ? Math.round((totalScore / maxScore) * 100) : 100;
+    const isValid &#x3D; errors.filter(e &#x3D;&gt; e.severity &#x3D;&#x3D;&#x3D; &#x27;critical&#x27; || e.severity &#x3D;&#x3D;&#x3D; &#x27;high&#x27;).length &#x3D;&#x3D;&#x3D; 0;
+
+    const result: ValidationResult &#x3D; {
+      isValid,
+      errors,
+      warnings,
+      score: finalScore,
+      timestamp: new Date()
+    };
+
+    this.validationHistory.push(result);
+    this.updateStats();
+    
+    // Émettre l&#x27;événement de validation
+    this.communicationService.emitValidationResult(result);
+
+    return result;
+  }
+
+  /**
+   * Valider un mur
+   */
+  validateWall(wallData: any, wallType: string): ValidationResult {
+    const errors: ValidationError[] &#x3D; [];
+    const warnings: ValidationWarning[] &#x3D; [];
+    let score &#x3D; 100;
+
+    // Épaisseur minimale
+    if (wallData.epaisseur &lt; 0.1) {
+      errors.push({
+        code: &#x27;wall_thickness_min&#x27;,
+        message: &#x60;Le mur ${wallType} a une épaisseur trop faible (${wallData.epaisseur}m)&#x60;,
+        field: &#x27;epaisseur&#x27;,
+        severity: &#x27;high&#x27;,
+        suggestion: &#x27;Augmenter l\&#x27;épaisseur à au moins 0.1m&#x27;
+      });
+      score -&#x3D; 20;
+    }
+
+    // Épaisseur maximale
+    if (wallData.epaisseur &gt; 1.0) {
+      warnings.push({
+        code: &#x27;wall_thickness_max&#x27;,
+        message: &#x60;Le mur ${wallType} a une épaisseur très importante (${wallData.epaisseur}m)&#x60;,
+        field: &#x27;epaisseur&#x27;,
+        suggestion: &#x27;Considérer une épaisseur plus standard&#x27;
+      });
+      score -&#x3D; 10;
+    }
+
+    // Dimensions raisonnables
+    if (wallData.dimensions.height &lt; 2.0) {
+      errors.push({
+        code: &#x27;wall_height_min&#x27;,
+        message: &#x60;Le mur ${wallType} est trop bas (${wallData.dimensions.height}m)&#x60;,
+        field: &#x27;dimensions.height&#x27;,
+        severity: &#x27;medium&#x27;,
+        suggestion: &#x27;Augmenter la hauteur à au moins 2m&#x27;
+      });
+      score -&#x3D; 15;
+    }
+
+    return {
+      isValid: errors.filter(e &#x3D;&gt; e.severity &#x3D;&#x3D;&#x3D; &#x27;critical&#x27; || e.severity &#x3D;&#x3D;&#x3D; &#x27;high&#x27;).length &#x3D;&#x3D;&#x3D; 0,
+      errors,
+      warnings,
+      score: Math.max(0, score),
+      timestamp: new Date()
+    };
+  }
+
+  /**
+   * Valider une ouverture
+   */
+  validateOpening(openingData: any, wallType: string): ValidationResult {
+    const errors: ValidationError[] &#x3D; [];
+    const warnings: ValidationWarning[] &#x3D; [];
+    let score &#x3D; 100;
+
+    if (openingData.type &#x3D;&#x3D;&#x3D; &#x27;porte&#x27;) {
+      // Hauteur minimale des portes
+      if (openingData.dimensions.height &lt; 2.0) {
+        errors.push({
+          code: &#x27;door_height_min&#x27;,
+          message: &#x60;La porte sur le mur ${wallType} est trop basse (${openingData.dimensions.height}m)&#x60;,
+          field: &#x27;dimensions.height&#x27;,
+          severity: &#x27;high&#x27;,
+          suggestion: &#x27;Augmenter la hauteur à au moins 2m&#x27;
+        });
+        score -&#x3D; 25;
+      }
+
+      // Largeur minimale des portes
+      if (openingData.dimensions.width &lt; 0.8) {
+        errors.push({
+          code: &#x27;door_width_min&#x27;,
+          message: &#x60;La porte sur le mur ${wallType} est trop étroite (${openingData.dimensions.width}m)&#x60;,
+          field: &#x27;dimensions.width&#x27;,
+          severity: &#x27;high&#x27;,
+          suggestion: &#x27;Augmenter la largeur à au moins 0.8m&#x27;
+        });
+        score -&#x3D; 25;
+      }
+
+      // Largeur maximale des portes
+      if (openingData.dimensions.width &gt; 1.2) {
+        warnings.push({
+          code: &#x27;door_width_max&#x27;,
+          message: &#x60;La porte sur le mur ${wallType} est très large (${openingData.dimensions.width}m)&#x60;,
+          field: &#x27;dimensions.width&#x27;,
+          suggestion: &#x27;Considérer une largeur plus standard&#x27;
+        });
+        score -&#x3D; 10;
+      }
+    }
+
+    if (openingData.type &#x3D;&#x3D;&#x3D; &#x27;fenetre&#x27;) {
+      // Hauteur minimale des fenêtres
+      if (openingData.dimensions.height &lt; 1.0) {
+        errors.push({
+          code: &#x27;window_height_min&#x27;,
+          message: &#x60;La fenêtre sur le mur ${wallType} est trop basse (${openingData.dimensions.height}m)&#x60;,
+          field: &#x27;dimensions.height&#x27;,
+          severity: &#x27;medium&#x27;,
+          suggestion: &#x27;Augmenter la hauteur à au moins 1m&#x27;
+        });
+        score -&#x3D; 20;
+      }
+
+      // Ratio d&#x27;aspect des fenêtres
+      const aspectRatio &#x3D; openingData.dimensions.width / openingData.dimensions.height;
+      if (aspectRatio &lt; 0.3 || aspectRatio &gt; 3) {
+        warnings.push({
+          code: &#x27;aspect_ratio_reasonable&#x27;,
+          message: &#x60;La fenêtre sur le mur ${wallType} a un ratio d&#x27;aspect inhabituel (${aspectRatio.toFixed(2)})&#x60;,
+          field: &#x27;dimensions&#x27;,
+          suggestion: &#x27;Considérer un ratio entre 0.3 et 3&#x27;
+        });
+        score -&#x3D; 15;
+      }
+    }
+
+    return {
+      isValid: errors.filter(e &#x3D;&gt; e.severity &#x3D;&#x3D;&#x3D; &#x27;critical&#x27; || e.severity &#x3D;&#x3D;&#x3D; &#x27;high&#x27;).length &#x3D;&#x3D;&#x3D; 0,
+      errors,
+      warnings,
+      score: Math.max(0, score),
+      timestamp: new Date()
+    };
+  }
+
+  /**
+   * Valider les proportions globales
+   */
+  validateProportions(buildingData: any): ValidationResult {
+    const errors: ValidationError[] &#x3D; [];
+    const warnings: ValidationWarning[] &#x3D; [];
+    let score &#x3D; 100;
+
+    // Calculer le pourcentage d&#x27;ouvertures
+    let totalWallSurface &#x3D; 0;
+    let totalOpeningSurface &#x3D; 0;
+
+    if (buildingData.murs) {
+      Object.values(buildingData.murs).forEach((wall: any) &#x3D;&gt; {
+        totalWallSurface +&#x3D; wall.dimensions.width * wall.dimensions.height;
+        if (wall.ouvertures) {
+          wall.ouvertures.forEach((opening: any) &#x3D;&gt; {
+            totalOpeningSurface +&#x3D; opening.dimensions.width * opening.dimensions.height;
+          });
+        }
+      });
+    }
+
+    const openingPercentage &#x3D; totalWallSurface &gt; 0 ? (totalOpeningSurface / totalWallSurface) * 100 : 0;
+
+    if (openingPercentage &gt; 50) {
+      errors.push({
+        code: &#x27;opening_ratio_max&#x27;,
+        message: &#x60;Trop d&#x27;ouvertures (${openingPercentage.toFixed(1)}% de la surface des murs)&#x60;,
+        field: &#x27;ouvertures&#x27;,
+        severity: &#x27;medium&#x27;,
+        suggestion: &#x27;Réduire le nombre ou la taille des ouvertures&#x27;
+      });
+      score -&#x3D; 30;
+    } else if (openingPercentage &gt; 30) {
+      warnings.push({
+        code: &#x27;opening_ratio_high&#x27;,
+        message: &#x60;Beaucoup d&#x27;ouvertures (${openingPercentage.toFixed(1)}% de la surface des murs)&#x60;,
+        field: &#x27;ouvertures&#x27;,
+        suggestion: &#x27;Vérifier l\&#x27;isolation thermique&#x27;
+      });
+      score -&#x3D; 10;
+    }
+
+    return {
+      isValid: errors.filter(e &#x3D;&gt; e.severity &#x3D;&#x3D;&#x3D; &#x27;critical&#x27; || e.severity &#x3D;&#x3D;&#x3D; &#x27;high&#x27;).length &#x3D;&#x3D;&#x3D; 0,
+      errors,
+      warnings,
+      score: Math.max(0, score),
+      timestamp: new Date()
+    };
+  }
+
+  /**
+   * Obtenir les règles de validation
+   */
+  getValidationRules(): ValidationRule[] {
+    return [...this.validationRules];
+  }
+
+  /**
+   * Activer/désactiver une règle
+   */
+  toggleRule(ruleId: string): void {
+    const rule &#x3D; this.validationRules.find(r &#x3D;&gt; r.id &#x3D;&#x3D;&#x3D; ruleId);
+    if (rule) {
+      rule.enabled &#x3D; !rule.enabled;
+      console.log(&#x60;Règle ${ruleId} ${rule.enabled ? &#x27;activée&#x27; : &#x27;désactivée&#x27;}&#x60;);
+    }
+  }
+
+  /**
+   * Obtenir l&#x27;historique des validations
+   */
+  getValidationHistory(): ValidationResult[] {
+    return [...this.validationHistory];
+  }
+
+  /**
+   * Obtenir les statistiques de validation
+   */
+  getStats(): ValidationStats {
+    return this.statsSubject.value;
+  }
+
+  /**
+   * Obtenir les statistiques en tant qu&#x27;Observable
+   */
+  getStatsObservable(): Observable&lt;ValidationStats&gt; {
+    return this.stats$;
+  }
+
+  /**
+   * Mettre à jour les statistiques
+   */
+  private updateStats(): void {
+    const totalValidations &#x3D; this.validationHistory.length;
+    const successfulValidations &#x3D; this.validationHistory.filter(v &#x3D;&gt; v.isValid).length;
+    const successRate &#x3D; totalValidations &gt; 0 ? (successfulValidations / totalValidations) * 100 : 0;
+    const averageScore &#x3D; totalValidations &gt; 0 ? 
+      this.validationHistory.reduce((sum, v) &#x3D;&gt; sum + v.score, 0) / totalValidations : 0;
+
+    const errorsByCategory: Record&lt;string, number&gt; &#x3D; {};
+    const warningsByCategory: Record&lt;string, number&gt; &#x3D; {};
+
+    this.validationHistory.forEach(validation &#x3D;&gt; {
+      validation.errors.forEach(error &#x3D;&gt; {
+        const rule &#x3D; this.validationRules.find(r &#x3D;&gt; r.id &#x3D;&#x3D;&#x3D; error.code);
+        if (rule) {
+          errorsByCategory[rule.category] &#x3D; (errorsByCategory[rule.category] || 0) + 1;
+        }
+      });
+
+      validation.warnings.forEach(warning &#x3D;&gt; {
+        const rule &#x3D; this.validationRules.find(r &#x3D;&gt; r.id &#x3D;&#x3D;&#x3D; warning.code);
+        if (rule) {
+          warningsByCategory[rule.category] &#x3D; (warningsByCategory[rule.category] || 0) + 1;
+        }
+      });
+    });
+
+    const stats: ValidationStats &#x3D; {
+      totalValidations,
+      successRate: Math.round(successRate * 100) / 100,
+      averageScore: Math.round(averageScore * 100) / 100,
+      errorsByCategory,
+      warningsByCategory,
+      lastValidation: totalValidations &gt; 0 ? this.validationHistory[totalValidations - 1].timestamp : null
+    };
+
+    this.statsSubject.next(stats);
+  }
+
+  /**
+   * Effacer l&#x27;historique des validations
+   */
+  clearHistory(): void {
+    this.validationHistory &#x3D; [];
+    this.updateStats();
+    console.log(&#x27;Historique des validations effacé&#x27;);
+  }
+
+  /**
+   * Exporter les données de validation
+   */
+  exportValidationData(): string {
+    const data &#x3D; {
+      rules: this.validationRules,
+      history: this.validationHistory,
+      stats: this.getStats(),
+      exportDate: new Date()
+    };
+    
+    return JSON.stringify(data, null, 2);
+  }
+
+  /**
+   * Importer les données de validation
+   */
+  importValidationData(dataJson: string): boolean {
+    try {
+      const data &#x3D; JSON.parse(dataJson);
+      
+      if (data.rules) {
+        this.validationRules &#x3D; data.rules;
+      }
+      
+      if (data.history) {
+        this.validationHistory &#x3D; data.history;
+      }
+      
+      this.updateStats();
+      console.log(&#x27;Données de validation importées avec succès&#x27;);
+      return true;
+    } catch (error) {
+      console.error(&#x27;Erreur lors de l\&#x27;importation des données de validation:&#x27;, error);
+      return false;
+    }
+  }
+}
+
+</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'ValidationService.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

@@ -1,0 +1,2257 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>projet-3-d documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">projet-3-d documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  CalculateurFenetresComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/calculateur-fenetres/calculateur-fenetres.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-calculateur-fenetres</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>CommonModule</code>
+                            <code>FormsModule</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">styles</td>
+                <td class="col-md-9"><code>
+    .calculateur-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      font-family: &#x27;Segoe UI&#x27;, Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .section {
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-left: 4px solid #007bff;
+    }
+
+    .section h3 {
+      margin-top: 0;
+      color: #333;
+      border-bottom: 2px solid #007bff;
+      padding-bottom: 10px;
+    }
+
+    .mur-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .mur-info p {
+      background: white;
+      padding: 10px;
+      border-radius: 5px;
+      margin: 0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .parametres {
+      display: grid;
+      gap: 20px;
+      margin-top: 15px;
+    }
+
+    .parametre {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .parametre label {
+      min-width: 200px;
+      font-weight: 500;
+    }
+
+    .slider {
+      flex: 1;
+      height: 6px;
+      border-radius: 3px;
+      background: #ddd;
+      outline: none;
+      -webkit-appearance: none;
+    }
+
+    .slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #007bff;
+      cursor: pointer;
+    }
+
+    .valeur {
+      min-width: 60px;
+      font-weight: bold;
+      color: #007bff;
+    }
+
+    .number-input {
+      width: 100px;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    .resultats {
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 15px;
+    }
+
+    .resultats.valid {
+      background: #d4edda;
+      border: 1px solid #c3e6cb;
+    }
+
+    .resultats.invalid {
+      background: #f8d7da;
+      border: 1px solid #f5c6cb;
+    }
+
+    .statut {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .icone {
+      font-size: 1.2em;
+    }
+
+    .message {
+      font-weight: 500;
+    }
+
+    .details {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 10px;
+    }
+
+    .detail {
+      background: white;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .positions {
+      margin-top: 20px;
+    }
+
+    .position-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .position-item {
+      background: white;
+      padding: 12px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .numero {
+      font-weight: bold;
+      color: #007bff;
+    }
+
+    .coordonnees {
+      font-family: &#x27;Courier New&#x27;, monospace;
+      color: #666;
+    }
+
+    .actions {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      background: #007bff;
+      color: white;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background: #0056b3;
+    }
+
+    .btn-secondary {
+      background: #6c757d;
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background: #545b62;
+    }
+
+    .btn-success {
+      background: #28a745;
+      color: white;
+    }
+
+    .btn-success:hover {
+      background: #1e7e34;
+    }
+
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .config-code {
+      background: #2d3748;
+      color: #e2e8f0;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 15px;
+      overflow-x: auto;
+    }
+
+    .config-code pre {
+      margin: 0;
+      font-family: &#x27;Courier New&#x27;, monospace;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+  </code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">template</td>
+                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;calculateur-container&quot;&gt;
+  &lt;h2&gt;Calculateur de Fenêtres Intelligent&lt;/h2&gt;
+
+  &lt;!-- Sélection du mur --&gt;
+  &lt;div class&#x3D;&quot;section&quot;&gt;
+    &lt;h3&gt;Sélection du Mur&lt;/h3&gt;
+    &lt;select [(ngModel)]&#x3D;&quot;murSelectionne&quot; (change)&#x3D;&quot;onMurChange()&quot; class&#x3D;&quot;form-control&quot;&gt;
+      &lt;option value&#x3D;&quot;&quot;&gt;-- Choisir un mur --&lt;/option&gt;
+      &lt;option value&#x3D;&quot;principal&quot;&gt;Mur Principal (Façade)&lt;/option&gt;
+      &lt;option value&#x3D;&quot;arriere&quot;&gt;Mur Arrière&lt;/option&gt;
+      &lt;option value&#x3D;&quot;gauche&quot;&gt;Mur Gauche&lt;/option&gt;
+      &lt;option value&#x3D;&quot;droit&quot;&gt;Mur Droit&lt;/option&gt;
+    &lt;/select&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Informations du mur --&gt;
+  &lt;div class&#x3D;&quot;section&quot; *ngIf&#x3D;&quot;murSelectionne &amp;&amp; murInfo&quot;&gt;
+    &lt;h3&gt; Informations du Mur&lt;/h3&gt;
+    &lt;div class&#x3D;&quot;mur-info&quot;&gt;
+      &lt;p&gt;&lt;strong&gt;Largeur:&lt;/strong&gt; {{ murInfo.dimensions.width }}m&lt;/p&gt;
+      &lt;p&gt;&lt;strong&gt;Hauteur:&lt;/strong&gt; {{ murInfo.dimensions.height }}m&lt;/p&gt;
+      &lt;p&gt;&lt;strong&gt;Profondeur:&lt;/strong&gt; {{ murInfo.dimensions.depth }}m&lt;/p&gt;
+      &lt;p&gt;&lt;strong&gt;Position:&lt;/strong&gt; ({{ murInfo.position.x }}, {{ murInfo.position.y }}, {{ murInfo.position.z }})&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Paramètres des fenêtres --&gt;
+  &lt;div class&#x3D;&quot;section&quot; *ngIf&#x3D;&quot;murSelectionne&quot;&gt;
+    &lt;h3&gt;Paramètres des Fenêtres&lt;/h3&gt;
+
+    &lt;div class&#x3D;&quot;parametres&quot;&gt;
+      &lt;div class&#x3D;&quot;parametre&quot;&gt;
+        &lt;label&gt;Largeur des fenêtres (m):&lt;/label&gt;
+        &lt;input
+          type&#x3D;&quot;range&quot;
+          [(ngModel)]&#x3D;&quot;largeurFenetre&quot;
+          [min]&#x3D;&quot;0.5&quot;
+          [max]&#x3D;&quot;3.0&quot;
+          [step]&#x3D;&quot;0.1&quot;
+          (input)&#x3D;&quot;calculerCapacite()&quot;
+          class&#x3D;&quot;slider&quot;&gt;
+        &lt;span class&#x3D;&quot;valeur&quot;&gt;{{ largeurFenetre }}m&lt;/span&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;parametre&quot;&gt;
+        &lt;label&gt;Hauteur des fenêtres (m):&lt;/label&gt;
+        &lt;input
+          type&#x3D;&quot;range&quot;
+          [(ngModel)]&#x3D;&quot;hauteurFenetre&quot;
+          [min]&#x3D;&quot;0.8&quot;
+          [max]&#x3D;&quot;2.5&quot;
+          [step]&#x3D;&quot;0.1&quot;
+          (input)&#x3D;&quot;calculerCapacite()&quot;
+          class&#x3D;&quot;slider&quot;&gt;
+        &lt;span class&#x3D;&quot;valeur&quot;&gt;{{ hauteurFenetre }}m&lt;/span&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;parametre&quot;&gt;
+        &lt;label&gt;Écart entre fenêtres (m):&lt;/label&gt;
+        &lt;input
+          type&#x3D;&quot;range&quot;
+          [(ngModel)]&#x3D;&quot;ecart&quot;
+          [min]&#x3D;&quot;0.1&quot;
+          [max]&#x3D;&quot;2.0&quot;
+          [step]&#x3D;&quot;0.1&quot;
+          (input)&#x3D;&quot;calculerCapacite()&quot;
+          class&#x3D;&quot;slider&quot;&gt;
+        &lt;span class&#x3D;&quot;valeur&quot;&gt;{{ ecart }}m&lt;/span&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;parametre&quot;&gt;
+        &lt;label&gt;Nombre de fenêtres souhaitées:&lt;/label&gt;
+        &lt;input
+          type&#x3D;&quot;number&quot;
+          [(ngModel)]&#x3D;&quot;nombreFenetresSouhaitees&quot;
+          [min]&#x3D;&quot;0&quot;
+          [max]&#x3D;&quot;20&quot;
+          (input)&#x3D;&quot;calculerCapacite()&quot;
+          class&#x3D;&quot;number-input&quot;&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Résultats du calcul --&gt;
+  &lt;div class&#x3D;&quot;section&quot; *ngIf&#x3D;&quot;calculResultat&quot;&gt;
+    &lt;h3&gt;Résultats du Calcul&lt;/h3&gt;
+
+    &lt;div class&#x3D;&quot;resultats&quot; [class.valid]&#x3D;&quot;calculResultat.isValid&quot; [class.invalid]&#x3D;&quot;!calculResultat.isValid&quot;&gt;
+      &lt;div class&#x3D;&quot;statut&quot;&gt;
+        &lt;span class&#x3D;&quot;icone&quot;&gt;{{ calculResultat.isValid ? &#x27;✅&#x27; : &#x27;❌&#x27; }}&lt;/span&gt;
+        &lt;span class&#x3D;&quot;message&quot;&gt;{{ calculResultat.message }}&lt;/span&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;details&quot; *ngIf&#x3D;&quot;calculResultat.isValid&quot;&gt;
+        &lt;div class&#x3D;&quot;detail&quot;&gt;
+          &lt;strong&gt;Nombre max de fenêtres:&lt;/strong&gt; {{ calculResultat.nombreMaxFenetres }}
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;detail&quot;&gt;
+          &lt;strong&gt;Largeur totale utilisée:&lt;/strong&gt; {{ calculResultat.largeurTotaleUtilisee.toFixed(2) }}m
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;detail&quot;&gt;
+          &lt;strong&gt;Marge restante:&lt;/strong&gt; {{ calculResultat.margeRestante.toFixed(2) }}m
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;detail&quot;&gt;
+          &lt;strong&gt;Écart optimal:&lt;/strong&gt; {{ calculResultat.ecartOptimal.toFixed(2) }}m
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Positions calculées --&gt;
+    &lt;div class&#x3D;&quot;positions&quot; *ngIf&#x3D;&quot;calculResultat.positionsCalculees.length &gt; 0&quot;&gt;
+      &lt;h4&gt;Positions Calculées&lt;/h4&gt;
+      &lt;div class&#x3D;&quot;position-list&quot;&gt;
+        &lt;div
+          *ngFor&#x3D;&quot;let position of calculResultat.positionsCalculees; let i &#x3D; index&quot;
+          class&#x3D;&quot;position-item&quot;&gt;
+          &lt;span class&#x3D;&quot;numero&quot;&gt;Fenêtre {{ i + 1 }}:&lt;/span&gt;
+          &lt;span class&#x3D;&quot;coordonnees&quot;&gt;
+            X: {{ position.x.toFixed(2) }}m,
+            Y: {{ position.y.toFixed(2) }}m,
+            Z: {{ position.z.toFixed(2) }}m
+          &lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Boutons d&#x27;action --&gt;
+  &lt;div class&#x3D;&quot;actions&quot; *ngIf&#x3D;&quot;calculResultat &amp;&amp; calculResultat.isValid&quot;&gt;
+    &lt;button
+      (click)&#x3D;&quot;genererConfiguration()&quot;
+      class&#x3D;&quot;btn btn-primary&quot;
+      [disabled]&#x3D;&quot;nombreFenetresSouhaitees &gt; calculResultat.nombreMaxFenetres&quot;&gt;
+      Générer la Configuration
+    &lt;/button&gt;
+
+    &lt;button
+      (click)&#x3D;&quot;optimiserDimensions()&quot;
+      class&#x3D;&quot;btn btn-secondary&quot;&gt;
+      Optimiser les Dimensions
+    &lt;/button&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Configuration générée --&gt;
+  &lt;div class&#x3D;&quot;section&quot; *ngIf&#x3D;&quot;configurationGeneree&quot;&gt;
+    &lt;h3&gt;Configuration Générée&lt;/h3&gt;
+    &lt;div class&#x3D;&quot;config-code&quot;&gt;
+      &lt;pre&gt;{{ configurationGeneree }}&lt;/pre&gt;
+    &lt;/div&gt;
+    &lt;button (click)&#x3D;&quot;copierConfiguration()&quot; class&#x3D;&quot;btn btn-success&quot;&gt;Copier la Configuration&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#calculResultat" >calculResultat</a>
+                            </li>
+                            <li>
+                                <a href="#configurationGeneree" >configurationGeneree</a>
+                            </li>
+                            <li>
+                                <a href="#ecart" >ecart</a>
+                            </li>
+                            <li>
+                                <a href="#hauteurFenetre" >hauteurFenetre</a>
+                            </li>
+                            <li>
+                                <a href="#largeurFenetre" >largeurFenetre</a>
+                            </li>
+                            <li>
+                                <a href="#murInfo" >murInfo</a>
+                            </li>
+                            <li>
+                                <a href="#murSelectionne" >murSelectionne</a>
+                            </li>
+                            <li>
+                                <a href="#nombreFenetresSouhaitees" >nombreFenetresSouhaitees</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#calculerCapacite" >calculerCapacite</a>
+                            </li>
+                            <li>
+                                <a href="#copierConfiguration" >copierConfiguration</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#formaterConfiguration" >formaterConfiguration</a>
+                            </li>
+                            <li>
+                                <a href="#genererConfiguration" >genererConfiguration</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#getMurFromConfig" >getMurFromConfig</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onMurChange" >onMurChange</a>
+                            </li>
+                            <li>
+                                <a href="#optimiserDimensions" >optimiserDimensions</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(calculateurService: <a href="../injectables/CalculateurFenetresService.html" target="_self">CalculateurFenetresService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="411" class="link-to-prism">src/app/components/calculateur-fenetres/calculateur-fenetres.component.ts:411</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>calculateurService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/CalculateurFenetresService.html" target="_self" >CalculateurFenetresService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="calculerCapacite"></a>
+                    <span class="name">
+                        <span ><b>calculerCapacite</b></span>
+                        <a href="#calculerCapacite"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>calculerCapacite()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="474"
+                                    class="link-to-prism">src/app/components/calculateur-fenetres/calculateur-fenetres.component.ts:474</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="copierConfiguration"></a>
+                    <span class="name">
+                        <span ><b>copierConfiguration</b></span>
+                        <a href="#copierConfiguration"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>copierConfiguration()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="539"
+                                    class="link-to-prism">src/app/components/calculateur-fenetres/calculateur-fenetres.component.ts:539</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="formaterConfiguration"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>formaterConfiguration</b></span>
+                        <a href="#formaterConfiguration"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>formaterConfiguration(fenetres: any[])</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="523"
+                                    class="link-to-prism">src/app/components/calculateur-fenetres/calculateur-fenetres.component.ts:523</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>fenetres</td>
+                                            <td>
+                                                        <code>any[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="genererConfiguration"></a>
+                    <span class="name">
+                        <span ><b>genererConfiguration</b></span>
+                        <a href="#genererConfiguration"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>genererConfiguration()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="485"
+                                    class="link-to-prism">src/app/components/calculateur-fenetres/calculateur-fenetres.component.ts:485</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getMurFromConfig"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>getMurFromConfig</b></span>
+                        <a href="#getMurFromConfig"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getMurFromConfig(nomMur: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="434"
+                                    class="link-to-prism">src/app/components/calculateur-fenetres/calculateur-fenetres.component.ts:434</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>nomMur</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>MurConfig | null</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="415"
+                                    class="link-to-prism">src/app/components/calculateur-fenetres/calculateur-fenetres.component.ts:415</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onMurChange"></a>
+                    <span class="name">
+                        <span ><b>onMurChange</b></span>
+                        <a href="#onMurChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onMurChange()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="419"
+                                    class="link-to-prism">src/app/components/calculateur-fenetres/calculateur-fenetres.component.ts:419</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="optimiserDimensions"></a>
+                    <span class="name">
+                        <span ><b>optimiserDimensions</b></span>
+                        <a href="#optimiserDimensions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>optimiserDimensions()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="504"
+                                    class="link-to-prism">src/app/components/calculateur-fenetres/calculateur-fenetres.component.ts:504</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="calculResultat"></a>
+                    <span class="name">
+                        <span ><b>calculResultat</b></span>
+                        <a href="#calculResultat"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/CalculFenetres.html" target="_self" >CalculFenetres | null</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="410" class="link-to-prism">src/app/components/calculateur-fenetres/calculateur-fenetres.component.ts:410</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="configurationGeneree"></a>
+                    <span class="name">
+                        <span ><b>configurationGeneree</b></span>
+                        <a href="#configurationGeneree"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="411" class="link-to-prism">src/app/components/calculateur-fenetres/calculateur-fenetres.component.ts:411</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ecart"></a>
+                    <span class="name">
+                        <span ><b>ecart</b></span>
+                        <a href="#ecart"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0.5</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="406" class="link-to-prism">src/app/components/calculateur-fenetres/calculateur-fenetres.component.ts:406</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="hauteurFenetre"></a>
+                    <span class="name">
+                        <span ><b>hauteurFenetre</b></span>
+                        <a href="#hauteurFenetre"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>1.2</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="405" class="link-to-prism">src/app/components/calculateur-fenetres/calculateur-fenetres.component.ts:405</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="largeurFenetre"></a>
+                    <span class="name">
+                        <span ><b>largeurFenetre</b></span>
+                        <a href="#largeurFenetre"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>1.5</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="404" class="link-to-prism">src/app/components/calculateur-fenetres/calculateur-fenetres.component.ts:404</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="murInfo"></a>
+                    <span class="name">
+                        <span ><b>murInfo</b></span>
+                        <a href="#murInfo"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>MurConfig | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="401" class="link-to-prism">src/app/components/calculateur-fenetres/calculateur-fenetres.component.ts:401</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="murSelectionne"></a>
+                    <span class="name">
+                        <span ><b>murSelectionne</b></span>
+                        <a href="#murSelectionne"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="400" class="link-to-prism">src/app/components/calculateur-fenetres/calculateur-fenetres.component.ts:400</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="nombreFenetresSouhaitees"></a>
+                    <span class="name">
+                        <span ><b>nombreFenetresSouhaitees</b></span>
+                        <a href="#nombreFenetresSouhaitees"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>2</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="407" class="link-to-prism">src/app/components/calculateur-fenetres/calculateur-fenetres.component.ts:407</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { FormsModule } from &#x27;@angular/forms&#x27;;
+import { CalculateurFenetresService, CalculFenetres, MurConfig } from &#x27;../../services/calculateur-fenetres/calculateur-fenetres.service&#x27;;
+import { BUILDING_CONFIG } from &#x27;../../config/building-config&#x27;;
+
+@Component({
+  selector: &#x27;app-calculateur-fenetres&#x27;,
+  standalone: true,
+  imports: [CommonModule, FormsModule],
+  template: &#x60;
+    &lt;div class&#x3D;&quot;calculateur-container&quot;&gt;
+      &lt;h2&gt;Calculateur de Fenêtres Intelligent&lt;/h2&gt;
+      
+      &lt;!-- Sélection du mur --&gt;
+      &lt;div class&#x3D;&quot;section&quot;&gt;
+        &lt;h3&gt;Sélection du Mur&lt;/h3&gt;
+        &lt;select [(ngModel)]&#x3D;&quot;murSelectionne&quot; (change)&#x3D;&quot;onMurChange()&quot; class&#x3D;&quot;form-control&quot;&gt;
+          &lt;option value&#x3D;&quot;&quot;&gt;-- Choisir un mur --&lt;/option&gt;
+          &lt;option value&#x3D;&quot;principal&quot;&gt;Mur Principal (Façade)&lt;/option&gt;
+          &lt;option value&#x3D;&quot;arriere&quot;&gt;Mur Arrière&lt;/option&gt;
+          &lt;option value&#x3D;&quot;gauche&quot;&gt;Mur Gauche&lt;/option&gt;
+          &lt;option value&#x3D;&quot;droit&quot;&gt;Mur Droit&lt;/option&gt;
+        &lt;/select&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Informations du mur --&gt;
+      &lt;div class&#x3D;&quot;section&quot; *ngIf&#x3D;&quot;murSelectionne &amp;&amp; murInfo&quot;&gt;
+        &lt;h3&gt; Informations du Mur&lt;/h3&gt;
+        &lt;div class&#x3D;&quot;mur-info&quot;&gt;
+          &lt;p&gt;&lt;strong&gt;Largeur:&lt;/strong&gt; {{ murInfo.dimensions.width }}m&lt;/p&gt;
+          &lt;p&gt;&lt;strong&gt;Hauteur:&lt;/strong&gt; {{ murInfo.dimensions.height }}m&lt;/p&gt;
+          &lt;p&gt;&lt;strong&gt;Profondeur:&lt;/strong&gt; {{ murInfo.dimensions.depth }}m&lt;/p&gt;
+          &lt;p&gt;&lt;strong&gt;Position:&lt;/strong&gt; ({{ murInfo.position.x }}, {{ murInfo.position.y }}, {{ murInfo.position.z }})&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Paramètres des fenêtres --&gt;
+      &lt;div class&#x3D;&quot;section&quot; *ngIf&#x3D;&quot;murSelectionne&quot;&gt;
+        &lt;h3&gt;Paramètres des Fenêtres&lt;/h3&gt;
+        
+        &lt;div class&#x3D;&quot;parametres&quot;&gt;
+          &lt;div class&#x3D;&quot;parametre&quot;&gt;
+            &lt;label&gt;Largeur des fenêtres (m):&lt;/label&gt;
+            &lt;input 
+              type&#x3D;&quot;range&quot; 
+              [(ngModel)]&#x3D;&quot;largeurFenetre&quot; 
+              [min]&#x3D;&quot;0.5&quot; 
+              [max]&#x3D;&quot;3.0&quot; 
+              [step]&#x3D;&quot;0.1&quot;
+              (input)&#x3D;&quot;calculerCapacite()&quot;
+              class&#x3D;&quot;slider&quot;&gt;
+            &lt;span class&#x3D;&quot;valeur&quot;&gt;{{ largeurFenetre }}m&lt;/span&gt;
+          &lt;/div&gt;
+
+          &lt;div class&#x3D;&quot;parametre&quot;&gt;
+            &lt;label&gt;Hauteur des fenêtres (m):&lt;/label&gt;
+            &lt;input 
+              type&#x3D;&quot;range&quot; 
+              [(ngModel)]&#x3D;&quot;hauteurFenetre&quot; 
+              [min]&#x3D;&quot;0.8&quot; 
+              [max]&#x3D;&quot;2.5&quot; 
+              [step]&#x3D;&quot;0.1&quot;
+              (input)&#x3D;&quot;calculerCapacite()&quot;
+              class&#x3D;&quot;slider&quot;&gt;
+            &lt;span class&#x3D;&quot;valeur&quot;&gt;{{ hauteurFenetre }}m&lt;/span&gt;
+          &lt;/div&gt;
+
+          &lt;div class&#x3D;&quot;parametre&quot;&gt;
+            &lt;label&gt;Écart entre fenêtres (m):&lt;/label&gt;
+            &lt;input 
+              type&#x3D;&quot;range&quot; 
+              [(ngModel)]&#x3D;&quot;ecart&quot; 
+              [min]&#x3D;&quot;0.1&quot; 
+              [max]&#x3D;&quot;2.0&quot; 
+              [step]&#x3D;&quot;0.1&quot;
+              (input)&#x3D;&quot;calculerCapacite()&quot;
+              class&#x3D;&quot;slider&quot;&gt;
+            &lt;span class&#x3D;&quot;valeur&quot;&gt;{{ ecart }}m&lt;/span&gt;
+          &lt;/div&gt;
+
+          &lt;div class&#x3D;&quot;parametre&quot;&gt;
+            &lt;label&gt;Nombre de fenêtres souhaitées:&lt;/label&gt;
+            &lt;input 
+              type&#x3D;&quot;number&quot; 
+              [(ngModel)]&#x3D;&quot;nombreFenetresSouhaitees&quot; 
+              [min]&#x3D;&quot;0&quot; 
+              [max]&#x3D;&quot;20&quot;
+              (input)&#x3D;&quot;calculerCapacite()&quot;
+              class&#x3D;&quot;number-input&quot;&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Résultats du calcul --&gt;
+      &lt;div class&#x3D;&quot;section&quot; *ngIf&#x3D;&quot;calculResultat&quot;&gt;
+        &lt;h3&gt;Résultats du Calcul&lt;/h3&gt;
+        
+        &lt;div class&#x3D;&quot;resultats&quot; [class.valid]&#x3D;&quot;calculResultat.isValid&quot; [class.invalid]&#x3D;&quot;!calculResultat.isValid&quot;&gt;
+          &lt;div class&#x3D;&quot;statut&quot;&gt;
+            &lt;span class&#x3D;&quot;icone&quot;&gt;{{ calculResultat.isValid ? &#x27;✅&#x27; : &#x27;❌&#x27; }}&lt;/span&gt;
+            &lt;span class&#x3D;&quot;message&quot;&gt;{{ calculResultat.message }}&lt;/span&gt;
+          &lt;/div&gt;
+          
+          &lt;div class&#x3D;&quot;details&quot; *ngIf&#x3D;&quot;calculResultat.isValid&quot;&gt;
+            &lt;div class&#x3D;&quot;detail&quot;&gt;
+              &lt;strong&gt;Nombre max de fenêtres:&lt;/strong&gt; {{ calculResultat.nombreMaxFenetres }}
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;detail&quot;&gt;
+              &lt;strong&gt;Largeur totale utilisée:&lt;/strong&gt; {{ calculResultat.largeurTotaleUtilisee.toFixed(2) }}m
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;detail&quot;&gt;
+              &lt;strong&gt;Marge restante:&lt;/strong&gt; {{ calculResultat.margeRestante.toFixed(2) }}m
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;detail&quot;&gt;
+              &lt;strong&gt;Écart optimal:&lt;/strong&gt; {{ calculResultat.ecartOptimal.toFixed(2) }}m
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Positions calculées --&gt;
+        &lt;div class&#x3D;&quot;positions&quot; *ngIf&#x3D;&quot;calculResultat.positionsCalculees.length &gt; 0&quot;&gt;
+          &lt;h4&gt;Positions Calculées&lt;/h4&gt;
+          &lt;div class&#x3D;&quot;position-list&quot;&gt;
+            &lt;div 
+              *ngFor&#x3D;&quot;let position of calculResultat.positionsCalculees; let i &#x3D; index&quot; 
+              class&#x3D;&quot;position-item&quot;&gt;
+              &lt;span class&#x3D;&quot;numero&quot;&gt;Fenêtre {{ i + 1 }}:&lt;/span&gt;
+              &lt;span class&#x3D;&quot;coordonnees&quot;&gt;
+                X: {{ position.x.toFixed(2) }}m, 
+                Y: {{ position.y.toFixed(2) }}m, 
+                Z: {{ position.z.toFixed(2) }}m
+              &lt;/span&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Boutons d&#x27;action --&gt;
+      &lt;div class&#x3D;&quot;actions&quot; *ngIf&#x3D;&quot;calculResultat &amp;&amp; calculResultat.isValid&quot;&gt;
+        &lt;button 
+          (click)&#x3D;&quot;genererConfiguration()&quot; 
+          class&#x3D;&quot;btn btn-primary&quot;
+          [disabled]&#x3D;&quot;nombreFenetresSouhaitees &gt; calculResultat.nombreMaxFenetres&quot;&gt;
+          Générer la Configuration
+        &lt;/button&gt;
+        
+        &lt;button 
+          (click)&#x3D;&quot;optimiserDimensions()&quot; 
+          class&#x3D;&quot;btn btn-secondary&quot;&gt;
+          Optimiser les Dimensions
+        &lt;/button&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Configuration générée --&gt;
+      &lt;div class&#x3D;&quot;section&quot; *ngIf&#x3D;&quot;configurationGeneree&quot;&gt;
+        &lt;h3&gt;Configuration Générée&lt;/h3&gt;
+        &lt;div class&#x3D;&quot;config-code&quot;&gt;
+          &lt;pre&gt;{{ configurationGeneree }}&lt;/pre&gt;
+        &lt;/div&gt;
+        &lt;button (click)&#x3D;&quot;copierConfiguration()&quot; class&#x3D;&quot;btn btn-success&quot;&gt;Copier la Configuration&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &#x60;,
+  styles: [&#x60;
+    .calculateur-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      font-family: &#x27;Segoe UI&#x27;, Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .section {
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-left: 4px solid #007bff;
+    }
+
+    .section h3 {
+      margin-top: 0;
+      color: #333;
+      border-bottom: 2px solid #007bff;
+      padding-bottom: 10px;
+    }
+
+    .mur-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .mur-info p {
+      background: white;
+      padding: 10px;
+      border-radius: 5px;
+      margin: 0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .parametres {
+      display: grid;
+      gap: 20px;
+      margin-top: 15px;
+    }
+
+    .parametre {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .parametre label {
+      min-width: 200px;
+      font-weight: 500;
+    }
+
+    .slider {
+      flex: 1;
+      height: 6px;
+      border-radius: 3px;
+      background: #ddd;
+      outline: none;
+      -webkit-appearance: none;
+    }
+
+    .slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #007bff;
+      cursor: pointer;
+    }
+
+    .valeur {
+      min-width: 60px;
+      font-weight: bold;
+      color: #007bff;
+    }
+
+    .number-input {
+      width: 100px;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    .resultats {
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 15px;
+    }
+
+    .resultats.valid {
+      background: #d4edda;
+      border: 1px solid #c3e6cb;
+    }
+
+    .resultats.invalid {
+      background: #f8d7da;
+      border: 1px solid #f5c6cb;
+    }
+
+    .statut {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .icone {
+      font-size: 1.2em;
+    }
+
+    .message {
+      font-weight: 500;
+    }
+
+    .details {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 10px;
+    }
+
+    .detail {
+      background: white;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .positions {
+      margin-top: 20px;
+    }
+
+    .position-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .position-item {
+      background: white;
+      padding: 12px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .numero {
+      font-weight: bold;
+      color: #007bff;
+    }
+
+    .coordonnees {
+      font-family: &#x27;Courier New&#x27;, monospace;
+      color: #666;
+    }
+
+    .actions {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      background: #007bff;
+      color: white;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background: #0056b3;
+    }
+
+    .btn-secondary {
+      background: #6c757d;
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background: #545b62;
+    }
+
+    .btn-success {
+      background: #28a745;
+      color: white;
+    }
+
+    .btn-success:hover {
+      background: #1e7e34;
+    }
+
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .config-code {
+      background: #2d3748;
+      color: #e2e8f0;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 15px;
+      overflow-x: auto;
+    }
+
+    .config-code pre {
+      margin: 0;
+      font-family: &#x27;Courier New&#x27;, monospace;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+  &#x60;]
+})
+export class CalculateurFenetresComponent implements OnInit {
+  
+  murSelectionne: string &#x3D; &#x27;&#x27;;
+  murInfo: MurConfig | null &#x3D; null;
+  
+  // Paramètres des fenêtres
+  largeurFenetre: number &#x3D; 1.5;
+  hauteurFenetre: number &#x3D; 1.2;
+  ecart: number &#x3D; 0.5;
+  nombreFenetresSouhaitees: number &#x3D; 2;
+  
+  // Résultats
+  calculResultat: CalculFenetres | null &#x3D; null;
+  configurationGeneree: string &#x3D; &#x27;&#x27;;
+
+  constructor(private calculateurService: CalculateurFenetresService) {}
+
+  ngOnInit() {
+    console.log(&#x27;CalculateurFenetresComponent initialisé&#x27;);
+  }
+
+  onMurChange() {
+    if (!this.murSelectionne) {
+      this.murInfo &#x3D; null;
+      this.calculResultat &#x3D; null;
+      return;
+    }
+
+    // Récupérer les informations du mur depuis BUILDING_CONFIG
+    this.murInfo &#x3D; this.getMurFromConfig(this.murSelectionne);
+
+    if (this.murInfo) {
+      this.calculerCapacite();
+    }
+  }
+
+  private getMurFromConfig(nomMur: string): MurConfig | null {
+    const config &#x3D; BUILDING_CONFIG;
+    switch (nomMur) {
+      case &#x27;principal&#x27;:
+        return {
+          position: config.mainWall.position,
+          dimensions: {
+            width: config.mainWall.contour[1].x - config.mainWall.contour[0].x,
+            height: config.mainWall.contour[2].y - config.mainWall.contour[0].y,
+            depth: config.mainWall.thickness
+          },
+          color: config.mainWall.color
+        };
+        
+      case &#x27;arriere&#x27;:
+        return {
+          position: config.walls.back.position,
+          dimensions: config.walls.back.dimensions,
+          color: config.walls.back.color
+        };
+      
+      case &#x27;gauche&#x27;:
+        return {
+          position: config.walls.left.position,
+          dimensions: config.walls.left.dimensions,
+          color: config.walls.left.color
+        };
+      
+      case &#x27;droit&#x27;:
+        return {
+          position: config.walls.right.position,
+          dimensions: config.walls.right.dimensions,
+          color: config.walls.right.color
+        };
+      
+      default:
+        return null;
+    }
+  }
+
+  calculerCapacite() {
+    if (!this.murInfo) return;
+
+    this.calculResultat &#x3D; this.calculateurService.calculerNombreMaxFenetres(
+      this.murInfo,
+      this.largeurFenetre,
+      this.ecart,
+      this.hauteurFenetre
+    );
+  }
+
+  genererConfiguration() {
+    if (!this.murInfo || !this.calculResultat) return;
+
+    const resultat &#x3D; this.calculateurService.genererConfigurationFenetres(
+      this.murInfo,
+      this.nombreFenetresSouhaitees,
+      this.largeurFenetre,
+      this.ecart,
+      this.hauteurFenetre,
+      0xff0000
+    );
+
+    if (resultat.isValid) {
+      this.configurationGeneree &#x3D; this.formaterConfiguration(resultat.fenetres);
+    } else {
+      alert(resultat.message);
+    }
+  }
+
+  optimiserDimensions() {
+    if (!this.murInfo) return;
+
+    const optimisation &#x3D; this.calculateurService.optimiserDimensions(
+      this.murInfo,
+      this.nombreFenetresSouhaitees,
+      this.hauteurFenetre
+    );
+
+    if (optimisation.isValid) {
+      this.largeurFenetre &#x3D; optimisation.largeurFenetre;
+      this.ecart &#x3D; optimisation.ecart;
+      this.calculerCapacite();
+      alert(optimisation.message);
+    } else {
+      alert(optimisation.message);
+    }
+  }
+
+  private formaterConfiguration(fenetres: any[]): string {
+    let config &#x3D; &#x27;openings: {\n&#x27;;
+    
+    fenetres.forEach((fenetre, index) &#x3D;&gt; {
+      config +&#x3D; &#x60;  window${index + 1}: {\n&#x60;;
+      config +&#x3D; &#x60;    position: { x: ${fenetre.position.x.toFixed(2)}, y: ${fenetre.position.y.toFixed(2)}, z: ${fenetre.position.z.toFixed(2)} },\n&#x60;;
+      config +&#x3D; &#x60;    dimensions: { width: ${fenetre.dimensions.width}, height: ${fenetre.dimensions.height}, depth: ${fenetre.dimensions.depth} },\n&#x60;;
+      config +&#x3D; &#x60;    color: 0x${fenetre.color.toString(16)},\n&#x60;;
+      config +&#x3D; &#x60;    type: &#x27;window&#x27; as const\n&#x60;;
+      config +&#x3D; &#x60;  }${index &lt; fenetres.length - 1 ? &#x27;,&#x27; : &#x27;&#x27;}\n&#x60;;
+    });
+    
+    config +&#x3D; &#x27;}&#x27;;
+    return config;
+  }
+
+  copierConfiguration() {
+    navigator.clipboard.writeText(this.configurationGeneree).then(() &#x3D;&gt; {
+      alert(&#x27;Configuration copiée dans le presse-papiers !&#x27;);
+    });
+  }
+}
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="styleData">
+            <pre class="line-numbers"><code class="language-scss">
+    .calculateur-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      font-family: &#x27;Segoe UI&#x27;, Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .section {
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-left: 4px solid #007bff;
+    }
+
+    .section h3 {
+      margin-top: 0;
+      color: #333;
+      border-bottom: 2px solid #007bff;
+      padding-bottom: 10px;
+    }
+
+    .mur-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .mur-info p {
+      background: white;
+      padding: 10px;
+      border-radius: 5px;
+      margin: 0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .parametres {
+      display: grid;
+      gap: 20px;
+      margin-top: 15px;
+    }
+
+    .parametre {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .parametre label {
+      min-width: 200px;
+      font-weight: 500;
+    }
+
+    .slider {
+      flex: 1;
+      height: 6px;
+      border-radius: 3px;
+      background: #ddd;
+      outline: none;
+      -webkit-appearance: none;
+    }
+
+    .slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #007bff;
+      cursor: pointer;
+    }
+
+    .valeur {
+      min-width: 60px;
+      font-weight: bold;
+      color: #007bff;
+    }
+
+    .number-input {
+      width: 100px;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    .resultats {
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 15px;
+    }
+
+    .resultats.valid {
+      background: #d4edda;
+      border: 1px solid #c3e6cb;
+    }
+
+    .resultats.invalid {
+      background: #f8d7da;
+      border: 1px solid #f5c6cb;
+    }
+
+    .statut {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .icone {
+      font-size: 1.2em;
+    }
+
+    .message {
+      font-weight: 500;
+    }
+
+    .details {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 10px;
+    }
+
+    .detail {
+      background: white;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .positions {
+      margin-top: 20px;
+    }
+
+    .position-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .position-item {
+      background: white;
+      padding: 12px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .numero {
+      font-weight: bold;
+      color: #007bff;
+    }
+
+    .coordonnees {
+      font-family: &#x27;Courier New&#x27;, monospace;
+      color: #666;
+    }
+
+    .actions {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      background: #007bff;
+      color: white;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background: #0056b3;
+    }
+
+    .btn-secondary {
+      background: #6c757d;
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background: #545b62;
+    }
+
+    .btn-success {
+      background: #28a745;
+      color: white;
+    }
+
+    .btn-success:hover {
+      background: #1e7e34;
+    }
+
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .config-code {
+      background: #2d3748;
+      color: #e2e8f0;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 15px;
+      overflow-x: auto;
+    }
+
+    .config-code pre {
+      margin: 0;
+      font-family: &#x27;Courier New&#x27;, monospace;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+  
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="calculateur-container">  <h2>Calculateur de Fenêtres Intelligent</h2>  <!-- Sélection du mur -->  <div class="section">    <h3>Sélection du Mur</h3>    <select [(ngModel)]="murSelectionne" (change)="onMurChange()" class="form-control">      <option value="">-- Choisir un mur --</option>      <option value="principal">Mur Principal (Façade)</option>      <option value="arriere">Mur Arrière</option>      <option value="gauche">Mur Gauche</option>      <option value="droit">Mur Droit</option>    </select>  </div>  <!-- Informations du mur -->  <div class="section" *ngIf="murSelectionne && murInfo">    <h3> Informations du Mur</h3>    <div class="mur-info">      <p><strong>Largeur:</strong> {{ murInfo.dimensions.width }}m</p>      <p><strong>Hauteur:</strong> {{ murInfo.dimensions.height }}m</p>      <p><strong>Profondeur:</strong> {{ murInfo.dimensions.depth }}m</p>      <p><strong>Position:</strong> ({{ murInfo.position.x }}, {{ murInfo.position.y }}, {{ murInfo.position.z }})</p>    </div>  </div>  <!-- Paramètres des fenêtres -->  <div class="section" *ngIf="murSelectionne">    <h3>Paramètres des Fenêtres</h3>    <div class="parametres">      <div class="parametre">        <label>Largeur des fenêtres (m):</label>        <input          type="range"          [(ngModel)]="largeurFenetre"          [min]="0.5"          [max]="3.0"          [step]="0.1"          (input)="calculerCapacite()"          class="slider">        <span class="valeur">{{ largeurFenetre }}m</span>      </div>      <div class="parametre">        <label>Hauteur des fenêtres (m):</label>        <input          type="range"          [(ngModel)]="hauteurFenetre"          [min]="0.8"          [max]="2.5"          [step]="0.1"          (input)="calculerCapacite()"          class="slider">        <span class="valeur">{{ hauteurFenetre }}m</span>      </div>      <div class="parametre">        <label>Écart entre fenêtres (m):</label>        <input          type="range"          [(ngModel)]="ecart"          [min]="0.1"          [max]="2.0"          [step]="0.1"          (input)="calculerCapacite()"          class="slider">        <span class="valeur">{{ ecart }}m</span>      </div>      <div class="parametre">        <label>Nombre de fenêtres souhaitées:</label>        <input          type="number"          [(ngModel)]="nombreFenetresSouhaitees"          [min]="0"          [max]="20"          (input)="calculerCapacite()"          class="number-input">      </div>    </div>  </div>  <!-- Résultats du calcul -->  <div class="section" *ngIf="calculResultat">    <h3>Résultats du Calcul</h3>    <div class="resultats" [class.valid]="calculResultat.isValid" [class.invalid]="!calculResultat.isValid">      <div class="statut">        <span class="icone">{{ calculResultat.isValid ? \'✅\' : \'❌\' }}</span>        <span class="message">{{ calculResultat.message }}</span>      </div>      <div class="details" *ngIf="calculResultat.isValid">        <div class="detail">          <strong>Nombre max de fenêtres:</strong> {{ calculResultat.nombreMaxFenetres }}        </div>        <div class="detail">          <strong>Largeur totale utilisée:</strong> {{ calculResultat.largeurTotaleUtilisee.toFixed(2) }}m        </div>        <div class="detail">          <strong>Marge restante:</strong> {{ calculResultat.margeRestante.toFixed(2) }}m        </div>        <div class="detail">          <strong>Écart optimal:</strong> {{ calculResultat.ecartOptimal.toFixed(2) }}m        </div>      </div>    </div>    <!-- Positions calculées -->    <div class="positions" *ngIf="calculResultat.positionsCalculees.length > 0">      <h4>Positions Calculées</h4>      <div class="position-list">        <div          *ngFor="let position of calculResultat.positionsCalculees; let i = index"          class="position-item">          <span class="numero">Fenêtre {{ i + 1 }}:</span>          <span class="coordonnees">            X: {{ position.x.toFixed(2) }}m,            Y: {{ position.y.toFixed(2) }}m,            Z: {{ position.z.toFixed(2) }}m          </span>        </div>      </div>    </div>  </div>  <!-- Boutons d\'action -->  <div class="actions" *ngIf="calculResultat && calculResultat.isValid">    <button      (click)="genererConfiguration()"      class="btn btn-primary"      [disabled]="nombreFenetresSouhaitees > calculResultat.nombreMaxFenetres">      Générer la Configuration    </button>    <button      (click)="optimiserDimensions()"      class="btn btn-secondary">      Optimiser les Dimensions    </button>  </div>  <!-- Configuration générée -->  <div class="section" *ngIf="configurationGeneree">    <h3>Configuration Générée</h3>    <div class="config-code">      <pre>{{ configurationGeneree }}</pre>    </div>    <button (click)="copierConfiguration()" class="btn btn-success">Copier la Configuration</button>  </div></div></div>'
+    var COMPONENTS = [{'name': 'App', 'selector': 'app-root'},{'name': 'CalculateurFenetresComponent', 'selector': 'app-calculateur-fenetres'},{'name': 'ColorSelectorComponent', 'selector': 'app-color-selector'},{'name': 'DimensionsControllerComponent', 'selector': 'app-dimensions-controller'},{'name': 'FenetresCalculatorComponent', 'selector': 'app-fenetres-calculator'},{'name': 'MursControllerComponent', 'selector': 'app-murs-controller'},{'name': 'OuverturesControllerComponent', 'selector': 'app-ouvertures-controller'},{'name': 'Scene3d', 'selector': 'app-scene3d'},{'name': 'Scene3dCoreComponent', 'selector': 'app-scene3d-core'},{'name': 'Scene3dRefactored', 'selector': 'app-scene3d'},{'name': 'StructureControllerComponent', 'selector': 'app-structure-controller'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'CalculateurFenetresComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'CalculateurFenetresComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

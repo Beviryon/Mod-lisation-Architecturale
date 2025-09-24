@@ -1,0 +1,2433 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>projet-3-d documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">projet-3-d documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Injectables</li>
+  <li class="breadcrumb-item" >SceneService</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/services/scene/scene.service.ts</code>
+        </p>
+
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Service de gestion de la scène 3D</p>
+
+            </p>
+
+
+
+            <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#camera$" >camera$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#cameraActuelle" >cameraActuelle</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#controles$" >controles$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#controlesActuels" >controlesActuels</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#lumiere$" >lumiere$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#lumiereActuelles" >lumiereActuelles</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#scene$" >scene$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#sceneActuelle" >sceneActuelle</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#ajouterLumiere" >ajouterLumiere</a>
+                            </li>
+                            <li>
+                                <a href="#calculerDistanceCamera" >calculerDistanceCamera</a>
+                            </li>
+                            <li>
+                                <a href="#centrerCameraSurObjet" >centrerCameraSurObjet</a>
+                            </li>
+                            <li>
+                                <a href="#exporterConfigurationScene" >exporterConfigurationScene</a>
+                            </li>
+                            <li>
+                                <a href="#getControlesScene" >getControlesScene</a>
+                            </li>
+                            <li>
+                                <a href="#getControlesSceneObservable" >getControlesSceneObservable</a>
+                            </li>
+                            <li>
+                                <a href="#getLumieres" >getLumieres</a>
+                            </li>
+                            <li>
+                                <a href="#getLumieresObservable" >getLumieresObservable</a>
+                            </li>
+                            <li>
+                                <a href="#getPointLePlusProcheDeCamera" >getPointLePlusProcheDeCamera</a>
+                            </li>
+                            <li>
+                                <a href="#getProprietesCamera" >getProprietesCamera</a>
+                            </li>
+                            <li>
+                                <a href="#getProprietesCameraObservable" >getProprietesCameraObservable</a>
+                            </li>
+                            <li>
+                                <a href="#getProprietesScene" >getProprietesScene</a>
+                            </li>
+                            <li>
+                                <a href="#getProprietesSceneObservable" >getProprietesSceneObservable</a>
+                            </li>
+                            <li>
+                                <a href="#getStatistiquesScene" >getStatistiquesScene</a>
+                            </li>
+                            <li>
+                                <a href="#importerConfigurationScene" >importerConfigurationScene</a>
+                            </li>
+                            <li>
+                                <a href="#mettreAJourControlesScene" >mettreAJourControlesScene</a>
+                            </li>
+                            <li>
+                                <a href="#mettreAJourProprietesCamera" >mettreAJourProprietesCamera</a>
+                            </li>
+                            <li>
+                                <a href="#mettreAJourProprietesScene" >mettreAJourProprietesScene</a>
+                            </li>
+                            <li>
+                                <a href="#modifierLumiere" >modifierLumiere</a>
+                            </li>
+                            <li>
+                                <a href="#reinitialiserCamera" >reinitialiserCamera</a>
+                            </li>
+                            <li>
+                                <a href="#reinitialiserScene" >reinitialiserScene</a>
+                            </li>
+                            <li>
+                                <a href="#supprimerLumiere" >supprimerLumiere</a>
+                            </li>
+                            <li>
+                                <a href="#toggleLumiere" >toggleLumiere</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(configurationService: <a href="../injectables/ConfigurationService.html" target="_self">ConfigurationService</a>, murService: <a href="../injectables/MurService.html" target="_self">MurService</a>, ouvertureService: <a href="../injectables/OuvertureService.html" target="_self">OuvertureService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="156" class="link-to-prism">src/app/services/scene/scene.service.ts:156</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>configurationService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ConfigurationService.html" target="_self" >ConfigurationService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>murService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/MurService.html" target="_self" >MurService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>ouvertureService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/OuvertureService.html" target="_self" >OuvertureService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ajouterLumiere"></a>
+                    <span class="name">
+                        <span ><b>ajouterLumiere</b></span>
+                        <a href="#ajouterLumiere"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ajouterLumiere(nouvelleLumiere: <a href="../interfaces/ProprietesLumiere.html" target="_self">Omit&lt;ProprietesLumiere | id&gt;</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="268"
+                                    class="link-to-prism">src/app/services/scene/scene.service.ts:268</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Ajouter une nouvelle lumière</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>nouvelleLumiere</td>
+                                            <td>
+                                                            <code><a href="../interfaces/ProprietesLumiere.html" target="_self" >Omit&lt;ProprietesLumiere | id&gt;</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="calculerDistanceCamera"></a>
+                    <span class="name">
+                        <span ><b>calculerDistanceCamera</b></span>
+                        <a href="#calculerDistanceCamera"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>calculerDistanceCamera(point: literal type)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="370"
+                                    class="link-to-prism">src/app/services/scene/scene.service.ts:370</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Obtenir la distance entre la caméra et un point</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>point</td>
+                                            <td>
+                                                        <code>literal type</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="centrerCameraSurObjet"></a>
+                    <span class="name">
+                        <span ><b>centrerCameraSurObjet</b></span>
+                        <a href="#centrerCameraSurObjet"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>centrerCameraSurObjet(position: literal type)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="361"
+                                    class="link-to-prism">src/app/services/scene/scene.service.ts:361</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Centrer la caméra sur un objet</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>position</td>
+                                            <td>
+                                                        <code>literal type</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="exporterConfigurationScene"></a>
+                    <span class="name">
+                        <span ><b>exporterConfigurationScene</b></span>
+                        <a href="#exporterConfigurationScene"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>exporterConfigurationScene()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="414"
+                                    class="link-to-prism">src/app/services/scene/scene.service.ts:414</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Exporter la configuration de la scène</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getControlesScene"></a>
+                    <span class="name">
+                        <span ><b>getControlesScene</b></span>
+                        <a href="#getControlesScene"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getControlesScene()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="226"
+                                    class="link-to-prism">src/app/services/scene/scene.service.ts:226</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Obtenir les contrôles de la scène</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/ControlesScene.html" target="_self" >ControlesScene</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getControlesSceneObservable"></a>
+                    <span class="name">
+                        <span ><b>getControlesSceneObservable</b></span>
+                        <a href="#getControlesSceneObservable"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getControlesSceneObservable()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="233"
+                                    class="link-to-prism">src/app/services/scene/scene.service.ts:233</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Obtenir les contrôles de la scène en tant qu&#39;Observable</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/ControlesScene.html" target="_self" >Observable&lt;ControlesScene&gt;</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getLumieres"></a>
+                    <span class="name">
+                        <span ><b>getLumieres</b></span>
+                        <a href="#getLumieres"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getLumieres()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="254"
+                                    class="link-to-prism">src/app/services/scene/scene.service.ts:254</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Obtenir les lumières</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/ProprietesLumiere.html" target="_self" >ProprietesLumiere[]</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getLumieresObservable"></a>
+                    <span class="name">
+                        <span ><b>getLumieresObservable</b></span>
+                        <a href="#getLumieresObservable"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getLumieresObservable()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="261"
+                                    class="link-to-prism">src/app/services/scene/scene.service.ts:261</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Obtenir les lumières en tant qu&#39;Observable</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/ProprietesLumiere.html" target="_self" >Observable&lt;ProprietesLumiere[]&gt;</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getPointLePlusProcheDeCamera"></a>
+                    <span class="name">
+                        <span ><b>getPointLePlusProcheDeCamera</b></span>
+                        <a href="#getPointLePlusProcheDeCamera"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getPointLePlusProcheDeCamera()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="382"
+                                    class="link-to-prism">src/app/services/scene/scene.service.ts:382</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Obtenir le point le plus proche de la caméra</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>literal type | null</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getProprietesCamera"></a>
+                    <span class="name">
+                        <span ><b>getProprietesCamera</b></span>
+                        <a href="#getProprietesCamera"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getProprietesCamera()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="198"
+                                    class="link-to-prism">src/app/services/scene/scene.service.ts:198</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Obtenir les propriétés de la caméra</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/ProprietesCamera.html" target="_self" >ProprietesCamera</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getProprietesCameraObservable"></a>
+                    <span class="name">
+                        <span ><b>getProprietesCameraObservable</b></span>
+                        <a href="#getProprietesCameraObservable"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getProprietesCameraObservable()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="205"
+                                    class="link-to-prism">src/app/services/scene/scene.service.ts:205</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Obtenir les propriétés de la caméra en tant qu&#39;Observable</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/ProprietesCamera.html" target="_self" >Observable&lt;ProprietesCamera&gt;</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getProprietesScene"></a>
+                    <span class="name">
+                        <span ><b>getProprietesScene</b></span>
+                        <a href="#getProprietesScene"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getProprietesScene()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="169"
+                                    class="link-to-prism">src/app/services/scene/scene.service.ts:169</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Obtenir les propriétés de la scène</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/ProprietesScene.html" target="_self" >ProprietesScene</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getProprietesSceneObservable"></a>
+                    <span class="name">
+                        <span ><b>getProprietesSceneObservable</b></span>
+                        <a href="#getProprietesSceneObservable"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getProprietesSceneObservable()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="176"
+                                    class="link-to-prism">src/app/services/scene/scene.service.ts:176</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Obtenir les propriétés de la scène en tant qu&#39;Observable</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/ProprietesScene.html" target="_self" >Observable&lt;ProprietesScene&gt;</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getStatistiquesScene"></a>
+                    <span class="name">
+                        <span ><b>getStatistiquesScene</b></span>
+                        <a href="#getStatistiquesScene"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getStatistiquesScene()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="320"
+                                    class="link-to-prism">src/app/services/scene/scene.service.ts:320</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Obtenir les statistiques de la scène</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/StatistiquesScene.html" target="_self" >StatistiquesScene</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="importerConfigurationScene"></a>
+                    <span class="name">
+                        <span ><b>importerConfigurationScene</b></span>
+                        <a href="#importerConfigurationScene"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>importerConfigurationScene(configurationJson: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="430"
+                                    class="link-to-prism">src/app/services/scene/scene.service.ts:430</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Importer la configuration de la scène</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>configurationJson</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="mettreAJourControlesScene"></a>
+                    <span class="name">
+                        <span ><b>mettreAJourControlesScene</b></span>
+                        <a href="#mettreAJourControlesScene"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>mettreAJourControlesScene(nouveauxControles: <a href="../interfaces/ControlesScene.html" target="_self">Partial&lt;ControlesScene&gt;</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="240"
+                                    class="link-to-prism">src/app/services/scene/scene.service.ts:240</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Mettre à jour les contrôles de la scène</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>nouveauxControles</td>
+                                            <td>
+                                                            <code><a href="../interfaces/ControlesScene.html" target="_self" >Partial&lt;ControlesScene&gt;</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="mettreAJourProprietesCamera"></a>
+                    <span class="name">
+                        <span ><b>mettreAJourProprietesCamera</b></span>
+                        <a href="#mettreAJourProprietesCamera"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>mettreAJourProprietesCamera(nouvellesProprietes: <a href="../interfaces/ProprietesCamera.html" target="_self">Partial&lt;ProprietesCamera&gt;</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="212"
+                                    class="link-to-prism">src/app/services/scene/scene.service.ts:212</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Mettre à jour les propriétés de la caméra</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>nouvellesProprietes</td>
+                                            <td>
+                                                            <code><a href="../interfaces/ProprietesCamera.html" target="_self" >Partial&lt;ProprietesCamera&gt;</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="mettreAJourProprietesScene"></a>
+                    <span class="name">
+                        <span ><b>mettreAJourProprietesScene</b></span>
+                        <a href="#mettreAJourProprietesScene"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>mettreAJourProprietesScene(nouvellesProprietes: <a href="../interfaces/ProprietesScene.html" target="_self">Partial&lt;ProprietesScene&gt;</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="183"
+                                    class="link-to-prism">src/app/services/scene/scene.service.ts:183</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Mettre à jour les propriétés de la scène</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>nouvellesProprietes</td>
+                                            <td>
+                                                            <code><a href="../interfaces/ProprietesScene.html" target="_self" >Partial&lt;ProprietesScene&gt;</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="modifierLumiere"></a>
+                    <span class="name">
+                        <span ><b>modifierLumiere</b></span>
+                        <a href="#modifierLumiere"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>modifierLumiere(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, nouvellesProprietes: <a href="../interfaces/ProprietesLumiere.html" target="_self">Partial&lt;ProprietesLumiere&gt;</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="291"
+                                    class="link-to-prism">src/app/services/scene/scene.service.ts:291</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Modifier une lumière</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>nouvellesProprietes</td>
+                                            <td>
+                                                            <code><a href="../interfaces/ProprietesLumiere.html" target="_self" >Partial&lt;ProprietesLumiere&gt;</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="reinitialiserCamera"></a>
+                    <span class="name">
+                        <span ><b>reinitialiserCamera</b></span>
+                        <a href="#reinitialiserCamera"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>reinitialiserCamera()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="351"
+                                    class="link-to-prism">src/app/services/scene/scene.service.ts:351</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Réinitialiser la caméra à sa position par défaut</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="reinitialiserScene"></a>
+                    <span class="name">
+                        <span ><b>reinitialiserScene</b></span>
+                        <a href="#reinitialiserScene"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>reinitialiserScene()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="477"
+                                    class="link-to-prism">src/app/services/scene/scene.service.ts:477</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Réinitialiser la scène à ses valeurs par défaut</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="supprimerLumiere"></a>
+                    <span class="name">
+                        <span ><b>supprimerLumiere</b></span>
+                        <a href="#supprimerLumiere"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>supprimerLumiere(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="282"
+                                    class="link-to-prism">src/app/services/scene/scene.service.ts:282</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Supprimer une lumière</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleLumiere"></a>
+                    <span class="name">
+                        <span ><b>toggleLumiere</b></span>
+                        <a href="#toggleLumiere"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toggleLumiere(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="307"
+                                    class="link-to-prism">src/app/services/scene/scene.service.ts:307</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Activer/Désactiver une lumière</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+            <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="camera$"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>camera$</b></span>
+                        <a href="#camera$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.cameraActuelle.asObservable()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="154" class="link-to-prism">src/app/services/scene/scene.service.ts:154</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cameraActuelle"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>cameraActuelle</b></span>
+                        <a href="#cameraActuelle"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new BehaviorSubject&lt;ProprietesCamera&gt;({
+    position: { x: 5, y: 5, z: 5 },
+    target: { x: 0, y: 0, z: 0 },
+    fov: 75,
+    near: 0.1,
+    far: 1000,
+    type: &#x27;perspective&#x27;
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="108" class="link-to-prism">src/app/services/scene/scene.service.ts:108</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="controles$"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>controles$</b></span>
+                        <a href="#controles$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.controlesActuels.asObservable()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="155" class="link-to-prism">src/app/services/scene/scene.service.ts:155</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="controlesActuels"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>controlesActuels</b></span>
+                        <a href="#controlesActuels"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new BehaviorSubject&lt;ControlesScene&gt;({
+    enableRotate: true,
+    enableZoom: true,
+    enablePan: true,
+    enableDamping: true,
+    dampingFactor: 0.05,
+    rotateSpeed: 1.0,
+    zoomSpeed: 1.0,
+    panSpeed: 1.0,
+    minDistance: 2,
+    maxDistance: 50,
+    minPolarAngle: 0,
+    maxPolarAngle: Math.PI
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="117" class="link-to-prism">src/app/services/scene/scene.service.ts:117</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="lumiere$"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>lumiere$</b></span>
+                        <a href="#lumiere$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.lumiereActuelles.asObservable()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="156" class="link-to-prism">src/app/services/scene/scene.service.ts:156</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="lumiereActuelles"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>lumiereActuelles</b></span>
+                        <a href="#lumiereActuelles"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new BehaviorSubject&lt;ProprietesLumiere[]&gt;([
+    {
+      id: &#x27;lumiere_ambient&#x27;,
+      type: &#x27;ambient&#x27;,
+      color: 0x404040,
+      intensity: 0.4,
+      castShadow: false,
+      enabled: true
+    },
+    {
+      id: &#x27;lumiere_directionnelle&#x27;,
+      type: &#x27;directional&#x27;,
+      position: { x: 10, y: 10, z: 5 },
+      direction: { x: -1, y: -1, z: -1 },
+      color: 0xffffff,
+      intensity: 1.0,
+      castShadow: true,
+      enabled: true
+    }
+  ])</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="132" class="link-to-prism">src/app/services/scene/scene.service.ts:132</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="scene$"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>scene$</b></span>
+                        <a href="#scene$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.sceneActuelle.asObservable()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="153" class="link-to-prism">src/app/services/scene/scene.service.ts:153</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sceneActuelle"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>sceneActuelle</b></span>
+                        <a href="#sceneActuelle"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new BehaviorSubject&lt;ProprietesScene&gt;({
+    id: &#x27;scene_principale&#x27;,
+    nom: &#x27;Scène Architecturale 3D&#x27;,
+    largeur: 800,
+    hauteur: 600,
+    backgroundColor: 0x87CEEB, // Bleu ciel
+    fogColor: 0x87CEEB,
+    fogNear: 1,
+    fogFar: 100,
+    antialias: true,
+    shadowMapEnabled: true,
+    shadowMapType: &#x27;PCFSoft&#x27;,
+    dateCreation: new Date(),
+    derniereModification: new Date()
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="92" class="link-to-prism">src/app/services/scene/scene.service.ts:92</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+import { BehaviorSubject, Observable } from &#x27;rxjs&#x27;;
+import { ConfigurationService } from &#x27;../configuration/configuration.service&#x27;;
+import { MurService, ProprietesMur } from &#x27;../mur/mur.service&#x27;;
+import { OuvertureService, ProprietesOuverture } from &#x27;../ouverture/ouverture.service&#x27;;
+
+/**
+ * Interface pour les propriétés de la scène 3D
+ */
+export interface ProprietesScene {
+  id: string;
+  nom: string;
+  largeur: number;
+  hauteur: number;
+  backgroundColor: number;
+  fogColor: number;
+  fogNear: number;
+  fogFar: number;
+  antialias: boolean;
+  shadowMapEnabled: boolean;
+  shadowMapType: &#x27;PCF&#x27; | &#x27;PCFSoft&#x27; | &#x27;Basic&#x27;;
+  dateCreation: Date;
+  derniereModification: Date;
+}
+
+/**
+ * Interface pour la caméra
+ */
+export interface ProprietesCamera {
+  position: { x: number; y: number; z: number };
+  target: { x: number; y: number; z: number };
+  fov: number;
+  near: number;
+  far: number;
+  type: &#x27;perspective&#x27; | &#x27;orthographic&#x27;;
+}
+
+/**
+ * Interface pour les contrôles de la scène
+ */
+export interface ControlesScene {
+  enableRotate: boolean;
+  enableZoom: boolean;
+  enablePan: boolean;
+  enableDamping: boolean;
+  dampingFactor: number;
+  rotateSpeed: number;
+  zoomSpeed: number;
+  panSpeed: number;
+  minDistance: number;
+  maxDistance: number;
+  minPolarAngle: number;
+  maxPolarAngle: number;
+}
+
+/**
+ * Interface pour les lumières
+ */
+export interface ProprietesLumiere {
+  id: string;
+  type: &#x27;ambient&#x27; | &#x27;directional&#x27; | &#x27;point&#x27; | &#x27;spot&#x27;;
+  position?: { x: number; y: number; z: number };
+  direction?: { x: number; y: number; z: number };
+  color: number;
+  intensity: number;
+  castShadow: boolean;
+  enabled: boolean;
+}
+
+/**
+ * Interface pour les statistiques de la scène
+ */
+export interface StatistiquesScene {
+  nombreObjets: number;
+  nombreMurs: number;
+  nombreOuvertures: number;
+  nombreLumieres: number;
+  nombreTriangles: number;
+  memoireUtilisee: number;
+  fps: number;
+  tempsRendu: number;
+}
+
+/**
+ * Service de gestion de la scène 3D
+ */
+@Injectable({
+  providedIn: &#x27;root&#x27;
+})
+export class SceneService {
+  
+  private sceneActuelle &#x3D; new BehaviorSubject&lt;ProprietesScene&gt;({
+    id: &#x27;scene_principale&#x27;,
+    nom: &#x27;Scène Architecturale 3D&#x27;,
+    largeur: 800,
+    hauteur: 600,
+    backgroundColor: 0x87CEEB, // Bleu ciel
+    fogColor: 0x87CEEB,
+    fogNear: 1,
+    fogFar: 100,
+    antialias: true,
+    shadowMapEnabled: true,
+    shadowMapType: &#x27;PCFSoft&#x27;,
+    dateCreation: new Date(),
+    derniereModification: new Date()
+  });
+
+  private cameraActuelle &#x3D; new BehaviorSubject&lt;ProprietesCamera&gt;({
+    position: { x: 5, y: 5, z: 5 },
+    target: { x: 0, y: 0, z: 0 },
+    fov: 75,
+    near: 0.1,
+    far: 1000,
+    type: &#x27;perspective&#x27;
+  });
+
+  private controlesActuels &#x3D; new BehaviorSubject&lt;ControlesScene&gt;({
+    enableRotate: true,
+    enableZoom: true,
+    enablePan: true,
+    enableDamping: true,
+    dampingFactor: 0.05,
+    rotateSpeed: 1.0,
+    zoomSpeed: 1.0,
+    panSpeed: 1.0,
+    minDistance: 2,
+    maxDistance: 50,
+    minPolarAngle: 0,
+    maxPolarAngle: Math.PI
+  });
+
+  private lumiereActuelles &#x3D; new BehaviorSubject&lt;ProprietesLumiere[]&gt;([
+    {
+      id: &#x27;lumiere_ambient&#x27;,
+      type: &#x27;ambient&#x27;,
+      color: 0x404040,
+      intensity: 0.4,
+      castShadow: false,
+      enabled: true
+    },
+    {
+      id: &#x27;lumiere_directionnelle&#x27;,
+      type: &#x27;directional&#x27;,
+      position: { x: 10, y: 10, z: 5 },
+      direction: { x: -1, y: -1, z: -1 },
+      color: 0xffffff,
+      intensity: 1.0,
+      castShadow: true,
+      enabled: true
+    }
+  ]);
+
+  public scene$ &#x3D; this.sceneActuelle.asObservable();
+  public camera$ &#x3D; this.cameraActuelle.asObservable();
+  public controles$ &#x3D; this.controlesActuels.asObservable();
+  public lumiere$ &#x3D; this.lumiereActuelles.asObservable();
+
+  constructor(
+    private configurationService: ConfigurationService,
+    private murService: MurService,
+    private ouvertureService: OuvertureService
+  ) {
+    console.log(&#x27;SceneService initialisé&#x27;);
+  }
+
+  /**
+   * Obtenir les propriétés de la scène
+   */
+  getProprietesScene(): ProprietesScene {
+    return this.sceneActuelle.value;
+  }
+
+  /**
+   * Obtenir les propriétés de la scène en tant qu&#x27;Observable
+   */
+  getProprietesSceneObservable(): Observable&lt;ProprietesScene&gt; {
+    return this.scene$;
+  }
+
+  /**
+   * Mettre à jour les propriétés de la scène
+   */
+  mettreAJourProprietesScene(nouvellesProprietes: Partial&lt;ProprietesScene&gt;): void {
+    const proprietesActuelles &#x3D; this.getProprietesScene();
+    const proprietesMisesAJour &#x3D; {
+      ...proprietesActuelles,
+      ...nouvellesProprietes,
+      derniereModification: new Date()
+    };
+    
+    this.sceneActuelle.next(proprietesMisesAJour);
+    console.log(&#x27;Propriétés de la scène mises à jour:&#x27;, proprietesMisesAJour);
+  }
+
+  /**
+   * Obtenir les propriétés de la caméra
+   */
+  getProprietesCamera(): ProprietesCamera {
+    return this.cameraActuelle.value;
+  }
+
+  /**
+   * Obtenir les propriétés de la caméra en tant qu&#x27;Observable
+   */
+  getProprietesCameraObservable(): Observable&lt;ProprietesCamera&gt; {
+    return this.camera$;
+  }
+
+  /**
+   * Mettre à jour les propriétés de la caméra
+   */
+  mettreAJourProprietesCamera(nouvellesProprietes: Partial&lt;ProprietesCamera&gt;): void {
+    const proprietesActuelles &#x3D; this.getProprietesCamera();
+    const proprietesMisesAJour &#x3D; {
+      ...proprietesActuelles,
+      ...nouvellesProprietes
+    };
+    
+    this.cameraActuelle.next(proprietesMisesAJour);
+    console.log(&#x27;Propriétés de la caméra mises à jour:&#x27;, proprietesMisesAJour);
+  }
+
+  /**
+   * Obtenir les contrôles de la scène
+   */
+  getControlesScene(): ControlesScene {
+    return this.controlesActuels.value;
+  }
+
+  /**
+   * Obtenir les contrôles de la scène en tant qu&#x27;Observable
+   */
+  getControlesSceneObservable(): Observable&lt;ControlesScene&gt; {
+    return this.controles$;
+  }
+
+  /**
+   * Mettre à jour les contrôles de la scène
+   */
+  mettreAJourControlesScene(nouveauxControles: Partial&lt;ControlesScene&gt;): void {
+    const controlesActuels &#x3D; this.getControlesScene();
+    const controlesMisesAJour &#x3D; {
+      ...controlesActuels,
+      ...nouveauxControles
+    };
+    
+    this.controlesActuels.next(controlesMisesAJour);
+    console.log(&#x27;Contrôles de la scène mis à jour:&#x27;, controlesMisesAJour);
+  }
+
+  /**
+   * Obtenir les lumières
+   */
+  getLumieres(): ProprietesLumiere[] {
+    return this.lumiereActuelles.value;
+  }
+
+  /**
+   * Obtenir les lumières en tant qu&#x27;Observable
+   */
+  getLumieresObservable(): Observable&lt;ProprietesLumiere[]&gt; {
+    return this.lumiere$;
+  }
+
+  /**
+   * Ajouter une nouvelle lumière
+   */
+  ajouterLumiere(nouvelleLumiere: Omit&lt;ProprietesLumiere, &#x27;id&#x27;&gt;): void {
+    const lumiereComplete: ProprietesLumiere &#x3D; {
+      ...nouvelleLumiere,
+      id: &#x60;lumiere_${Date.now()}&#x60;
+    };
+    
+    const lumiereActuelles &#x3D; this.getLumieres();
+    lumiereActuelles.push(lumiereComplete);
+    this.lumiereActuelles.next(lumiereActuelles);
+  }
+
+  /**
+   * Supprimer une lumière
+   */
+  supprimerLumiere(id: string): void {
+    const lumiereActuelles &#x3D; this.getLumieres();
+    const lumiereFiltrees &#x3D; lumiereActuelles.filter(lumiere &#x3D;&gt; lumiere.id !&#x3D;&#x3D; id);
+    this.lumiereActuelles.next(lumiereFiltrees);
+  }
+
+  /**
+   * Modifier une lumière
+   */
+  modifierLumiere(id: string, nouvellesProprietes: Partial&lt;ProprietesLumiere&gt;): void {
+    const lumiereActuelles &#x3D; this.getLumieres();
+    const lumiereIndex &#x3D; lumiereActuelles.findIndex(lumiere &#x3D;&gt; lumiere.id &#x3D;&#x3D;&#x3D; id);
+    
+    if (lumiereIndex !&#x3D;&#x3D; -1) {
+      lumiereActuelles[lumiereIndex] &#x3D; {
+        ...lumiereActuelles[lumiereIndex],
+        ...nouvellesProprietes
+      };
+      this.lumiereActuelles.next(lumiereActuelles);
+    }
+  }
+
+  /**
+   * Activer/Désactiver une lumière
+   */
+  toggleLumiere(id: string): void {
+    const lumiereActuelles &#x3D; this.getLumieres();
+    const lumiereIndex &#x3D; lumiereActuelles.findIndex(lumiere &#x3D;&gt; lumiere.id &#x3D;&#x3D;&#x3D; id);
+    
+    if (lumiereIndex !&#x3D;&#x3D; -1) {
+      lumiereActuelles[lumiereIndex].enabled &#x3D; !lumiereActuelles[lumiereIndex].enabled;
+      this.lumiereActuelles.next(lumiereActuelles);
+    }
+  }
+
+  /**
+   * Obtenir les statistiques de la scène
+   */
+  getStatistiquesScene(): StatistiquesScene {
+    const murs &#x3D; this.murService.getMurs();
+    const ouvertures &#x3D; this.ouvertureService.getOuvertures();
+    const lumiere &#x3D; this.getLumieres();
+    
+    const nombreMurs &#x3D; murs.length;
+    const nombreOuvertures &#x3D; ouvertures.length;
+    const nombreLumieres &#x3D; lumiere.length;
+    const nombreObjets &#x3D; nombreMurs + nombreOuvertures + nombreLumieres;
+    
+    // Estimation du nombre de triangles (approximation)
+    const nombreTriangles &#x3D; (nombreMurs * 12) + (nombreOuvertures * 8); // Estimation
+    
+    // Estimation de la mémoire utilisée (en MB)
+    const memoireUtilisee &#x3D; (nombreTriangles * 0.001); // Approximation
+    
+    return {
+      nombreObjets,
+      nombreMurs,
+      nombreOuvertures,
+      nombreLumieres,
+      nombreTriangles,
+      memoireUtilisee: Math.round(memoireUtilisee * 100) / 100,
+      fps: 60, // Valeur par défaut
+      tempsRendu: 16.67 // 60 FPS &#x3D; 16.67ms par frame
+    };
+  }
+
+  /**
+   * Réinitialiser la caméra à sa position par défaut
+   */
+  reinitialiserCamera(): void {
+    this.mettreAJourProprietesCamera({
+      position: { x: 5, y: 5, z: 5 },
+      target: { x: 0, y: 0, z: 0 }
+    });
+  }
+
+  /**
+   * Centrer la caméra sur un objet
+   */
+  centrerCameraSurObjet(position: { x: number; y: number; z: number }): void {
+    this.mettreAJourProprietesCamera({
+      target: position
+    });
+  }
+
+  /**
+   * Obtenir la distance entre la caméra et un point
+   */
+  calculerDistanceCamera(point: { x: number; y: number; z: number }): number {
+    const camera &#x3D; this.getProprietesCamera();
+    const dx &#x3D; camera.position.x - point.x;
+    const dy &#x3D; camera.position.y - point.y;
+    const dz &#x3D; camera.position.z - point.z;
+    
+    return Math.round(Math.sqrt(dx * dx + dy * dy + dz * dz) * 100) / 100;
+  }
+
+  /**
+   * Obtenir le point le plus proche de la caméra
+   */
+  getPointLePlusProcheDeCamera(): { x: number; y: number; z: number } | null {
+    const camera &#x3D; this.getProprietesCamera();
+    const murs &#x3D; this.murService.getMurs();
+    const ouvertures &#x3D; this.ouvertureService.getOuvertures();
+    
+    let pointLePlusProche: { x: number; y: number; z: number } | null &#x3D; null;
+    let distanceMin &#x3D; Infinity;
+    
+    // Vérifier les murs
+    murs.forEach(mur &#x3D;&gt; {
+      const distance &#x3D; this.calculerDistanceCamera(mur.position);
+      if (distance &lt; distanceMin) {
+        distanceMin &#x3D; distance;
+        pointLePlusProche &#x3D; mur.position;
+      }
+    });
+    
+    // Vérifier les ouvertures
+    ouvertures.forEach(ouverture &#x3D;&gt; {
+      const distance &#x3D; this.calculerDistanceCamera(ouverture.position);
+      if (distance &lt; distanceMin) {
+        distanceMin &#x3D; distance;
+        pointLePlusProche &#x3D; ouverture.position;
+      }
+    });
+    
+    return pointLePlusProche;
+  }
+
+  /**
+   * Exporter la configuration de la scène
+   */
+  exporterConfigurationScene(): string {
+    const configuration &#x3D; {
+      scene: this.getProprietesScene(),
+      camera: this.getProprietesCamera(),
+      controles: this.getControlesScene(),
+      lumiere: this.getLumieres(),
+      statistiques: this.getStatistiquesScene(),
+      dateExport: new Date()
+    };
+    
+    return JSON.stringify(configuration, null, 2);
+  }
+
+  /**
+   * Importer la configuration de la scène
+   */
+  importerConfigurationScene(configurationJson: string): boolean {
+    try {
+      if (!configurationJson || configurationJson.trim() &#x3D;&#x3D;&#x3D; &#x27;&#x27;) {
+        throw new Error(&#x27;Configuration JSON vide ou invalide&#x27;);
+      }
+      
+      const configuration &#x3D; JSON.parse(configurationJson);
+      
+      if (!configuration || typeof configuration !&#x3D;&#x3D; &#x27;object&#x27;) {
+        throw new Error(&#x27;Format de configuration invalide&#x27;);
+      }
+      
+      if (configuration.scene) {
+        // Validation des propriétés de la scène
+        if (!configuration.scene.nom || !configuration.scene.largeur || !configuration.scene.hauteur) {
+          throw new Error(&#x27;Propriétés de la scène incomplètes&#x27;);
+        }
+        this.mettreAJourProprietesScene(configuration.scene);
+      }
+      
+      if (configuration.camera) {
+        // Validation des propriétés de la caméra
+        if (!configuration.camera.position || !configuration.camera.target) {
+          throw new Error(&#x27;Propriétés de la caméra incomplètes&#x27;);
+        }
+        this.mettreAJourProprietesCamera(configuration.camera);
+      }
+      
+      if (configuration.controles) {
+        this.mettreAJourControlesScene(configuration.controles);
+      }
+      
+      if (configuration.lumiere &amp;&amp; Array.isArray(configuration.lumiere)) {
+        this.lumiereActuelles.next(configuration.lumiere);
+      }
+      
+      console.log(&#x27;Configuration de la scène importée avec succès&#x27;);
+      return true;
+    } catch (error) {
+      console.error(&#x27;Erreur lors de l\&#x27;importation de la configuration:&#x27;, error);
+      return false;
+    }
+  }
+
+  /**
+   * Réinitialiser la scène à ses valeurs par défaut
+   */
+  reinitialiserScene(): void {
+    this.sceneActuelle.next({
+      id: &#x27;scene_principale&#x27;,
+      nom: &#x27;Scène Architecturale 3D&#x27;,
+      largeur: 800,
+      hauteur: 600,
+      backgroundColor: 0x87CEEB,
+      fogColor: 0x87CEEB,
+      fogNear: 1,
+      fogFar: 100,
+      antialias: true,
+      shadowMapEnabled: true,
+      shadowMapType: &#x27;PCFSoft&#x27;,
+      dateCreation: new Date(),
+      derniereModification: new Date()
+    });
+    
+    this.reinitialiserCamera();
+    
+    console.log(&#x27;Scène réinitialisée&#x27;);
+  }
+}
+
+</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'SceneService.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

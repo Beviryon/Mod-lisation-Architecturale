@@ -1,0 +1,1271 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>projet-3-d documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">projet-3-d documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Interfaces</li>
+  <li class="breadcrumb-item"
+  >
+  ProprietesScene</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/services/scene/scene.service.ts</code>
+        </p>
+
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Interface pour les propriétés de la scène 3D</p>
+
+            </p>
+
+
+        <section data-compodoc="block-index">
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#antialias" 
+>
+                                            antialias
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#backgroundColor" 
+>
+                                            backgroundColor
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#dateCreation" 
+>
+                                            dateCreation
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#derniereModification" 
+>
+                                            derniereModification
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#fogColor" 
+>
+                                            fogColor
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#fogFar" 
+>
+                                            fogFar
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#fogNear" 
+>
+                                            fogNear
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#hauteur" 
+>
+                                            hauteur
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#id" 
+>
+                                            id
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#largeur" 
+>
+                                            largeur
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#nom" 
+>
+                                            nom
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#shadowMapEnabled" 
+>
+                                            shadowMapEnabled
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#shadowMapType" 
+>
+                                            shadowMapType
+                                        </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section data-compodoc="block-properties">
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="antialias"></a>
+                                        <span class="name "><b>antialias</b>
+                                            <a href="#antialias">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>antialias:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="backgroundColor"></a>
+                                        <span class="name "><b>backgroundColor</b>
+                                            <a href="#backgroundColor">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>backgroundColor:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="dateCreation"></a>
+                                        <span class="name "><b>dateCreation</b>
+                                            <a href="#dateCreation">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>dateCreation:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="derniereModification"></a>
+                                        <span class="name "><b>derniereModification</b>
+                                            <a href="#derniereModification">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>derniereModification:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="fogColor"></a>
+                                        <span class="name "><b>fogColor</b>
+                                            <a href="#fogColor">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>fogColor:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="fogFar"></a>
+                                        <span class="name "><b>fogFar</b>
+                                            <a href="#fogFar">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>fogFar:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="fogNear"></a>
+                                        <span class="name "><b>fogNear</b>
+                                            <a href="#fogNear">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>fogNear:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="hauteur"></a>
+                                        <span class="name "><b>hauteur</b>
+                                            <a href="#hauteur">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>hauteur:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="id"></a>
+                                        <span class="name "><b>id</b>
+                                            <a href="#id">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>id:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="largeur"></a>
+                                        <span class="name "><b>largeur</b>
+                                            <a href="#largeur">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>largeur:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="nom"></a>
+                                        <span class="name "><b>nom</b>
+                                            <a href="#nom">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>nom:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="shadowMapEnabled"></a>
+                                        <span class="name "><b>shadowMapEnabled</b>
+                                            <a href="#shadowMapEnabled">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>shadowMapEnabled:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="shadowMapType"></a>
+                                        <span class="name "><b>shadowMapType</b>
+                                            <a href="#shadowMapType">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>shadowMapType:     <code>&quot;PCF&quot; | &quot;PCFSoft&quot; | &quot;Basic&quot;</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>&quot;PCF&quot; | &quot;PCFSoft&quot; | &quot;Basic&quot;</code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+import { BehaviorSubject, Observable } from &#x27;rxjs&#x27;;
+import { ConfigurationService } from &#x27;../configuration/configuration.service&#x27;;
+import { MurService, ProprietesMur } from &#x27;../mur/mur.service&#x27;;
+import { OuvertureService, ProprietesOuverture } from &#x27;../ouverture/ouverture.service&#x27;;
+
+/**
+ * Interface pour les propriétés de la scène 3D
+ */
+export interface ProprietesScene {
+  id: string;
+  nom: string;
+  largeur: number;
+  hauteur: number;
+  backgroundColor: number;
+  fogColor: number;
+  fogNear: number;
+  fogFar: number;
+  antialias: boolean;
+  shadowMapEnabled: boolean;
+  shadowMapType: &#x27;PCF&#x27; | &#x27;PCFSoft&#x27; | &#x27;Basic&#x27;;
+  dateCreation: Date;
+  derniereModification: Date;
+}
+
+/**
+ * Interface pour la caméra
+ */
+export interface ProprietesCamera {
+  position: { x: number; y: number; z: number };
+  target: { x: number; y: number; z: number };
+  fov: number;
+  near: number;
+  far: number;
+  type: &#x27;perspective&#x27; | &#x27;orthographic&#x27;;
+}
+
+/**
+ * Interface pour les contrôles de la scène
+ */
+export interface ControlesScene {
+  enableRotate: boolean;
+  enableZoom: boolean;
+  enablePan: boolean;
+  enableDamping: boolean;
+  dampingFactor: number;
+  rotateSpeed: number;
+  zoomSpeed: number;
+  panSpeed: number;
+  minDistance: number;
+  maxDistance: number;
+  minPolarAngle: number;
+  maxPolarAngle: number;
+}
+
+/**
+ * Interface pour les lumières
+ */
+export interface ProprietesLumiere {
+  id: string;
+  type: &#x27;ambient&#x27; | &#x27;directional&#x27; | &#x27;point&#x27; | &#x27;spot&#x27;;
+  position?: { x: number; y: number; z: number };
+  direction?: { x: number; y: number; z: number };
+  color: number;
+  intensity: number;
+  castShadow: boolean;
+  enabled: boolean;
+}
+
+/**
+ * Interface pour les statistiques de la scène
+ */
+export interface StatistiquesScene {
+  nombreObjets: number;
+  nombreMurs: number;
+  nombreOuvertures: number;
+  nombreLumieres: number;
+  nombreTriangles: number;
+  memoireUtilisee: number;
+  fps: number;
+  tempsRendu: number;
+}
+
+/**
+ * Service de gestion de la scène 3D
+ */
+@Injectable({
+  providedIn: &#x27;root&#x27;
+})
+export class SceneService {
+  
+  private sceneActuelle &#x3D; new BehaviorSubject&lt;ProprietesScene&gt;({
+    id: &#x27;scene_principale&#x27;,
+    nom: &#x27;Scène Architecturale 3D&#x27;,
+    largeur: 800,
+    hauteur: 600,
+    backgroundColor: 0x87CEEB, // Bleu ciel
+    fogColor: 0x87CEEB,
+    fogNear: 1,
+    fogFar: 100,
+    antialias: true,
+    shadowMapEnabled: true,
+    shadowMapType: &#x27;PCFSoft&#x27;,
+    dateCreation: new Date(),
+    derniereModification: new Date()
+  });
+
+  private cameraActuelle &#x3D; new BehaviorSubject&lt;ProprietesCamera&gt;({
+    position: { x: 5, y: 5, z: 5 },
+    target: { x: 0, y: 0, z: 0 },
+    fov: 75,
+    near: 0.1,
+    far: 1000,
+    type: &#x27;perspective&#x27;
+  });
+
+  private controlesActuels &#x3D; new BehaviorSubject&lt;ControlesScene&gt;({
+    enableRotate: true,
+    enableZoom: true,
+    enablePan: true,
+    enableDamping: true,
+    dampingFactor: 0.05,
+    rotateSpeed: 1.0,
+    zoomSpeed: 1.0,
+    panSpeed: 1.0,
+    minDistance: 2,
+    maxDistance: 50,
+    minPolarAngle: 0,
+    maxPolarAngle: Math.PI
+  });
+
+  private lumiereActuelles &#x3D; new BehaviorSubject&lt;ProprietesLumiere[]&gt;([
+    {
+      id: &#x27;lumiere_ambient&#x27;,
+      type: &#x27;ambient&#x27;,
+      color: 0x404040,
+      intensity: 0.4,
+      castShadow: false,
+      enabled: true
+    },
+    {
+      id: &#x27;lumiere_directionnelle&#x27;,
+      type: &#x27;directional&#x27;,
+      position: { x: 10, y: 10, z: 5 },
+      direction: { x: -1, y: -1, z: -1 },
+      color: 0xffffff,
+      intensity: 1.0,
+      castShadow: true,
+      enabled: true
+    }
+  ]);
+
+  public scene$ &#x3D; this.sceneActuelle.asObservable();
+  public camera$ &#x3D; this.cameraActuelle.asObservable();
+  public controles$ &#x3D; this.controlesActuels.asObservable();
+  public lumiere$ &#x3D; this.lumiereActuelles.asObservable();
+
+  constructor(
+    private configurationService: ConfigurationService,
+    private murService: MurService,
+    private ouvertureService: OuvertureService
+  ) {
+    console.log(&#x27;SceneService initialisé&#x27;);
+  }
+
+  /**
+   * Obtenir les propriétés de la scène
+   */
+  getProprietesScene(): ProprietesScene {
+    return this.sceneActuelle.value;
+  }
+
+  /**
+   * Obtenir les propriétés de la scène en tant qu&#x27;Observable
+   */
+  getProprietesSceneObservable(): Observable&lt;ProprietesScene&gt; {
+    return this.scene$;
+  }
+
+  /**
+   * Mettre à jour les propriétés de la scène
+   */
+  mettreAJourProprietesScene(nouvellesProprietes: Partial&lt;ProprietesScene&gt;): void {
+    const proprietesActuelles &#x3D; this.getProprietesScene();
+    const proprietesMisesAJour &#x3D; {
+      ...proprietesActuelles,
+      ...nouvellesProprietes,
+      derniereModification: new Date()
+    };
+    
+    this.sceneActuelle.next(proprietesMisesAJour);
+    console.log(&#x27;Propriétés de la scène mises à jour:&#x27;, proprietesMisesAJour);
+  }
+
+  /**
+   * Obtenir les propriétés de la caméra
+   */
+  getProprietesCamera(): ProprietesCamera {
+    return this.cameraActuelle.value;
+  }
+
+  /**
+   * Obtenir les propriétés de la caméra en tant qu&#x27;Observable
+   */
+  getProprietesCameraObservable(): Observable&lt;ProprietesCamera&gt; {
+    return this.camera$;
+  }
+
+  /**
+   * Mettre à jour les propriétés de la caméra
+   */
+  mettreAJourProprietesCamera(nouvellesProprietes: Partial&lt;ProprietesCamera&gt;): void {
+    const proprietesActuelles &#x3D; this.getProprietesCamera();
+    const proprietesMisesAJour &#x3D; {
+      ...proprietesActuelles,
+      ...nouvellesProprietes
+    };
+    
+    this.cameraActuelle.next(proprietesMisesAJour);
+    console.log(&#x27;Propriétés de la caméra mises à jour:&#x27;, proprietesMisesAJour);
+  }
+
+  /**
+   * Obtenir les contrôles de la scène
+   */
+  getControlesScene(): ControlesScene {
+    return this.controlesActuels.value;
+  }
+
+  /**
+   * Obtenir les contrôles de la scène en tant qu&#x27;Observable
+   */
+  getControlesSceneObservable(): Observable&lt;ControlesScene&gt; {
+    return this.controles$;
+  }
+
+  /**
+   * Mettre à jour les contrôles de la scène
+   */
+  mettreAJourControlesScene(nouveauxControles: Partial&lt;ControlesScene&gt;): void {
+    const controlesActuels &#x3D; this.getControlesScene();
+    const controlesMisesAJour &#x3D; {
+      ...controlesActuels,
+      ...nouveauxControles
+    };
+    
+    this.controlesActuels.next(controlesMisesAJour);
+    console.log(&#x27;Contrôles de la scène mis à jour:&#x27;, controlesMisesAJour);
+  }
+
+  /**
+   * Obtenir les lumières
+   */
+  getLumieres(): ProprietesLumiere[] {
+    return this.lumiereActuelles.value;
+  }
+
+  /**
+   * Obtenir les lumières en tant qu&#x27;Observable
+   */
+  getLumieresObservable(): Observable&lt;ProprietesLumiere[]&gt; {
+    return this.lumiere$;
+  }
+
+  /**
+   * Ajouter une nouvelle lumière
+   */
+  ajouterLumiere(nouvelleLumiere: Omit&lt;ProprietesLumiere, &#x27;id&#x27;&gt;): void {
+    const lumiereComplete: ProprietesLumiere &#x3D; {
+      ...nouvelleLumiere,
+      id: &#x60;lumiere_${Date.now()}&#x60;
+    };
+    
+    const lumiereActuelles &#x3D; this.getLumieres();
+    lumiereActuelles.push(lumiereComplete);
+    this.lumiereActuelles.next(lumiereActuelles);
+  }
+
+  /**
+   * Supprimer une lumière
+   */
+  supprimerLumiere(id: string): void {
+    const lumiereActuelles &#x3D; this.getLumieres();
+    const lumiereFiltrees &#x3D; lumiereActuelles.filter(lumiere &#x3D;&gt; lumiere.id !&#x3D;&#x3D; id);
+    this.lumiereActuelles.next(lumiereFiltrees);
+  }
+
+  /**
+   * Modifier une lumière
+   */
+  modifierLumiere(id: string, nouvellesProprietes: Partial&lt;ProprietesLumiere&gt;): void {
+    const lumiereActuelles &#x3D; this.getLumieres();
+    const lumiereIndex &#x3D; lumiereActuelles.findIndex(lumiere &#x3D;&gt; lumiere.id &#x3D;&#x3D;&#x3D; id);
+    
+    if (lumiereIndex !&#x3D;&#x3D; -1) {
+      lumiereActuelles[lumiereIndex] &#x3D; {
+        ...lumiereActuelles[lumiereIndex],
+        ...nouvellesProprietes
+      };
+      this.lumiereActuelles.next(lumiereActuelles);
+    }
+  }
+
+  /**
+   * Activer/Désactiver une lumière
+   */
+  toggleLumiere(id: string): void {
+    const lumiereActuelles &#x3D; this.getLumieres();
+    const lumiereIndex &#x3D; lumiereActuelles.findIndex(lumiere &#x3D;&gt; lumiere.id &#x3D;&#x3D;&#x3D; id);
+    
+    if (lumiereIndex !&#x3D;&#x3D; -1) {
+      lumiereActuelles[lumiereIndex].enabled &#x3D; !lumiereActuelles[lumiereIndex].enabled;
+      this.lumiereActuelles.next(lumiereActuelles);
+    }
+  }
+
+  /**
+   * Obtenir les statistiques de la scène
+   */
+  getStatistiquesScene(): StatistiquesScene {
+    const murs &#x3D; this.murService.getMurs();
+    const ouvertures &#x3D; this.ouvertureService.getOuvertures();
+    const lumiere &#x3D; this.getLumieres();
+    
+    const nombreMurs &#x3D; murs.length;
+    const nombreOuvertures &#x3D; ouvertures.length;
+    const nombreLumieres &#x3D; lumiere.length;
+    const nombreObjets &#x3D; nombreMurs + nombreOuvertures + nombreLumieres;
+    
+    // Estimation du nombre de triangles (approximation)
+    const nombreTriangles &#x3D; (nombreMurs * 12) + (nombreOuvertures * 8); // Estimation
+    
+    // Estimation de la mémoire utilisée (en MB)
+    const memoireUtilisee &#x3D; (nombreTriangles * 0.001); // Approximation
+    
+    return {
+      nombreObjets,
+      nombreMurs,
+      nombreOuvertures,
+      nombreLumieres,
+      nombreTriangles,
+      memoireUtilisee: Math.round(memoireUtilisee * 100) / 100,
+      fps: 60, // Valeur par défaut
+      tempsRendu: 16.67 // 60 FPS &#x3D; 16.67ms par frame
+    };
+  }
+
+  /**
+   * Réinitialiser la caméra à sa position par défaut
+   */
+  reinitialiserCamera(): void {
+    this.mettreAJourProprietesCamera({
+      position: { x: 5, y: 5, z: 5 },
+      target: { x: 0, y: 0, z: 0 }
+    });
+  }
+
+  /**
+   * Centrer la caméra sur un objet
+   */
+  centrerCameraSurObjet(position: { x: number; y: number; z: number }): void {
+    this.mettreAJourProprietesCamera({
+      target: position
+    });
+  }
+
+  /**
+   * Obtenir la distance entre la caméra et un point
+   */
+  calculerDistanceCamera(point: { x: number; y: number; z: number }): number {
+    const camera &#x3D; this.getProprietesCamera();
+    const dx &#x3D; camera.position.x - point.x;
+    const dy &#x3D; camera.position.y - point.y;
+    const dz &#x3D; camera.position.z - point.z;
+    
+    return Math.round(Math.sqrt(dx * dx + dy * dy + dz * dz) * 100) / 100;
+  }
+
+  /**
+   * Obtenir le point le plus proche de la caméra
+   */
+  getPointLePlusProcheDeCamera(): { x: number; y: number; z: number } | null {
+    const camera &#x3D; this.getProprietesCamera();
+    const murs &#x3D; this.murService.getMurs();
+    const ouvertures &#x3D; this.ouvertureService.getOuvertures();
+    
+    let pointLePlusProche: { x: number; y: number; z: number } | null &#x3D; null;
+    let distanceMin &#x3D; Infinity;
+    
+    // Vérifier les murs
+    murs.forEach(mur &#x3D;&gt; {
+      const distance &#x3D; this.calculerDistanceCamera(mur.position);
+      if (distance &lt; distanceMin) {
+        distanceMin &#x3D; distance;
+        pointLePlusProche &#x3D; mur.position;
+      }
+    });
+    
+    // Vérifier les ouvertures
+    ouvertures.forEach(ouverture &#x3D;&gt; {
+      const distance &#x3D; this.calculerDistanceCamera(ouverture.position);
+      if (distance &lt; distanceMin) {
+        distanceMin &#x3D; distance;
+        pointLePlusProche &#x3D; ouverture.position;
+      }
+    });
+    
+    return pointLePlusProche;
+  }
+
+  /**
+   * Exporter la configuration de la scène
+   */
+  exporterConfigurationScene(): string {
+    const configuration &#x3D; {
+      scene: this.getProprietesScene(),
+      camera: this.getProprietesCamera(),
+      controles: this.getControlesScene(),
+      lumiere: this.getLumieres(),
+      statistiques: this.getStatistiquesScene(),
+      dateExport: new Date()
+    };
+    
+    return JSON.stringify(configuration, null, 2);
+  }
+
+  /**
+   * Importer la configuration de la scène
+   */
+  importerConfigurationScene(configurationJson: string): boolean {
+    try {
+      if (!configurationJson || configurationJson.trim() &#x3D;&#x3D;&#x3D; &#x27;&#x27;) {
+        throw new Error(&#x27;Configuration JSON vide ou invalide&#x27;);
+      }
+      
+      const configuration &#x3D; JSON.parse(configurationJson);
+      
+      if (!configuration || typeof configuration !&#x3D;&#x3D; &#x27;object&#x27;) {
+        throw new Error(&#x27;Format de configuration invalide&#x27;);
+      }
+      
+      if (configuration.scene) {
+        // Validation des propriétés de la scène
+        if (!configuration.scene.nom || !configuration.scene.largeur || !configuration.scene.hauteur) {
+          throw new Error(&#x27;Propriétés de la scène incomplètes&#x27;);
+        }
+        this.mettreAJourProprietesScene(configuration.scene);
+      }
+      
+      if (configuration.camera) {
+        // Validation des propriétés de la caméra
+        if (!configuration.camera.position || !configuration.camera.target) {
+          throw new Error(&#x27;Propriétés de la caméra incomplètes&#x27;);
+        }
+        this.mettreAJourProprietesCamera(configuration.camera);
+      }
+      
+      if (configuration.controles) {
+        this.mettreAJourControlesScene(configuration.controles);
+      }
+      
+      if (configuration.lumiere &amp;&amp; Array.isArray(configuration.lumiere)) {
+        this.lumiereActuelles.next(configuration.lumiere);
+      }
+      
+      console.log(&#x27;Configuration de la scène importée avec succès&#x27;);
+      return true;
+    } catch (error) {
+      console.error(&#x27;Erreur lors de l\&#x27;importation de la configuration:&#x27;, error);
+      return false;
+    }
+  }
+
+  /**
+   * Réinitialiser la scène à ses valeurs par défaut
+   */
+  reinitialiserScene(): void {
+    this.sceneActuelle.next({
+      id: &#x27;scene_principale&#x27;,
+      nom: &#x27;Scène Architecturale 3D&#x27;,
+      largeur: 800,
+      hauteur: 600,
+      backgroundColor: 0x87CEEB,
+      fogColor: 0x87CEEB,
+      fogNear: 1,
+      fogFar: 100,
+      antialias: true,
+      shadowMapEnabled: true,
+      shadowMapType: &#x27;PCFSoft&#x27;,
+      dateCreation: new Date(),
+      derniereModification: new Date()
+    });
+    
+    this.reinitialiserCamera();
+    
+    console.log(&#x27;Scène réinitialisée&#x27;);
+  }
+}
+
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'ProprietesScene.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

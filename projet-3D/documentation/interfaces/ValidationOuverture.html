@@ -1,0 +1,832 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>projet-3-d documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">projet-3-d documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Interfaces</li>
+  <li class="breadcrumb-item"
+  >
+  ValidationOuverture</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/services/ouverture/ouverture.service.ts</code>
+        </p>
+
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Interface pour la validation d&#39;une ouverture</p>
+
+            </p>
+
+
+        <section data-compodoc="block-index">
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#avertissements" 
+>
+                                            avertissements
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#erreurs" 
+>
+                                            erreurs
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#isValid" 
+>
+                                            isValid
+                                        </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section data-compodoc="block-properties">
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="avertissements"></a>
+                                        <span class="name "><b>avertissements</b>
+                                            <a href="#avertissements">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>avertissements:     <code>string[]</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>string[]</code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="erreurs"></a>
+                                        <span class="name "><b>erreurs</b>
+                                            <a href="#erreurs">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>erreurs:     <code>string[]</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>string[]</code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="isValid"></a>
+                                        <span class="name "><b>isValid</b>
+                                            <a href="#isValid">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>isValid:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+import { BehaviorSubject, Observable } from &#x27;rxjs&#x27;;
+import { ConfigurationService, ConfigurationOuverture } from &#x27;../configuration/configuration.service&#x27;;
+
+/**
+ * Interface pour les propriétés d&#x27;une ouverture
+ */
+export interface ProprietesOuverture {
+  id: string;
+  nom: string;
+  type: &#x27;porte&#x27; | &#x27;fenetre&#x27;;
+  position: { x: number; y: number; z: number };
+  dimensions: { width: number; height: number; depth: number };
+  couleur: number;
+  surface: number;
+  volume: number;
+  murParent: &#x27;principal&#x27; | &#x27;arriere&#x27; | &#x27;gauche&#x27; | &#x27;droit&#x27;;
+  dateCreation: Date;
+  derniereModification: Date;
+}
+
+/**
+ * Interface pour les calculs d&#x27;une ouverture
+ */
+export interface CalculsOuverture {
+  surface: number;
+  volume: number;
+  perimetre: number;
+  centreGravite: { x: number; y: number; z: number };
+  ratioAspect: number; // largeur/hauteur
+}
+
+/**
+ * Interface pour la validation d&#x27;une ouverture
+ */
+export interface ValidationOuverture {
+  isValid: boolean;
+  erreurs: string[];
+  avertissements: string[];
+}
+
+/**
+ * Interface pour les statistiques des ouvertures
+ */
+export interface StatistiquesOuvertures {
+  nombreTotal: number;
+  nombrePortes: number;
+  nombreFenetres: number;
+  surfaceTotale: number;
+  surfacePortes: number;
+  surfaceFenetres: number;
+  pourcentagePortes: number;
+  pourcentageFenetres: number;
+}
+
+/**
+ * Service de gestion des ouvertures (portes et fenêtres)
+ */
+@Injectable({
+  providedIn: &#x27;root&#x27;
+})
+export class OuvertureService {
+  
+  private ouverturesActuelles &#x3D; new BehaviorSubject&lt;ProprietesOuverture[]&gt;([]);
+  public ouvertures$ &#x3D; this.ouverturesActuelles.asObservable();
+
+  constructor(private configurationService: ConfigurationService) {
+    // Initialiser avec la configuration actuelle
+    this.initialiserOuvertures();
+    
+    // Écouter les changements de configuration
+    this.configurationService.getConfigurationObservable().subscribe(() &#x3D;&gt; {
+      this.initialiserOuvertures();
+    });
+  }
+
+  /**
+   * Initialiser les ouvertures à partir de la configuration
+   */
+  private initialiserOuvertures(): void {
+    const config &#x3D; this.configurationService.getConfiguration();
+    const ouvertures: ProprietesOuverture[] &#x3D; [];
+    
+    Object.entries(config.murs).forEach(([typeMur, murConfig]) &#x3D;&gt; {
+      murConfig.ouvertures.forEach(ouvertureConfig &#x3D;&gt; {
+        const calculs &#x3D; this.calculerProprietesOuverture(ouvertureConfig);
+        const ouverture: ProprietesOuverture &#x3D; {
+          id: ouvertureConfig.id,
+          nom: ouvertureConfig.nom || &#x60;${ouvertureConfig.type}_${ouvertureConfig.id}&#x60;,
+          type: ouvertureConfig.type,
+          position: ouvertureConfig.position,
+          dimensions: ouvertureConfig.dimensions,
+          couleur: ouvertureConfig.couleur,
+          surface: calculs.surface,
+          volume: calculs.volume,
+          murParent: typeMur as ProprietesOuverture[&#x27;murParent&#x27;],
+          dateCreation: new Date(),
+          derniereModification: new Date()
+        };
+        ouvertures.push(ouverture);
+      });
+    });
+    
+    this.ouverturesActuelles.next(ouvertures);
+  }
+
+  /**
+   * Calculer les propriétés géométriques d&#x27;une ouverture
+   */
+  private calculerProprietesOuverture(ouvertureConfig: ConfigurationOuverture): CalculsOuverture {
+    const surface &#x3D; ouvertureConfig.dimensions.width * ouvertureConfig.dimensions.height;
+    const volume &#x3D; surface * ouvertureConfig.dimensions.depth;
+    const perimetre &#x3D; 2 * (ouvertureConfig.dimensions.width + ouvertureConfig.dimensions.height);
+    const ratioAspect &#x3D; ouvertureConfig.dimensions.width / ouvertureConfig.dimensions.height;
+    
+    const centreGravite &#x3D; {
+      x: ouvertureConfig.position.x,
+      y: ouvertureConfig.position.y + (ouvertureConfig.dimensions.height / 2),
+      z: ouvertureConfig.position.z
+    };
+
+    return {
+      surface: Math.round(surface * 100) / 100,
+      volume: Math.round(volume * 100) / 100,
+      perimetre: Math.round(perimetre * 100) / 100,
+      centreGravite,
+      ratioAspect: Math.round(ratioAspect * 100) / 100
+    };
+  }
+
+  /**
+   * Obtenir toutes les ouvertures
+   */
+  getOuvertures(): ProprietesOuverture[] {
+    return this.ouverturesActuelles.value;
+  }
+
+  /**
+   * Obtenir les ouvertures en tant qu&#x27;Observable
+   */
+  getOuverturesObservable(): Observable&lt;ProprietesOuverture[]&gt; {
+    return this.ouvertures$;
+  }
+
+  /**
+   * Obtenir une ouverture par son ID
+   */
+  getOuvertureParId(id: string): ProprietesOuverture | undefined {
+    return this.ouverturesActuelles.value.find(ouverture &#x3D;&gt; ouverture.id &#x3D;&#x3D;&#x3D; id);
+  }
+
+  /**
+   * Obtenir les ouvertures par type
+   */
+  getOuverturesParType(type: &#x27;porte&#x27; | &#x27;fenetre&#x27;): ProprietesOuverture[] {
+    return this.ouverturesActuelles.value.filter(ouverture &#x3D;&gt; ouverture.type &#x3D;&#x3D;&#x3D; type);
+  }
+
+  /**
+   * Obtenir toutes les portes
+   */
+  getPortes(): ProprietesOuverture[] {
+    return this.getOuverturesParType(&#x27;porte&#x27;);
+  }
+
+  /**
+   * Obtenir toutes les fenêtres
+   */
+  getFenetres(): ProprietesOuverture[] {
+    return this.getOuverturesParType(&#x27;fenetre&#x27;);
+  }
+
+  /**
+   * Obtenir les ouvertures d&#x27;un mur spécifique
+   */
+  getOuverturesParMur(murParent: ProprietesOuverture[&#x27;murParent&#x27;]): ProprietesOuverture[] {
+    return this.ouverturesActuelles.value.filter(ouverture &#x3D;&gt; ouverture.murParent &#x3D;&#x3D;&#x3D; murParent);
+  }
+
+  /**
+   * Ajouter une nouvelle ouverture
+   */
+  ajouterOuverture(
+    murParent: ProprietesOuverture[&#x27;murParent&#x27;],
+    nouvelleOuverture: Omit&lt;ConfigurationOuverture, &#x27;id&#x27;&gt;
+  ): void {
+    try {
+      // Validation des paramètres
+      if (!murParent || !nouvelleOuverture) {
+        throw new Error(&#x27;Paramètres manquants pour l\&#x27;ajout d\&#x27;ouverture&#x27;);
+      }
+      
+      if (!nouvelleOuverture.type || !nouvelleOuverture.dimensions || !nouvelleOuverture.position) {
+        throw new Error(&#x27;Ouverture incomplète: propriétés manquantes&#x27;);
+      }
+      
+      if (nouvelleOuverture.dimensions.width &lt;&#x3D; 0 || 
+          nouvelleOuverture.dimensions.height &lt;&#x3D; 0 || 
+          nouvelleOuverture.dimensions.depth &lt;&#x3D; 0) {
+        throw new Error(&#x27;Dimensions de l\&#x27;ouverture doivent être positives&#x27;);
+      }
+      
+      const id &#x3D; &#x60;${nouvelleOuverture.type}_${Date.now()}&#x60;;
+      const ouvertureComplete: ConfigurationOuverture &#x3D; {
+        ...nouvelleOuverture,
+        id
+      };
+      
+      this.configurationService.ajouterOuverture(murParent, ouvertureComplete);
+    } catch (error) {
+      console.error(&#x27;Erreur lors de l\&#x27;ajout d\&#x27;ouverture:&#x27;, error);
+      throw error;
+    }
+  }
+
+  /**
+   * Supprimer une ouverture
+   */
+  supprimerOuverture(id: string): void {
+    const ouverture &#x3D; this.getOuvertureParId(id);
+    if (ouverture) {
+      this.configurationService.supprimerOuverture(ouverture.murParent, id);
+    }
+  }
+
+  /**
+   * Modifier la position d&#x27;une ouverture
+   */
+  modifierPositionOuverture(id: string, nouvellePosition: { x: number; y: number; z: number }): void {
+    const ouverture &#x3D; this.getOuvertureParId(id);
+    if (ouverture) {
+      // Mettre à jour dans la configuration
+      const config &#x3D; this.configurationService.getConfiguration();
+      const murConfig &#x3D; config.murs[ouverture.murParent];
+      const ouvertureConfig &#x3D; murConfig.ouvertures.find(o &#x3D;&gt; o.id &#x3D;&#x3D;&#x3D; id);
+      
+      if (ouvertureConfig) {
+        ouvertureConfig.position &#x3D; nouvellePosition;
+        this.configurationService.mettreAJourMur(ouverture.murParent, murConfig);
+      }
+    }
+  }
+
+  /**
+   * Modifier les dimensions d&#x27;une ouverture
+   */
+  modifierDimensionsOuverture(id: string, nouvellesDimensions: { width: number; height: number; depth: number }): void {
+    const ouverture &#x3D; this.getOuvertureParId(id);
+    if (ouverture) {
+      const config &#x3D; this.configurationService.getConfiguration();
+      const murConfig &#x3D; config.murs[ouverture.murParent];
+      const ouvertureConfig &#x3D; murConfig.ouvertures.find(o &#x3D;&gt; o.id &#x3D;&#x3D;&#x3D; id);
+      
+      if (ouvertureConfig) {
+        ouvertureConfig.dimensions &#x3D; nouvellesDimensions;
+        this.configurationService.mettreAJourMur(ouverture.murParent, murConfig);
+      }
+    }
+  }
+
+  /**
+   * Modifier la couleur d&#x27;une ouverture
+   */
+  modifierCouleurOuverture(id: string, nouvelleCouleur: number): void {
+    const ouverture &#x3D; this.getOuvertureParId(id);
+    if (ouverture) {
+      const config &#x3D; this.configurationService.getConfiguration();
+      const murConfig &#x3D; config.murs[ouverture.murParent];
+      const ouvertureConfig &#x3D; murConfig.ouvertures.find(o &#x3D;&gt; o.id &#x3D;&#x3D;&#x3D; id);
+      
+      if (ouvertureConfig) {
+        ouvertureConfig.couleur &#x3D; nouvelleCouleur;
+        this.configurationService.mettreAJourMur(ouverture.murParent, murConfig);
+      }
+    }
+  }
+
+  /**
+   * Valider une ouverture
+   */
+  validerOuverture(ouverture: ProprietesOuverture): ValidationOuverture {
+    const erreurs: string[] &#x3D; [];
+    const avertissements: string[] &#x3D; [];
+
+    // Validation des dimensions
+    if (ouverture.dimensions.width &lt;&#x3D; 0) {
+      erreurs.push(&#x27;La largeur de l\&#x27;ouverture doit être positive&#x27;);
+    }
+    if (ouverture.dimensions.height &lt;&#x3D; 0) {
+      erreurs.push(&#x27;La hauteur de l\&#x27;ouverture doit être positive&#x27;);
+    }
+    if (ouverture.dimensions.depth &lt;&#x3D; 0) {
+      erreurs.push(&#x27;La profondeur de l\&#x27;ouverture doit être positive&#x27;);
+    }
+
+    // Validation spécifique aux portes
+    if (ouverture.type &#x3D;&#x3D;&#x3D; &#x27;porte&#x27;) {
+      if (ouverture.dimensions.height &lt; 2) {
+        avertissements.push(&#x27;La hauteur de la porte est inférieure à 2m&#x27;);
+      }
+      if (ouverture.dimensions.width &lt; 0.8) {
+        avertissements.push(&#x27;La largeur de la porte est inférieure à 80cm&#x27;);
+      }
+      if (ouverture.dimensions.width &gt; 1.2) {
+        avertissements.push(&#x27;La largeur de la porte est supérieure à 1.2m&#x27;);
+      }
+    }
+
+    // Validation spécifique aux fenêtres
+    if (ouverture.type &#x3D;&#x3D;&#x3D; &#x27;fenetre&#x27;) {
+      if (ouverture.dimensions.height &lt; 1) {
+        avertissements.push(&#x27;La hauteur de la fenêtre est inférieure à 1m&#x27;);
+      }
+      if (ouverture.dimensions.width &lt; 0.6) {
+        avertissements.push(&#x27;La largeur de la fenêtre est inférieure à 60cm&#x27;);
+      }
+    }
+
+    // Validation du ratio d&#x27;aspect
+    const ratioAspect &#x3D; ouverture.dimensions.width / ouverture.dimensions.height;
+    if (ratioAspect &gt; 3) {
+      avertissements.push(&#x27;Le ratio largeur/hauteur est très élevé (&gt; 3)&#x27;);
+    }
+    if (ratioAspect &lt; 0.3) {
+      avertissements.push(&#x27;Le ratio largeur/hauteur est très faible (&lt; 0.3)&#x27;);
+    }
+
+    return {
+      isValid: erreurs.length &#x3D;&#x3D;&#x3D; 0,
+      erreurs,
+      avertissements
+    };
+  }
+
+  /**
+   * Obtenir les statistiques des ouvertures
+   */
+  getStatistiquesOuvertures(): StatistiquesOuvertures {
+    const ouvertures &#x3D; this.getOuvertures();
+    const portes &#x3D; this.getPortes();
+    const fenetres &#x3D; this.getFenetres();
+    
+    const nombreTotal &#x3D; ouvertures.length;
+    const nombrePortes &#x3D; portes.length;
+    const nombreFenetres &#x3D; fenetres.length;
+    
+    const surfaceTotale &#x3D; ouvertures.reduce((total, ouverture) &#x3D;&gt; total + ouverture.surface, 0);
+    const surfacePortes &#x3D; portes.reduce((total, porte) &#x3D;&gt; total + porte.surface, 0);
+    const surfaceFenetres &#x3D; fenetres.reduce((total, fenetre) &#x3D;&gt; total + fenetre.surface, 0);
+    
+    const pourcentagePortes &#x3D; surfaceTotale &gt; 0 ? (surfacePortes / surfaceTotale) * 100 : 0;
+    const pourcentageFenetres &#x3D; surfaceTotale &gt; 0 ? (surfaceFenetres / surfaceTotale) * 100 : 0;
+
+    return {
+      nombreTotal,
+      nombrePortes,
+      nombreFenetres,
+      surfaceTotale: Math.round(surfaceTotale * 100) / 100,
+      surfacePortes: Math.round(surfacePortes * 100) / 100,
+      surfaceFenetres: Math.round(surfaceFenetres * 100) / 100,
+      pourcentagePortes: Math.round(pourcentagePortes * 100) / 100,
+      pourcentageFenetres: Math.round(pourcentageFenetres * 100) / 100
+    };
+  }
+
+  /**
+   * Obtenir la plus grande ouverture
+   */
+  getPlusGrandeOuverture(): ProprietesOuverture | undefined {
+    const ouvertures &#x3D; this.getOuvertures();
+    if (ouvertures.length &#x3D;&#x3D;&#x3D; 0) return undefined;
+    
+    return ouvertures.reduce((plusGrande, ouverture) &#x3D;&gt; 
+      ouverture.surface &gt; plusGrande.surface ? ouverture : plusGrande
+    );
+  }
+
+  /**
+   * Obtenir la plus petite ouverture
+   */
+  getPlusPetiteOuverture(): ProprietesOuverture | undefined {
+    const ouvertures &#x3D; this.getOuvertures();
+    if (ouvertures.length &#x3D;&#x3D;&#x3D; 0) return undefined;
+    
+    return ouvertures.reduce((plusPetite, ouverture) &#x3D;&gt; 
+      ouverture.surface &lt; plusPetite.surface ? ouverture : plusPetite
+    );
+  }
+
+  /**
+   * Obtenir les ouvertures par taille
+   */
+  getOuverturesParTaille(minSurface: number, maxSurface: number): ProprietesOuverture[] {
+    return this.getOuvertures().filter(ouverture &#x3D;&gt; 
+      ouverture.surface &gt;&#x3D; minSurface &amp;&amp; ouverture.surface &lt;&#x3D; maxSurface
+    );
+  }
+
+  /**
+   * Calculer la distance entre deux ouvertures
+   */
+  calculerDistanceEntreOuvertures(ouverture1: ProprietesOuverture, ouverture2: ProprietesOuverture): number {
+    const dx &#x3D; ouverture1.position.x - ouverture2.position.x;
+    const dy &#x3D; ouverture1.position.y - ouverture2.position.y;
+    const dz &#x3D; ouverture1.position.z - ouverture2.position.z;
+    
+    return Math.round(Math.sqrt(dx * dx + dy * dy + dz * dz) * 100) / 100;
+  }
+
+  /**
+   * Obtenir les ouvertures les plus proches
+   */
+  getOuverturesProches(ouverture: ProprietesOuverture, distanceMax: number &#x3D; 2): ProprietesOuverture[] {
+    const ouvertures &#x3D; this.getOuvertures();
+    const ouverturesProches: ProprietesOuverture[] &#x3D; [];
+    
+    ouvertures.forEach(autreOuverture &#x3D;&gt; {
+      if (autreOuverture.id !&#x3D;&#x3D; ouverture.id) {
+        const distance &#x3D; this.calculerDistanceEntreOuvertures(ouverture, autreOuverture);
+        if (distance &lt;&#x3D; distanceMax) {
+          ouverturesProches.push(autreOuverture);
+        }
+      }
+    });
+    
+    return ouverturesProches;
+  }
+
+  /**
+   * Obtenir les ouvertures par couleur
+   */
+  getOuverturesParCouleur(couleur: number): ProprietesOuverture[] {
+    return this.getOuvertures().filter(ouverture &#x3D;&gt; ouverture.couleur &#x3D;&#x3D;&#x3D; couleur);
+  }
+
+  /**
+   * Obtenir les couleurs utilisées
+   */
+  getCouleursUtilisees(): number[] {
+    const ouvertures &#x3D; this.getOuvertures();
+    const couleurs &#x3D; new Set&lt;number&gt;();
+    
+    ouvertures.forEach(ouverture &#x3D;&gt; {
+      couleurs.add(ouverture.couleur);
+    });
+    
+    return Array.from(couleurs);
+  }
+}
+
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'ValidationOuverture.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

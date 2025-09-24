@@ -1,59 +1,150 @@
-# Projet3D
+# 🏗️ Modélisation Architecturale 3D
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.2.
+Application Angular avec Three.js pour la modélisation et visualisation de bâtiments en 3D.
 
-## Development server
-
-To start a local development server, run:
+## 🚀 Démarrage Rapide
 
 ```bash
+# Installation des dépendances
+npm install
+
+# Lancement de l'application
 ng serve
+
+# Accès à l'application
+http://localhost:4200
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## ✨ Fonctionnalités Principales
 
-## Code scaffolding
+### 🏠 Modélisation 3D
+- **Bâtiment complet** : Murs, toit, sol, ouvertures
+- **Modifications en temps réel** : Dimensions, couleurs, positions
+- **Calculateur de fenêtres** : Ajout automatique d'ouvertures
+- **Interface intuitive** : Contrôles visuels et sliders
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### 🎨 Personnalisation
+- **Couleurs interactives** : Sélecteur de couleurs pour chaque élément
+- **Dimensions flexibles** : Modification des tailles en temps réel
+- **Configuration directe** : Édition du fichier `building-config.ts`
 
-```bash
-ng generate component component-name
+### 🧮 Outils Avancés
+- **Calculateur de fenêtres** : Calcul automatique du nombre d'ouvertures
+- **Validation en temps réel** : Vérification des contraintes architecturales
+- **Export/Import** : Sauvegarde des configurations
+
+## 📁 Structure du Projet
+
+```
+src/
+├── app/
+│   ├── components/
+│   │   ├── scene3d/           # Composant principal 3D
+│   │   └── calculateur-fenetres/ # Calculateur d'ouvertures
+│   ├── services/              # Services métier
+│   ├── config/
+│   │   └── building-config.ts # Configuration du bâtiment
+│   └── app.ts                 # Composant racine
+├── assets/                    # Ressources statiques
+└── styles/                    # Styles globaux
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## 🎯 Utilisation
 
-```bash
-ng generate --help
+### 1. Interface Principale
+- **Barre latérale gauche** : Contrôles et outils
+- **Zone centrale** : Visualisation 3D interactive
+- **Boutons de modification** : Dimensions, couleurs, ouvertures
+
+### 2. Modification du Bâtiment
+- **Dimensions** : Sliders pour longueur, largeur, hauteur
+- **Couleurs** : Sélecteur de couleurs pour chaque élément
+- **Ouvertures** : Ajout/suppression de fenêtres et portes
+
+### 3. Calculateur de Fenêtres
+- **Sélection du mur** : Choisir le mur à modifier
+- **Paramètres** : Taille, écart, nombre de fenêtres
+- **Application** : Ajout automatique des ouvertures
+
+## 🔧 Configuration
+
+### Fichier `building-config.ts`
+```typescript
+export const BUILDING_CONFIG = {
+  // Dimensions du bâtiment
+  dimensions: { longueur: 8, largeur: 5, hauteur: 2.5 },
+  
+  // Configuration des murs
+  murs: {
+    principal: { /* ... */ },
+    arriere: { /* ... */ },
+    gauche: { /* ... */ },
+    droit: { /* ... */ }
+  },
+  
+  // Ouvertures (fenêtres et portes)
+  ouvertures: { /* ... */ }
+};
 ```
 
-## Building
+### Modification Directe
+1. Éditez `src/app/config/building-config.ts`
+2. Cliquez sur "🔄 Recharger Configuration"
+3. Les changements s'appliquent immédiatement
 
-To build the project run:
+## 🛠️ Technologies
 
+- **Angular 17+** : Framework frontend
+- **Three.js** : Rendu 3D
+- **TypeScript** : Langage de développement
+- **RxJS** : Programmation réactive
+- **CSS3** : Styles et animations
+
+## 📚 Documentation
+
+- **[Guide de Navigation](./Documentations/NAVIGATION.md)** : Navigation dans l'interface
+- **[Guide de Test de Scène](./Documentations/GUIDE-TEST-SCENE.md)** : Tests et diagnostics
+- **[Documentation Complète](./Documentations/README.md)** : Guide détaillé
+
+## 🐛 Dépannage
+
+### Problèmes Courants
+- **Scène 3D ne se charge pas** : Vérifiez la console, redémarrez l'application
+- **Modifications non visibles** : Cliquez sur "Recharger Configuration"
+- **Erreurs de compilation** : Vérifiez `building-config.ts` pour les erreurs de syntaxe
+
+### Console de Développement
+Ouvrez F12 pour voir :
+- Messages de log détaillés
+- Erreurs de compilation
+- État des services
+
+## 🚀 Développement
+
+### Commandes Utiles
 ```bash
+# Compilation
 ng build
-```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
+# Tests
 ng test
+
+# Linting
+ng lint
+
+# Génération de composant
+ng generate component nom-composant
 ```
 
-## Running end-to-end tests
+### Structure des Services
+- `ConfigurationService` : Gestion de la configuration
+- `SceneService` : Gestion de la scène 3D
+- `CalculateurFenetresService` : Calcul des ouvertures
 
-For end-to-end (e2e) testing, run:
+## 📄 Licence
 
-```bash
-ng e2e
-```
+Projet éducatif - Utilisation libre pour l'apprentissage.
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+---
 
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+*Dernière mise à jour : {{ new Date().toLocaleDateString('fr-FR') }}*

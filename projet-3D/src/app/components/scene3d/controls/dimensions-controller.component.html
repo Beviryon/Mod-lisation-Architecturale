@@ -1,0 +1,122 @@
+<div class="dimensions-controller" *ngIf="isVisible">
+  <h3>📏 Dimensions Temps Réel</h3>
+  <!-- Dimensions de structure -->
+  <div class="dimension-group" *ngIf="showStructureDimensions">
+    <h4>Structure</h4>
+    <div class="dimension-item">
+      <label>Longueur (m)</label>
+      <input
+        type="range"
+        min="4"
+        max="20"
+        step="0.1"
+        [(ngModel)]="structureDimensions.longueur"
+        (input)="onStructureDimensionsChange()"
+        title="Longueur du bâtiment"
+        aria-label="Longueur du bâtiment"
+      >
+      <span class="value">{{ structureDimensions.longueur }}m</span>
+    </div>
+
+    <div class="dimension-item">
+      <label>Largeur (m)</label>
+      <input
+        type="range"
+        min="3"
+        max="15"
+        step="0.1"
+        [(ngModel)]="structureDimensions.largeur"
+        (input)="onStructureDimensionsChange()"
+        title="Largeur du bâtiment"
+        aria-label="Largeur du bâtiment"
+      >
+      <span class="value">{{ structureDimensions.largeur }}m</span>
+    </div>
+
+    <div class="dimension-item">
+      <label>Hauteur (m)</label>
+      <input
+        type="range"
+        min="2"
+        max="8"
+        step="0.1"
+        [(ngModel)]="structureDimensions.hauteur"
+        (input)="onStructureDimensionsChange()"
+        title="Hauteur du bâtiment"
+        aria-label="Hauteur du bâtiment"
+      >
+      <span class="value">{{ structureDimensions.hauteur }}m</span>
+    </div>
+  </div>
+
+  <!-- Dimensions d'éléments -->
+  <div class="dimension-group" *ngIf="showElementDimensions">
+    <h4>{{ elementName }}</h4>
+    <div class="dimension-item">
+      <label>Largeur (m)</label>
+      <input
+        type="range"
+        [min]="minDimensions.width"
+        [max]="maxDimensions.width"
+        step="0.1"
+        [(ngModel)]="elementDimensions.width"
+        (input)="onElementDimensionsChange()"
+        [title]="'Largeur de ' + elementName"
+        [aria-label]="'Largeur de ' + elementName"
+      >
+      <span class="value">{{ elementDimensions.width }}m</span>
+    </div>
+
+    <div class="dimension-item">
+      <label>Hauteur (m)</label>
+      <input
+        type="range"
+        [min]="minDimensions.height"
+        [max]="maxDimensions.height"
+        step="0.1"
+        [(ngModel)]="elementDimensions.height"
+        (input)="onElementDimensionsChange()"
+        [title]="'Hauteur de ' + elementName"
+        [aria-label]="'Hauteur de ' + elementName"
+      >
+      <span class="value">{{ elementDimensions.height }}m</span>
+    </div>
+
+    <div class="dimension-item">
+      <label>Profondeur (m)</label>
+      <input type="range"
+        [min]="minDimensions.depth"
+        [max]="maxDimensions.depth"
+        step="0.01"
+        [(ngModel)]="elementDimensions.depth"
+        (input)="onElementDimensionsChange()"
+        [title]="'Profondeur de ' + elementName"
+        [aria-label]="'Profondeur de ' + elementName"
+      >
+      <span class="value">{{ elementDimensions.depth }}m</span>
+    </div>
+  </div>
+
+  <!-- Boutons d'action -->
+  <div class="action-buttons">
+    <button
+      type="button"
+      (click)="resetDimensions()"
+      class="btn btn-secondary"
+      title="Réinitialiser les dimensions"
+      aria-label="Réinitialiser les dimensions"
+    >
+      🔄 Réinitialiser
+    </button>
+
+    <button
+      type="button"
+      (click)="applyDimensions()"
+      class="btn btn-primary"
+      title="Appliquer les modifications"
+      aria-label="Appliquer les modifications"
+    >
+    Appliquer
+    </button>
+  </div>
+</div>

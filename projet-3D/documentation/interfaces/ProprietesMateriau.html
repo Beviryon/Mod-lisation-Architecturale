@@ -1,0 +1,1619 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>projet-3-d documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">projet-3-d documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Interfaces</li>
+  <li class="breadcrumb-item"
+  >
+  ProprietesMateriau</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/services/materiau/materiau.service.ts</code>
+        </p>
+
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Interface pour les propriétés d&#39;un matériau</p>
+
+            </p>
+
+
+        <section data-compodoc="block-index">
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#couleur" 
+>
+                                            couleur
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#couleurHex" 
+>
+                                            couleurHex
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#couleurHsl" 
+>
+                                            couleurHsl
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#couleurRgb" 
+>
+                                            couleurRgb
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#dateCreation" 
+>
+                                            dateCreation
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#derniereModification" 
+>
+                                            derniereModification
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#emissive" 
+>
+                                            emissive
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#emissiveIntensity" 
+>
+                                            emissiveIntensity
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#id" 
+>
+                                            id
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#metallic" 
+>
+                                            metallic
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#nom" 
+>
+                                            nom
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#opacity" 
+>
+                                            opacity
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#rugosite" 
+>
+                                            rugosite
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#texture" 
+>
+                                            texture
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#transparent" 
+>
+                                            transparent
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#type" 
+>
+                                            type
+                                        </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section data-compodoc="block-properties">
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="couleur"></a>
+                                        <span class="name "><b>couleur</b>
+                                            <a href="#couleur">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>couleur:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="couleurHex"></a>
+                                        <span class="name "><b>couleurHex</b>
+                                            <a href="#couleurHex">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>couleurHex:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="couleurHsl"></a>
+                                        <span class="name "><b>couleurHsl</b>
+                                            <a href="#couleurHsl">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>couleurHsl:     <code>literal type</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>literal type</code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="couleurRgb"></a>
+                                        <span class="name "><b>couleurRgb</b>
+                                            <a href="#couleurRgb">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>couleurRgb:     <code>literal type</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>literal type</code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="dateCreation"></a>
+                                        <span class="name "><b>dateCreation</b>
+                                            <a href="#dateCreation">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>dateCreation:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="derniereModification"></a>
+                                        <span class="name "><b>derniereModification</b>
+                                            <a href="#derniereModification">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>derniereModification:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="emissive"></a>
+                                        <span class="name "><b>emissive</b>
+                                            <a href="#emissive">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>emissive:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="emissiveIntensity"></a>
+                                        <span class="name "><b>emissiveIntensity</b>
+                                            <a href="#emissiveIntensity">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>emissiveIntensity:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="id"></a>
+                                        <span class="name "><b>id</b>
+                                            <a href="#id">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>id:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="metallic"></a>
+                                        <span class="name "><b>metallic</b>
+                                            <a href="#metallic">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>metallic:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="nom"></a>
+                                        <span class="name "><b>nom</b>
+                                            <a href="#nom">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>nom:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="opacity"></a>
+                                        <span class="name "><b>opacity</b>
+                                            <a href="#opacity">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>opacity:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="rugosite"></a>
+                                        <span class="name "><b>rugosite</b>
+                                            <a href="#rugosite">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>rugosite:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="texture"></a>
+                                        <span class="name "><b>texture</b>
+                                            <a href="#texture">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>texture:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="transparent"></a>
+                                        <span class="name "><b>transparent</b>
+                                            <a href="#transparent">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>transparent:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="type"></a>
+                                        <span class="name "><b>type</b>
+                                            <a href="#type">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>type:     <code>&quot;mur&quot; | &quot;porte&quot; | &quot;fenetre&quot; | &quot;toit&quot; | &quot;sol&quot; | &quot;decoration&quot;</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>&quot;mur&quot; | &quot;porte&quot; | &quot;fenetre&quot; | &quot;toit&quot; | &quot;sol&quot; | &quot;decoration&quot;</code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+import { BehaviorSubject, Observable } from &#x27;rxjs&#x27;;
+
+/**
+ * Interface pour les propriétés d&#x27;un matériau
+ */
+export interface ProprietesMateriau {
+  id: string;
+  nom: string;
+  type: &#x27;mur&#x27; | &#x27;porte&#x27; | &#x27;fenetre&#x27; | &#x27;toit&#x27; | &#x27;sol&#x27; | &#x27;decoration&#x27;;
+  couleur: number;
+  couleurHex: string;
+  couleurRgb: { r: number; g: number; b: number };
+  couleurHsl: { h: number; s: number; l: number };
+  texture?: string;
+  rugosite: number; // 0 &#x3D; lisse, 1 &#x3D; rugueux
+  metallic: number; // 0 &#x3D; non métallique, 1 &#x3D; métallique
+  transparent: boolean;
+  opacity: number; // 0 &#x3D; transparent, 1 &#x3D; opaque
+  emissive: number; // Couleur émissive
+  emissiveIntensity: number;
+  dateCreation: Date;
+  derniereModification: Date;
+}
+
+/**
+ * Interface pour les palettes de couleurs
+ */
+export interface PaletteCouleurs {
+  id: string;
+  nom: string;
+  description: string;
+  couleurs: number[];
+  type: &#x27;architecturale&#x27; | &#x27;moderne&#x27; | &#x27;classique&#x27; | &#x27;naturelle&#x27; | &#x27;personnalisee&#x27;;
+  dateCreation: Date;
+}
+
+/**
+ * Interface pour les textures
+ */
+export interface ProprietesTexture {
+  id: string;
+  nom: string;
+  url: string;
+  type: &#x27;diffuse&#x27; | &#x27;normal&#x27; | &#x27;roughness&#x27; | &#x27;metallic&#x27; | &#x27;emissive&#x27;;
+  resolution: { width: number; height: number };
+  format: &#x27;jpg&#x27; | &#x27;png&#x27; | &#x27;webp&#x27;;
+  taille: number; // en KB
+}
+
+/**
+ * Interface pour les statistiques des matériaux
+ */
+export interface StatistiquesMateriaux {
+  nombreTotal: number;
+  nombreParType: Record&lt;string, number&gt;;
+  couleursUtilisees: number[];
+  texturesUtilisees: string[];
+  paletteLaPlusUtilisee: string;
+  materiauLePlusUtilise: string;
+}
+
+/**
+ * Service de gestion des matériaux et couleurs
+ */
+@Injectable({
+  providedIn: &#x27;root&#x27;
+})
+export class MateriauService {
+  
+  private materiauxActuels &#x3D; new BehaviorSubject&lt;ProprietesMateriau[]&gt;([]);
+  private palettesActuelles &#x3D; new BehaviorSubject&lt;PaletteCouleurs[]&gt;([]);
+  private texturesActuelles &#x3D; new BehaviorSubject&lt;ProprietesTexture[]&gt;([]);
+
+  public materiaux$ &#x3D; this.materiauxActuels.asObservable();
+  public palettes$ &#x3D; this.palettesActuelles.asObservable();
+  public textures$ &#x3D; this.texturesActuelles.asObservable();
+
+  constructor() {
+    this.initialiserMateriauxParDefaut();
+    this.initialiserPalettesParDefaut();
+    this.initialiserTexturesParDefaut();
+  }
+
+  /**
+   * Initialiser les matériaux par défaut
+   */
+  private initialiserMateriauxParDefaut(): void {
+    const materiaux: ProprietesMateriau[] &#x3D; [
+      // Matériaux pour murs
+      {
+        id: &#x27;mur_beton&#x27;,
+        nom: &#x27;Béton Gris&#x27;,
+        type: &#x27;mur&#x27;,
+        couleur: 0xaaaaaa,
+        couleurHex: &#x27;#aaaaaa&#x27;,
+        couleurRgb: { r: 170, g: 170, b: 170 },
+        couleurHsl: { h: 0, s: 0, l: 67 },
+        rugosite: 0.7,
+        metallic: 0.0,
+        transparent: false,
+        opacity: 1.0,
+        emissive: 0x000000,
+        emissiveIntensity: 0.0,
+        dateCreation: new Date(),
+        derniereModification: new Date()
+      },
+      {
+        id: &#x27;mur_brique&#x27;,
+        nom: &#x27;Brique Rouge&#x27;,
+        type: &#x27;mur&#x27;,
+        couleur: 0x8b4513,
+        couleurHex: &#x27;#8b4513&#x27;,
+        couleurRgb: { r: 139, g: 69, b: 19 },
+        couleurHsl: { h: 25, s: 76, l: 31 },
+        rugosite: 0.8,
+        metallic: 0.0,
+        transparent: false,
+        opacity: 1.0,
+        emissive: 0x000000,
+        emissiveIntensity: 0.0,
+        dateCreation: new Date(),
+        derniereModification: new Date()
+      },
+      {
+        id: &#x27;mur_bois&#x27;,
+        nom: &#x27;Bois Naturel&#x27;,
+        type: &#x27;mur&#x27;,
+        couleur: 0xdeb887,
+        couleurHex: &#x27;#deb887&#x27;,
+        couleurRgb: { r: 222, g: 184, b: 135 },
+        couleurHsl: { h: 34, s: 57, l: 70 },
+        rugosite: 0.6,
+        metallic: 0.0,
+        transparent: false,
+        opacity: 1.0,
+        emissive: 0x000000,
+        emissiveIntensity: 0.0,
+        dateCreation: new Date(),
+        derniereModification: new Date()
+      },
+      
+      // Matériaux pour portes
+      {
+        id: &#x27;porte_bois_vert&#x27;,
+        nom: &#x27;Porte Bois Vert&#x27;,
+        type: &#x27;porte&#x27;,
+        couleur: 0x00ff00,
+        couleurHex: &#x27;#00ff00&#x27;,
+        couleurRgb: { r: 0, g: 255, b: 0 },
+        couleurHsl: { h: 120, s: 100, l: 50 },
+        rugosite: 0.4,
+        metallic: 0.0,
+        transparent: false,
+        opacity: 1.0,
+        emissive: 0x000000,
+        emissiveIntensity: 0.0,
+        dateCreation: new Date(),
+        derniereModification: new Date()
+      },
+      {
+        id: &#x27;porte_bois_brun&#x27;,
+        nom: &#x27;Porte Bois Brun&#x27;,
+        type: &#x27;porte&#x27;,
+        couleur: 0x8b4513,
+        couleurHex: &#x27;#8b4513&#x27;,
+        couleurRgb: { r: 139, g: 69, b: 19 },
+        couleurHsl: { h: 25, s: 76, l: 31 },
+        rugosite: 0.3,
+        metallic: 0.0,
+        transparent: false,
+        opacity: 1.0,
+        emissive: 0x000000,
+        emissiveIntensity: 0.0,
+        dateCreation: new Date(),
+        derniereModification: new Date()
+      },
+      
+      // Matériaux pour fenêtres
+      {
+        id: &#x27;fenetre_bleue&#x27;,
+        nom: &#x27;Fenêtre Bleue&#x27;,
+        type: &#x27;fenetre&#x27;,
+        couleur: 0x0000ff,
+        couleurHex: &#x27;#0000ff&#x27;,
+        couleurRgb: { r: 0, g: 0, b: 255 },
+        couleurHsl: { h: 240, s: 100, l: 50 },
+        rugosite: 0.1,
+        metallic: 0.0,
+        transparent: true,
+        opacity: 0.8,
+        emissive: 0x000000,
+        emissiveIntensity: 0.0,
+        dateCreation: new Date(),
+        derniereModification: new Date()
+      },
+      {
+        id: &#x27;fenetre_rouge&#x27;,
+        nom: &#x27;Fenêtre Rouge&#x27;,
+        type: &#x27;fenetre&#x27;,
+        couleur: 0xff0000,
+        couleurHex: &#x27;#ff0000&#x27;,
+        couleurRgb: { r: 255, g: 0, b: 0 },
+        couleurHsl: { h: 0, s: 100, l: 50 },
+        rugosite: 0.1,
+        metallic: 0.0,
+        transparent: true,
+        opacity: 0.8,
+        emissive: 0x000000,
+        emissiveIntensity: 0.0,
+        dateCreation: new Date(),
+        derniereModification: new Date()
+      },
+      
+      // Matériaux pour toit
+      {
+        id: &#x27;toit_bleu&#x27;,
+        nom: &#x27;Toit Bleu Royal&#x27;,
+        type: &#x27;toit&#x27;,
+        couleur: 0x4169e1,
+        couleurHex: &#x27;#4169e1&#x27;,
+        couleurRgb: { r: 65, g: 105, b: 225 },
+        couleurHsl: { h: 225, s: 73, l: 57 },
+        rugosite: 0.5,
+        metallic: 0.0,
+        transparent: false,
+        opacity: 1.0,
+        emissive: 0x000000,
+        emissiveIntensity: 0.0,
+        dateCreation: new Date(),
+        derniereModification: new Date()
+      },
+      
+      // Matériaux pour sol
+      {
+        id: &#x27;sol_marron&#x27;,
+        nom: &#x27;Sol Marron&#x27;,
+        type: &#x27;sol&#x27;,
+        couleur: 0x8b4513,
+        couleurHex: &#x27;#8b4513&#x27;,
+        couleurRgb: { r: 139, g: 69, b: 19 },
+        couleurHsl: { h: 25, s: 76, l: 31 },
+        rugosite: 0.9,
+        metallic: 0.0,
+        transparent: false,
+        opacity: 1.0,
+        emissive: 0x000000,
+        emissiveIntensity: 0.0,
+        dateCreation: new Date(),
+        derniereModification: new Date()
+      }
+    ];
+    
+    this.materiauxActuels.next(materiaux);
+  }
+
+  /**
+   * Initialiser les palettes par défaut
+   */
+  private initialiserPalettesParDefaut(): void {
+    const palettes: PaletteCouleurs[] &#x3D; [
+      {
+        id: &#x27;palette_moderne&#x27;,
+        nom: &#x27;Palette Moderne&#x27;,
+        description: &#x27;Couleurs modernes et épurées&#x27;,
+        couleurs: [0xaaaaaa, 0xffffff, 0x000000, 0x4169e1, 0x00ff00],
+        type: &#x27;moderne&#x27;,
+        dateCreation: new Date()
+      },
+      {
+        id: &#x27;palette_classique&#x27;,
+        nom: &#x27;Palette Classique&#x27;,
+        description: &#x27;Couleurs traditionnelles et chaleureuses&#x27;,
+        couleurs: [0x8b4513, 0xdeb887, 0x654321, 0xffd700, 0xcd853f],
+        type: &#x27;classique&#x27;,
+        dateCreation: new Date()
+      },
+      {
+        id: &#x27;palette_naturelle&#x27;,
+        nom: &#x27;Palette Naturelle&#x27;,
+        description: &#x27;Couleurs inspirées de la nature&#x27;,
+        couleurs: [0x228b22, 0x8fbc8f, 0x2e8b57, 0x90ee90, 0x32cd32],
+        type: &#x27;naturelle&#x27;,
+        dateCreation: new Date()
+      },
+      {
+        id: &#x27;palette_architecturale&#x27;,
+        nom: &#x27;Palette Architecturale&#x27;,
+        description: &#x27;Couleurs professionnelles pour l\&#x27;architecture&#x27;,
+        couleurs: [0xaaaaaa, 0x696969, 0x2f4f4f, 0x708090, 0x778899],
+        type: &#x27;architecturale&#x27;,
+        dateCreation: new Date()
+      }
+    ];
+    
+    this.palettesActuelles.next(palettes);
+  }
+
+  /**
+   * Initialiser les textures par défaut
+   */
+  private initialiserTexturesParDefaut(): void {
+    const textures: ProprietesTexture[] &#x3D; [
+      {
+        id: &#x27;texture_beton&#x27;,
+        nom: &#x27;Texture Béton&#x27;,
+        url: &#x27;/assets/textures/beton.jpg&#x27;,
+        type: &#x27;diffuse&#x27;,
+        resolution: { width: 512, height: 512 },
+        format: &#x27;jpg&#x27;,
+        taille: 256
+      },
+      {
+        id: &#x27;texture_brique&#x27;,
+        nom: &#x27;Texture Brique&#x27;,
+        url: &#x27;/assets/textures/brique.jpg&#x27;,
+        type: &#x27;diffuse&#x27;,
+        resolution: { width: 512, height: 512 },
+        format: &#x27;jpg&#x27;,
+        taille: 312
+      },
+      {
+        id: &#x27;texture_bois&#x27;,
+        nom: &#x27;Texture Bois&#x27;,
+        url: &#x27;/assets/textures/bois.jpg&#x27;,
+        type: &#x27;diffuse&#x27;,
+        resolution: { width: 512, height: 512 },
+        format: &#x27;jpg&#x27;,
+        taille: 198
+      }
+    ];
+    
+    this.texturesActuelles.next(textures);
+  }
+
+  /**
+   * Convertir une couleur hexadécimale en RGB
+   */
+  hexToRgb(hex: string): { r: number; g: number; b: number } {
+    const result &#x3D; /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+      r: parseInt(result[1], 16),
+      g: parseInt(result[2], 16),
+      b: parseInt(result[3], 16)
+    } : { r: 0, g: 0, b: 0 };
+  }
+
+  /**
+   * Convertir une couleur RGB en HSL
+   */
+  rgbToHsl(r: number, g: number, b: number): { h: number; s: number; l: number } {
+    r /&#x3D; 255;
+    g /&#x3D; 255;
+    b /&#x3D; 255;
+    
+    const max &#x3D; Math.max(r, g, b);
+    const min &#x3D; Math.min(r, g, b);
+    let h &#x3D; 0, s &#x3D; 0, l &#x3D; (max + min) / 2;
+    
+    if (max !&#x3D;&#x3D; min) {
+      const d &#x3D; max - min;
+      s &#x3D; l &gt; 0.5 ? d / (2 - max - min) : d / (max + min);
+      
+      switch (max) {
+        case r: h &#x3D; (g - b) / d + (g &lt; b ? 6 : 0); break;
+        case g: h &#x3D; (b - r) / d + 2; break;
+        case b: h &#x3D; (r - g) / d + 4; break;
+      }
+      h /&#x3D; 6;
+    }
+    
+    return {
+      h: Math.round(h * 360),
+      s: Math.round(s * 100),
+      l: Math.round(l * 100)
+    };
+  }
+
+  /**
+   * Convertir une couleur numérique en hexadécimale
+   */
+  numberToHex(color: number): string {
+    return &#x27;#&#x27; + color.toString(16).padStart(6, &#x27;0&#x27;);
+  }
+
+  /**
+   * Obtenir tous les matériaux
+   */
+  getMateriaux(): ProprietesMateriau[] {
+    return this.materiauxActuels.value;
+  }
+
+  /**
+   * Obtenir les matériaux en tant qu&#x27;Observable
+   */
+  getMateriauxObservable(): Observable&lt;ProprietesMateriau[]&gt; {
+    return this.materiaux$;
+  }
+
+  /**
+   * Obtenir un matériau par son ID
+   */
+  getMateriauParId(id: string): ProprietesMateriau | undefined {
+    return this.materiauxActuels.value.find(materiau &#x3D;&gt; materiau.id &#x3D;&#x3D;&#x3D; id);
+  }
+
+  /**
+   * Obtenir les matériaux par type
+   */
+  getMateriauxParType(type: ProprietesMateriau[&#x27;type&#x27;]): ProprietesMateriau[] {
+    return this.materiauxActuels.value.filter(materiau &#x3D;&gt; materiau.type &#x3D;&#x3D;&#x3D; type);
+  }
+
+  /**
+   * Obtenir les matériaux pour murs
+   */
+  getMateriauxMurs(): ProprietesMateriau[] {
+    return this.getMateriauxParType(&#x27;mur&#x27;);
+  }
+
+  /**
+   * Obtenir les matériaux pour portes
+   */
+  getMateriauxPortes(): ProprietesMateriau[] {
+    return this.getMateriauxParType(&#x27;porte&#x27;);
+  }
+
+  /**
+   * Obtenir les matériaux pour fenêtres
+   */
+  getMateriauxFenetres(): ProprietesMateriau[] {
+    return this.getMateriauxParType(&#x27;fenetre&#x27;);
+  }
+
+  /**
+   * Ajouter un nouveau matériau
+   */
+  ajouterMateriau(nouveauMateriau: Omit&lt;ProprietesMateriau, &#x27;id&#x27; | &#x27;dateCreation&#x27; | &#x27;derniereModification&#x27;&gt;): void {
+    try {
+      // Validation des paramètres
+      if (!nouveauMateriau) {
+        throw new Error(&#x27;Matériau manquant&#x27;);
+      }
+      
+      if (!nouveauMateriau.nom || !nouveauMateriau.type) {
+        throw new Error(&#x27;Nom et type du matériau requis&#x27;);
+      }
+      
+      if (typeof nouveauMateriau.couleur !&#x3D;&#x3D; &#x27;number&#x27; || nouveauMateriau.couleur &lt; 0 || nouveauMateriau.couleur &gt; 0xFFFFFF) {
+        throw new Error(&#x27;Couleur invalide: doit être un nombre entre 0 et 16777215&#x27;);
+      }
+      
+      const materiauComplete: ProprietesMateriau &#x3D; {
+        ...nouveauMateriau,
+        id: &#x60;materiau_${Date.now()}&#x60;,
+        dateCreation: new Date(),
+        derniereModification: new Date()
+      };
+      
+      const materiauxActuels &#x3D; this.getMateriaux();
+      materiauxActuels.push(materiauComplete);
+      this.materiauxActuels.next(materiauxActuels);
+    } catch (error) {
+      console.error(&#x27;Erreur lors de l\&#x27;ajout du matériau:&#x27;, error);
+      throw error;
+    }
+  }
+
+  /**
+   * Modifier un matériau
+   */
+  modifierMateriau(id: string, nouvellesProprietes: Partial&lt;ProprietesMateriau&gt;): void {
+    const materiauxActuels &#x3D; this.getMateriaux();
+    const materiauIndex &#x3D; materiauxActuels.findIndex(materiau &#x3D;&gt; materiau.id &#x3D;&#x3D;&#x3D; id);
+    
+    if (materiauIndex !&#x3D;&#x3D; -1) {
+      materiauxActuels[materiauIndex] &#x3D; {
+        ...materiauxActuels[materiauIndex],
+        ...nouvellesProprietes,
+        derniereModification: new Date()
+      };
+      this.materiauxActuels.next(materiauxActuels);
+    }
+  }
+
+  /**
+   * Supprimer un matériau
+   */
+  supprimerMateriau(id: string): void {
+    const materiauxActuels &#x3D; this.getMateriaux();
+    const materiauxFiltres &#x3D; materiauxActuels.filter(materiau &#x3D;&gt; materiau.id !&#x3D;&#x3D; id);
+    this.materiauxActuels.next(materiauxFiltres);
+  }
+
+  /**
+   * Obtenir toutes les palettes
+   */
+  getPalettes(): PaletteCouleurs[] {
+    return this.palettesActuelles.value;
+  }
+
+  /**
+   * Obtenir les palettes en tant qu&#x27;Observable
+   */
+  getPalettesObservable(): Observable&lt;PaletteCouleurs[]&gt; {
+    return this.palettes$;
+  }
+
+  /**
+   * Obtenir une palette par son ID
+   */
+  getPaletteParId(id: string): PaletteCouleurs | undefined {
+    return this.palettesActuelles.value.find(palette &#x3D;&gt; palette.id &#x3D;&#x3D;&#x3D; id);
+  }
+
+  /**
+   * Obtenir les palettes par type
+   */
+  getPalettesParType(type: PaletteCouleurs[&#x27;type&#x27;]): PaletteCouleurs[] {
+    return this.palettesActuelles.value.filter(palette &#x3D;&gt; palette.type &#x3D;&#x3D;&#x3D; type);
+  }
+
+  /**
+   * Ajouter une nouvelle palette
+   */
+  ajouterPalette(nouvellePalette: Omit&lt;PaletteCouleurs, &#x27;id&#x27; | &#x27;dateCreation&#x27;&gt;): void {
+    const paletteComplete: PaletteCouleurs &#x3D; {
+      ...nouvellePalette,
+      id: &#x60;palette_${Date.now()}&#x60;,
+      dateCreation: new Date()
+    };
+    
+    const palettesActuelles &#x3D; this.getPalettes();
+    palettesActuelles.push(paletteComplete);
+    this.palettesActuelles.next(palettesActuelles);
+  }
+
+  /**
+   * Obtenir toutes les textures
+   */
+  getTextures(): ProprietesTexture[] {
+    return this.texturesActuelles.value;
+  }
+
+  /**
+   * Obtenir les textures en tant qu&#x27;Observable
+   */
+  getTexturesObservable(): Observable&lt;ProprietesTexture[]&gt; {
+    return this.textures$;
+  }
+
+  /**
+   * Obtenir une texture par son ID
+   */
+  getTextureParId(id: string): ProprietesTexture | undefined {
+    return this.texturesActuelles.value.find(texture &#x3D;&gt; texture.id &#x3D;&#x3D;&#x3D; id);
+  }
+
+  /**
+   * Obtenir les textures par type
+   */
+  getTexturesParType(type: ProprietesTexture[&#x27;type&#x27;]): ProprietesTexture[] {
+    return this.texturesActuelles.value.filter(texture &#x3D;&gt; texture.type &#x3D;&#x3D;&#x3D; type);
+  }
+
+  /**
+   * Ajouter une nouvelle texture
+   */
+  ajouterTexture(nouvelleTexture: Omit&lt;ProprietesTexture, &#x27;id&#x27;&gt;): void {
+    const textureComplete: ProprietesTexture &#x3D; {
+      ...nouvelleTexture,
+      id: &#x60;texture_${Date.now()}&#x60;
+    };
+    
+    const texturesActuelles &#x3D; this.getTextures();
+    texturesActuelles.push(textureComplete);
+    this.texturesActuelles.next(texturesActuelles);
+  }
+
+  /**
+   * Obtenir les statistiques des matériaux
+   */
+  getStatistiquesMateriaux(): StatistiquesMateriaux {
+    const materiaux &#x3D; this.getMateriaux();
+    const palettes &#x3D; this.getPalettes();
+    const textures &#x3D; this.getTextures();
+    
+    const nombreTotal &#x3D; materiaux.length;
+    const nombreParType: Record&lt;string, number&gt; &#x3D; {};
+    
+    materiaux.forEach(materiau &#x3D;&gt; {
+      nombreParType[materiau.type] &#x3D; (nombreParType[materiau.type] || 0) + 1;
+    });
+    
+    const couleursUtilisees &#x3D; materiaux.map(materiau &#x3D;&gt; materiau.couleur);
+    const texturesUtilisees &#x3D; materiaux
+      .filter(materiau &#x3D;&gt; materiau.texture)
+      .map(materiau &#x3D;&gt; materiau.texture!);
+    
+    const paletteLaPlusUtilisee &#x3D; palettes.length &gt; 0 ? palettes[0].nom : &#x27;Aucune&#x27;;
+    const materiauLePlusUtilise &#x3D; Object.keys(nombreParType).reduce((a, b) &#x3D;&gt; 
+      nombreParType[a] &gt; nombreParType[b] ? a : b
+    );
+
+    return {
+      nombreTotal,
+      nombreParType,
+      couleursUtilisees,
+      texturesUtilisees,
+      paletteLaPlusUtilisee,
+      materiauLePlusUtilise
+    };
+  }
+
+  /**
+   * Générer une couleur aléatoire
+   */
+  genererCouleurAleatoire(): number {
+    return Math.floor(Math.random() * 16777215);
+  }
+
+  /**
+   * Générer une palette de couleurs harmonieuses
+   */
+  genererPaletteHarmonieuse(couleurBase: number, nombreCouleurs: number &#x3D; 5): number[] {
+    const couleurs: number[] &#x3D; [couleurBase];
+    const rgb &#x3D; this.hexToRgb(this.numberToHex(couleurBase));
+    const hsl &#x3D; this.rgbToHsl(rgb.r, rgb.g, rgb.b);
+    
+    for (let i &#x3D; 1; i &lt; nombreCouleurs; i++) {
+      const nouvelleTeinte &#x3D; (hsl.h + (i * 60)) % 360;
+      const nouvelleCouleur &#x3D; this.hslToRgb(nouvelleTeinte, hsl.s, hsl.l);
+      couleurs.push(this.rgbToNumber(nouvelleCouleur.r, nouvelleCouleur.g, nouvelleCouleur.b));
+    }
+    
+    return couleurs;
+  }
+
+  /**
+   * Convertir HSL en RGB
+   */
+  private hslToRgb(h: number, s: number, l: number): { r: number; g: number; b: number } {
+    h /&#x3D; 360;
+    s /&#x3D; 100;
+    l /&#x3D; 100;
+    
+    const hue2rgb &#x3D; (p: number, q: number, t: number) &#x3D;&gt; {
+      if (t &lt; 0) t +&#x3D; 1;
+      if (t &gt; 1) t -&#x3D; 1;
+      if (t &lt; 1/6) return p + (q - p) * 6 * t;
+      if (t &lt; 1/2) return q;
+      if (t &lt; 2/3) return p + (q - p) * (2/3 - t) * 6;
+      return p;
+    };
+    
+    let r, g, b;
+    
+    if (s &#x3D;&#x3D;&#x3D; 0) {
+      r &#x3D; g &#x3D; b &#x3D; l;
+    } else {
+      const q &#x3D; l &lt; 0.5 ? l * (1 + s) : l + s - l * s;
+      const p &#x3D; 2 * l - q;
+      r &#x3D; hue2rgb(p, q, h + 1/3);
+      g &#x3D; hue2rgb(p, q, h);
+      b &#x3D; hue2rgb(p, q, h - 1/3);
+    }
+    
+    return {
+      r: Math.round(r * 255),
+      g: Math.round(g * 255),
+      b: Math.round(b * 255)
+    };
+  }
+
+  /**
+   * Convertir RGB en nombre
+   */
+  private rgbToNumber(r: number, g: number, b: number): number {
+    return (r &lt;&lt; 16) | (g &lt;&lt; 8) | b;
+  }
+
+  /**
+   * Exporter les matériaux
+   */
+  exporterMateriaux(): string {
+    const donnees &#x3D; {
+      materiaux: this.getMateriaux(),
+      palettes: this.getPalettes(),
+      textures: this.getTextures(),
+      statistiques: this.getStatistiquesMateriaux(),
+      dateExport: new Date()
+    };
+    
+    return JSON.stringify(donnees, null, 2);
+  }
+
+  /**
+   * Importer les matériaux
+   */
+  importerMateriaux(donneesJson: string): boolean {
+    try {
+      const donnees &#x3D; JSON.parse(donneesJson);
+      
+      if (donnees.materiaux) {
+        this.materiauxActuels.next(donnees.materiaux);
+      }
+      
+      if (donnees.palettes) {
+        this.palettesActuelles.next(donnees.palettes);
+      }
+      
+      if (donnees.textures) {
+        this.texturesActuelles.next(donnees.textures);
+      }
+      
+      console.log(&#x27;Matériaux importés avec succès&#x27;);
+      return true;
+    } catch (error) {
+      console.error(&#x27;Erreur lors de l\&#x27;importation des matériaux:&#x27;, error);
+      return false;
+    }
+  }
+}
+
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'ProprietesMateriau.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

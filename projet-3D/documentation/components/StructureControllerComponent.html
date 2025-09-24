@@ -1,0 +1,1588 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>projet-3-d documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">projet-3-d documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  StructureControllerComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/scene3d/controls/structure-controller.component.ts</code>
+</p>
+
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Composant pour contrôler la structure globale du bâtiment</p>
+
+    </p>
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-structure-controller</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>CommonModule</code>
+                            <code>FormsModule</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./structure-controller.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./structure-controller.component.css</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#applyStructure" >applyStructure</a>
+                            </li>
+                            <li>
+                                <a href="#exportStructure" >exportStructure</a>
+                            </li>
+                            <li>
+                                <a href="#getNombreMurs" >getNombreMurs</a>
+                            </li>
+                            <li>
+                                <a href="#getNombreOuvertures" >getNombreOuvertures</a>
+                            </li>
+                            <li>
+                                <a href="#getPerimetre" >getPerimetre</a>
+                            </li>
+                            <li>
+                                <a href="#getRatioHauteurLongueur" >getRatioHauteurLongueur</a>
+                            </li>
+                            <li>
+                                <a href="#getSurfaceSol" >getSurfaceSol</a>
+                            </li>
+                            <li>
+                                <a href="#getVolume" >getVolume</a>
+                            </li>
+                            <li>
+                                <a href="#getVolumeTotal" >getVolumeTotal</a>
+                            </li>
+                            <li>
+                                <a href="#importStructure" >importStructure</a>
+                            </li>
+                            <li>
+                                <a href="#onStructureChange" >onStructureChange</a>
+                            </li>
+                            <li>
+                                <a href="#optimizeDimensions" >optimizeDimensions</a>
+                            </li>
+                            <li>
+                                <a href="#previewStructure" >previewStructure</a>
+                            </li>
+                            <li>
+                                <a href="#resetStructure" >resetStructure</a>
+                            </li>
+                            <li>
+                                <a href="#resetToDefault" >resetToDefault</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#isVisible" >isVisible</a>
+                            </li>
+                            <li>
+                                <a href="#structure" >structure</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#structureApplied" >structureApplied</a>
+                            </li>
+                            <li>
+                                <a href="#structureChanged" >structureChanged</a>
+                            </li>
+                            <li>
+                                <a href="#structureExported" >structureExported</a>
+                            </li>
+                            <li>
+                                <a href="#structureImported" >structureImported</a>
+                            </li>
+                            <li>
+                                <a href="#structureOptimized" >structureOptimized</a>
+                            </li>
+                            <li>
+                                <a href="#structurePreviewed" >structurePreviewed</a>
+                            </li>
+                            <li>
+                                <a href="#structureReset" >structureReset</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isVisible"></a>
+                        <b>isVisible</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/components/scene3d/controls/structure-controller.component.ts:34</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="structure"></a>
+                        <b>structure</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Structure.html" target="_self" >Structure</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    nom: &#x27;Bâtiment Principal&#x27;,
+    description: &#x27;Bâtiment architectural avec murs, ouvertures et toit&#x27;,
+    type: &#x27;residentiel&#x27;,
+    dimensions: { longueur: 8, largeur: 5, hauteur: 2.5 },
+    couleur: &#x27;#aaaaaa&#x27;,
+    materiau: &#x27;beton&#x27;,
+    materiauPrincipal: &#x27;beton&#x27;,
+    materiauToit: &#x27;tuile&#x27;
+  }</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/components/scene3d/controls/structure-controller.component.ts:35</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+    <section data-compodoc="block-outputs">
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="structureApplied"></a>
+                        <b>structureApplied</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/components/scene3d/controls/structure-controller.component.ts:47</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="structureChanged"></a>
+                        <b>structureChanged</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/components/scene3d/controls/structure-controller.component.ts:46</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="structureExported"></a>
+                        <b>structureExported</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/components/scene3d/controls/structure-controller.component.ts:50</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="structureImported"></a>
+                        <b>structureImported</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/components/scene3d/controls/structure-controller.component.ts:51</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="structureOptimized"></a>
+                        <b>structureOptimized</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/components/scene3d/controls/structure-controller.component.ts:49</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="structurePreviewed"></a>
+                        <b>structurePreviewed</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/components/scene3d/controls/structure-controller.component.ts:52</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="structureReset"></a>
+                        <b>structureReset</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/components/scene3d/controls/structure-controller.component.ts:48</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="applyStructure"></a>
+                    <span class="name">
+                        <span ><b>applyStructure</b></span>
+                        <a href="#applyStructure"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>applyStructure()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="58"
+                                    class="link-to-prism">src/app/components/scene3d/controls/structure-controller.component.ts:58</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="exportStructure"></a>
+                    <span class="name">
+                        <span ><b>exportStructure</b></span>
+                        <a href="#exportStructure"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>exportStructure()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="92"
+                                    class="link-to-prism">src/app/components/scene3d/controls/structure-controller.component.ts:92</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getNombreMurs"></a>
+                    <span class="name">
+                        <span ><b>getNombreMurs</b></span>
+                        <a href="#getNombreMurs"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getNombreMurs()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="145"
+                                    class="link-to-prism">src/app/components/scene3d/controls/structure-controller.component.ts:145</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getNombreOuvertures"></a>
+                    <span class="name">
+                        <span ><b>getNombreOuvertures</b></span>
+                        <a href="#getNombreOuvertures"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getNombreOuvertures()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="150"
+                                    class="link-to-prism">src/app/components/scene3d/controls/structure-controller.component.ts:150</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getPerimetre"></a>
+                    <span class="name">
+                        <span ><b>getPerimetre</b></span>
+                        <a href="#getPerimetre"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getPerimetre()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="133"
+                                    class="link-to-prism">src/app/components/scene3d/controls/structure-controller.component.ts:133</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getRatioHauteurLongueur"></a>
+                    <span class="name">
+                        <span ><b>getRatioHauteurLongueur</b></span>
+                        <a href="#getRatioHauteurLongueur"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getRatioHauteurLongueur()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="137"
+                                    class="link-to-prism">src/app/components/scene3d/controls/structure-controller.component.ts:137</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getSurfaceSol"></a>
+                    <span class="name">
+                        <span ><b>getSurfaceSol</b></span>
+                        <a href="#getSurfaceSol"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getSurfaceSol()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="125"
+                                    class="link-to-prism">src/app/components/scene3d/controls/structure-controller.component.ts:125</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getVolume"></a>
+                    <span class="name">
+                        <span ><b>getVolume</b></span>
+                        <a href="#getVolume"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getVolume()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="129"
+                                    class="link-to-prism">src/app/components/scene3d/controls/structure-controller.component.ts:129</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getVolumeTotal"></a>
+                    <span class="name">
+                        <span ><b>getVolumeTotal</b></span>
+                        <a href="#getVolumeTotal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getVolumeTotal()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="141"
+                                    class="link-to-prism">src/app/components/scene3d/controls/structure-controller.component.ts:141</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="importStructure"></a>
+                    <span class="name">
+                        <span ><b>importStructure</b></span>
+                        <a href="#importStructure"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>importStructure()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="96"
+                                    class="link-to-prism">src/app/components/scene3d/controls/structure-controller.component.ts:96</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onStructureChange"></a>
+                    <span class="name">
+                        <span ><b>onStructureChange</b></span>
+                        <a href="#onStructureChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onStructureChange()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="54"
+                                    class="link-to-prism">src/app/components/scene3d/controls/structure-controller.component.ts:54</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="optimizeDimensions"></a>
+                    <span class="name">
+                        <span ><b>optimizeDimensions</b></span>
+                        <a href="#optimizeDimensions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>optimizeDimensions()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="76"
+                                    class="link-to-prism">src/app/components/scene3d/controls/structure-controller.component.ts:76</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="previewStructure"></a>
+                    <span class="name">
+                        <span ><b>previewStructure</b></span>
+                        <a href="#previewStructure"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>previewStructure()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="120"
+                                    class="link-to-prism">src/app/components/scene3d/controls/structure-controller.component.ts:120</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resetStructure"></a>
+                    <span class="name">
+                        <span ><b>resetStructure</b></span>
+                        <a href="#resetStructure"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>resetStructure()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="155"
+                                    class="link-to-prism">src/app/components/scene3d/controls/structure-controller.component.ts:155</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resetToDefault"></a>
+                    <span class="name">
+                        <span ><b>resetToDefault</b></span>
+                        <a href="#resetToDefault"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>resetToDefault()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="62"
+                                    class="link-to-prism">src/app/components/scene3d/controls/structure-controller.component.ts:62</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input, Output, EventEmitter } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { FormsModule } from &#x27;@angular/forms&#x27;;
+
+/**
+ * Interface pour la structure du bâtiment
+ */
+export interface Structure {
+  nom: string;
+  description: string;
+  type: string;
+  dimensions: {
+    longueur: number;
+    largeur: number;
+    hauteur: number;
+  };
+  couleur: string;
+  materiau: string;
+  materiauPrincipal: string;
+  materiauToit: string;
+}
+
+/**
+ * Composant pour contrôler la structure globale du bâtiment
+ */
+@Component({
+  selector: &#x27;app-structure-controller&#x27;,
+  imports: [CommonModule, FormsModule],
+  templateUrl: &#x27;./structure-controller.component.html&#x27;,
+  styleUrl: &#x27;./structure-controller.component.css&#x27;,
+  standalone: true
+})
+export class StructureControllerComponent {
+  @Input() isVisible: boolean &#x3D; false;
+  @Input() structure: Structure &#x3D; {
+    nom: &#x27;Bâtiment Principal&#x27;,
+    description: &#x27;Bâtiment architectural avec murs, ouvertures et toit&#x27;,
+    type: &#x27;residentiel&#x27;,
+    dimensions: { longueur: 8, largeur: 5, hauteur: 2.5 },
+    couleur: &#x27;#aaaaaa&#x27;,
+    materiau: &#x27;beton&#x27;,
+    materiauPrincipal: &#x27;beton&#x27;,
+    materiauToit: &#x27;tuile&#x27;
+  };
+
+  @Output() structureChanged &#x3D; new EventEmitter&lt;Structure&gt;();
+  @Output() structureApplied &#x3D; new EventEmitter&lt;Structure&gt;();
+  @Output() structureReset &#x3D; new EventEmitter&lt;void&gt;();
+  @Output() structureOptimized &#x3D; new EventEmitter&lt;Structure&gt;();
+  @Output() structureExported &#x3D; new EventEmitter&lt;Structure&gt;();
+  @Output() structureImported &#x3D; new EventEmitter&lt;Structure&gt;();
+  @Output() structurePreviewed &#x3D; new EventEmitter&lt;Structure&gt;();
+
+  onStructureChange(): void {
+    this.structureChanged.emit({ ...this.structure });
+  }
+
+  applyStructure(): void {
+    this.structureApplied.emit({ ...this.structure });
+  }
+
+  resetToDefault(): void {
+    this.structure &#x3D; {
+      nom: &#x27;Bâtiment Principal&#x27;,
+      description: &#x27;Bâtiment architectural avec murs, ouvertures et toit&#x27;,
+      type: &#x27;residentiel&#x27;,
+      dimensions: { longueur: 8, largeur: 5, hauteur: 2.5 },
+      couleur: &#x27;#aaaaaa&#x27;,
+      materiau: &#x27;beton&#x27;,
+      materiauPrincipal: &#x27;beton&#x27;,
+      materiauToit: &#x27;tuile&#x27;
+    };
+    this.structureReset.emit();
+  }
+
+  optimizeDimensions(): void {
+    // Optimisation basique des dimensions
+    const optimizedStructure &#x3D; { ...this.structure };
+    
+    // Ratio optimal pour un bâtiment résidentiel
+    const ratioOptimal &#x3D; 0.4; // hauteur/longueur
+    const longueurOptimale &#x3D; Math.sqrt(this.getVolume() / ratioOptimal);
+    
+    optimizedStructure.dimensions.longueur &#x3D; Math.round(longueurOptimale * 10) / 10;
+    optimizedStructure.dimensions.largeur &#x3D; Math.round(longueurOptimale * 0.6 * 10) / 10;
+    optimizedStructure.dimensions.hauteur &#x3D; Math.round(longueurOptimale * ratioOptimal * 10) / 10;
+    
+    this.structure &#x3D; optimizedStructure;
+    this.structureOptimized.emit(optimizedStructure);
+  }
+
+  exportStructure(): void {
+    this.structureExported.emit({ ...this.structure });
+  }
+
+  importStructure(): void {
+    // Simulation d&#x27;importation
+    const input &#x3D; document.createElement(&#x27;input&#x27;);
+    input.type &#x3D; &#x27;file&#x27;;
+    input.accept &#x3D; &#x27;.json&#x27;;
+    input.onchange &#x3D; (event: any) &#x3D;&gt; {
+      const file &#x3D; event.target.files[0];
+      if (file) {
+        const reader &#x3D; new FileReader();
+        reader.onload &#x3D; (e: any) &#x3D;&gt; {
+          try {
+            const importedStructure &#x3D; JSON.parse(e.target.result);
+            this.structure &#x3D; { ...this.structure, ...importedStructure };
+            this.structureImported.emit(this.structure);
+          } catch (error) {
+            console.error(&#x27;Erreur lors de l\&#x27;importation:&#x27;, error);
+          }
+        };
+        reader.readAsText(file);
+      }
+    };
+    input.click();
+  }
+
+  previewStructure(): void {
+    this.structurePreviewed.emit({ ...this.structure });
+  }
+
+  // Méthodes de calcul
+  getSurfaceSol(): number {
+    return Math.round(this.structure.dimensions.longueur * this.structure.dimensions.largeur * 10) / 10;
+  }
+
+  getVolume(): number {
+    return Math.round(this.structure.dimensions.longueur * this.structure.dimensions.largeur * this.structure.dimensions.hauteur * 10) / 10;
+  }
+
+  getPerimetre(): number {
+    return Math.round((this.structure.dimensions.longueur + this.structure.dimensions.largeur) * 2 * 10) / 10;
+  }
+
+  getRatioHauteurLongueur(): number {
+    return Math.round((this.structure.dimensions.hauteur / this.structure.dimensions.longueur) * 100) / 100;
+  }
+
+  getVolumeTotal(): number {
+    return this.getVolume();
+  }
+
+  getNombreMurs(): number {
+    // Cette méthode devrait recevoir les murs en input ou via un service
+    return 0; // Valeur par défaut
+  }
+
+  getNombreOuvertures(): number {
+    // Cette méthode devrait recevoir les ouvertures en input ou via un service
+    return 0; // Valeur par défaut
+  }
+
+  resetStructure(): void {
+    this.resetToDefault();
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;structure-controller&quot; *ngIf&#x3D;&quot;isVisible&quot;&gt;
+  &lt;h3&gt;🏗️ Contrôleur de Structure&lt;/h3&gt;
+  
+  &lt;!-- Informations générales --&gt;
+  &lt;div class&#x3D;&quot;structure-info&quot;&gt;
+    &lt;h4&gt;Informations générales&lt;/h4&gt;
+    &lt;div class&#x3D;&quot;info-grid&quot;&gt;
+      &lt;div class&#x3D;&quot;info-item&quot;&gt;
+        &lt;label&gt;Nom du bâtiment :&lt;/label&gt;
+        &lt;input 
+          type&#x3D;&quot;text&quot; 
+          [(ngModel)]&#x3D;&quot;structure.nom&quot;
+          (input)&#x3D;&quot;onStructureChange()&quot;
+          class&#x3D;&quot;info-input&quot;
+          title&#x3D;&quot;Nom du bâtiment&quot;
+          aria-label&#x3D;&quot;Nom du bâtiment&quot;
+        &gt;
+      &lt;/div&gt;
+      
+      &lt;div class&#x3D;&quot;info-item&quot;&gt;
+        &lt;label&gt;Type de bâtiment :&lt;/label&gt;
+        &lt;select 
+          [(ngModel)]&#x3D;&quot;structure.type&quot;
+          (change)&#x3D;&quot;onStructureChange()&quot;
+          class&#x3D;&quot;info-select&quot;
+          title&#x3D;&quot;Type de bâtiment&quot;
+          aria-label&#x3D;&quot;Type de bâtiment&quot;
+        &gt;
+          &lt;option value&#x3D;&quot;residentiel&quot;&gt;Résidentiel&lt;/option&gt;
+          &lt;option value&#x3D;&quot;commercial&quot;&gt;Commercial&lt;/option&gt;
+          &lt;option value&#x3D;&quot;industriel&quot;&gt;Industriel&lt;/option&gt;
+          &lt;option value&#x3D;&quot;public&quot;&gt;Public&lt;/option&gt;
+        &lt;/select&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Dimensions globales --&gt;
+  &lt;div class&#x3D;&quot;dimensions-section&quot;&gt;
+    &lt;h4&gt;Dimensions globales&lt;/h4&gt;
+    &lt;div class&#x3D;&quot;dimension-controls&quot;&gt;
+      &lt;div class&#x3D;&quot;control-group&quot;&gt;
+        &lt;label&gt;Longueur (m)&lt;/label&gt;
+        &lt;input 
+          type&#x3D;&quot;range&quot; 
+          min&#x3D;&quot;5&quot; 
+          max&#x3D;&quot;50&quot; 
+          step&#x3D;&quot;0.5&quot; 
+          [(ngModel)]&#x3D;&quot;structure.dimensions.longueur&quot;
+          (input)&#x3D;&quot;onStructureChange()&quot;
+          class&#x3D;&quot;control-slider&quot;
+          title&#x3D;&quot;Longueur du bâtiment&quot;
+          aria-label&#x3D;&quot;Longueur du bâtiment&quot;
+        &gt;
+        &lt;span class&#x3D;&quot;control-value&quot;&gt;{{ structure.dimensions.longueur }}&lt;/span&gt;
+      &lt;/div&gt;
+      
+      &lt;div class&#x3D;&quot;control-group&quot;&gt;
+        &lt;label&gt;Largeur (m)&lt;/label&gt;
+        &lt;input 
+          type&#x3D;&quot;range&quot; 
+          min&#x3D;&quot;5&quot; 
+          max&#x3D;&quot;50&quot; 
+          step&#x3D;&quot;0.5&quot; 
+          [(ngModel)]&#x3D;&quot;structure.dimensions.largeur&quot;
+          (input)&#x3D;&quot;onStructureChange()&quot;
+          class&#x3D;&quot;control-slider&quot;
+          title&#x3D;&quot;Largeur du bâtiment&quot;
+          aria-label&#x3D;&quot;Largeur du bâtiment&quot;
+        &gt;
+        &lt;span class&#x3D;&quot;control-value&quot;&gt;{{ structure.dimensions.largeur }}&lt;/span&gt;
+      &lt;/div&gt;
+      
+      &lt;div class&#x3D;&quot;control-group&quot;&gt;
+        &lt;label&gt;Hauteur (m)&lt;/label&gt;
+        &lt;input 
+          type&#x3D;&quot;range&quot; 
+          min&#x3D;&quot;2&quot; 
+          max&#x3D;&quot;20&quot; 
+          step&#x3D;&quot;0.5&quot; 
+          [(ngModel)]&#x3D;&quot;structure.dimensions.hauteur&quot;
+          (input)&#x3D;&quot;onStructureChange()&quot;
+          class&#x3D;&quot;control-slider&quot;
+          title&#x3D;&quot;Hauteur du bâtiment&quot;
+          aria-label&#x3D;&quot;Hauteur du bâtiment&quot;
+        &gt;
+        &lt;span class&#x3D;&quot;control-value&quot;&gt;{{ structure.dimensions.hauteur }}&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Couleur de base --&gt;
+  &lt;div class&#x3D;&quot;color-section&quot;&gt;
+    &lt;h4&gt;Couleur de base&lt;/h4&gt;
+    &lt;div class&#x3D;&quot;color-controls&quot;&gt;
+        &lt;input 
+          type&#x3D;&quot;color&quot; 
+          [(ngModel)]&#x3D;&quot;structure.couleur&quot;
+          (input)&#x3D;&quot;onStructureChange()&quot;
+          class&#x3D;&quot;color-input&quot;
+          title&#x3D;&quot;Couleur de base du bâtiment&quot;
+          aria-label&#x3D;&quot;Couleur de base du bâtiment&quot;
+        &gt;
+      &lt;span class&#x3D;&quot;color-value&quot;&gt;{{ structure.couleur }}&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Matériaux --&gt;
+  &lt;div class&#x3D;&quot;materials-section&quot;&gt;
+    &lt;h4&gt;Matériaux&lt;/h4&gt;
+    &lt;div class&#x3D;&quot;material-controls&quot;&gt;
+      &lt;div class&#x3D;&quot;control-group&quot;&gt;
+        &lt;label&gt;Matériau principal :&lt;/label&gt;
+        &lt;select 
+          [(ngModel)]&#x3D;&quot;structure.materiauPrincipal&quot;
+          (change)&#x3D;&quot;onStructureChange()&quot;
+          class&#x3D;&quot;material-select&quot;
+          title&#x3D;&quot;Matériau principal du bâtiment&quot;
+          aria-label&#x3D;&quot;Matériau principal du bâtiment&quot;
+        &gt;
+          &lt;option value&#x3D;&quot;beton&quot;&gt;Béton&lt;/option&gt;
+          &lt;option value&#x3D;&quot;brique&quot;&gt;Brique&lt;/option&gt;
+          &lt;option value&#x3D;&quot;bois&quot;&gt;Bois&lt;/option&gt;
+          &lt;option value&#x3D;&quot;metal&quot;&gt;Métal&lt;/option&gt;
+          &lt;option value&#x3D;&quot;pierre&quot;&gt;Pierre&lt;/option&gt;
+        &lt;/select&gt;
+      &lt;/div&gt;
+      
+      &lt;div class&#x3D;&quot;control-group&quot;&gt;
+        &lt;label&gt;Matériau de toit :&lt;/label&gt;
+        &lt;select 
+          [(ngModel)]&#x3D;&quot;structure.materiauToit&quot;
+          (change)&#x3D;&quot;onStructureChange()&quot;
+          class&#x3D;&quot;material-select&quot;
+          title&#x3D;&quot;Matériau de toit du bâtiment&quot;
+          aria-label&#x3D;&quot;Matériau de toit du bâtiment&quot;
+        &gt;
+          &lt;option value&#x3D;&quot;tuile&quot;&gt;Tuile&lt;/option&gt;
+          &lt;option value&#x3D;&quot;ardoise&quot;&gt;Ardoise&lt;/option&gt;
+          &lt;option value&#x3D;&quot;metal&quot;&gt;Métal&lt;/option&gt;
+          &lt;option value&#x3D;&quot;beton&quot;&gt;Béton&lt;/option&gt;
+        &lt;/select&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Statistiques --&gt;
+  &lt;div class&#x3D;&quot;stats-section&quot;&gt;
+    &lt;h4&gt;Statistiques&lt;/h4&gt;
+    &lt;div class&#x3D;&quot;stats-grid&quot;&gt;
+      &lt;div class&#x3D;&quot;stat-item&quot;&gt;
+        &lt;span class&#x3D;&quot;stat-label&quot;&gt;Surface au sol :&lt;/span&gt;
+        &lt;span class&#x3D;&quot;stat-value&quot;&gt;{{ getSurfaceSol() }} m²&lt;/span&gt;
+      &lt;/div&gt;
+      
+      &lt;div class&#x3D;&quot;stat-item&quot;&gt;
+        &lt;span class&#x3D;&quot;stat-label&quot;&gt;Volume total :&lt;/span&gt;
+        &lt;span class&#x3D;&quot;stat-value&quot;&gt;{{ getVolumeTotal() }} m³&lt;/span&gt;
+      &lt;/div&gt;
+      
+      &lt;div class&#x3D;&quot;stat-item&quot;&gt;
+        &lt;span class&#x3D;&quot;stat-label&quot;&gt;Nombre de murs :&lt;/span&gt;
+        &lt;span class&#x3D;&quot;stat-value&quot;&gt;{{ getNombreMurs() }}&lt;/span&gt;
+      &lt;/div&gt;
+      
+      &lt;div class&#x3D;&quot;stat-item&quot;&gt;
+        &lt;span class&#x3D;&quot;stat-label&quot;&gt;Nombre d&#x27;ouvertures :&lt;/span&gt;
+        &lt;span class&#x3D;&quot;stat-value&quot;&gt;{{ getNombreOuvertures() }}&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Boutons d&#x27;action --&gt;
+  &lt;div class&#x3D;&quot;action-buttons&quot;&gt;
+    &lt;button 
+      type&#x3D;&quot;button&quot; 
+      (click)&#x3D;&quot;resetStructure()&quot; 
+      class&#x3D;&quot;btn btn-secondary&quot;
+      title&#x3D;&quot;Réinitialiser la structure&quot;
+    &gt;
+      🔄 Réinitialiser
+    &lt;/button&gt;
+    
+    &lt;button 
+      type&#x3D;&quot;button&quot; 
+      (click)&#x3D;&quot;exportStructure()&quot; 
+      class&#x3D;&quot;btn btn-primary&quot;
+      title&#x3D;&quot;Exporter la structure&quot;
+    &gt;
+      📤 Exporter
+    &lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="structure-controller" *ngIf="isVisible">  <h3>🏗️ Contrôleur de Structure</h3>    <!-- Informations générales -->  <div class="structure-info">    <h4>Informations générales</h4>    <div class="info-grid">      <div class="info-item">        <label>Nom du bâtiment :</label>        <input           type="text"           [(ngModel)]="structure.nom"          (input)="onStructureChange()"          class="info-input"          title="Nom du bâtiment"          aria-label="Nom du bâtiment"        >      </div>            <div class="info-item">        <label>Type de bâtiment :</label>        <select           [(ngModel)]="structure.type"          (change)="onStructureChange()"          class="info-select"          title="Type de bâtiment"          aria-label="Type de bâtiment"        >          <option value="residentiel">Résidentiel</option>          <option value="commercial">Commercial</option>          <option value="industriel">Industriel</option>          <option value="public">Public</option>        </select>      </div>    </div>  </div>  <!-- Dimensions globales -->  <div class="dimensions-section">    <h4>Dimensions globales</h4>    <div class="dimension-controls">      <div class="control-group">        <label>Longueur (m)</label>        <input           type="range"           min="5"           max="50"           step="0.5"           [(ngModel)]="structure.dimensions.longueur"          (input)="onStructureChange()"          class="control-slider"          title="Longueur du bâtiment"          aria-label="Longueur du bâtiment"        >        <span class="control-value">{{ structure.dimensions.longueur }}</span>      </div>            <div class="control-group">        <label>Largeur (m)</label>        <input           type="range"           min="5"           max="50"           step="0.5"           [(ngModel)]="structure.dimensions.largeur"          (input)="onStructureChange()"          class="control-slider"          title="Largeur du bâtiment"          aria-label="Largeur du bâtiment"        >        <span class="control-value">{{ structure.dimensions.largeur }}</span>      </div>            <div class="control-group">        <label>Hauteur (m)</label>        <input           type="range"           min="2"           max="20"           step="0.5"           [(ngModel)]="structure.dimensions.hauteur"          (input)="onStructureChange()"          class="control-slider"          title="Hauteur du bâtiment"          aria-label="Hauteur du bâtiment"        >        <span class="control-value">{{ structure.dimensions.hauteur }}</span>      </div>    </div>  </div>  <!-- Couleur de base -->  <div class="color-section">    <h4>Couleur de base</h4>    <div class="color-controls">        <input           type="color"           [(ngModel)]="structure.couleur"          (input)="onStructureChange()"          class="color-input"          title="Couleur de base du bâtiment"          aria-label="Couleur de base du bâtiment"        >      <span class="color-value">{{ structure.couleur }}</span>    </div>  </div>  <!-- Matériaux -->  <div class="materials-section">    <h4>Matériaux</h4>    <div class="material-controls">      <div class="control-group">        <label>Matériau principal :</label>        <select           [(ngModel)]="structure.materiauPrincipal"          (change)="onStructureChange()"          class="material-select"          title="Matériau principal du bâtiment"          aria-label="Matériau principal du bâtiment"        >          <option value="beton">Béton</option>          <option value="brique">Brique</option>          <option value="bois">Bois</option>          <option value="metal">Métal</option>          <option value="pierre">Pierre</option>        </select>      </div>            <div class="control-group">        <label>Matériau de toit :</label>        <select           [(ngModel)]="structure.materiauToit"          (change)="onStructureChange()"          class="material-select"          title="Matériau de toit du bâtiment"          aria-label="Matériau de toit du bâtiment"        >          <option value="tuile">Tuile</option>          <option value="ardoise">Ardoise</option>          <option value="metal">Métal</option>          <option value="beton">Béton</option>        </select>      </div>    </div>  </div>  <!-- Statistiques -->  <div class="stats-section">    <h4>Statistiques</h4>    <div class="stats-grid">      <div class="stat-item">        <span class="stat-label">Surface au sol :</span>        <span class="stat-value">{{ getSurfaceSol() }} m²</span>      </div>            <div class="stat-item">        <span class="stat-label">Volume total :</span>        <span class="stat-value">{{ getVolumeTotal() }} m³</span>      </div>            <div class="stat-item">        <span class="stat-label">Nombre de murs :</span>        <span class="stat-value">{{ getNombreMurs() }}</span>      </div>            <div class="stat-item">        <span class="stat-label">Nombre d\'ouvertures :</span>        <span class="stat-value">{{ getNombreOuvertures() }}</span>      </div>    </div>  </div>  <!-- Boutons d\'action -->  <div class="action-buttons">    <button       type="button"       (click)="resetStructure()"       class="btn btn-secondary"      title="Réinitialiser la structure"    >      🔄 Réinitialiser    </button>        <button       type="button"       (click)="exportStructure()"       class="btn btn-primary"      title="Exporter la structure"    >      📤 Exporter    </button>  </div></div></div>'
+    var COMPONENTS = [{'name': 'App', 'selector': 'app-root'},{'name': 'CalculateurFenetresComponent', 'selector': 'app-calculateur-fenetres'},{'name': 'ColorSelectorComponent', 'selector': 'app-color-selector'},{'name': 'DimensionsControllerComponent', 'selector': 'app-dimensions-controller'},{'name': 'FenetresCalculatorComponent', 'selector': 'app-fenetres-calculator'},{'name': 'MursControllerComponent', 'selector': 'app-murs-controller'},{'name': 'OuverturesControllerComponent', 'selector': 'app-ouvertures-controller'},{'name': 'Scene3d', 'selector': 'app-scene3d'},{'name': 'Scene3dCoreComponent', 'selector': 'app-scene3d-core'},{'name': 'Scene3dRefactored', 'selector': 'app-scene3d'},{'name': 'StructureControllerComponent', 'selector': 'app-structure-controller'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'StructureControllerComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'StructureControllerComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

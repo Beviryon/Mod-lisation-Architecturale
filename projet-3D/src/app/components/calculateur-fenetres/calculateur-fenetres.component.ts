@@ -425,7 +425,7 @@ export class CalculateurFenetresComponent implements OnInit {
 
     // Récupérer les informations du mur depuis BUILDING_CONFIG
     this.murInfo = this.getMurFromConfig(this.murSelectionne);
-    
+
     if (this.murInfo) {
       this.calculerCapacite();
     }
@@ -433,7 +433,6 @@ export class CalculateurFenetresComponent implements OnInit {
 
   private getMurFromConfig(nomMur: string): MurConfig | null {
     const config = BUILDING_CONFIG;
-    
     switch (nomMur) {
       case 'principal':
         return {
@@ -445,7 +444,7 @@ export class CalculateurFenetresComponent implements OnInit {
           },
           color: config.mainWall.color
         };
-      
+        
       case 'arriere':
         return {
           position: config.walls.back.position,

@@ -1,0 +1,927 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>projet-3-d documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">projet-3-d documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Interfaces</li>
+  <li class="breadcrumb-item"
+  >
+  CalculFenetres</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/services/calculateur-fenetres/calculateur-fenetres.service.ts</code>
+        </p>
+
+
+
+
+        <section data-compodoc="block-index">
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#ecartOptimal" 
+>
+                                            ecartOptimal
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#isValid" 
+>
+                                            isValid
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#largeurFenetreOptimale" 
+>
+                                            largeurFenetreOptimale
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#largeurTotaleUtilisee" 
+>
+                                            largeurTotaleUtilisee
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#margeRestante" 
+>
+                                            margeRestante
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#message" 
+>
+                                            message
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#nombreMaxFenetres" 
+>
+                                            nombreMaxFenetres
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#positionsCalculees" 
+>
+                                            positionsCalculees
+                                        </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section data-compodoc="block-properties">
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="ecartOptimal"></a>
+                                        <span class="name "><b>ecartOptimal</b>
+                                            <a href="#ecartOptimal">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>ecartOptimal:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="isValid"></a>
+                                        <span class="name "><b>isValid</b>
+                                            <a href="#isValid">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>isValid:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="largeurFenetreOptimale"></a>
+                                        <span class="name "><b>largeurFenetreOptimale</b>
+                                            <a href="#largeurFenetreOptimale">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>largeurFenetreOptimale:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="largeurTotaleUtilisee"></a>
+                                        <span class="name "><b>largeurTotaleUtilisee</b>
+                                            <a href="#largeurTotaleUtilisee">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>largeurTotaleUtilisee:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="margeRestante"></a>
+                                        <span class="name "><b>margeRestante</b>
+                                            <a href="#margeRestante">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>margeRestante:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="message"></a>
+                                        <span class="name "><b>message</b>
+                                            <a href="#message">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>message:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="nombreMaxFenetres"></a>
+                                        <span class="name "><b>nombreMaxFenetres</b>
+                                            <a href="#nombreMaxFenetres">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>nombreMaxFenetres:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="positionsCalculees"></a>
+                                        <span class="name "><b>positionsCalculees</b>
+                                            <a href="#positionsCalculees">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>positionsCalculees:     <code>Array&lt;literal type&gt;</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>Array&lt;literal type&gt;</code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+
+export interface FenetreConfig {
+  position: { x: number; y: number; z: number };
+  dimensions: { width: number; height: number; depth: number };
+  color: number;
+  type: &#x27;window&#x27;;
+}
+
+export interface MurConfig {
+  position: { x: number; y: number; z: number };
+  dimensions: { width: number; height: number; depth: number };
+  color: number;
+}
+
+export interface CalculFenetres {
+  nombreMaxFenetres: number;
+  largeurFenetreOptimale: number;
+  ecartOptimal: number;
+  positionsCalculees: Array&lt;{ x: number; y: number; z: number }&gt;;
+  largeurTotaleUtilisee: number;
+  margeRestante: number;
+  isValid: boolean;
+  message: string;
+}
+
+@Injectable({
+  providedIn: &#x27;root&#x27;
+})
+export class CalculateurFenetresService {
+
+  // Contraintes par défaut
+  private readonly CONTRAINTES &#x3D; {
+    largeurFenetreMin: 0.5,      // Largeur minimale d&#x27;une fenêtre (m)
+    largeurFenetreMax: 3.0,      // Largeur maximale d&#x27;une fenêtre (m)
+    hauteurFenetreMin: 0.8,      // Hauteur minimale d&#x27;une fenêtre (m)
+    hauteurFenetreMax: 2.5,      // Hauteur maximale d&#x27;une fenêtre (m)
+    ecartMin: 0.1,               // Écart minimum entre fenêtres (m)
+    ecartMax: 2.0,               // Écart maximum entre fenêtres (m)
+    margeMin: 0.2,               // Marge minimum des bords du mur (m)
+    hauteurMurMin: 1.0           // Hauteur minimale du mur (m)
+  };
+
+  constructor() {
+    console.log(&#x27;CalculateurFenetresService initialisé&#x27;);
+  }
+
+  /**
+   * Calcule le nombre maximum de fenêtres pour un mur donné
+   */
+  public calculerNombreMaxFenetres(
+    mur: MurConfig,
+    largeurFenetre: number &#x3D; 1.5,
+    ecart: number &#x3D; 0.5,
+    hauteurFenetre: number &#x3D; 1.2
+  ): CalculFenetres {
+    
+    console.log(&#x27;Calcul du nombre max de fenêtres pour le mur:&#x27;, {
+      largeurMur: mur.dimensions.width,
+      hauteurMur: mur.dimensions.height,
+      largeurFenetre,
+      ecart,
+      hauteurFenetre
+    });
+
+    // Validation des contraintes
+    const validation &#x3D; this.validerContraintes(mur, largeurFenetre, ecart, hauteurFenetre);
+    if (!validation.isValid) {
+      return {
+        nombreMaxFenetres: 0,
+        largeurFenetreOptimale: 0,
+        ecartOptimal: 0,
+        positionsCalculees: [],
+        largeurTotaleUtilisee: 0,
+        margeRestante: 0,
+        isValid: false,
+        message: validation.message
+      };
+    }
+
+    // Calcul du nombre maximum de fenêtres
+    const largeurDisponible &#x3D; mur.dimensions.width - (2 * this.CONTRAINTES.margeMin);
+    const largeurParFenetre &#x3D; largeurFenetre + ecart;
+    const nombreMaxFenetres &#x3D; Math.floor(largeurDisponible / largeurParFenetre);
+
+    // Calcul des positions optimales
+    const positions &#x3D; this.calculerPositionsOptimales(
+      mur, 
+      nombreMaxFenetres, 
+      largeurFenetre, 
+      ecart, 
+      hauteurFenetre
+    );
+
+    // Calcul de la largeur totale utilisée
+    const largeurTotaleUtilisee &#x3D; (nombreMaxFenetres * largeurFenetre) + ((nombreMaxFenetres - 1) * ecart);
+    const margeRestante &#x3D; mur.dimensions.width - largeurTotaleUtilisee;
+
+    const resultat: CalculFenetres &#x3D; {
+      nombreMaxFenetres,
+      largeurFenetreOptimale: largeurFenetre,
+      ecartOptimal: ecart,
+      positionsCalculees: positions,
+      largeurTotaleUtilisee,
+      margeRestante,
+      isValid: true,
+      message: &#x60;✅ ${nombreMaxFenetres} fenêtre(s) possible(s) avec ${margeRestante.toFixed(2)}m de marge&#x60;
+    };
+
+    console.log(&#x27; Résultat du calcul:&#x27;, resultat);
+    return resultat;
+  }
+
+  /**
+   * Calcule les positions optimales pour les fenêtres
+   */
+  private calculerPositionsOptimales(
+    mur: MurConfig,
+    nombreFenetres: number,
+    largeurFenetre: number,
+    ecart: number,
+    hauteurFenetre: number
+  ): Array&lt;{ x: number; y: number; z: number }&gt; {
+    
+    const positions: Array&lt;{ x: number; y: number; z: number }&gt; &#x3D; [];
+    
+    if (nombreFenetres &#x3D;&#x3D;&#x3D; 0) {
+      return positions;
+    }
+
+    // Calcul de la largeur totale utilisée
+    const largeurTotale &#x3D; (nombreFenetres * largeurFenetre) + ((nombreFenetres - 1) * ecart);
+    
+    // Position de départ (centrée)
+    const debut &#x3D; mur.position.x - (largeurTotale / 2) + (largeurFenetre / 2);
+    
+    // Hauteur des fenêtres (centrée verticalement)
+    const hauteurMur &#x3D; mur.dimensions.height;
+    const yPosition &#x3D; mur.position.y + (hauteurMur / 2) - (hauteurFenetre / 2);
+    
+    // Calcul des positions
+    for (let i &#x3D; 0; i &lt; nombreFenetres; i++) {
+      const xPosition &#x3D; debut + (i * (largeurFenetre + ecart));
+      
+      positions.push({
+        x: xPosition,
+        y: yPosition,
+        z: mur.position.z
+      });
+    }
+
+    return positions;
+  }
+
+  /**
+   * Valide les contraintes d&#x27;espacement
+   */
+  private validerContraintes(
+    mur: MurConfig,
+    largeurFenetre: number,
+    ecart: number,
+    hauteurFenetre: number
+  ): { isValid: boolean; message: string } {
+    
+    // Vérification de la largeur de la fenêtre
+    if (largeurFenetre &lt; this.CONTRAINTES.largeurFenetreMin) {
+      return {
+        isValid: false,
+        message: &#x60;❌ Largeur de fenêtre trop petite (min: ${this.CONTRAINTES.largeurFenetreMin}m)&#x60;
+      };
+    }
+    
+    if (largeurFenetre &gt; this.CONTRAINTES.largeurFenetreMax) {
+      return {
+        isValid: false,
+        message: &#x60;❌ Largeur de fenêtre trop grande (max: ${this.CONTRAINTES.largeurFenetreMax}m)&#x60;
+      };
+    }
+
+    // Vérification de la hauteur de la fenêtre
+    if (hauteurFenetre &lt; this.CONTRAINTES.hauteurFenetreMin) {
+      return {
+        isValid: false,
+        message: &#x60;❌ Hauteur de fenêtre trop petite (min: ${this.CONTRAINTES.hauteurFenetreMin}m)&#x60;
+      };
+    }
+    
+    if (hauteurFenetre &gt; this.CONTRAINTES.hauteurFenetreMax) {
+      return {
+        isValid: false,
+        message: &#x60;❌ Hauteur de fenêtre trop grande (max: ${this.CONTRAINTES.hauteurFenetreMax}m)&#x60;
+      };
+    }
+
+    // Vérification de l&#x27;écart
+    if (ecart &lt; this.CONTRAINTES.ecartMin) {
+      return {
+        isValid: false,
+        message: &#x60;❌ Écart trop petit (min: ${this.CONTRAINTES.ecartMin}m)&#x60;
+      };
+    }
+    
+    if (ecart &gt; this.CONTRAINTES.ecartMax) {
+      return {
+        isValid: false,
+        message: &#x60;❌ Écart trop grand (max: ${this.CONTRAINTES.ecartMax}m)&#x60;
+      };
+    }
+
+    // Vérification de la hauteur du mur
+    if (mur.dimensions.height &lt; this.CONTRAINTES.hauteurMurMin) {
+      return {
+        isValid: false,
+        message: &#x60;❌ Mur trop bas (min: ${this.CONTRAINTES.hauteurMurMin}m)&#x60;
+      };
+    }
+
+    // Vérification que la fenêtre rentre dans le mur
+    if (hauteurFenetre &gt; mur.dimensions.height) {
+      return {
+        isValid: false,
+        message: &#x60;❌ Fenêtre trop haute pour le mur (mur: ${mur.dimensions.height}m, fenêtre: ${hauteurFenetre}m)&#x60;
+      };
+    }
+
+    // Vérification de l&#x27;espace disponible
+    const largeurDisponible &#x3D; mur.dimensions.width - (2 * this.CONTRAINTES.margeMin);
+    const largeurMinimale &#x3D; largeurFenetre + ecart;
+    
+    if (largeurDisponible &lt; largeurMinimale) {
+      return {
+        isValid: false,
+        message: &#x60;❌ Pas assez d&#x27;espace (disponible: ${largeurDisponible}m, nécessaire: ${largeurMinimale}m)&#x60;
+      };
+    }
+
+    return {
+      isValid: true,
+      message: &#x27;✅ Contraintes respectées&#x27;
+    };
+  }
+
+  /**
+   * Génère automatiquement la configuration des fenêtres pour un mur
+   */
+  public genererConfigurationFenetres(
+    mur: MurConfig,
+    nombreFenetres: number,
+    largeurFenetre: number &#x3D; 1.5,
+    ecart: number &#x3D; 0.5,
+    hauteurFenetre: number &#x3D; 1.2,
+    couleur: number &#x3D; 0xff0000
+  ): { fenetres: FenetreConfig[]; isValid: boolean; message: string } {
+    
+    const calcul &#x3D; this.calculerNombreMaxFenetres(mur, largeurFenetre, ecart, hauteurFenetre);
+    
+    if (!calcul.isValid) {
+      return {
+        fenetres: [],
+        isValid: false,
+        message: calcul.message
+      };
+    }
+
+    if (nombreFenetres &gt; calcul.nombreMaxFenetres) {
+      return {
+        fenetres: [],
+        isValid: false,
+        message: &#x60;❌ Trop de fenêtres demandées (max: ${calcul.nombreMaxFenetres})&#x60;
+      };
+    }
+
+    const fenetres: FenetreConfig[] &#x3D; [];
+    
+    for (let i &#x3D; 0; i &lt; nombreFenetres; i++) {
+      const position &#x3D; calcul.positionsCalculees[i];
+      
+      fenetres.push({
+        position: {
+          x: position.x,
+          y: position.y,
+          z: position.z
+        },
+        dimensions: {
+          width: largeurFenetre,
+          height: hauteurFenetre,
+          depth: 0.05
+        },
+        color: couleur,
+        type: &#x27;window&#x27;
+      });
+    }
+
+    return {
+      fenetres,
+      isValid: true,
+      message: &#x60;✅ ${nombreFenetres} fenêtre(s) générée(s) avec succès&#x60;
+    };
+  }
+
+  /**
+   * Optimise automatiquement les dimensions pour un nombre de fenêtres donné
+   */
+  public optimiserDimensions(
+    mur: MurConfig,
+    nombreFenetres: number,
+    hauteurFenetre: number &#x3D; 1.2
+  ): { largeurFenetre: number; ecart: number; isValid: boolean; message: string } {
+    
+    if (nombreFenetres &#x3D;&#x3D;&#x3D; 0) {
+      return {
+        largeurFenetre: 0,
+        ecart: 0,
+        isValid: false,
+        message: &#x27;❌ Nombre de fenêtres doit être &gt; 0&#x27;
+      };
+    }
+
+    const largeurDisponible &#x3D; mur.dimensions.width - (2 * this.CONTRAINTES.margeMin);
+    
+    // Calcul de l&#x27;écart optimal (équilibre entre fenêtres et espacement)
+    const ecartOptimal &#x3D; Math.max(this.CONTRAINTES.ecartMin, largeurDisponible * 0.1);
+    
+    // Calcul de la largeur de fenêtre optimale
+    const largeurFenetreOptimale &#x3D; (largeurDisponible - ((nombreFenetres - 1) * ecartOptimal)) / nombreFenetres;
+    
+    // Vérification des contraintes
+    if (largeurFenetreOptimale &lt; this.CONTRAINTES.largeurFenetreMin) {
+      return {
+        largeurFenetre: 0,
+        ecart: 0,
+        isValid: false,
+        message: &#x60;❌ Impossible d&#x27;optimiser pour ${nombreFenetres} fenêtres&#x60;
+      };
+    }
+
+    return {
+      largeurFenetre: Math.min(largeurFenetreOptimale, this.CONTRAINTES.largeurFenetreMax),
+      ecart: ecartOptimal,
+      isValid: true,
+      message: &#x60;✅ Dimensions optimisées: ${largeurFenetreOptimale.toFixed(2)}m × ${ecartOptimal.toFixed(2)}m&#x60;
+    };
+  }
+
+  /**
+   * Analyse tous les murs et retourne leurs capacités
+   */
+  public analyserCapaciteMurs(murs: { [key: string]: MurConfig }): { [key: string]: CalculFenetres } {
+    const resultats: { [key: string]: CalculFenetres } &#x3D; {};
+    
+    Object.entries(murs).forEach(([nomMur, mur]) &#x3D;&gt; {
+      resultats[nomMur] &#x3D; this.calculerNombreMaxFenetres(mur);
+    });
+    
+    return resultats;
+  }
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'CalculFenetres.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

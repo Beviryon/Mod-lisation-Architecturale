@@ -12,9 +12,7 @@ import { OuvertureService } from '../../services/ouverture/ouverture.service';
 import { MateriauService } from '../../services/materiau/materiau.service';
 import { SceneService } from '../../services/scene/scene.service';
 import { CalculateurFenetresService, MurConfig, CalculFenetres } from '../../services/calculateur-fenetres/calculateur-fenetres.service';
-// Temporairement commentés pour debug
-// import { CommunicationService } from '../../services/communication/communication.service';
-// import { ValidationService } from '../../services/validation/validation.service';
+
 
 @Component({
   selector: 'app-scene3d',
@@ -115,7 +113,7 @@ export class Scene3d implements OnInit, OnDestroy {
   };
   
   // Tailles prédéfinies des fenêtres
-  taillesFenetres = {
+  taillesFenetres: { [key: string]: { largeur: number; hauteur: number; nom: string } } = {
     petit: { largeur: 0.8, hauteur: 1.0, nom: 'Petit' },
     moyen: { largeur: 1.5, hauteur: 1.2, nom: 'Moyen' },
     grand: { largeur: 2.5, hauteur: 1.8, nom: 'Grand' }
@@ -292,10 +290,25 @@ export class Scene3d implements OnInit, OnDestroy {
     // --- Ouvertures ---
     const openings = BUILDING_CONFIG.mainWall.openings;
     
-    // Porte - Maintenant sur le mur droit
-    // Fenêtre 1 - Maintenant sur le mur arrière
+    // Porte centrale
+    const porteHole = new THREE.Path();
+    const doorHole = WallCalculations.getDoorHole(openings.door);
+    porteHole.moveTo(doorHole[0].x, doorHole[0].y);
+    for (let i = 1; i < doorHole.length; i++) {
+      porteHole.lineTo(doorHole[i].x, doorHole[i].y);
+    }
+    murShape.holes.push(porteHole);
 
-    // Fenêtre 2
+    // Fenêtre 1 (gauche)
+    const fenetre1Hole = new THREE.Path();
+    const window1Hole = WallCalculations.getWindowHole(openings.window1);
+    fenetre1Hole.moveTo(window1Hole[0].x, window1Hole[0].y);
+    for (let i = 1; i < window1Hole.length; i++) {
+      fenetre1Hole.lineTo(window1Hole[i].x, window1Hole[i].y);
+    }
+    murShape.holes.push(fenetre1Hole);
+
+    // Fenêtre 2 (droite)
     const fenetre2Hole = new THREE.Path();
     const window2Hole = WallCalculations.getWindowHole(openings.window2);
     fenetre2Hole.moveTo(window2Hole[0].x, window2Hole[0].y);
@@ -318,11 +331,27 @@ export class Scene3d implements OnInit, OnDestroy {
 
     this.scene.add(mur);
 
-    // --- Ajout des fenêtres (colorées) ---
-    // Porte - Maintenant sur le mur droit
-    // Fenêtre 1 - Maintenant sur le mur arrière
+    // --- Ajout des ouvertures colorées ---
+    
+    // Porte centrale
+    const doorConfig = openings.door;
+    const porteGeo = new THREE.BoxGeometry(doorConfig.dimensions.width, doorConfig.dimensions.height, doorConfig.dimensions.depth);
+    const porteMat = new THREE.MeshStandardMaterial({ color: doorConfig.color });
+    const porte = new THREE.Mesh(porteGeo, porteMat);
+    porte.position.set(doorConfig.position.x, doorConfig.position.y, doorConfig.position.z);
+    porte.name = 'porte'; // Nom pour la mise à jour des couleurs
+    this.scene.add(porte);
 
-    // Fenêtre 2
+    // Fenêtre 1 (gauche)
+    const window1Config = openings.window1;
+    const fenetre1Geo = new THREE.BoxGeometry(window1Config.dimensions.width, window1Config.dimensions.height, window1Config.dimensions.depth);
+    const fenetre1Mat = new THREE.MeshStandardMaterial({ color: window1Config.color });
+    const fenetre1 = new THREE.Mesh(fenetre1Geo, fenetre1Mat);
+    fenetre1.position.set(window1Config.position.x, window1Config.position.y, window1Config.position.z);
+    fenetre1.name = 'fenetre1'; // Nom pour la mise à jour des couleurs
+    this.scene.add(fenetre1);
+
+    // Fenêtre 2 (droite)
     const window2Config = openings.window2;
     const fenetre2Geo = new THREE.BoxGeometry(window2Config.dimensions.width, window2Config.dimensions.height, window2Config.dimensions.depth);
     const fenetre2Mat = new THREE.MeshStandardMaterial({ color: window2Config.color });
@@ -571,8 +600,6 @@ export class Scene3d implements OnInit, OnDestroy {
     // Positionner le mur à sa place avec ROTATION
     mur.position.set(rightWall.position.x, rightWall.position.y, rightWall.position.z);
     
-    // ROTATION NÉCESSAIRE : Le mur droit doit être tourné de 90° sur l'axe Y
-    // pour être perpendiculaire aux autres murs
     mur.rotation.y = Math.PI / 2; // 90 degrés en radians
     
     mur.name = 'murDroit'; // Nom pour la mise à jour des couleurs
@@ -3219,7 +3246,14 @@ export class Scene3d implements OnInit, OnDestroy {
           dimensions: config.walls.left.dimensions,
           couleur: config.walls.left.color,
           epaisseur: config.walls.left.dimensions.width,
-          ouvertures: []
+          // ouvertures: [{
+          //   id: 'fenetre5',
+          //   type: 'fenetre',
+          //   position: config.walls.back.openings.window5.position,
+          //   dimensions: config.walls.back.openings.window5.dimensions,
+          //   couleur: config.walls.back.openings.window5.color,
+          //   nom: 'Fenêtre Gauche'
+          // }]
         },
         droit: {
           position: config.walls.right.position,
@@ -3417,12 +3451,13 @@ export class Scene3d implements OnInit, OnDestroy {
 
     const couleurHex = parseInt(this.parametresFenetres.couleur.replace('#', ''), 16);
     
+    const taille = this.taillesFenetres[this.parametresFenetres.tailleFenetre];
     const resultat = this.calculateurFenetresService.genererConfigurationFenetres(
       murInfo,
       this.parametresFenetres.nombreFenetres,
-      this.parametresFenetres.largeurFenetre,
+      taille.largeur,
       this.parametresFenetres.ecart,
-      this.parametresFenetres.hauteurFenetre,
+      taille.hauteur,
       couleurHex
     );
 
@@ -3443,19 +3478,32 @@ export class Scene3d implements OnInit, OnDestroy {
     const murInfo = this.getMurFromConfig(this.murSelectionneCalculateur);
     if (!murInfo) return;
 
+    const taille = this.taillesFenetres[this.parametresFenetres.tailleFenetre];
     const optimisation = this.calculateurFenetresService.optimiserDimensions(
       murInfo,
       this.parametresFenetres.nombreFenetres,
-      this.parametresFenetres.hauteurFenetre
+      taille.hauteur
     );
 
     if (optimisation.isValid) {
-      this.parametresFenetres.largeurFenetre = optimisation.largeurFenetre;
+      // Trouver la taille la plus proche des dimensions optimisées
+      let tailleOptimale = 'moyen';
+      let ecartMin = Math.abs(optimisation.largeurFenetre - taille.largeur);
+      
+      Object.keys(this.taillesFenetres).forEach(key => {
+        const ecart = Math.abs(optimisation.largeurFenetre - this.taillesFenetres[key].largeur);
+        if (ecart < ecartMin) {
+          ecartMin = ecart;
+          tailleOptimale = key;
+        }
+      });
+      
+      this.parametresFenetres.tailleFenetre = tailleOptimale;
       this.parametresFenetres.ecart = optimisation.ecart;
       this.onParametresFenetresChange();
-      alert(optimisation.message);
+      alert(`✅ Taille optimisée: ${this.taillesFenetres[tailleOptimale].nom} (${optimisation.ecart.toFixed(2)}m d'écart)`);
     } else {
-      alert(optimisation.message);
+      alert(`❌ ${optimisation.message}`);
     }
   }
 
@@ -3554,8 +3602,8 @@ export class Scene3d implements OnInit, OnDestroy {
       // Sauvegarder la configuration
       this.configurationService.mettreAJourConfiguration(config);
       
-      // Reconstruire le mur avec les vraies ouvertures
-      this.mettreAJourRendu3D();
+      // Ajouter les fenêtres directement au modèle 3D (sans reconstruire le mur)
+      this.ajouterFenetresDirectementAuModele(nouvellesFenetres);
       
       alert(`✅ ${nouvellesFenetres.length} fenêtre(s) ${taille.nom.toLowerCase()} ajoutée(s) au mur ${this.murSelectionneCalculateur} !`);
       
@@ -3566,34 +3614,36 @@ export class Scene3d implements OnInit, OnDestroy {
   }
 
   /**
-   * Ajouter les fenêtres directement au modèle 3D sans modifier la structure
+   * Ajouter les fenêtres directement au modèle 3D comme de vraies ouvertures
    */
   private ajouterFenetresDirectementAuModele(fenetres: any[]): void {
     if (!this.scene) return;
 
     fenetres.forEach((fenetre, index) => {
-      // Créer la géométrie de la fenêtre
+      // Créer la géométrie de la fenêtre (plus épaisse pour simuler le verre)
       const geometry = new THREE.BoxGeometry(
         fenetre.dimensions.width,
         fenetre.dimensions.height,
-        fenetre.dimensions.depth
+        0.1 // Épaisseur du verre
       );
 
-      // Créer le matériau avec la couleur spécifiée
+      // Créer le matériau transparent pour simuler le verre
       const material = new THREE.MeshLambertMaterial({ 
         color: fenetre.couleur,
         transparent: true,
-        opacity: 0.8
+        opacity: 0.3, // Très transparent pour simuler le verre
+        side: THREE.DoubleSide // Visible des deux côtés
       });
 
       // Créer le mesh de la fenêtre
       const fenetreMesh = new THREE.Mesh(geometry, material);
       
-      // Positionner la fenêtre
+      // Positionner la fenêtre légèrement en avant du mur pour être visible
+      const decalageZ = this.murSelectionneCalculateur === 'principal' ? 0.05 : -0.05;
       fenetreMesh.position.set(
         fenetre.position.x,
         fenetre.position.y,
-        fenetre.position.z
+        fenetre.position.z + decalageZ
       );
 
       // Donner un nom unique à la fenêtre
@@ -3607,5 +3657,139 @@ export class Scene3d implements OnInit, OnDestroy {
 
     // Forcer le rendu
     this.renderer.render(this.scene, this.camera);
+  }
+
+  /**
+   * Reconstruire seulement le mur sélectionné avec ses ouvertures
+   */
+  private reconstruireMurSeulement(nomMur: string): void {
+    if (!this.scene) return;
+
+    console.log(`🔧 Reconstruction du mur ${nomMur} seulement`);
+
+    // Supprimer l'ancien mur et ses ouvertures
+    const ancienMur = this.scene.getObjectByName(`mur-${nomMur}`);
+    if (ancienMur) {
+      this.scene.remove(ancienMur);
+      console.log(`🗑️ Ancien mur ${nomMur} supprimé`);
+    }
+
+    // Supprimer les anciennes ouvertures de ce mur
+    const objetsASupprimer: THREE.Object3D[] = [];
+    this.scene.traverse((child) => {
+      if (child.name && child.name.includes(`ouverture-${nomMur}`)) {
+        objetsASupprimer.push(child);
+      }
+    });
+    objetsASupprimer.forEach(obj => {
+      this.scene.remove(obj);
+      console.log(`🗑️ Ancienne ouverture ${obj.name} supprimée`);
+    });
+
+    // Reconstruire le mur avec toutes ses ouvertures
+    this.createMurAvecOuvertures(nomMur);
+
+    // Forcer le rendu
+    this.renderer.render(this.scene, this.camera);
+    console.log(`✅ Mur ${nomMur} reconstruit avec ses ouvertures`);
+  }
+
+  /**
+   * Créer un mur spécifique avec toutes ses ouvertures
+   */
+  private createMurAvecOuvertures(nomMur: string): void {
+    const config = this.configurationService.getConfiguration();
+    let murConfig;
+
+    // Récupérer la configuration du mur selon son nom
+    switch (nomMur) {
+      case 'principal':
+        murConfig = config.murs.principal;
+        break;
+      case 'arriere':
+        murConfig = config.murs.arriere;
+        break;
+      case 'gauche':
+        murConfig = config.murs.gauche;
+        break;
+      case 'droit':
+        murConfig = config.murs.droit;
+        break;
+      default:
+        console.error(`❌ Mur inconnu: ${nomMur}`);
+        return;
+    }
+
+    if (!murConfig) {
+      console.error(`❌ Configuration manquante pour le mur ${nomMur}`);
+      return;
+    }
+
+    // Créer la géométrie du mur
+    const geometry = new THREE.BoxGeometry(
+      murConfig.dimensions.width,
+      murConfig.dimensions.height,
+      murConfig.dimensions.depth
+    );
+
+    // Créer le matériau
+    const material = new THREE.MeshLambertMaterial({ color: murConfig.couleur });
+
+    // Créer le mesh
+    const murMesh = new THREE.Mesh(geometry, material);
+    murMesh.position.set(
+      murConfig.position.x,
+      murConfig.position.y,
+      murConfig.position.z
+    );
+    murMesh.name = `mur-${nomMur}`;
+
+    // Ajouter au modèle 3D
+    this.scene.add(murMesh);
+
+    // Créer les ouvertures
+    if (murConfig.ouvertures && murConfig.ouvertures.length > 0) {
+      murConfig.ouvertures.forEach((ouverture, index) => {
+        this.createOuverture3D(ouverture, `ouverture-${nomMur}-${index}`);
+      });
+      console.log(`🪟 ${murConfig.ouvertures.length} ouverture(s) créée(s) pour le mur ${nomMur}`);
+    } else {
+      console.log(`ℹ️ Aucune ouverture pour le mur ${nomMur}`);
+    }
+
+    console.log(`🧱 Mur ${nomMur} créé avec ${murConfig.ouvertures?.length || 0} ouverture(s)`);
+  }
+
+  /**
+   * Créer une ouverture 3D (fenêtre ou porte)
+   */
+  private createOuverture3D(ouverture: any, nom: string): void {
+    // Créer la géométrie de l'ouverture
+    const geometry = new THREE.BoxGeometry(
+      ouverture.dimensions.width,
+      ouverture.dimensions.height,
+      ouverture.dimensions.depth
+    );
+
+    // Créer le matériau avec transparence
+    const material = new THREE.MeshLambertMaterial({ 
+      color: ouverture.couleur,
+      transparent: true,
+      opacity: 0.7
+    });
+
+    // Créer le mesh
+    const ouvertureMesh = new THREE.Mesh(geometry, material);
+    ouvertureMesh.position.set(
+      ouverture.position.x,
+      ouverture.position.y,
+      ouverture.position.z
+    );
+    ouvertureMesh.name = nom;
+
+    // Ajouter au modèle 3D
+    this.scene.add(ouvertureMesh);
+
+    console.log(`🪟 Ouverture créée: ${nom} (${ouverture.type})`);
   }
 }

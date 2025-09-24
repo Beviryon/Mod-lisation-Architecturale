@@ -1,0 +1,1217 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>projet-3-d documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">projet-3-d documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  ColorSelectorComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/scene3d/controls/color-selector.component.ts</code>
+</p>
+
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Composant pour sélectionner et modifier les couleurs des éléments</p>
+
+    </p>
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-color-selector</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>CommonModule</code>
+                            <code>FormsModule</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./color-selector.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./color-selector.component.css</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#presetColors" >presetColors</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#applyColor" >applyColor</a>
+                            </li>
+                            <li>
+                                <a href="#onColorChange" >onColorChange</a>
+                            </li>
+                            <li>
+                                <a href="#onElementChange" >onElementChange</a>
+                            </li>
+                            <li>
+                                <a href="#resetColor" >resetColor</a>
+                            </li>
+                            <li>
+                                <a href="#selectElement" >selectElement</a>
+                            </li>
+                            <li>
+                                <a href="#selectPresetColor" >selectPresetColor</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#elements" >elements</a>
+                            </li>
+                            <li>
+                                <a href="#isVisible" >isVisible</a>
+                            </li>
+                            <li>
+                                <a href="#newColor" >newColor</a>
+                            </li>
+                            <li>
+                                <a href="#selectedElementId" >selectedElementId</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#colorApplied" >colorApplied</a>
+                            </li>
+                            <li>
+                                <a href="#colorChanged" >colorChanged</a>
+                            </li>
+                            <li>
+                                <a href="#colorReset" >colorReset</a>
+                            </li>
+                            <li>
+                                <a href="#elementSelected" >elementSelected</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#selectedElement" >selectedElement</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="elements"></a>
+                        <b>elements</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/ColorableElement.html" target="_self" >ColorableElement[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/components/scene3d/controls/color-selector.component.ts:27</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isVisible"></a>
+                        <b>isVisible</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/components/scene3d/controls/color-selector.component.ts:26</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="newColor"></a>
+                        <b>newColor</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;#007bff&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/components/scene3d/controls/color-selector.component.ts:29</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="selectedElementId"></a>
+                        <b>selectedElementId</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/components/scene3d/controls/color-selector.component.ts:28</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+    <section data-compodoc="block-outputs">
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="colorApplied"></a>
+                        <b>colorApplied</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/components/scene3d/controls/color-selector.component.ts:33</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="colorChanged"></a>
+                        <b>colorChanged</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/components/scene3d/controls/color-selector.component.ts:32</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="colorReset"></a>
+                        <b>colorReset</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/components/scene3d/controls/color-selector.component.ts:34</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="elementSelected"></a>
+                        <b>elementSelected</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/components/scene3d/controls/color-selector.component.ts:31</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="applyColor"></a>
+                    <span class="name">
+                        <span ><b>applyColor</b></span>
+                        <a href="#applyColor"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>applyColor()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="74"
+                                    class="link-to-prism">src/app/components/scene3d/controls/color-selector.component.ts:74</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onColorChange"></a>
+                    <span class="name">
+                        <span ><b>onColorChange</b></span>
+                        <a href="#onColorChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onColorChange()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="63"
+                                    class="link-to-prism">src/app/components/scene3d/controls/color-selector.component.ts:63</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onElementChange"></a>
+                    <span class="name">
+                        <span ><b>onElementChange</b></span>
+                        <a href="#onElementChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onElementChange()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="56"
+                                    class="link-to-prism">src/app/components/scene3d/controls/color-selector.component.ts:56</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resetColor"></a>
+                    <span class="name">
+                        <span ><b>resetColor</b></span>
+                        <a href="#resetColor"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>resetColor()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="80"
+                                    class="link-to-prism">src/app/components/scene3d/controls/color-selector.component.ts:80</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectElement"></a>
+                    <span class="name">
+                        <span ><b>selectElement</b></span>
+                        <a href="#selectElement"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>selectElement(elementId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="86"
+                                    class="link-to-prism">src/app/components/scene3d/controls/color-selector.component.ts:86</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>elementId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectPresetColor"></a>
+                    <span class="name">
+                        <span ><b>selectPresetColor</b></span>
+                        <a href="#selectPresetColor"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>selectPresetColor(color: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="69"
+                                    class="link-to-prism">src/app/components/scene3d/controls/color-selector.component.ts:69</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>color</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="presetColors"></a>
+                    <span class="name">
+                        <span ><b>presetColors</b></span>
+                        <a href="#presetColors"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    { name: &#x27;Rouge&#x27;, value: &#x27;#dc3545&#x27; },
+    { name: &#x27;Vert&#x27;, value: &#x27;#28a745&#x27; },
+    { name: &#x27;Bleu&#x27;, value: &#x27;#007bff&#x27; },
+    { name: &#x27;Jaune&#x27;, value: &#x27;#ffc107&#x27; },
+    { name: &#x27;Orange&#x27;, value: &#x27;#fd7e14&#x27; },
+    { name: &#x27;Violet&#x27;, value: &#x27;#6f42c1&#x27; },
+    { name: &#x27;Rose&#x27;, value: &#x27;#e83e8c&#x27; },
+    { name: &#x27;Cyan&#x27;, value: &#x27;#17a2b8&#x27; },
+    { name: &#x27;Gris&#x27;, value: &#x27;#6c757d&#x27; },
+    { name: &#x27;Blanc&#x27;, value: &#x27;#ffffff&#x27; },
+    { name: &#x27;Noir&#x27;, value: &#x27;#000000&#x27; },
+    { name: &#x27;Marron&#x27;, value: &#x27;#8b4513&#x27; }
+  ]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/components/scene3d/controls/color-selector.component.ts:37</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="selectedElement"></a>
+                        <span class="name"><b>selectedElement</b><a href="#selectedElement"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>selectedElement()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/components/scene3d/controls/color-selector.component.ts:52</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input, Output, EventEmitter } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { FormsModule } from &#x27;@angular/forms&#x27;;
+
+/**
+ * Interface pour un élément colorable
+ */
+export interface ColorableElement {
+  id: string;
+  name: string;
+  currentColor: string;
+  type: &#x27;mur&#x27; | &#x27;ouverture&#x27; | &#x27;toit&#x27; | &#x27;sol&#x27; | &#x27;structure&#x27;;
+}
+
+/**
+ * Composant pour sélectionner et modifier les couleurs des éléments
+ */
+@Component({
+  selector: &#x27;app-color-selector&#x27;,
+  imports: [CommonModule, FormsModule],
+  templateUrl: &#x27;./color-selector.component.html&#x27;,
+  styleUrl: &#x27;./color-selector.component.css&#x27;,
+  standalone: true
+})
+export class ColorSelectorComponent {
+  @Input() isVisible: boolean &#x3D; false;
+  @Input() elements: ColorableElement[] &#x3D; [];
+  @Input() selectedElementId: string &#x3D; &#x27;&#x27;;
+  @Input() newColor: string &#x3D; &#x27;#007bff&#x27;;
+
+  @Output() elementSelected &#x3D; new EventEmitter&lt;string&gt;();
+  @Output() colorChanged &#x3D; new EventEmitter&lt;{ elementId: string; color: string }&gt;();
+  @Output() colorApplied &#x3D; new EventEmitter&lt;{ elementId: string; color: string }&gt;();
+  @Output() colorReset &#x3D; new EventEmitter&lt;string&gt;();
+
+  // Couleurs prédéfinies
+  presetColors &#x3D; [
+    { name: &#x27;Rouge&#x27;, value: &#x27;#dc3545&#x27; },
+    { name: &#x27;Vert&#x27;, value: &#x27;#28a745&#x27; },
+    { name: &#x27;Bleu&#x27;, value: &#x27;#007bff&#x27; },
+    { name: &#x27;Jaune&#x27;, value: &#x27;#ffc107&#x27; },
+    { name: &#x27;Orange&#x27;, value: &#x27;#fd7e14&#x27; },
+    { name: &#x27;Violet&#x27;, value: &#x27;#6f42c1&#x27; },
+    { name: &#x27;Rose&#x27;, value: &#x27;#e83e8c&#x27; },
+    { name: &#x27;Cyan&#x27;, value: &#x27;#17a2b8&#x27; },
+    { name: &#x27;Gris&#x27;, value: &#x27;#6c757d&#x27; },
+    { name: &#x27;Blanc&#x27;, value: &#x27;#ffffff&#x27; },
+    { name: &#x27;Noir&#x27;, value: &#x27;#000000&#x27; },
+    { name: &#x27;Marron&#x27;, value: &#x27;#8b4513&#x27; }
+  ];
+
+  get selectedElement(): ColorableElement | null {
+    return this.elements.find(e &#x3D;&gt; e.id &#x3D;&#x3D;&#x3D; this.selectedElementId) || null;
+  }
+
+  onElementChange(): void {
+    if (this.selectedElement) {
+      this.newColor &#x3D; this.selectedElement.currentColor;
+    }
+    this.elementSelected.emit(this.selectedElementId);
+  }
+
+  onColorChange(): void {
+    if (this.selectedElementId) {
+      this.colorChanged.emit({ elementId: this.selectedElementId, color: this.newColor });
+    }
+  }
+
+  selectPresetColor(color: string): void {
+    this.newColor &#x3D; color;
+    this.onColorChange();
+  }
+
+  applyColor(): void {
+    if (this.selectedElementId &amp;&amp; this.newColor) {
+      this.colorApplied.emit({ elementId: this.selectedElementId, color: this.newColor });
+    }
+  }
+
+  resetColor(): void {
+    if (this.selectedElementId) {
+      this.colorReset.emit(this.selectedElementId);
+    }
+  }
+
+  selectElement(elementId: string): void {
+    this.selectedElementId &#x3D; elementId;
+    this.onElementChange();
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;color-selector&quot; *ngIf&#x3D;&quot;isVisible&quot;&gt;
+  &lt;h3&gt;🎨 Sélecteur de Couleurs&lt;/h3&gt;
+  
+  &lt;!-- Sélection d&#x27;élément --&gt;
+  &lt;div class&#x3D;&quot;element-selection&quot;&gt;
+    &lt;label for&#x3D;&quot;elementSelect&quot;&gt;Élément à modifier :&lt;/label&gt;
+    &lt;select 
+      id&#x3D;&quot;elementSelect&quot;
+      [(ngModel)]&#x3D;&quot;selectedElementId&quot; 
+      (change)&#x3D;&quot;onElementChange()&quot;
+      class&#x3D;&quot;element-select&quot;
+    &gt;
+      &lt;option value&#x3D;&quot;&quot;&gt;-- Sélectionner un élément --&lt;/option&gt;
+      &lt;option 
+        *ngFor&#x3D;&quot;let element of elements&quot; 
+        [value]&#x3D;&quot;element.id&quot;
+      &gt;
+        {{ element.name }} ({{ element.type }})
+      &lt;/option&gt;
+    &lt;/select&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Sélecteur de couleur --&gt;
+  &lt;div class&#x3D;&quot;color-picker&quot; *ngIf&#x3D;&quot;selectedElement&quot;&gt;
+    &lt;h4&gt;{{ selectedElement.name }}&lt;/h4&gt;
+    
+    &lt;div class&#x3D;&quot;current-color&quot;&gt;
+      &lt;label&gt;Couleur actuelle :&lt;/label&gt;
+      &lt;div 
+        class&#x3D;&quot;color-preview&quot; 
+        [style.background-color]&#x3D;&quot;selectedElement.currentColor&quot;
+        [title]&#x3D;&quot;selectedElement.currentColor&quot;
+      &gt;&lt;/div&gt;
+      &lt;span class&#x3D;&quot;color-value&quot;&gt;{{ selectedElement.currentColor }}&lt;/span&gt;
+    &lt;/div&gt;
+
+    &lt;div class&#x3D;&quot;color-input&quot;&gt;
+      &lt;label for&#x3D;&quot;colorInput&quot;&gt;Nouvelle couleur :&lt;/label&gt;
+      &lt;input 
+        type&#x3D;&quot;color&quot; 
+        id&#x3D;&quot;colorInput&quot;
+        [(ngModel)]&#x3D;&quot;newColor&quot;
+        (input)&#x3D;&quot;onColorChange()&quot;
+        class&#x3D;&quot;color-input-field&quot;
+        title&#x3D;&quot;Sélectionner une nouvelle couleur&quot;
+      &gt;
+    &lt;/div&gt;
+
+    &lt;!-- Couleurs prédéfinies --&gt;
+    &lt;div class&#x3D;&quot;preset-colors&quot;&gt;
+      &lt;label&gt;Couleurs prédéfinies :&lt;/label&gt;
+      &lt;div class&#x3D;&quot;color-grid&quot;&gt;
+        &lt;button 
+          *ngFor&#x3D;&quot;let color of presetColors&quot; 
+          type&#x3D;&quot;button&quot;
+          class&#x3D;&quot;preset-color-btn&quot;
+          [style.background-color]&#x3D;&quot;color.value&quot;
+          [title]&#x3D;&quot;color.name&quot;
+          (click)&#x3D;&quot;selectPresetColor(color.value)&quot;
+        &gt;
+          &lt;span class&#x3D;&quot;color-name&quot;&gt;{{ color.name }}&lt;/span&gt;
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Boutons d&#x27;action --&gt;
+    &lt;div class&#x3D;&quot;action-buttons&quot;&gt;
+      &lt;button 
+        type&#x3D;&quot;button&quot; 
+        (click)&#x3D;&quot;applyColor()&quot; 
+        class&#x3D;&quot;btn btn-primary&quot;
+        [disabled]&#x3D;&quot;!newColor&quot;
+        title&#x3D;&quot;Appliquer la couleur&quot;
+      &gt;
+        ✅ Appliquer
+      &lt;/button&gt;
+      
+      &lt;button 
+        type&#x3D;&quot;button&quot; 
+        (click)&#x3D;&quot;resetColor()&quot; 
+        class&#x3D;&quot;btn btn-secondary&quot;
+        title&#x3D;&quot;Réinitialiser la couleur&quot;
+      &gt;
+        🔄 Réinitialiser
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Aperçu des couleurs --&gt;
+  &lt;div class&#x3D;&quot;color-preview-section&quot; *ngIf&#x3D;&quot;elements.length &gt; 0&quot;&gt;
+    &lt;h4&gt;Aperçu des couleurs&lt;/h4&gt;
+    &lt;div class&#x3D;&quot;color-list&quot;&gt;
+      &lt;div 
+        *ngFor&#x3D;&quot;let element of elements&quot; 
+        class&#x3D;&quot;color-item&quot;
+        [class.selected]&#x3D;&quot;element.id &#x3D;&#x3D;&#x3D; selectedElementId&quot;
+        (click)&#x3D;&quot;selectElement(element.id)&quot;
+      &gt;
+        &lt;div 
+          class&#x3D;&quot;color-swatch&quot; 
+          [style.background-color]&#x3D;&quot;element.currentColor&quot;
+        &gt;&lt;/div&gt;
+        &lt;span class&#x3D;&quot;element-name&quot;&gt;{{ element.name }}&lt;/span&gt;
+        &lt;span class&#x3D;&quot;element-type&quot;&gt;{{ element.type }}&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="color-selector" *ngIf="isVisible">  <h3>🎨 Sélecteur de Couleurs</h3>    <!-- Sélection d\'élément -->  <div class="element-selection">    <label for="elementSelect">Élément à modifier :</label>    <select       id="elementSelect"      [(ngModel)]="selectedElementId"       (change)="onElementChange()"      class="element-select"    >      <option value="">-- Sélectionner un élément --</option>      <option         *ngFor="let element of elements"         [value]="element.id"      >        {{ element.name }} ({{ element.type }})      </option>    </select>  </div>  <!-- Sélecteur de couleur -->  <div class="color-picker" *ngIf="selectedElement">    <h4>{{ selectedElement.name }}</h4>        <div class="current-color">      <label>Couleur actuelle :</label>      <div         class="color-preview"         [style.background-color]="selectedElement.currentColor"        [title]="selectedElement.currentColor"      ></div>      <span class="color-value">{{ selectedElement.currentColor }}</span>    </div>    <div class="color-input">      <label for="colorInput">Nouvelle couleur :</label>      <input         type="color"         id="colorInput"        [(ngModel)]="newColor"        (input)="onColorChange()"        class="color-input-field"        title="Sélectionner une nouvelle couleur"      >    </div>    <!-- Couleurs prédéfinies -->    <div class="preset-colors">      <label>Couleurs prédéfinies :</label>      <div class="color-grid">        <button           *ngFor="let color of presetColors"           type="button"          class="preset-color-btn"          [style.background-color]="color.value"          [title]="color.name"          (click)="selectPresetColor(color.value)"        >          <span class="color-name">{{ color.name }}</span>        </button>      </div>    </div>    <!-- Boutons d\'action -->    <div class="action-buttons">      <button         type="button"         (click)="applyColor()"         class="btn btn-primary"        [disabled]="!newColor"        title="Appliquer la couleur"      >        ✅ Appliquer      </button>            <button         type="button"         (click)="resetColor()"         class="btn btn-secondary"        title="Réinitialiser la couleur"      >        🔄 Réinitialiser      </button>    </div>  </div>  <!-- Aperçu des couleurs -->  <div class="color-preview-section" *ngIf="elements.length > 0">    <h4>Aperçu des couleurs</h4>    <div class="color-list">      <div         *ngFor="let element of elements"         class="color-item"        [class.selected]="element.id === selectedElementId"        (click)="selectElement(element.id)"      >        <div           class="color-swatch"           [style.background-color]="element.currentColor"        ></div>        <span class="element-name">{{ element.name }}</span>        <span class="element-type">{{ element.type }}</span>      </div>    </div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'App', 'selector': 'app-root'},{'name': 'CalculateurFenetresComponent', 'selector': 'app-calculateur-fenetres'},{'name': 'ColorSelectorComponent', 'selector': 'app-color-selector'},{'name': 'DimensionsControllerComponent', 'selector': 'app-dimensions-controller'},{'name': 'FenetresCalculatorComponent', 'selector': 'app-fenetres-calculator'},{'name': 'MursControllerComponent', 'selector': 'app-murs-controller'},{'name': 'OuverturesControllerComponent', 'selector': 'app-ouvertures-controller'},{'name': 'Scene3d', 'selector': 'app-scene3d'},{'name': 'Scene3dCoreComponent', 'selector': 'app-scene3d-core'},{'name': 'Scene3dRefactored', 'selector': 'app-scene3d'},{'name': 'StructureControllerComponent', 'selector': 'app-structure-controller'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'ColorSelectorComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ColorSelectorComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

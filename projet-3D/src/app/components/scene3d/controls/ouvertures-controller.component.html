@@ -1,0 +1,187 @@
+<div class="ouvertures-controller" *ngIf="isVisible">
+  <h3>🚪 Gestion des Ouvertures</h3>
+  
+  <!-- Liste des ouvertures -->
+  <div class="ouvertures-list">
+    <h4>Ouvertures disponibles</h4>
+    <div class="ouverture-item" 
+         *ngFor="let ouverture of ouvertures; let i = index" 
+         [class.selected]="ouverture.id === selectedOuvertureId"
+         (click)="selectOuverture(ouverture.id)">
+      <div class="ouverture-info">
+        <div class="ouverture-name">{{ ouverture.type }} #{{ i + 1 }}</div>
+        <div class="ouverture-details">
+          {{ ouverture.dimensions.width }}m × {{ ouverture.dimensions.height }}m × {{ ouverture.dimensions.depth }}m
+        </div>
+        <div class="ouverture-position">
+          Position: ({{ ouverture.position.x }}, {{ ouverture.position.y }}, {{ ouverture.position.z }})
+        </div>
+      </div>
+      <div class="ouverture-color" [style.background-color]="ouverture.couleur"></div>
+    </div>
+  </div>
+
+  <!-- Détails de l'ouverture sélectionnée -->
+  <div class="ouverture-details" *ngIf="ouvertureSelectionnee">
+    <h4>📐 Détails de l'Ouverture : {{ ouvertureSelectionnee.type }}</h4>
+    
+    <!-- Type -->
+    <div class="detail-section">
+      <h5>Type</h5>
+      <select 
+        [(ngModel)]="ouvertureSelectionnee.type"
+        (change)="onOuvertureChange()"
+        class="form-select"
+        title="Type d'ouverture"
+        aria-label="Type d'ouverture">
+        <option value="porte">Porte</option>
+        <option value="fenetre">Fenêtre</option>
+      </select>
+    </div>
+
+    <!-- Position -->
+    <div class="detail-section">
+      <h5>Position</h5>
+      <div class="position-controls">
+        <div class="control-group">
+          <label>X (m)</label>
+          <input 
+            type="range" 
+            min="-10" 
+            max="10" 
+            step="0.1" 
+            [(ngModel)]="ouvertureSelectionnee.position.x"
+            (input)="onOuvertureChange()"
+            class="control-slider"
+            title="Position X de l'ouverture"
+            aria-label="Position X de l'ouverture"
+          >
+          <span class="control-value">{{ ouvertureSelectionnee.position.x }}</span>
+        </div>
+        
+        <div class="control-group">
+          <label>Y (m)</label>
+          <input 
+            type="range" 
+            min="-5" 
+            max="10" 
+            step="0.1" 
+            [(ngModel)]="ouvertureSelectionnee.position.y"
+            (input)="onOuvertureChange()"
+            class="control-slider"
+            title="Position Y de l'ouverture"
+            aria-label="Position Y de l'ouverture"
+          >
+          <span class="control-value">{{ ouvertureSelectionnee.position.y }}</span>
+        </div>
+        
+        <div class="control-group">
+          <label>Z (m)</label>
+          <input 
+            type="range" 
+            min="-10" 
+            max="10" 
+            step="0.1" 
+            [(ngModel)]="ouvertureSelectionnee.position.z"
+            (input)="onOuvertureChange()"
+            class="control-slider"
+            title="Position Z de l'ouverture"
+            aria-label="Position Z de l'ouverture"
+          >
+          <span class="control-value">{{ ouvertureSelectionnee.position.z }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dimensions -->
+    <div class="detail-section">
+      <h5>Dimensions</h5>
+      <div class="dimension-controls">
+        <div class="control-group">
+          <label>Largeur (m)</label>
+          <input 
+            type="range" 
+            min="0.5" 
+            max="5" 
+            step="0.1" 
+            [(ngModel)]="ouvertureSelectionnee.dimensions.width"
+            (input)="onOuvertureChange()"
+            class="control-slider"
+            title="Largeur de l'ouverture"
+            aria-label="Largeur de l'ouverture"
+          >
+          <span class="control-value">{{ ouvertureSelectionnee.dimensions.width }}</span>
+        </div>
+        
+        <div class="control-group">
+          <label>Hauteur (m)</label>
+          <input 
+            type="range" 
+            min="0.5" 
+            max="3" 
+            step="0.1" 
+            [(ngModel)]="ouvertureSelectionnee.dimensions.height"
+            (input)="onOuvertureChange()"
+            class="control-slider"
+            title="Hauteur de l'ouverture"
+            aria-label="Hauteur de l'ouverture"
+          >
+          <span class="control-value">{{ ouvertureSelectionnee.dimensions.height }}</span>
+        </div>
+        
+        <div class="control-group">
+          <label>Profondeur (m)</label>
+          <input 
+            type="range" 
+            min="0.05" 
+            max="1" 
+            step="0.01" 
+            [(ngModel)]="ouvertureSelectionnee.dimensions.depth"
+            (input)="onOuvertureChange()"
+            class="control-slider"
+            title="Profondeur de l'ouverture"
+            aria-label="Profondeur de l'ouverture"
+          >
+          <span class="control-value">{{ ouvertureSelectionnee.dimensions.depth }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Couleur -->
+    <div class="detail-section">
+      <h5>Couleur</h5>
+      <div class="color-controls">
+        <input 
+          type="color" 
+          [(ngModel)]="ouvertureSelectionnee.couleur"
+          (input)="onOuvertureChange()"
+          class="color-input"
+          title="Couleur de l'ouverture"
+          aria-label="Couleur de l'ouverture"
+        >
+        <span class="color-value">{{ ouvertureSelectionnee.couleur }}</span>
+      </div>
+    </div>
+
+    <!-- Boutons d'action -->
+    <div class="action-buttons">
+      <button 
+        type="button" 
+        (click)="duplicateOuverture()" 
+        class="btn btn-secondary"
+        title="Dupliquer cette ouverture"
+      >
+        📋 Dupliquer
+      </button>
+      
+      <button 
+        type="button" 
+        (click)="deleteOuverture()" 
+        class="btn btn-danger"
+        title="Supprimer cette ouverture"
+      >
+        🗑️ Supprimer
+      </button>
+    </div>
+  </div>
+</div>

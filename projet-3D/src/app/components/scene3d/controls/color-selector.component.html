@@ -1,0 +1,108 @@
+<div class="color-selector" *ngIf="isVisible">
+  <h3>🎨 Sélecteur de Couleurs</h3>
+  
+  <!-- Sélection d'élément -->
+  <div class="element-selection">
+    <label for="elementSelect">Élément à modifier :</label>
+    <select 
+      id="elementSelect"
+      [(ngModel)]="selectedElementId" 
+      (change)="onElementChange()"
+      class="element-select"
+    >
+      <option value="">-- Sélectionner un élément --</option>
+      <option 
+        *ngFor="let element of elements" 
+        [value]="element.id"
+      >
+        {{ element.name }} ({{ element.type }})
+      </option>
+    </select>
+  </div>
+
+  <!-- Sélecteur de couleur -->
+  <div class="color-picker" *ngIf="selectedElement">
+    <h4>{{ selectedElement.name }}</h4>
+    
+    <div class="current-color">
+      <label>Couleur actuelle :</label>
+      <div 
+        class="color-preview" 
+        [style.background-color]="selectedElement.currentColor"
+        [title]="selectedElement.currentColor"
+      ></div>
+      <span class="color-value">{{ selectedElement.currentColor }}</span>
+    </div>
+
+    <div class="color-input">
+      <label for="colorInput">Nouvelle couleur :</label>
+      <input 
+        type="color" 
+        id="colorInput"
+        [(ngModel)]="newColor"
+        (input)="onColorChange()"
+        class="color-input-field"
+        title="Sélectionner une nouvelle couleur"
+      >
+    </div>
+
+    <!-- Couleurs prédéfinies -->
+    <div class="preset-colors">
+      <label>Couleurs prédéfinies :</label>
+      <div class="color-grid">
+        <button 
+          *ngFor="let color of presetColors" 
+          type="button"
+          class="preset-color-btn"
+          [style.background-color]="color.value"
+          [title]="color.name"
+          (click)="selectPresetColor(color.value)"
+        >
+          <span class="color-name">{{ color.name }}</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Boutons d'action -->
+    <div class="action-buttons">
+      <button 
+        type="button" 
+        (click)="applyColor()" 
+        class="btn btn-primary"
+        [disabled]="!newColor"
+        title="Appliquer la couleur"
+      >
+        ✅ Appliquer
+      </button>
+      
+      <button 
+        type="button" 
+        (click)="resetColor()" 
+        class="btn btn-secondary"
+        title="Réinitialiser la couleur"
+      >
+        🔄 Réinitialiser
+      </button>
+    </div>
+  </div>
+
+  <!-- Aperçu des couleurs -->
+  <div class="color-preview-section" *ngIf="elements.length > 0">
+    <h4>Aperçu des couleurs</h4>
+    <div class="color-list">
+      <div 
+        *ngFor="let element of elements" 
+        class="color-item"
+        [class.selected]="element.id === selectedElementId"
+        (click)="selectElement(element.id)"
+      >
+        <div 
+          class="color-swatch" 
+          [style.background-color]="element.currentColor"
+        ></div>
+        <span class="element-name">{{ element.name }}</span>
+        <span class="element-type">{{ element.type }}</span>
+      </div>
+    </div>
+  </div>
+</div>

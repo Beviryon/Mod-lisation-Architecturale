@@ -1,0 +1,1036 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>projet-3-d documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">projet-3-d documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Injectables</li>
+  <li class="breadcrumb-item" >ConfigDirectService</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/config/config-direct.ts</code>
+        </p>
+
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Service de configuration directe
+Lit directement building-config.ts et applique les modifications</p>
+
+            </p>
+
+
+
+            <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#configuration$" >configuration$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#configurationSubject" >configurationSubject</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#chargerConfiguration" >chargerConfiguration</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getConfiguration" >getConfiguration</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getCouleurMurs" >getCouleurMurs</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getDimensionsBatiment" >getDimensionsBatiment</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getOuvertures" >getOuvertures</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#hasConfigurationChanged" >hasConfigurationChanged</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#mettreAJourConfiguration" >mettreAJourConfiguration</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#rechargerConfiguration" >rechargerConfiguration</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#rechargerSiNecessaire" >rechargerSiNecessaire</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor()</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="97" class="link-to-prism">src/app/config/config-direct.ts:97</a></div>
+                            </td>
+                        </tr>
+
+            </tbody>
+        </table>
+</section>
+
+            <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="chargerConfiguration"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>chargerConfiguration</b></span>
+                        <a href="#chargerConfiguration"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>chargerConfiguration()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="106"
+                                    class="link-to-prism">src/app/config/config-direct.ts:106</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Charger la configuration directement depuis building-config.ts</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/ConfigurationComplete.html" target="_self" >ConfigurationComplete</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getConfiguration"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>getConfiguration</b></span>
+                        <a href="#getConfiguration"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getConfiguration()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="129"
+                                    class="link-to-prism">src/app/config/config-direct.ts:129</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Obtenir la configuration actuelle</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/ConfigurationComplete.html" target="_self" >ConfigurationComplete</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getCouleurMurs"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>getCouleurMurs</b></span>
+                        <a href="#getCouleurMurs"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getCouleurMurs()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="176"
+                                    class="link-to-prism">src/app/config/config-direct.ts:176</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Obtenir la couleur des murs</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getDimensionsBatiment"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>getDimensionsBatiment</b></span>
+                        <a href="#getDimensionsBatiment"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getDimensionsBatiment()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="164"
+                                    class="link-to-prism">src/app/config/config-direct.ts:164</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Obtenir les dimensions du bâtiment</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>literal type</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getOuvertures"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>getOuvertures</b></span>
+                        <a href="#getOuvertures"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getOuvertures()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="184"
+                                    class="link-to-prism">src/app/config/config-direct.ts:184</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Obtenir les informations des ouvertures</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Array&lt;literal type&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="hasConfigurationChanged"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>hasConfigurationChanged</b></span>
+                        <a href="#hasConfigurationChanged"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>hasConfigurationChanged()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="224"
+                                    class="link-to-prism">src/app/config/config-direct.ts:224</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Vérifier si la configuration a changé</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="mettreAJourConfiguration"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>mettreAJourConfiguration</b></span>
+                        <a href="#mettreAJourConfiguration"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>mettreAJourConfiguration(config: <a href="../interfaces/ConfigurationComplete.html" target="_self">ConfigurationComplete</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="156"
+                                    class="link-to-prism">src/app/config/config-direct.ts:156</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Mettre à jour la configuration (pour compatibilité)</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>config</td>
+                                            <td>
+                                                            <code><a href="../interfaces/ConfigurationComplete.html" target="_self" >ConfigurationComplete</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="rechargerConfiguration"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>rechargerConfiguration</b></span>
+                        <a href="#rechargerConfiguration"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>rechargerConfiguration()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="136"
+                                    class="link-to-prism">src/app/config/config-direct.ts:136</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Recharger la configuration depuis building-config.ts</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="rechargerSiNecessaire"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>rechargerSiNecessaire</b></span>
+                        <a href="#rechargerSiNecessaire"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>rechargerSiNecessaire()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="245"
+                                    class="link-to-prism">src/app/config/config-direct.ts:245</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Forcer le rechargement si des changements sont détectés</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+            <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="configuration$"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>configuration$</b></span>
+                        <a href="#configuration$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.configurationSubject.asObservable()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="97" class="link-to-prism">src/app/config/config-direct.ts:97</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="configurationSubject"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>configurationSubject</b></span>
+                        <a href="#configurationSubject"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new BehaviorSubject&lt;ConfigurationComplete&gt;(this.chargerConfiguration())</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="96" class="link-to-prism">src/app/config/config-direct.ts:96</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+import { BehaviorSubject, Observable } from &#x27;rxjs&#x27;;
+import { BUILDING_CONFIG, WallConfig, MainWallConfig, OpeningConfig, Position3D, Dimensions3D } from &#x27;./building-config&#x27;;
+
+/**
+ * Interface pour la configuration complète du bâtiment
+ */
+export interface ConfigurationComplete {
+  scene: {
+    background: number;
+    camera: {
+      fov: number;
+      near: number;
+      far: number;
+    };
+  };
+  lighting: {
+    ambient: {
+      color: number;
+      intensity: number;
+    };
+    directional: {
+      color: number;
+      intensity: number;
+      position: Position3D;
+      shadow: {
+        mapSize: number;
+      };
+    };
+  };
+  camera: {
+    initial: {
+      position: Position3D;
+      rotationX: number;
+      rotationY: number;
+      zoom: number;
+    };
+    target: Position3D;
+    controls: {
+      minZoom: number;
+      maxZoom: number;
+      rotationSpeed: number;
+      zoomSpeed: number;
+    };
+  };
+  ground: WallConfig;
+  roof: WallConfig;
+  mainWall: MainWallConfig;
+  walls: {
+    back: WallConfig &amp; { openings?: { window1: OpeningConfig } };
+    left: WallConfig;
+    right: WallConfig &amp; { openings?: { door: OpeningConfig } };
+  };
+  axes: {
+    size: number;
+    labels: Array&lt;{
+      text: string;
+      position: Position3D;
+      color: number;
+    }&gt;;
+    labelSize: Dimensions3D;
+  };
+}
+
+/**
+ * Service de configuration directe
+ * Lit directement building-config.ts et applique les modifications
+ */
+@Injectable({
+  providedIn: &#x27;root&#x27;
+})
+export class ConfigDirectService {
+  
+  private configurationSubject &#x3D; new BehaviorSubject&lt;ConfigurationComplete&gt;(this.chargerConfiguration());
+  public configuration$ &#x3D; this.configurationSubject.asObservable();
+
+  constructor() {
+    console.log(&#x27;🔧 ConfigDirectService initialisé - Lecture directe de building-config.ts&#x27;);
+  }
+
+  /**
+   * Charger la configuration directement depuis building-config.ts
+   */
+  public chargerConfiguration(): ConfigurationComplete {
+    try {
+      // Import dynamique pour forcer le rechargement
+      const config &#x3D; { ...BUILDING_CONFIG } as ConfigurationComplete;
+      
+      console.log(&#x27;📥 Configuration chargée directement depuis building-config.ts&#x27;);
+      console.log(&#x27;🏠 Bâtiment:&#x27;, {
+        longueur: config.walls.back.dimensions.width,
+        largeur: config.walls.left.dimensions.depth,
+        hauteur: config.walls.back.dimensions.height,
+        couleur: &#x60;#${config.walls.back.color.toString(16)}&#x60;
+      });
+      
+      return config;
+    } catch (error) {
+      console.error(&#x27;❌ Erreur lors du chargement de la configuration:&#x27;, error);
+      throw error;
+    }
+  }
+
+  /**
+   * Obtenir la configuration actuelle
+   */
+  public getConfiguration(): ConfigurationComplete {
+    return this.configurationSubject.value;
+  }
+
+  /**
+   * Recharger la configuration depuis building-config.ts
+   */
+  public rechargerConfiguration(): void {
+    try {
+      const nouvelleConfig &#x3D; this.chargerConfiguration();
+      this.configurationSubject.next(nouvelleConfig);
+      
+      console.log(&#x27;🔄 Configuration rechargée depuis building-config.ts&#x27;);
+      console.log(&#x27;📊 Nouvelles dimensions:&#x27;, {
+        longueur: nouvelleConfig.walls.back.dimensions.width,
+        largeur: nouvelleConfig.walls.left.dimensions.depth,
+        hauteur: nouvelleConfig.walls.back.dimensions.height
+      });
+      
+    } catch (error) {
+      console.error(&#x27;❌ Erreur lors du rechargement de la configuration:&#x27;, error);
+    }
+  }
+
+  /**
+   * Mettre à jour la configuration (pour compatibilité)
+   */
+  public mettreAJourConfiguration(config: ConfigurationComplete): void {
+    this.configurationSubject.next(config);
+    console.log(&#x27;📝 Configuration mise à jour via ConfigDirectService&#x27;);
+  }
+
+  /**
+   * Obtenir les dimensions du bâtiment
+   */
+  public getDimensionsBatiment(): { longueur: number; largeur: number; hauteur: number } {
+    const config &#x3D; this.getConfiguration();
+    return {
+      longueur: config.walls.back.dimensions.width,
+      largeur: config.walls.left.dimensions.depth,
+      hauteur: config.walls.back.dimensions.height
+    };
+  }
+
+  /**
+   * Obtenir la couleur des murs
+   */
+  public getCouleurMurs(): string {
+    const config &#x3D; this.getConfiguration();
+    return &#x60;#${config.walls.back.color.toString(16).padStart(6, &#x27;0&#x27;)}&#x60;;
+  }
+
+  /**
+   * Obtenir les informations des ouvertures
+   */
+  public getOuvertures(): Array&lt;{ type: string; position: Position3D; dimensions: Dimensions3D; couleur: string }&gt; {
+    const config &#x3D; this.getConfiguration();
+    const ouvertures: Array&lt;{ type: string; position: Position3D; dimensions: Dimensions3D; couleur: string }&gt; &#x3D; [];
+
+    // Fenêtres du mur principal
+    if (config.mainWall.openings.window2) {
+      ouvertures.push({
+        type: &#x27;fenetre&#x27;,
+        position: config.mainWall.openings.window2.position,
+        dimensions: config.mainWall.openings.window2.dimensions,
+        couleur: &#x60;#${config.mainWall.openings.window2.color.toString(16).padStart(6, &#x27;0&#x27;)}&#x60;
+      });
+    }
+
+    // Fenêtres du mur arrière
+    if (config.walls.back.openings?.window1) {
+      ouvertures.push({
+        type: &#x27;fenetre&#x27;,
+        position: config.walls.back.openings.window1.position,
+        dimensions: config.walls.back.openings.window1.dimensions,
+        couleur: &#x60;#${config.walls.back.openings.window1.color.toString(16).padStart(6, &#x27;0&#x27;)}&#x60;
+      });
+    }
+
+    // Porte du mur droit
+    if (config.walls.right.openings?.door) {
+      ouvertures.push({
+        type: &#x27;porte&#x27;,
+        position: config.walls.right.openings.door.position,
+        dimensions: config.walls.right.openings.door.dimensions,
+        couleur: &#x60;#${config.walls.right.openings.door.color.toString(16).padStart(6, &#x27;0&#x27;)}&#x60;
+      });
+    }
+
+    return ouvertures;
+  }
+
+  /**
+   * Vérifier si la configuration a changé
+   */
+  public hasConfigurationChanged(): boolean {
+    try {
+      const configActuelle &#x3D; this.getConfiguration();
+      const nouvelleConfig &#x3D; this.chargerConfiguration();
+      
+      // Comparaison simple des dimensions principales
+      return (
+        configActuelle.walls.back.dimensions.width !&#x3D;&#x3D; nouvelleConfig.walls.back.dimensions.width ||
+        configActuelle.walls.left.dimensions.depth !&#x3D;&#x3D; nouvelleConfig.walls.left.dimensions.depth ||
+        configActuelle.walls.back.dimensions.height !&#x3D;&#x3D; nouvelleConfig.walls.back.dimensions.height ||
+        configActuelle.walls.back.color !&#x3D;&#x3D; nouvelleConfig.walls.back.color
+      );
+    } catch (error) {
+      console.error(&#x27;❌ Erreur lors de la vérification des changements:&#x27;, error);
+      return false;
+    }
+  }
+
+  /**
+   * Forcer le rechargement si des changements sont détectés
+   */
+  public rechargerSiNecessaire(): boolean {
+    if (this.hasConfigurationChanged()) {
+      console.log(&#x27;🔄 Changements détectés dans building-config.ts - Rechargement automatique&#x27;);
+      this.rechargerConfiguration();
+      return true;
+    }
+    return false;
+  }
+}
+</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'ConfigDirectService.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
